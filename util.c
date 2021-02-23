@@ -1,6 +1,8 @@
+#include <stdlib.h>
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+#include <sys/stat.h>
 
 #include "util.h"
 #include "logger.h"
@@ -23,7 +25,7 @@ int open_path(char *base, char *extension)
     }
 
     // Add 2 for null terminators
-    size_t path_size = (strlen(base) + strlen(path) + 2) * sizeof(char);
+    size_t path_size = (strlen(base) + strlen(extension) + 2) * sizeof(char);
     char* path = malloc(path_size);
 
     // Case: Invalid full path
