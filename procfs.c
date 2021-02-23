@@ -50,6 +50,11 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
             model_name = strstr(model_name, ": ") + 2;
             LOG("NEW MODEL NAME:\t'%s'\n", model_name);
 
+            model_name[buf_sz-1] = '\0';
+
+            strcpy(model_buf, model_name);
+            return 0;
+
             
         }
 
