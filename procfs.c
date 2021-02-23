@@ -60,9 +60,9 @@ int pfs_cpu_units(char *proc_dir)
         return -1;
     } 
 
-    LOG("ORIGINAL:\t%s + 1\t ATOI:\t%d\n", cpu_units, atoi(cpu_units) + 1);
+    LOG("ORIGINAL:\t%s + 1\t ATOI:\t%d\n", cpu_units, atoi(cpu_units) * 2);
 
-    return atoi(cpu_units) + 1;
+    return atoi(cpu_units) * 2;
 
 }
 
