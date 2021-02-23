@@ -4,18 +4,12 @@
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
-    int hostname_fd = open_path(proc_dir, "sys/kernel/hostname");
-
-    ssize_t read_size = lineread(hostname_fd, hostname_buf, buf_sz);
-
-    // TODO: Do we need to return only 0 or -1, or can return read_size on success? If we can return read_size, can make
-    // line "return lineread(...) instead"
-    return read_size >= 0 ? 0 : -1;
+   return pfs_get_aspect(proc_dir, hostname_buf, buf_sz, "sys/kernel/hostname");
 }
 
 int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
 {
-    return -1;
+    return pfs_get_aspect(proc_dir, hostname_buf, buf_sz, "sys/kernel/osrelease");
 }
 
 int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)

@@ -27,4 +27,6 @@ int open_path(char *base, char *extension);
  */
 ssize_t lineread(int fd, char *buf, size_t sz);
 
+int pfs_get_aspect(char *proc_dir, char *hostname_buf, size_t buf_sz, char *extension);
+
 #endif
