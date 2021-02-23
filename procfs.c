@@ -40,7 +40,7 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
     ssize_t read_sz;
 
     while ( (read_sz = lineread(model_fd, line, 256)) > 0) {
-        char* model_name = strstr(line, "model name: ");
+        char* model_name = strstr(line, "model name");
 
         printf("CURRENT model_name:\t%s", model_name);
 
