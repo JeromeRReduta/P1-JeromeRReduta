@@ -60,7 +60,8 @@ ssize_t lineread(int fd, char *buf, size_t sz)
         buf[i] = c;
        
         if (c == '\n') {
-            return i+1;
+            buf[i] = '\0';
+            return i + 1;
         }
     }
 
