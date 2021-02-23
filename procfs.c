@@ -45,6 +45,7 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
         // Case: found model_info
         if (model_info != NULL) {
             LOG("FOUND IT:\t%s", model_info);
+            printf("FOUND IT:\t%s", model_info);
         }
 
         
