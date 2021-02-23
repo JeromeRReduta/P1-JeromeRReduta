@@ -16,7 +16,7 @@ int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
 
     char* kernel_version = strsep(&version_buf, "-");
 
-    LOGP("KERNEL VERSION IS:\t%s", kernel_version);
+    printf("KERNEL VERSION IS:\t%s\n", kernel_version);
 
     return -1;
 }
