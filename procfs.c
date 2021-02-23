@@ -60,10 +60,10 @@ int pfs_cpu_units(char *proc_dir)
         return -1;
     } 
 
-    LOG("ORIGINAL:\t%s + 1\t ATOI:\t%d\n", cpu_units, atoi(cpu_units) * 2);
+    LOG("ORIGINAL:\t%s * 2\t ATOI:\t%d\n", cpu_units, atoi(cpu_units) * 2);
 
-    return atoi(cpu_units) * 2;
-
+    int result = atoi(cpu_units) * 2;
+    return result;
 }
 
 double pfs_uptime(char *proc_dir)
