@@ -53,7 +53,7 @@ int pfs_cpu_units(char *proc_dir)
         return -1;
     }
 
-    char* cpu_units = copy_cpu_info(cpu_fd, "siblings", 2);
+    char* cpu_units = copy_cpu_info(cpu_fd, "siblings", 256);
 
     if (cpu_units == NULL) {
         printf("Error - cpu_units null\n");
