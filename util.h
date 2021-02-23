@@ -5,5 +5,6 @@
 
 void draw_percbar(char *buf, double frac);
 void uid_to_uname(char *name_buf, uid_t uid);
+int open_path(char *base, char *extension);
 
 #endif

@@ -1,10 +1,16 @@
 #include "logger.h"
 #include "procfs.h"
+#include "util.h"
+#include "lineread.h"
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
-    printf("%s", proc_dir);
-    return -1;
+    int hostname_fd = open_path(proc_dir, "sys/kernel/hostname");
+
+    ssize_t read_size = lineread(hostname_fd, hostname_buf, buf_sz);
+
+    // TODO: Do we need to return only 0 or -1, or can return read_size on success?
+    return read_size >= 0 ? 0 : -1;
 }
 
 int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
