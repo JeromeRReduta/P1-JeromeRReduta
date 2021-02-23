@@ -97,8 +97,9 @@ int main(int argc, char *argv[])
 
     if (alt_proc == true) {
 
-        int proc_fd = open(options.procfs_loc);
+        int proc_fd = open(options.procfs_loc, O_RDONLY);
         if (proc_fd == -1) {
+            LOG("Invalid alternative proc directory: %s; shutting down", options.procfs_loc);
             close(proc_fd);
             return -1;
         }
