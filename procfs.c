@@ -29,40 +29,16 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
         return -1;
     }
 
-    /* I was told to add this comment in lab:
-     * Max model name size for model buf is 128; we're
-     * adding a bit more buffer space
-     * 
-     * Also forgot I can't instantiate arrays w/ variable length -
-     * would have to define global var at top, but would move var
-     * too far away from this func. I'll just hard-code 256 instead. */
-    char line[256] = {0};
-    ssize_t read_sz;
+    char* model_name = copy_cpu_info(model_fd, "model name", buf_sz);
 
-    while ( (read_sz = lineread(model_fd, line, 256)) > 0) {
-
-        char* model_name = strstr(line, "model name");
-
-        // Case: found model_name
-        if (model_name != NULL) {
-            LOG("FOUND IT:\t%s\n", model_name);
-            // Skip : and space after
-            model_name = strstr(model_name, ": ") + 2;
-            LOG("NEW MODEL NAME:\t'%s'\n", model_name);
-
-            model_name[buf_sz-1] = '\0';
-
-            strcpy(model_buf, model_name);
-            return 0;
-
-            
-        }
-
-        
+    // Case: cpu_info not found
+    if (cpu_info == NULL) {
+        return -1;
     }
-
-    // Case: Did not find model info
-    return -1;
+    // Case: cpu_info found
+    strcpy(model_buf, model_name);
+    return 0;
+  
 }
 
 int pfs_cpu_units(char *proc_dir)

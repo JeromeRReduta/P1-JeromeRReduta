@@ -78,3 +78,39 @@ int pfs_get_aspect(char *proc_dir, char *buf, size_t buf_sz, char *extension)
     return read_sz > 0 ? 0 : -1;
 }
 
+/* Parses proc/cpuinfo for given key string
+ * Returns pointer to value of key string if key exists
+ * Else returns NULL */
+char *copy_cpu_info(int cpu_fd, char* key, size_t buf_sz)
+{
+
+    /* I was told to add this comment in lab:
+     * Max model name size for model buf is 128; we're
+     * adding a bit more buffer space
+     * 
+     * Also forgot I can't instantiate arrays w/ variable length -
+     * would have to define global var at top, but would move var
+     * too far away from this func. I'll just hard-code 256 instead. */
+    char line[256] = {0};
+    ssize_t read_sz;
+
+    while ( (read_sz = lineread(model_fd, line, 256)) > 0) {
+        char* key_name = strstr(line, key);
+
+        // Case: found key_name
+        if (key_name != NULL) {
+            // Skip : and space after
+            key_name = strstr(key_name, ": ") + 2;
+            LOG("FOUND KEY:\t'%s'\n", key_name);
+
+            key_name[buf_sz-1] = '\0';
+
+            return key_name;
+        }
+    }
+      // Case: key_name not found in file
+        return NULL;
+
+
+}
+
