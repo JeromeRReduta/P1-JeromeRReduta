@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <string.h>
 #include "logger.h"
 #include "procfs.h"
@@ -55,7 +56,7 @@ int pfs_cpu_units(char *proc_dir)
     char* cpu_units = copy_cpu_info(cpu_fd, "cpu cores", 2);
 
     if (cpu_units == NULL) {
-        LOG("Error - cpu_units null");
+        printf("Error - cpu_units null\n");
         return -1;
     } 
 
