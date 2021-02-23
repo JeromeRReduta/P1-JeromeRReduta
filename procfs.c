@@ -32,7 +32,7 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
     char* model_name = copy_cpu_info(model_fd, "model name", buf_sz);
 
     // Case: cpu_info not found
-    if (cpu_info == NULL) {
+    if (model_name == NULL) {
         return -1;
     }
     // Case: cpu_info found
