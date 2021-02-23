@@ -40,12 +40,12 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
     ssize_t read_sz;
 
     while ( (read_sz = lineread(model_fd, line, 256)) > 0) {
-        char* model_info = strstr(line, "model info: ");
+        char* model_name = strstr(line, "model name: ");
 
-        // Case: found model_info
-        if (model_info != NULL) {
-            LOG("FOUND IT:\t%s", model_info);
-            printf("FOUND IT:\t%s", model_info);
+        // Case: found model_name
+        if (model_name != NULL) {
+            LOG("FOUND IT:\t%s", model_name);
+            printf("FOUND IT:\t%s", model_name);
         }
 
         
