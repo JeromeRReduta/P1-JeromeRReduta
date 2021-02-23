@@ -8,12 +8,8 @@ int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 
     ssize_t read_size = lineread(hostname_fd, hostname_buf, buf_sz);
 
-    printf("HOSTNAME:\t%s", hostname_buf);
-
-    int returnVal = read_size >= 0 ? 0 : -1;
-    printf("RETURNING:\t%d", returnVal);
-
-    // TODO: Do we need to return only 0 or -1, or can return read_size on success?
+    // TODO: Do we need to return only 0 or -1, or can return read_size on success? If we can return read_size, can make
+    // line "return lineread(...) instead"
     return read_size >= 0 ? 0 : -1;
 }
 
