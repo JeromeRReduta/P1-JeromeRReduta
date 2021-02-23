@@ -53,16 +53,16 @@ int pfs_cpu_units(char *proc_dir)
         return -1;
     }
 
-    char* cpu_units = copy_cpu_info(cpu_fd, "cpu cores", 2);
+    char* cpu_units = copy_cpu_info(cpu_fd, "siblings", 2);
 
     if (cpu_units == NULL) {
         printf("Error - cpu_units null\n");
         return -1;
     } 
 
-    LOG("ORIGINAL:\t%s\t ATOI:\t%d\n", cpu_units, atoi(cpu_units));
+    LOG("ORIGINAL:\t%s + 1\t ATOI:\t%d\n", cpu_units, atoi(cpu_units) + 1);
 
-    return atoi(cpu_units);
+    return atoi(cpu_units) + 1;
 
 }
 
