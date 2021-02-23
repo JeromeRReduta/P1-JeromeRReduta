@@ -94,7 +94,16 @@ int main(int argc, char *argv[])
     }
 
     if (alt_proc == true) {
+
+        int proc_fd = open(options.procfs_loc);
+        if (proc_fd == -1) {
+            close(proc_fd);
+            return -1;
+        }
+        close(proc_fd);
         LOG("Using alternative proc directory: %s\n", options.procfs_loc);
+
+    
     }
 
     if (options.one_shot == true) {
