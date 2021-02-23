@@ -69,17 +69,9 @@ ssize_t lineread(int fd, char *buf, size_t sz)
     return sz;
 }
 
-
 int pfs_get_aspect(char *proc_dir, char *buf, size_t buf_sz, char *extension)
 {
-    
     int hostname_fd = open_path(proc_dir, extension);
-
-    ssize_t read_size = lineread(hostname_fd, buf, buf_sz);
-
-    // TODO: Do we need to return only 0 or -1, or can return read_size on success? If we can return read_size, can make
-    // line "return lineread(...) instead"
-    return read_size >= 0 ? 0 : -1;
-
+    return lineread(hostname_fd, buf, buf_sz);
 }
 

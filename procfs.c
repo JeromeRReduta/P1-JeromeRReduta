@@ -1,3 +1,4 @@
+#include <string.h>
 #include "logger.h"
 #include "procfs.h"
 #include "util.h"
@@ -9,7 +10,15 @@ int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 
 int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
 {
-    return pfs_get_aspect(proc_dir, version_buf, buf_sz, "sys/kernel/osrelease");
+    if (pfs_get_aspect(proc_dir, version_buf, buf_sz, "sys/kernel/osrelease") == -1) {
+        return -1;
+    }
+
+    char* kernel_version = strsep(&version_buf, "-");
+
+    LOG("KERNEL VERSION IS:\t%s", kernel_version);
+
+    
 }
 
 int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
