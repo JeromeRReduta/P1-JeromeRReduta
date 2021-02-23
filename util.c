@@ -28,6 +28,8 @@ int open_path(char *base, char *extension)
     // Add 2 for null terminators
     size_t path_size = (strlen(base) + strlen(extension) + 2) * sizeof(char);
     char* path = malloc(path_size);
+    // Apparently this will concat base and extension, and make it the value of path
+    snprintf(path, path_size, "%s/%s", base, extension);
 
     // Case: Invalid full path
     if (path == NULL) {
