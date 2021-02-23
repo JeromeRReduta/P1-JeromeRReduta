@@ -40,11 +40,16 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
     ssize_t read_sz;
 
     while ( (read_sz = lineread(model_fd, line, 256)) > 0) {
+
         char* model_name = strstr(line, "model name");
 
         // Case: found model_name
         if (model_name != NULL) {
             LOG("FOUND IT:\t%s", model_name);
+            // Skip : and space after
+            model_name = strstr(model_name, ": ") + 2;
+
+            
         }
 
         
