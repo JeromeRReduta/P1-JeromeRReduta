@@ -25,7 +25,9 @@ int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
 int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
 {
     int model_fd = open_path(proc_dir, "cpuinfo");
-    if (model_fd == 1) {
+
+    // Case: Cannot find fd
+    if (model_fd == -1) {
         return -1;
     }
 
@@ -43,7 +45,24 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
 
 int pfs_cpu_units(char *proc_dir)
 {
-    return 0;
+    int cpu_fd = open_path(proc_dir, "cpuinfo");
+
+    // Case: Cannot find fd
+    if (cpu_fd == -1) {
+        return -1;
+    }
+
+    char* cpu_units = copy_cpu_info(cpu_fd, "cpu cores", 2);
+
+    if (cpu_units == NULL) {
+        LOG("Error - cpu_units null");
+        return -1;
+    } 
+
+    LOG("ORIGINAL:\t%s\t ATOI:\t%d\n", cpu_units, atoi(cpu_units));
+
+    return atoi(cpu_units);
+
 }
 
 double pfs_uptime(char *proc_dir)
