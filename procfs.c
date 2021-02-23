@@ -18,7 +18,7 @@ int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
 
     LOG("KERNEL VERSION IS:\t%s", kernel_version);
 
-    
+    return -1;
 }
 
 int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)

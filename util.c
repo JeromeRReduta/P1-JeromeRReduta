@@ -72,6 +72,9 @@ ssize_t lineread(int fd, char *buf, size_t sz)
 int pfs_get_aspect(char *proc_dir, char *buf, size_t buf_sz, char *extension)
 {
     int hostname_fd = open_path(proc_dir, extension);
-    return lineread(hostname_fd, buf, buf_sz);
+    ssize_t read_sz = lineread(hostname_fd, buf, buf_sz);
+
+    // Note: Won't pass tests unless this func returns either 0 or 1
+    return read_sz > 0 ? 0 : -1;
 }
 
