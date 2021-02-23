@@ -45,9 +45,10 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
 
         // Case: found model_name
         if (model_name != NULL) {
-            LOG("FOUND IT:\t%s", model_name);
+            LOG("FOUND IT:\t%s\n", model_name);
             // Skip : and space after
             model_name = strstr(model_name, ": ") + 2;
+            LOG("NEW MODEL NAME:\t%s\n", model_name);
 
             
         }
