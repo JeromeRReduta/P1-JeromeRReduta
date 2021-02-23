@@ -94,7 +94,7 @@ char *copy_cpu_info(int cpu_fd, char* key, size_t buf_sz)
     char line[256] = {0};
     ssize_t read_sz;
 
-    while ( (read_sz = lineread(model_fd, line, 256)) > 0) {
+    while ( (read_sz = lineread(cpu_fd, line, 256)) > 0) {
         char* key_name = strstr(line, key);
 
         // Case: found key_name
