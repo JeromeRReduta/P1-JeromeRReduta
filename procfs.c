@@ -3,6 +3,7 @@
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
+    printf("%s", proc_dir);
     return -1;
 }
 
