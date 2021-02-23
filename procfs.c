@@ -55,12 +55,13 @@ int pfs_cpu_units(char *proc_dir)
 
     char* cpu_units = copy_cpu_info(cpu_fd, "siblings", 200);
 
-    if (cpu_units == NULL) {
-        printf("Error - cpu_units null\n");
-        return -1;
-    } 
-
-    return atoi(cpu_units) * 2;
+    /* Wow problem was actually calling atoi twice for some reason:
+     * Original code called log(atoi(cpu_units) * 2) and then returned
+     * atoi(cpu_units) * 2, which gave correct result in log
+     * but incorrect result in return val
+     * I have no idea why */ 
+    return cpu_units == NULL ? -1 : atoi(cpu_units) * 2;
+    
 }
 
 double pfs_uptime(char *proc_dir)
