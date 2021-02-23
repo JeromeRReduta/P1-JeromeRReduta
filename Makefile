@@ -31,7 +31,7 @@ clean:
 
 # Individual dependencies --
 inspector.o: inspector.c logger.h
-procfs.o: procfs.c procfs.h logger.h lineread.c lineread.h
+procfs.o: procfs.c procfs.h logger.h
 display.o: display.c display.h procfs.h util.h logger.h
 util.o: util.c util.h logger.h
 
