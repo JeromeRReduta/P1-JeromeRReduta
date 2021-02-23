@@ -14,11 +14,12 @@ int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
         return -1;
     }
 
-    char* kernel_version = strsep(&version_buf, "-");
+    char* kernel_version = strsep(&version_buf, "-") + '\0';
 
     printf("KERNEL VERSION IS:\t%s\n", kernel_version);
 
-    return -1;
+    // Safe to use cpy because we know kernel_version has \0
+    strcpy(version_buf, kernel_version);
 }
 
 int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
