@@ -1,7 +1,6 @@
 #include "logger.h"
 #include "procfs.h"
 #include "util.h"
-#include "lineread.h"
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
