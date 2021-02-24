@@ -235,7 +235,7 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
 
 int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 {
-    char[256] buf;
+    char buf[256];
     char* buf_ptr;
 
     if (pfs_get_aspect(proc_dir, buf_ptr, 256, "stat") == -1) {
