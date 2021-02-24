@@ -47,6 +47,7 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
     }
     // Case: cpu_info found
     strcpy(model_buf, model_name);
+    close(model_fd);
     return 0;
   
 }
@@ -293,11 +294,32 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 
 }
 
+MemTotal: 1475464 kB = 1.475464 GB
 
 
 struct mem_stats pfs_mem_usage(char *proc_dir)
 {
     struct mem_stats mstats = { 0 };
+
+    int mem_fd = open_path(proc_dir, "meminfo");
+
+    if (mem_fd == -1) {
+        LOG("MEM_INFO = %d; RETURNING NULL", mem_fd);
+        return NULL;
+    }
+    
+    char* mem_total = copy_cpu_info(mem_fd, "MemTotal");
+    char* mem_avail = copy_cpu_info(mem_fd, "MemAvailable");
+
+    LOG("MEM VALUES:\n
+        \t mem_total:\t%s\n
+        \t mem-avail:\t%s\n",
+        mem_total, mem_avail);
+
+
+    
+
+    close(mem_fd);
     return mstats;
 }
 
