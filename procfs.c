@@ -164,7 +164,7 @@ int write_time(Uptime *time_record, char *uptime_buf)
     LOG("MINUTES:\t%s\n", minutes);
 
      LOG("CURRENT UPTIME:\t %s %s %s %s %s\n", years, days, hours, minutes, seconds);
-    snprintf(uptime_buf, 1024, "%s%s%s%s%s", years, days, hours, minutes, seconds);
+    snprintf(uptime_buf, 256, "%s%s%s%s%s", years, days, hours, minutes, seconds);
     free(years);
     free(days);
     free(hours);
