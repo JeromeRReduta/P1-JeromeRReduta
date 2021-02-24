@@ -171,7 +171,7 @@ int write_time(Uptime *time_record, char *uptime_buf)
     free(minutes);
     free(seconds);
 
-    LOG("%s", uptime_buf);
+    LOG("'%s'", uptime_buf);
     
 
     return 0;
