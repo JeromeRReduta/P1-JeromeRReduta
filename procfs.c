@@ -72,7 +72,7 @@ int pfs_cpu_units(char *proc_dir)
 
 double pfs_uptime(char *proc_dir)
 {
-    return 0.0
+    return 0.0;
     /*
     int uptime_fd = open_path(proc_dir, "uptime");
 
