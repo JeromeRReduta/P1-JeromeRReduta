@@ -313,7 +313,7 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
     }
 
     
-    if (init_mstats(mem_fd, mstats) == -1) {
+    if (init_mstats(mem_fd, &mstats) == -1) {
         LOG("VALUE OF INIT_MSTATS IS %d\n", -1);
         return mstats;
     }
