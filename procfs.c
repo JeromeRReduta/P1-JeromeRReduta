@@ -323,7 +323,7 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
 
 
     mem_total_ptr = strsep(&mem_total_ptr, "\t");
-    mem_avail_ptr = strsep(&mem_avail_head_ptr, "\t");
+    mem_avail_ptr = strsep(&mem_avail_ptr, "\t");
 
 
 
