@@ -236,7 +236,7 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
     }
 
     LOG(" (curr->idle - prev->idle) / (curr->total - prev->total):\n(%ld - %ld)/(%ld - %ld)\n", curr->idle, prev->idle, curr->total, prev->total);
-    double used = (curr ->idle - prev->idle) / (curr->total - prev->total);
+    long used = (curr ->idle - prev->idle) / (curr->total - prev->total);
     
     LOG("USED:\t%f\t CPU_USAGE:\t%f\n", used, 1-used);
     return 1 - used;
@@ -262,7 +262,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
     // 1st 3 #s
     for (int i = 0; i < 3; i++) {
         sep_ptr = strsep(&buf_ptr, " ");
-        stats->total += atol(sep_ptr)/100;
+        stats->total += atol(sep_ptr);
         LOG("SEP_PTR VAL:\t%s\n", sep_ptr);
         LOG("NEW STATS TOTAL VALUE:\t%ld\n", stats->total);
 
@@ -270,14 +270,16 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 
     // 4th # - idle time
     sep_ptr = strsep(&buf_ptr, " ");
-    stats->idle = atol(sep_ptr)/100;
+    stats->idle = atol(sep_ptr);
+    stats->total += atol(sep_ptr);
     LOG("SEP_PTR VAL:\t%s\n", sep_ptr);
     LOG("NEW STATS IDLE VALUE:\t%ld\n", stats->idle);
+    LOG("NEW STATS TOTAL VALUE:\t%ld\n", stats->total);
 
     // Last 6 #s
     for (int i = 0; i < 6; i++) {
         sep_ptr = strsep(&buf_ptr, " ");
-        stats->total += atol(sep_ptr)/100;
+        stats->total += atol(sep_ptr);
         LOG("SEP_PTR VAL:\t%s\n", sep_ptr);
         LOG("NEW STATS TOTAL VALUE:\t%ld\n", stats->total);
     }
