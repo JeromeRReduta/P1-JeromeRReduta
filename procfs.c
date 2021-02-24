@@ -341,7 +341,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
             mem_avail_search = strstr(mem_avail_search, ":") + 1;
             char* txt;
 
-            mem_avail = strtod(mem_avail_search, &txt);
+            mem_avail = strtod(mem_avail_search, &txt)/1000000;
             LOG("FOUND MEM_AVAIL:\t |%f|\n", mem_avail);
             // mem_avail[?] = '\0' Set ? to index of "k" in "kb"
         }
@@ -350,7 +350,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
             mem_total_search = strstr(mem_total_search, ":") + 1;
             char* txt;
 
-            mem_total = strtod(mem_total_search, &txt);
+            mem_total = strtod(mem_total_search, &txt)/1000000;
             LOG("FOUND mem_total:\t |%f|\n", mem_total);
             // mem_total[?] = '\0' Set ? to index of "k" in "kb"
         }
@@ -373,8 +373,8 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
           return -1;
       }
 
-      mstats->total = mem_total/1000000;
-      mstats->used = (mem_total - mem_avail)/1000000;
+      mstats->total = mem_total;
+      mstats->used = mem_total - mem_avail;
       return 0;
 
 
