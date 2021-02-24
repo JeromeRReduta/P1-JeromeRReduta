@@ -269,11 +269,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 
     // Do this twice to get to first cpu number
     sep_ptr = strsep(&buf_ptr, " ");
-
-    LOG("SEP_PTR VALUES: %d\n", 0);
-    LOG("\tSEP_PTR INIT:\t%s\n", sep_ptr);
     sep_ptr = strsep(&buf_ptr, " ");
-    LOG("\tSEP_PTR INIT 1:\t%s\n", sep_ptr);
 
     // 1st 3 #s
     for (int i = 0; i < 3; i++) {
@@ -296,7 +292,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
     LOG("VALUES:\n"
         "\tstats->idle:\t%ld\n"
         "\tstats->total:\t%ld\n",
-        stats->total, stats->idle);
+        stats->idle, stats->total);
 
 
 
