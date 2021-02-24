@@ -226,13 +226,14 @@ struct load_avg pfs_load_avg(char *proc_dir)
 
 double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *curr)
 {
-    
+    LOG("BEFORE READING FILE:\n\tprev->idle:\t%ld\n\tprev->total:\t%ld\n\tcurrent->idle:\t%ld\n\tcurrent->total:\t%ld\n",
+        prev->idle, prev->total, curr->idle, curr->total);
     LOG("MADE CURR:%d\n", 0);
 
     init_cpu_stats(proc_dir, curr);
 
 
-    LOG("\n\tprev->idle:\t%ld\n\tprev->total:\t%ld\n\tcurrent->idle:\t%ld\n\tcurrent->total:\t%ld\n",
+    LOG("AFTER READING FILE:\n\tprev->idle:\t%ld\n\tprev->total:\t%ld\n\tcurrent->idle:\t%ld\n\tcurrent->total:\t%ld\n",
         prev->idle, prev->total, curr->idle, curr->total);
 
     long idle = curr->idle - prev-> idle;
