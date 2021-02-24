@@ -380,7 +380,8 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
       if (mem_avail == -1 || mem_total == -1 || mem_free == -1) {
           LOG("ONE OR MORE VALUES NULL:\n"
           "\tmem_avail:\t%f\n"
-          "\tmem_total:\t%f\n",
+          "\tmem_total:\t%f\n"
+          "\tmem_free:\t%f\n",
           mem_avail, mem_total, mem_free);
 
           return -1;
