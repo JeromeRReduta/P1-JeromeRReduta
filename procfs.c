@@ -247,7 +247,7 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
     if (curr->total == prev->total) {
         return 0.0;
     }
-    LOG("FINAL ANSWER:%f", (1 - idle/total)*100);
+    //LOG("FINAL ANSWER:%f", (1 - idle/total)*100);
     return (double)(1 - idle/total)*100;
 }
 
