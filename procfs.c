@@ -5,7 +5,8 @@
 #include "util.h"
 
 // Function prototypes
-void populateUptime(double time, struct uptime *timeRecord);
+void populateUptime(double time, Uptime *timeRecord);
+int writeTime(Uptime *timeRecord, char *uptime_buf);
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
@@ -97,24 +98,12 @@ double pfs_uptime(char *proc_dir)
 
 int pfs_format_uptime(double time, char *uptime_buf)
 {
-
     // Format for this from https://dyclassroom.com/c/c-dynamic-memory-allocation-calloc-function
     Uptime* timeRecord = (Uptime *)calloc(1, sizeof(Uptime));
-    
+    populateUptime(time, timeRecord);
     // Note: no segfault so far
 
-    populateUptime(36000000.00, timeRecord);
-
-    
-    LOG("SECONDS:\t%d\n:\t", timeRecord->seconds);
-    LOG("MINUTES:\t%d\n:\t", timeRecord->minutes);
-    LOG("HOURS:\t%d\n:\t", timeRecord->hours);
-    LOG("DAYS:\t%d\n:\t", timeRecord->days);
-    LOG("YEARS:\t%d\n:\t", timeRecord->years);
-
-    
-    
-    return -1;
+    return writeTime(timeRecord, uptime_buf);
 }
 
 // Requires existing uptime so that I can calloc and free in the same func
@@ -137,9 +126,38 @@ void populateUptime(double time, Uptime *timeRecord)
     timeRecord->years = timeRecord->days/365;
     timeRecord->days %= 365;
 
+    //Note: Currently, populateUptime works as intended
+    LOG("SECONDS:\t%d\n:\t", timeRecord->seconds);
+    LOG("MINUTES:\t%d\n:\t", timeRecord->minutes);
+    LOG("HOURS:\t%d\n:\t", timeRecord->hours);
+    LOG("DAYS:\t%d\n:\t", timeRecord->days);
+    LOG("YEARS:\t%d\n:\t", timeRecord->years);
 
 
 
+}
+
+int writeTime(Uptime *timeRecord, char *uptime_buf)
+{
+    if (timeRecord == NULL) {
+        return -1;
+    }
+
+    char timeString[256] = {0};
+
+    char years[64];
+    
+    LOG("FINDING YEARS VAL FROM:\t%d",timeRecord->years);
+    if (timeRecord->years > 0) {
+        snprintf(years, "%d years, ", timeRecord->years);
+    } 
+    else {
+        years = NULL;
+    }
+    LOG("YEARS POINTER VAL:\t%s\n", years);
+
+
+    return -1;
 
 }
 
