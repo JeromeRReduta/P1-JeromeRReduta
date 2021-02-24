@@ -150,8 +150,8 @@ int write_time(Uptime *time_record, char *uptime_buf)
     get_time_substring(time_record->years, "years,", years);
     get_time_substring(time_record->days, "days,", days);
     get_time_substring(time_record->hours, "hours,", hours);
-    get_time_substring(time_record->minutes, "minutes,", minutes);
-    get_time_substring(time_record->seconds, "seconds", seconds);
+    snprintf(minutes, strlen(minutes), "%d %s", time_record->minutes, "minutes, ");
+    snprintf(seconds, strlen(seconds), "%d %s", time_record->seconds, "seconds");
 
     LOG("CURRENT UPTIME:\t %s %s %s %s %s\n", years, days, hours, minutes, seconds);
 
