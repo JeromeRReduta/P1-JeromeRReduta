@@ -328,25 +328,28 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
     char line[256] = {0};
     ssize_t read_sz;
 
-    char* mem_avail;
-    char* mem_total;
+    char mem_avail[256];
+    char mem_total[256];
 
     while ( (read_sz = lineread(mem_fd, line, 256)) > 0) {
-        mem_avail = strstr(line, "MemAvailable") + '\0';
-        mem_total = strstr(line,"MemTotal") + '\0';
+        mem_avail_search = strstr(line, "MemAvailable") + '\0';
+        mem_total_search = strstr(line,"MemTotal") + '\0';
 
         // Case: found key_name
 
-        if (mem_avail != NULL) {
-            mem_avail = strstr(mem_avail, ":") + 5;
-            LOG("FOUND MEM_AVAIL:\t |%s|\n", mem_avail);
+        if (mem_avail_search != NULL) {
+            mem_avail_search = strstr(mem_avail_search, ":") + 5;
+            LOG("FOUND MEM_AVAIL:\t |%s|\n", mem_avail_search);
             // mem_avail[?] = '\0' Set ? to index of "k" in "kb"
+            strcpy(mem_avail, mem_avail_search);
         }
 
-        if (mem_total != NULL) {
-            mem_total = strstr(mem_total, ":") + 5;
-            LOG("FOUND mem_total:\t |%s|\n", mem_total);
+        if (mem_total_search != NULL) {
+            mem_total_search = strstr(mem_total_search, ":") + 5;
+            LOG("FOUND mem_total:\t |%s|\n", mem_total_search);
             // mem_total[?] = '\0' Set ? to index of "k" in "kb"
+            strcpy(mem_total, mem_total_search);
+
         }
 
     }
