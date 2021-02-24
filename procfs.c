@@ -7,7 +7,7 @@
 // Function prototypes
 void populate_uptime(double time, Uptime *time_record);
 int write_time(Uptime *time_record, char *uptime_buf);
-void get_time_substring(int time_in_units, char* append_text, char* time_buf)
+void get_time_substring(int time_in_units, char* append_text, char* time_buf);
 
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
