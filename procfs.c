@@ -157,7 +157,7 @@ int write_time(Uptime *time_record, char *uptime_buf)
     get_time_substring(time_record->hours, "hours,", hours, time_sz);
 
 
-    snprintf(minutes, 64, "%d %s", time_record->minutes, "minutes, ");
+    snprintf(minutes, 64, "%d %s", time_record->minutes, "minutes,");
     snprintf(seconds, 64, "%d %s", time_record->seconds, "seconds");
 
     LOG("SECONDS:\t%s", seconds);
