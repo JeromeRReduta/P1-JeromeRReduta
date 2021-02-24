@@ -82,7 +82,7 @@ double pfs_uptime(char *proc_dir)
     }
 
     char line[256];
-    char* line_ptr = &line;
+    char* line_ptr = line;
     
     LOG("ATTEMPTING TO DO LINEREAD%d\n", 0);
     if ( lineread(uptime_fd, line_ptr, 256) == -1) {
