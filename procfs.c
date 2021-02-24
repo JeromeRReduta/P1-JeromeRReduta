@@ -7,7 +7,7 @@
 // Function prototypes
 void populate_uptime(double time, Uptime *time_record);
 int write_time(Uptime *time_record, char *uptime_buf);
-char* get_time_substring(int time_in_units, char* append_text);
+void get_time_substring(int time_in_units, char* append_text, char* time_buf)
 
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
@@ -80,7 +80,6 @@ double pfs_uptime(char *proc_dir)
 
     char* line;
     
-    
     if ( lineread(uptime_fd, line, 256) == -1) {
         return -1;
     }
@@ -146,12 +145,13 @@ int write_time(Uptime *time_record, char *uptime_buf)
     }
 
     char time_string[256] = {0};
+    char years[64], days[64], hours[64], minutes[64], seconds[64];
 
-    char* years = get_time_substring(time_record->years, "years,");
-    char* days = get_time_substring(time_record->days, "days,");
-    char* hours = get_time_substring(time_record->hours, "hours,");
-    char* minutes = get_time_substring(time_record->minutes, "minutes,");
-    char* seconds = get_time_substring(time_record->seconds, "seconds");
+    get_time_substring(time_record->years, "years,", years);
+    get_time_substring(time_record->days, "days,", days);
+    get_time_substring(time_record->hours, "hours,", hours);
+    get_time_substring(time_record->minutes, "minutes,", minutes);
+    get_time_substring(time_record->seconds, "seconds", seconds);
 
     LOG("CURRENT UPTIME:\t %s %s %s %s %s\n", years, days, hours, minutes, seconds);
 
@@ -160,9 +160,8 @@ int write_time(Uptime *time_record, char *uptime_buf)
 
 }
 
-char* get_time_substring(int time_in_units, char* append_text)
+void get_time_substring(int time_in_units, char* append_text, char* time_buf)
 {
-    char time_buf[64];
     if (time_in_units > 0) {
         snprintf(time_buf, strlen(time_buf), "%d %s", time_in_units, append_text);
     } 
@@ -171,8 +170,6 @@ char* get_time_substring(int time_in_units, char* append_text)
         setting char[0] to '\0'*/
         time_buf[0] = '\0';
     }
-    
-    return time_buf;
 }
 
 struct load_avg pfs_load_avg(char *proc_dir)
