@@ -63,6 +63,7 @@ int pfs_cpu_units(char *proc_dir)
 
     char* cpu_units = copy_cpu_info(cpu_fd, "siblings", 200);
 
+
     /* Wow problem was actually calling atoi twice for some reason:
      * Original code called log(atoi(cpu_units) * 2) and then returned
      * atoi(cpu_units) * 2, which gave correct result in log
@@ -310,13 +311,13 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
     char mem_total[256];
     char mem_avail[256];
 
-    char* mem_total_ptr = mem_total;
-    char* mem_avail_ptr = mem_avail;
+    char* mem_total_ptr = copy_cpu_info(mem_fd, "MemTotal", 200);
+    char* mem_avail_ptr = copy_cpu_info(mem_fd, "MemAvailable", 200);
 
     
     
-    mem_total_ptr = copy_cpu_info(mem_fd, "MemTotal", 256);
-    mem_avail_ptr = copy_cpu_info(mem_fd, "MemAvailable", 256);
+    
+    
 
     LOG("MEM VALUES:\n"
         "\t mem_total:\t%s\n"
