@@ -9,6 +9,7 @@ void populate_uptime(double time, Uptime *time_record);
 int write_time(Uptime *time_record, char *uptime_buf);
 void get_time_substring(int time_in_units, char* append_text, char* time_buf, size_t time_sz);
 int init_cpu_stats(char *proc_dir, struct cpu_stats *stats);
+int init_mstats(int mem_fd, struct mem_stats *mstats);
 
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
@@ -311,59 +312,63 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
         return mstats;
     }
 
-
-    char mem_total[256] = {0};
-    char mem_avail[256]= {0};
-
-    char* mem_total_head = mem_total;
-    char* mem_avail_head = mem_avail;
-    copy_cpu_info(mem_fd, "MemAvailable", mem_avail, 200);
-    copy_cpu_info(mem_fd, "MemTotal", mem_total, 200);
     
-
-
-
-    char* mem_total_ptr = mem_total_head + 7;
-    char* mem_avail_ptr = mem_avail_head + 9;
-
-    // index before 'k' in "# kb"
-    char* k_index_total = strstr(mem_total_ptr, "k");
-    if (k_index_total != NULL) {
-        *(k_index_total-1) = '\0';
+    if (init_mstats(mem_fd, mstats) == -1) {
+        LOG("VALUE OF INIT_MSTATS IS %d\n", -1);
+        return mstats;
     }
-
-    char* k_index_avail = strstr(mem_avail_ptr, "k");
-    if (k_index_avail != NULL) {
-        *(k_index_avail-1) = '\0';
-
-    }
-
-    mstats.total = atof(mem_total_ptr);
-    mstats.used = atof(mem_total_ptr) - atof(mem_avail_ptr);
     
-
-
-
-    
-    
-    
-    
-
-    LOG("MEM VALUES:\n"
-        "\t mem_total:\t'%s'\n"
-        "\t mem-avail:\t'%s'\n",
-        mem_total_ptr, mem_avail_ptr);
-
-    LOG("ANSWERS?:\n"
-        "\t mstats.total:\t%f\n"
-        "\t mstats.used:\t%f\n",
-        mstats.total, mstats.used);
-
-
-    
-
     close(mem_fd);
     return mstats;
+}
+
+// Initalizes mstats by going through page once and storing values; returns 0 on success, -1 if one or more value not filled in
+int init_mstats(int mem_fd, struct mem_stats *mstats)
+{
+    char line[256] = {0};
+    ssize_t read_sz;
+
+    char* mem_avail;
+    char* mem_total;
+
+    while ( (read_sz = lineread(mem_fd, line, 256)) > 0) {
+        mem_avail = strstr(line, "MemAvailable") + '\0';
+        mem_total = strstr(line,"MemTotal") + '\0';
+
+        // Case: found key_name
+
+        if (mem_avail != NULL) {
+            mem_avail = strstr(mem_avail, ":") + 5;
+            LOG("FOUND MEM_AVAIL:\t |%s|\n", mem_avail);
+            // mem_avail[?] = '\0' Set ? to index of "k" in "kb"
+        }
+
+        if (mem_total != NULL) {
+            mem_total = strstr(mem_total, ":") + 5;
+            LOG("FOUND mem_total:\t |%s|\n", mem_total);
+            // mem_total[?] = '\0' Set ? to index of "k" in "kb"
+        }
+
+    }
+    
+      // Case: key_name not found in file
+
+      if (mem_avail == NULL || mem_total == NULL) {
+          LOG("ONE OR MORE VALUES NULL:\n"
+          "\tmem_avail:\t%s\n"
+          "\tmem_total:\t%s\n",
+          mem_avail, mem_total);
+
+          return -1;
+      }
+
+      mstats->total = atof(mem_total);
+      mstats->used = atof(mem_total) - atof(mem_avail);
+      return 0;
+
+
+
+
 }
 
 struct task_stats *pfs_create_tstats()
