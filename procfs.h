@@ -44,6 +44,14 @@ struct task_info {
     char state[13];
 };
 
+struct uptime {
+    int seconds;
+    int minutes;
+    int hours;
+    int days;
+    int years;
+}
+
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz);
 int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz);
 int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz);
