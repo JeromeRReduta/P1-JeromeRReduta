@@ -243,11 +243,8 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
     if (curr->total == prev->total) {
         return 0.0;
     }
-    double used = idle / total;
-    LOG("USED:\t%f\n", used);
-    
-    LOG("USED:\t%f\t CPU_USAGE:\t%f\n", used, 1-used);
-    return 1 - used;
+    LOG("FINAL ANSWER:%f", (double)(1 - idle/total)*100);
+    return (double)(1 - idle/total)*100;
 }
 
 int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
