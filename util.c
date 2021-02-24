@@ -17,7 +17,7 @@ void uid_to_uname(char *name_buf, uid_t uid)
     strcpy(name_buf, "(UNKNOWN)");
 }
 
-// Lovingly ripped out of lab code
+// Lovingly ripped out of lab code - Note: HAVE to close @ end of func
 int open_path(char *base, char *extension)
 {
     // Case: Invalid base or extension
