@@ -90,7 +90,9 @@ double pfs_uptime(char *proc_dir)
 
     LOG("LINE IS:\t%s\n", line);
 
-    char* uptime_string = strsep(&line, " ");
+    char** uptime_string_ptr = &line[0];
+
+    char* uptime_string = strsep(uptime_string_ptr, " ");
     if (uptime_string == NULL) {
         return -1;
     }
