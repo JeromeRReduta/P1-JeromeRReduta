@@ -101,13 +101,44 @@ int pfs_format_uptime(double time, char *uptime_buf)
     typedef struct uptime uptime;
 
     uptime *timeRecord = (uptime *) calloc(1, sizeof(uptime));
-    int whatever = 5;
-    LOG("NO SEGFAULT YET %d\n", whatever);
+    
+    // Note: no segfault so far
+
+    populateUptime(36000000.00, timeRecord);
+
+    
+    LOG("SECONDS:\t%d\n:\t", timeRecord.seconds);
+    LOG("MINUTES:\t%d\n:\t", timeRecord.minutes);
+    LOG("HOURS:\t%d\n:\t", timeRecord.hours);
+    LOG("DAYS:\t%d\n:\t", timeRecord.days);
+    LOG("YEARS:\t%d\n:\t", timeRecord.years);
+
+    
+    
     return -1;
 }
 
+// Requires existing uptime so that I can calloc and free in the same func
+// Makes debugging a lot easier in the long run - only have to check for calloc
+// and free in one func @ a time
 void populateUptime(double time, struct uptime timeRecord)
 {
+
+    // Note: Int division rounds down
+    timeRecord->minutes = time/60;
+    timeRecord->seconds = time % 60;
+
+    timeRecord->hours = timeRecord->minutes / 60;
+    timeRecord->minutes %= 60;
+
+    timeRecord->days = timeRecord->hours/24;
+    timeRecord->hours %= 24;
+    
+    timeRecord->years = timeRecord->days/365;
+    timeRecord->days %= 365;
+
+
+
 
 
 }
