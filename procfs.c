@@ -194,6 +194,29 @@ void get_time_substring(int time_in_units, char* append_text, char* time_buf, si
 struct load_avg pfs_load_avg(char *proc_dir)
 {
    struct load_avg lavg = { 0 };
+
+   int load_avg_fd = open_path(proc_dir, "loadavg");
+   if (load_avg_fd == -1) {
+       LOG("ERROR: open_path() returned%d - returning null", load_avg_fd);
+       return NULL;
+   }
+
+   char* line;
+   int lineread_val = lineread(load_avg_fd, line, 256);
+   
+   if (lineread_val == -1) {
+       LOG("ERROR: lineread returned%d - returning null", lineread_val);
+       return NULL;
+   }
+
+    double* load_avg_val = &lavg->one;
+   for (int i = 0; i < 3; i++) {
+        char* load_avg_string = strsep(&line, " ");
+        *(load_avg_val + i * sizeof(double)) = atof(load_avg_string);
+
+   }
+
+   LOG("LOAD AVG:\n\t ONE:\t%f\n\t FIVE:\t%f\n\t FIFTEEN\t %f\n", lavg->one, lavg->five, lavg->fifteen);
    return lavg;
 }
 
