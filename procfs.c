@@ -311,9 +311,9 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
     char* mem_total = copy_cpu_info(mem_fd, "MemTotal");
     char* mem_avail = copy_cpu_info(mem_fd, "MemAvailable");
 
-    LOG("MEM VALUES:\n
-        \t mem_total:\t%s\n
-        \t mem-avail:\t%s\n",
+    LOG("MEM VALUES:\n"
+        "\t mem_total:\t%s\n"
+        "\t mem-avail:\t%s\n",
         mem_total, mem_avail);
 
 
