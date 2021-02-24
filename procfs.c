@@ -231,7 +231,7 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
 
     init_cpu_stats(proc_dir, curr);
 
-    if (prev == NULL) {
+    if (prev == NULL || (prev->total == 0 && prev->idle == 0)) {
         return 0.0;
     }
 
