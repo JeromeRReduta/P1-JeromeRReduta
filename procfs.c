@@ -4,6 +4,9 @@
 #include "procfs.h"
 #include "util.h"
 
+// Function prototypes
+void populateUptime(double time, struct uptime timeRecord);
+
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
    return pfs_get_aspect(proc_dir, hostname_buf, buf_sz, "sys/kernel/hostname");
@@ -94,7 +97,16 @@ double pfs_uptime(char *proc_dir)
 
 int pfs_format_uptime(double time, char *uptime_buf)
 {
+
+    struct uptime timeRecord = calloc(sizeof(uptime));
+    LOG("NO SEGFAULT YET");
     return -1;
+}
+
+void populateUptime(double time, struct uptime timeRecord)
+{
+
+
 }
 
 struct load_avg pfs_load_avg(char *proc_dir)
@@ -107,6 +119,8 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
 {
     return 0.0;
 }
+
+
 
 struct mem_stats pfs_mem_usage(char *proc_dir)
 {
