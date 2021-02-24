@@ -144,11 +144,14 @@ int write_time(Uptime *time_record, char *uptime_buf)
         return -1;
     }
 
+    size_t time_sz = 64;
     char time_string[256] = {0};
-    char years[64], days[64], hours[64];
 
-    char* minutes = malloc(64);
-    char* seconds = malloc(64);
+    char* years = malloc(time_sz);
+    char* days = malloc(time_sz);
+    char* hours = malloc(time_sz)
+    char* minutes = malloc(time_sz);
+    char* seconds = malloc(time_sz);
 
     get_time_substring(time_record->years, "years,", years);
     get_time_substring(time_record->days, "days,", days);
