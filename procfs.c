@@ -193,7 +193,9 @@ void get_time_substring(int time_in_units, char* append_text, char* time_buf, si
 
 struct load_avg pfs_load_avg(char *proc_dir)
 {
+    
    struct load_avg lavg = { 0 };
+    /*
     char load_avg_txt[256];
     char* line = load_avg_txt;
 
@@ -207,7 +209,7 @@ struct load_avg pfs_load_avg(char *proc_dir)
     lavg.five = atof(strsep(&line, " "));
     lavg.fifteen = atof(strsep(&line, " "));
 
-
+*/
     /*
    LOG("READ SIZE:\t%d\n", read_sz);
    
