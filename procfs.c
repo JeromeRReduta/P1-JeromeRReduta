@@ -202,7 +202,7 @@ struct load_avg pfs_load_avg(char *proc_dir)
    }
 
    char* line;
-   LOG("READING LINE FROM FD %d", load_avg_fd);
+   LOG("READING LINE FROM FD %d\n", load_avg_fd);
    int lineread_val = lineread(load_avg_fd, line, 256);
 
    LOG("LINEREAD VAL:\t%d\n", lineread_val);
