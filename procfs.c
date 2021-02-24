@@ -239,6 +239,10 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
     long idle = curr->idle - prev-> idle;
     long total = curr->total - prev-> total;
 
+    // Case - error: comparing the same entries or would divide by 0
+    if (curr->total == prev->total) {
+        return 0.0;
+    }
     double used = idle / total;
     LOG("USED:\t%f\n", used);
     
