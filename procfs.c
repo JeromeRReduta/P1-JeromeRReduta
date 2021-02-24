@@ -331,12 +331,11 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
     double mem_total = -1;
     double mem_avail = -1;
     // Is the formula mem_total - mem_avail - mem_free?
-    double mem_free = -1;
+    // double mem_free = -1; Maybe not
 
     while ( (read_sz = lineread(mem_fd, line, 256)) > 0) {
         char* mem_avail_search = strstr(line, "MemAvailable") + '\0';
         char* mem_total_search = strstr(line,"MemTotal") + '\0';
-        char* mem_free_search = strstr(line, "MemFree") + '\0';
 
         // Case: found key_name
 
@@ -358,37 +357,28 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
             // mem_total[?] = '\0' Set ? to index of "k" in "kb"
         }
 
-         if (mem_free_search != NULL) {
-            mem_free_search = strstr(mem_free_search, ":") + 1;
-            char* txt;
-
-            mem_free = strtod(mem_free_search, &txt)/1000000;
-            LOG("FOUND mem_free:\t |%f|\n", mem_free);
-            // mem_free[?] = '\0' Set ? to index of "k" in "kb"
-        }
+      
 
     }
 
     LOG("VALUES OUTSIDE OF LOOP:\n"
           "\tmem_avail:\t|%f|\n"
-          "\tmem_total:\t|%f|\n"
-          "\tmem_free:\t|%f|\n",
-          mem_avail, mem_total, mem_free);
+          "\tmem_total:\t|%f|\n",
+          mem_avail, mem_total);
     
       // Case: key_name not found in file
 
       if (mem_avail == -1 || mem_total == -1 || mem_free == -1) {
           LOG("ONE OR MORE VALUES NULL:\n"
           "\tmem_avail:\t%f\n"
-          "\tmem_total:\t%f\n"
-          "\tmem_free:\t%f\n",
-          mem_avail, mem_total, mem_free);
+          "\tmem_total:\t%f\n",
+          mem_avail, mem_total);
 
           return -1;
       }
 
       mstats->total = mem_total;
-      mstats->used = mem_total - mem_avail - mem_free*100;
+      mstats->used = mem_total - mem_avail;
       return 0;
 
 
