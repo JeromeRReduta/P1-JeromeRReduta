@@ -203,9 +203,10 @@ struct load_avg pfs_load_avg(char *proc_dir)
 
    char* line;
    LOG("READING LINE FROM FD %d\n", load_avg_fd);
-   int lineread_val = lineread(load_avg_fd, line, 256);
+   // This line segfaults
+   int read_sz = lineread(load_avg_fd, line, 256);
 
-   LOG("LINEREAD VAL:\t%d\n", lineread_val);
+   LOG("READ SIZE:\t%d\n", read_sz);
    
    if (lineread_val == -1) {
        LOG("ERROR: lineread returned%d - returning null", lineread_val);
