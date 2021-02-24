@@ -119,7 +119,7 @@ void display_refresh(char *procfs_loc)
             lavg.one, lavg.five, lavg.fifteen);
 
     char cpu_bar[30] = { 0 };
-    static struct cpu_stats prev_cpu;
+    static struct cpu_stats prev_cpu = NULL;
     struct cpu_stats curr_cpu;
     double cpu_perc = pfs_cpu_usage(procfs_loc, &prev_cpu, &curr_cpu);
     prev_cpu = curr_cpu;
