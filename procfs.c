@@ -197,13 +197,7 @@ struct load_avg pfs_load_avg(char *proc_dir)
     char* line;
     pfs_get_aspect(proc_dir, line, 256, "loadavg");
 
-   
-   LOG("READING LINE FROM FD %d\n", load_avg_fd);
-   // This line segfaults
 
-   
-
-   LOG("FD IS %d\n", load_avg_fd);
 
     /*
    LOG("READ SIZE:\t%d\n", read_sz);
