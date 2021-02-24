@@ -337,8 +337,8 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
 
     }
 
-    mstats->total = atof(mem_total_ptr);
-    mstats->used = atof(mem_total_ptr) - atof(mem_avail_ptr);
+    mstats.total = atof(mem_total_ptr);
+    mstats.used = atof(mem_total_ptr) - atof(mem_avail_ptr);
     
 
 
