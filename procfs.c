@@ -101,7 +101,8 @@ int pfs_format_uptime(double time, char *uptime_buf)
     typedef struct uptime uptime;
 
     uptime *timeRecord = (uptime *) calloc(1, sizeof(uptime));
-    LOG("NO SEGFAULT YET");
+    int whatever = 5;
+    LOG("NO SEGFAULT YET %d\n", whatever);
     return -1;
 }
 
