@@ -262,7 +262,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
     char* sep_ptr;
 
     // Do this twice to get to first cpu number
-    sep_ptr = strsep(&buf_ptr, " ");
+    //sep_ptr = strsep(&buf_ptr, " ");
     sep_ptr = strsep(&buf_ptr, " ");
 
     // 1st 3 #s
