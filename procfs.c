@@ -152,19 +152,19 @@ int write_time(Uptime *time_record, char *uptime_buf)
     char* minutes = malloc(time_sz);
     char* seconds = malloc(time_sz);
 
-    get_time_substring(time_record->years, "years,", years, time_sz);
-    get_time_substring(time_record->days, "days,", days, time_sz);
-    get_time_substring(time_record->hours, "hours,", hours, time_sz);
+    get_time_substring(time_record->years, "years, ", years, time_sz);
+    get_time_substring(time_record->days, "days, ", days, time_sz);
+    get_time_substring(time_record->hours, "hours, ", hours, time_sz);
 
 
-    snprintf(minutes, 64, "%d %s", time_record->minutes, "minutes,");
+    snprintf(minutes, 64, "%d %s", time_record->minutes, "minutes, ");
     snprintf(seconds, 64, "%d %s", time_record->seconds, "seconds");
 
     LOG("SECONDS:\t%s", seconds);
     LOG("MINUTES:\t%s\n", minutes);
 
      LOG("CURRENT UPTIME:\t %s %s %s %s %s\n", years, days, hours, minutes, seconds);
-    snprintf(uptime_buf, 1024, "%s %s %s %s %s", years, days, hours, minutes, seconds);
+    snprintf(uptime_buf, 1024, "%s%s%s%s%s", years, days, hours, minutes, seconds);
     free(years);
     free(days);
     free(hours);
@@ -182,7 +182,7 @@ void get_time_substring(int time_in_units, char* append_text, char* time_buf, si
 {
     if (time_in_units > 0) {
         snprintf(time_buf, time_sz, "%d %s", time_in_units, append_text);
-        LOG("TIME_BUF RIGHT NOW:\t%s\n", time_buf);
+        LOG("TIME_BUF RIGHT NOW:\t'%s'\n", time_buf);
     } 
     else {
         /* Learned from https://cboard.cprogramming.com/c-programming/112370-setting-char-*-null.html that I can null a char* by 
