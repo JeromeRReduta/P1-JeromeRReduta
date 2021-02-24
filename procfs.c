@@ -39,7 +39,9 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
         return -1;
     }
 
-    char* model_name = copy_cpu_info(model_fd, "model name", buf_sz);
+    char model_name[256] = {0};
+
+    copy_cpu_info(model_fd, "model name", model_name, buf_sz);
 
     // Case: cpu_info not found
     if (model_name == NULL) {
@@ -309,11 +311,13 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
     }
 
 
+    char mem_total[256] = {0};
+    char mem_avail[256]= {0};
+
     // Note: Reducing buf_sz to 200 prevents stack smashing - maybe just hard-code as limit in copy_cpu_info?
-    char* mem_total = copy_cpu_info(mem_fd, "MemTotal", 200);
-    mem_total = strsep(&mem_total, "\t");
-    char* mem_avail = copy_cpu_info(mem_fd, "MemAvailable", 200) + '\0';
-    mem_avail = strsep(&mem_avail, "\t");
+    copy_cpu_info(mem_fd, "MemTotal", mem_total, 200);
+    copy_cpu_info(mem_fd, "MemAvailable", mem_avail, 200);
+
 
     
     
