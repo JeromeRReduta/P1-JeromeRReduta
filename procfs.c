@@ -209,12 +209,12 @@ struct load_avg pfs_load_avg(char *proc_dir)
        return lavg;
     }
 
-    lavg.one = atof(strsep(line, " "));
-    lavg.five = atof(strsep(line, " "));
-    lavg.fifteen = atof(strsep(line, " "));
+    lavg.one = atof(strsep(&line, " "));
+    lavg.five = atof(strsep(&line, " "));
+    lavg.fifteen = atof(strsep(&line, " "));
 
 
-   LOG("LOAD AVG:\n\t ONE:\t%f\n\t FIVE:\t%f\n\t FIFTEEN\t %f\n", lavg->one, lavg->five, lavg->fifteen);
+   LOG("LOAD AVG:\n\t ONE:\t%f\n\t FIVE:\t%f\n\t FIFTEEN\t %f\n", lavg.one, lavg.five, lavg.fifteen);
    return lavg;
 }
 
