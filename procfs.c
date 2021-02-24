@@ -84,7 +84,7 @@ double pfs_uptime(char *proc_dir)
     LOG("UPTIME STRING IS:\t%s\n", uptime_string);
 
     
-    return strtod(uptime_string, &uptime_string);
+    return -1;
 }
 
 int pfs_format_uptime(double time, char *uptime_buf)
