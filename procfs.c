@@ -202,10 +202,9 @@ struct load_avg pfs_load_avg(char *proc_dir)
 
     LOG("LINE CONTENTS:\t%s\n", line);
 
-    lavg.one = atof(strsep(&line[0], " "));
-    lavg.five = atof(strsep(&line[0], " "));
-    lavg.fifteen = atof(strsep(&line[0], " "));
-
+    lavg.one = atof(strsep(&(line[0]), " "));
+    lavg.five = atof(strsep(&(line[0]), " "));
+    lavg.fifteen = atof(strsep(&(line[0]), " "));
 
 
     /*
