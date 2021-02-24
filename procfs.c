@@ -231,14 +231,10 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
 
     init_cpu_stats(proc_dir, curr);
 
-    // Should return false/0
-    LOG("CURR IS NULL? %d\n", curr == NULL);
-    //Should return true/non-0
-    LOG("PREV == NULL? %d\n", prev == NULL);
 
     LOG("\n\tprev->idle:\t%ld\n\tprev->total:\t%ld\n\tcurrent->idle:\t%ld\n\tcurrent->total:\t%ld\n",
         prev->idle, prev->total, curr->idle, curr->total);
-    double used = (double) ((curr->idle - prev->idle) / (curr->total - prev->total));
+    double used = (double) ((curr->idle - prev->idle) / (curr->total - prev->total)) * 100;
     LOG("USED:\t%f\n", used);
     
     LOG("USED:\t%f\t CPU_USAGE:\t%f\n", used, 1-used);
