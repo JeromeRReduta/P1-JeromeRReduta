@@ -371,7 +371,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
 
     LOG("VALUES OUTSIDE OF LOOP:\n"
           "\tmem_avail:\t|%f|\n"
-          "\tmem_total:\t|%f|\n",
+          "\tmem_total:\t|%f|\n"
           "\tmem_free:\t|%f|\n",
           mem_avail, mem_total, mem_free);
     
