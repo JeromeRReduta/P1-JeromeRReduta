@@ -332,8 +332,8 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
     char mem_total[256];
 
     while ( (read_sz = lineread(mem_fd, line, 256)) > 0) {
-        mem_avail_search = strstr(line, "MemAvailable") + '\0';
-        mem_total_search = strstr(line,"MemTotal") + '\0';
+        char* mem_avail_search = strstr(line, "MemAvailable") + '\0';
+        char* mem_total_search = strstr(line,"MemTotal") + '\0';
 
         // Case: found key_name
 
