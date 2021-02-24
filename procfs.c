@@ -209,9 +209,14 @@ struct load_avg pfs_load_avg(char *proc_dir)
        return lavg;
     }
 
+    int temp = 1;
+    LOG("ALL GOOD SO FAR %d", temp-1);
     lavg.one = atof(strsep(&line, " "));
+    LOG("ALL GOOD SO FAR %d", temp);
     lavg.five = atof(strsep(&line, " "));
+    LOG("ALL GOOD SO FAR %d", temp * 5);
     lavg.fifteen = atof(strsep(&line, " "));
+    LOG("ALL GOOD SO FAR %d", temp*15);
 
 
    LOG("LOAD AVG:\n\t ONE:\t%f\n\t FIVE:\t%f\n\t FIFTEEN\t %f\n", lavg.one, lavg.five, lavg.fifteen);
