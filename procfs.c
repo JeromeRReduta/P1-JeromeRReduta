@@ -5,7 +5,7 @@
 #include "util.h"
 
 // Function prototypes
-void populateUptime(double time, struct uptime timeRecord);
+void populateUptime(double time, struct uptime *timeRecord);
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
@@ -121,12 +121,13 @@ int pfs_format_uptime(double time, char *uptime_buf)
 // Requires existing uptime so that I can calloc and free in the same func
 // Makes debugging a lot easier in the long run - only have to check for calloc
 // and free in one func @ a time
-void populateUptime(double time, struct uptime *timeRecord)
+void populateUptime(double time, uptime *timeRecord)
 {
 
+    timeRecord->seconds = (int)time;
     // Note: Int division rounds down
-    timeRecord->minutes = time/60;
-    timeRecord->seconds = time % 60;
+    timeRecord->minutes = timeRecord->seconds/60;
+    timeRecord->seconds %= 60;
 
     timeRecord->hours = timeRecord->minutes / 60;
     timeRecord->minutes %= 60;
