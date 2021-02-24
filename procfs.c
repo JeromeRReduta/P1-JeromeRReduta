@@ -145,19 +145,26 @@ int write_time(Uptime *time_record, char *uptime_buf)
     }
 
     char time_string[256] = {0};
-    char years[64], days[64], hours[64], minutes[64], seconds[64];
+    char years[64], days[64], hours[64];
+
+    char* minutes = malloc(64);
+    char* seconds = malloc(64);
 
     get_time_substring(time_record->years, "years,", years);
     get_time_substring(time_record->days, "days,", days);
     get_time_substring(time_record->hours, "hours,", hours);
-    snprintf(minutes, strlen(minutes), "%d %s", time_record->minutes, "minutes, ");
-    snprintf(seconds, strlen(seconds), "%d %s", time_record->seconds, "seconds");
+
+
+    snprintf(minutes, 64, "%d %s", time_record->minutes, "minutes, ");
+    snprintf(seconds, 64, "%d %s", time_record->seconds, "seconds");
 
     LOG("SECONDS:\t%s", seconds);
     LOG("MINUTES:\t%s\n", minutes);
 
     LOG("CURRENT UPTIME:\t %s %s %s %s %s\n", years, days, hours, minutes, seconds);
 
+    free(minutes);
+    free(seconds);
 
     return -1;
 
