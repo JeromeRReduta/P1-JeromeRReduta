@@ -327,6 +327,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
 {
     char line[256] = {0};
     ssize_t read_sz;
+    int kb_to_mb = 1048576;
 
     double mem_total = -1;
     double mem_avail = -1;
@@ -343,7 +344,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
             mem_avail_search = strstr(mem_avail_search, ":") + 1;
             char* txt;
 
-            mem_avail = strtod(mem_avail_search, &txt)/1000000;
+            mem_avail = strtod(mem_avail_search, &txt)/kb_to_mb;
             LOG("FOUND MEM_AVAIL:\t |%s|\n", mem_avail_search);
             // mem_avail[?] = '\0' Set ? to index of "k" in "kb"
         }
@@ -352,7 +353,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
             mem_total_search = strstr(mem_total_search, ":") + 1;
             char* txt;
 
-            mem_total = strtod(mem_total_search, &txt)/1000000;
+            mem_total = strtod(mem_total_search, &txt)/kb_to_mb;
             LOG("FOUND mem_total:\t |%s|\n", mem_total_search);
             // mem_total[?] = '\0' Set ? to index of "k" in "kb"
         }
