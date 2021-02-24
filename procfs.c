@@ -98,7 +98,8 @@ double pfs_uptime(char *proc_dir)
 int pfs_format_uptime(double time, char *uptime_buf)
 {
 
-    Uptime* timeRecord = calloc(1, sizeof(*Uptime));
+    // Format for this from https://dyclassroom.com/c/c-dynamic-memory-allocation-calloc-function
+    Uptime* timeRecord = (Uptime *)calloc(1, sizeof(Uptime));
     
     // Note: no segfault so far
 
