@@ -167,6 +167,7 @@ void get_time_substring(int time_in_units, char* append_text, char* time_buf)
 {
     if (time_in_units > 0) {
         snprintf(time_buf, strlen(time_buf), "%d %s", time_in_units, append_text);
+        LOG("TIME_BUF RIGHT NOW:\t%s\n", time_buf);
     } 
     else {
         /* Learned from https://cboard.cprogramming.com/c-programming/112370-setting-char-*-null.html that I can null a char* by 
