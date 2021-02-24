@@ -350,6 +350,11 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
         }
 
     }
+
+    LOG("VALUES OUTSIDE OF LOOP:\n"
+          "\tmem_avail:\t%s\n"
+          "\tmem_total:\t%s\n",
+          mem_avail, mem_total);
     
       // Case: key_name not found in file
 
