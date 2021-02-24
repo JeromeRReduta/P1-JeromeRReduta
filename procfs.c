@@ -210,6 +210,8 @@ struct load_avg pfs_load_avg(char *proc_dir)
        return lavg;
     }
 
+    LOG("DONE READING FROM LINE: %d", 0);
+
     int temp = 1;
     LOG("ALL GOOD SO FAR %d", temp-1);
     lavg.one = atof(strsep(&line, " "));
