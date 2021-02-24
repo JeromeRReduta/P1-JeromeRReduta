@@ -73,6 +73,7 @@ double pfs_uptime(char *proc_dir)
     }
 
     char* line;
+    char* uptime_string;
     
     if ( lineread(uptime_fd, line, 256) == -1) {
         return -1;
@@ -80,11 +81,16 @@ double pfs_uptime(char *proc_dir)
 
     LOG("LINE IS:\t%s\n", line);
 
-    char* uptime_string = strsep(&line, " ");
+    if ( (uptime_string = strsep(&line, " ") == NULL) {
+        return -1;
+    }
+
+
     LOG("UPTIME STRING IS:\t%s\n", uptime_string);
 
-    
-    return -1;
+    char* buffer;
+
+    return strtod(uptime_string, buffer);
 }
 
 int pfs_format_uptime(double time, char *uptime_buf)
