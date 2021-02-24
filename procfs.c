@@ -198,7 +198,7 @@ struct load_avg pfs_load_avg(char *proc_dir)
    int load_avg_fd = open_path(proc_dir, "loadavg");
    if (load_avg_fd == -1) {
        LOG("ERROR: open_path() returned%d - returning null", load_avg_fd);
-       return NULL;
+       return lavg;
    }
 
    char* line;
@@ -206,7 +206,7 @@ struct load_avg pfs_load_avg(char *proc_dir)
    
    if (lineread_val == -1) {
        LOG("ERROR: lineread returned%d - returning null", lineread_val);
-       return NULL;
+       return lavg;
    }
 
     double* load_avg_val = &lavg->one;
