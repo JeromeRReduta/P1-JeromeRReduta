@@ -121,7 +121,7 @@ int pfs_format_uptime(double time, char *uptime_buf)
 // Requires existing uptime so that I can calloc and free in the same func
 // Makes debugging a lot easier in the long run - only have to check for calloc
 // and free in one func @ a time
-void populateUptime(double time, struct uptime timeRecord)
+void populateUptime(double time, struct uptime *timeRecord)
 {
 
     // Note: Int division rounds down
