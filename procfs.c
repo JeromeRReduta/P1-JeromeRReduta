@@ -336,6 +336,9 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
         *(k_index_avail-1) = '\0';
 
     }
+
+    mstats->total = atof(mem_total_ptr);
+    mstats->used = atof(mem_total_ptr) - atof(mem_avail_ptr);
     
 
 
