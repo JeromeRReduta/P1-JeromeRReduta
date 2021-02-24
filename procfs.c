@@ -317,8 +317,9 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
 
     char* mem_total_head = mem_total;
     char* mem_avail_head = mem_avail;
-    copy_cpu_info(mem_fd, "MemTotal", mem_total, 200);
     copy_cpu_info(mem_fd, "MemAvailable", mem_avail, 200);
+    copy_cpu_info(mem_fd, "MemTotal", mem_total, 200);
+    
 
 
 
