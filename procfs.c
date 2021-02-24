@@ -230,7 +230,15 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
     LOG("MADE CURR:%d\n", 0);
 
     init_cpu_stats(proc_dir, curr);
-    return 0.0;
+
+    if (prev == NULL) {
+        return 0.0;
+    }
+
+    double used = (curr ->idle - prev->idle) / (curr->total - prev->total);
+    
+    LOG("USED:\t%f\t CPU_USAGE:\t%f\n", used, 1-used);
+    return 1 - used;
 }
 
 int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
