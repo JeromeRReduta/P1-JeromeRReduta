@@ -28,6 +28,6 @@ int open_path(char *base, char *extension);
 ssize_t lineread(int fd, char *buf, size_t sz);
 
 int pfs_get_aspect(char *proc_dir, char *buf, size_t buf_sz, char *extension);
-char *copy_cpu_info(int cpu_fd, char* key, size_t buf_sz);
+void *copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz);
 
 #endif
