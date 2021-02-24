@@ -208,8 +208,8 @@ struct load_avg pfs_load_avg(char *proc_dir)
 
    LOG("READ SIZE:\t%d\n", read_sz);
    
-   if (lineread_val == -1) {
-       LOG("ERROR: lineread returned%d - returning null", lineread_val);
+   if (read_sz == -1) {
+       LOG("ERROR: lineread returned%d - returning null\n", read_sz);
        return lavg;
     }
 
