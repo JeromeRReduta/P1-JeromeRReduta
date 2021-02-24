@@ -249,7 +249,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
     sep_ptr = strsep(&buf_ptr, " ");
 
     for (int i = 0; i < 3; i++) {
-        sep_ptr = strsep(&Buf_ptr, " ");
+        sep_ptr = strsep(&buf_ptr, " ");
         stats->total += atof(sep_ptr);
         LOG("SEP_PTR VAL:\t%s\n", sep_ptr);
         LOG("NEW STATS TOTAL VALUE:\t%ld\n", stats->total);
