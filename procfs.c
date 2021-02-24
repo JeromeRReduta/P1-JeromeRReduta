@@ -353,8 +353,6 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
             mem_total = strtod(mem_total_search, &txt);
             LOG("FOUND mem_total:\t |%f|\n", mem_total);
             // mem_total[?] = '\0' Set ? to index of "k" in "kb"
-            strcpy(mem_total, mem_total_search);
-
         }
 
     }
