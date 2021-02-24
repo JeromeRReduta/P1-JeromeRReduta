@@ -91,6 +91,7 @@ double pfs_uptime(char *proc_dir)
 
     LOG("LINE IS:\t%s\n", line_ptr);
 
+    // This feels dirty, but if I don't do this the code segfaults
     char** uptime_string_ptr = &line_ptr;
 
     char* uptime_string = strsep(uptime_string_ptr, " ");
