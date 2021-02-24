@@ -263,7 +263,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
         return -1;
     }
 
-    LOG("FIRST LINE:\t%s\n", buf_ptr);
+    LOG("LINE:\t%s\n", buf_ptr);
 
     char* sep_ptr;
 
@@ -288,6 +288,11 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
         sep_ptr = strsep(&buf_ptr, " ");
         stats->total += atol(sep_ptr);
     }
+
+    LOG("VALUES:\n"
+        "\tstats->total:\t%ld\n"
+        "\tstats->idle:\t%ld\n",
+        stats->total, stats->idle);
 
 
 
