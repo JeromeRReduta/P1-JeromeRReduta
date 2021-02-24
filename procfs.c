@@ -308,11 +308,10 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
         return mstats;
     }
 
-    char mem_total[256];
-    char mem_avail[256];
 
-    char* mem_total_ptr = copy_cpu_info(mem_fd, "MemTotal", 200);
-    char* mem_avail_ptr = copy_cpu_info(mem_fd, "MemAvailable", 200);
+    // Note: Reducing buf_sz to 200 prevents stack smashing - maybe just hard-code as limit in copy_cpu_info?
+    char* mem_total = copy_cpu_info(mem_fd, "MemTotal", 200);
+    char* mem_avail = copy_cpu_info(mem_fd, "MemAvailable", 200);
 
     
     
