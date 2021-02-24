@@ -251,7 +251,6 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
     LOG("SEP_PTR VAL:\t%s\n", sep_ptr);
 
     // Because of earlier calloc, don't have to init values of stats
-    for (int i = 0; i < )
 
     return -1;
 
