@@ -104,14 +104,14 @@ int pfs_format_uptime(double time, char *uptime_buf)
     
     // Note: no segfault so far
 
-    populateUptime(36000000.00, timeRecord);
+    populateUptime(36000000.00, &timeRecord);
 
     
-    LOG("SECONDS:\t%d\n:\t", timeRecord.seconds);
-    LOG("MINUTES:\t%d\n:\t", timeRecord.minutes);
-    LOG("HOURS:\t%d\n:\t", timeRecord.hours);
-    LOG("DAYS:\t%d\n:\t", timeRecord.days);
-    LOG("YEARS:\t%d\n:\t", timeRecord.years);
+    LOG("SECONDS:\t%d\n:\t", timeRecord->seconds);
+    LOG("MINUTES:\t%d\n:\t", timeRecord->minutes);
+    LOG("HOURS:\t%d\n:\t", timeRecord->hours);
+    LOG("DAYS:\t%d\n:\t", timeRecord->days);
+    LOG("YEARS:\t%d\n:\t", timeRecord->years);
 
     
     
