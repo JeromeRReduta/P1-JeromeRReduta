@@ -7,7 +7,7 @@
 // Function prototypes
 void populate_uptime(double time, Uptime *time_record);
 int write_time(Uptime *time_record, char *uptime_buf);
-void get_time_substring(int time_in_units, char* append_text, char* time_buf);
+void get_time_substring(int time_in_units, char* append_text, char* time_buf, size_t time_sz)
 
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
@@ -173,10 +173,10 @@ int write_time(Uptime *time_record, char *uptime_buf)
 
 }
 
-void get_time_substring(int time_in_units, char* append_text, char* time_buf)
+void get_time_substring(int time_in_units, char* append_text, char* time_buf, size_t time_sz)
 {
     if (time_in_units > 0) {
-        snprintf(time_buf, strlen(time_buf), "%d %s", time_in_units, append_text);
+        snprintf(time_buf, time_sz, "%d %s", time_in_units, append_text);
         LOG("TIME_BUF RIGHT NOW:\t%s\n", time_buf);
     } 
     else {
