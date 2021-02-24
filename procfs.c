@@ -353,6 +353,11 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
         "\t mem-avail:\t'%s'\n",
         mem_total_ptr, mem_avail_ptr);
 
+    LOG("ANSWERS?:\n"
+        "\t mstats.total:\t%f\n"
+        "\t mstats.used:\t%f\n",
+        mstats.total, mstats.used);
+
 
     
 
