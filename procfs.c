@@ -225,6 +225,13 @@ struct load_avg pfs_load_avg(char *proc_dir)
 
 double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *curr)
 {
+
+    LOG("ATTEMPTING TO MAKE CURR:%d\n", 0);
+    curr = {0};
+
+    LOG("MADE CURR:%d\n", 0);
+
+
     return 0.0;
 }
 
