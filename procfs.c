@@ -338,11 +338,11 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
         // Case: found key_name
 
         if (mem_avail_search != NULL) {
-            mem_avail_search = strstr(mem_avail_search, ":")
+            mem_avail_search = strstr(mem_avail_search, ":");
             char* txt;
 
             double mem_in_kb = strtod(mem_avail_search, &txt);
-            LOG("FOUND MEM_AVAIL:\t |%ld|\n", mem_in_kb);
+            LOG("FOUND MEM_AVAIL:\t |%f|\n", mem_in_kb);
             // mem_avail[?] = '\0' Set ? to index of "k" in "kb"
             strcpy(mem_avail, mem_avail_search);
         }
@@ -352,7 +352,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
             char* txt;
 
             double mem_in_kb = strtod(mem_total_search, &txt);
-            LOG("FOUND mem_total:\t |%ld|\n", mem_in_kb);
+            LOG("FOUND mem_total:\t |%f|\n", mem_in_kb);
             // mem_total[?] = '\0' Set ? to index of "k" in "kb"
             strcpy(mem_total, mem_total_search);
 
