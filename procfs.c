@@ -72,6 +72,8 @@ int pfs_cpu_units(char *proc_dir)
 
 double pfs_uptime(char *proc_dir)
 {
+    return 0.0
+    /*
     int uptime_fd = open_path(proc_dir, "uptime");
 
     if (uptime_fd == -1) {
@@ -95,6 +97,7 @@ double pfs_uptime(char *proc_dir)
     LOG("UPTIME STRING IS:\t%s\n", uptime_string);
 
     return atof(uptime_string);
+    */
 }
 
 int pfs_format_uptime(double time, char *uptime_buf)
