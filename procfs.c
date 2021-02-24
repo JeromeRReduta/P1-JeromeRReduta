@@ -195,16 +195,16 @@ struct load_avg pfs_load_avg(char *proc_dir)
 {
    struct load_avg lavg = { 0 };
     char line[256];
-    
+
     if (pfs_get_aspect(proc_dir, line, 256, "loadavg") == -1) {
-        return -1;
+        return lavg;
     }
 
     LOG("LINE CONTENTS:\t%s\n", line);
 
-    lavg.one = atof(strsep(&line, " "));
-    lavg.five = atof(strsep(&line, " "));
-    lavg.fifteen = atof(strsep(&line, " "));
+    lavg.one = atof(strsep(&line[0], " "));
+    lavg.five = atof(strsep(&line[0], " "));
+    lavg.fifteen = atof(strsep(&line[0], " "));
 
 
 
