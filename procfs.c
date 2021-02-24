@@ -368,7 +368,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
     
       // Case: key_name not found in file
 
-      if (mem_avail == -1 || mem_total == -1 || mem_free == -1) {
+      if (mem_avail == -1 || mem_total == -1) {
           LOG("ONE OR MORE VALUES NULL:\n"
           "\tmem_avail:\t%f\n"
           "\tmem_total:\t%f\n",
