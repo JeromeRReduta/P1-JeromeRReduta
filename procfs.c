@@ -265,8 +265,8 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
     LOG("SEP_PTR VAL:\t%s\n", sep_ptr);
     LOG("NEW STATS IDLE VALUE:\t%ld\n", stats->idle);
 
-    // Last 3 #s
-    for (int i = 0; i < 3; i++) {
+    // Last 6 #s
+    for (int i = 0; i < 6; i++) {
         sep_ptr = strsep(&buf_ptr, " ");
         stats->total += atol(sep_ptr);
         LOG("SEP_PTR VAL:\t%s\n", sep_ptr);
