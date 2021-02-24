@@ -97,14 +97,12 @@ double pfs_uptime(char *proc_dir)
 
 int pfs_format_uptime(double time, char *uptime_buf)
 {
-    // Saw typedef from https://dyclassroom.com/c/c-dynamic-memory-allocation-calloc-function
-    typedef struct uptime uptime;
 
-    uptime *timeRecord = (uptime *) calloc(1, sizeof(uptime));
+    Uptime *timeRecord = (uptime *) calloc(1, sizeof(uptime));
     
     // Note: no segfault so far
 
-    populateUptime(36000000.00, &timeRecord);
+    populateUptime(36000000.00, timeRecord);
 
     
     LOG("SECONDS:\t%d\n:\t", timeRecord->seconds);
@@ -121,7 +119,7 @@ int pfs_format_uptime(double time, char *uptime_buf)
 // Requires existing uptime so that I can calloc and free in the same func
 // Makes debugging a lot easier in the long run - only have to check for calloc
 // and free in one func @ a time
-void populateUptime(double time, uptime *timeRecord)
+void populateUptime(double time, Uptime *timeRecord)
 {
 
     timeRecord->seconds = (int)time;

@@ -44,13 +44,14 @@ struct task_info {
     char state[13];
 };
 
-struct uptime {
+// Saw typedef from https://www.tutorialspoint.com/cprogramming/c_typedef.htm
+typdef struct uptime {
     int seconds;
     int minutes;
     int hours;
     int days;
     int years;
-};
+} Uptime;
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz);
 int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz);
