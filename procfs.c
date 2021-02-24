@@ -5,8 +5,10 @@
 #include "util.h"
 
 // Function prototypes
-void populateUptime(double time, Uptime *timeRecord);
-int writeTime(Uptime *timeRecord, char *uptime_buf);
+void populate_uptime(double time, Uptime *time_record);
+int write_time(Uptime *time_record, char *uptime_buf);
+char* get_time_substring(int time_in_units, char* append_text)
+
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
@@ -99,68 +101,78 @@ double pfs_uptime(char *proc_dir)
 int pfs_format_uptime(double time, char *uptime_buf)
 {
     // Format for this from https://dyclassroom.com/c/c-dynamic-memory-allocation-calloc-function
-    Uptime* timeRecord = (Uptime *)calloc(1, sizeof(Uptime));
-    populateUptime(time, timeRecord);
+    Uptime* time_record = (Uptime *)calloc(1, sizeof(Uptime));
+    populate_uptime(time, time_record);
     // Note: no segfault so far
 
-    return writeTime(timeRecord, uptime_buf);
+    return write_time(time_record, uptime_buf);
 }
 
 // Requires existing uptime so that I can calloc and free in the same func
 // Makes debugging a lot easier in the long run - only have to check for calloc
 // and free in one func @ a time
-void populateUptime(double time, Uptime *timeRecord)
+void populate_uptime(double time, Uptime *time_record)
 {
 
-    timeRecord->seconds = (int)time;
+    time_record->seconds = (int)time;
     // Note: Int division rounds down
-    timeRecord->minutes = timeRecord->seconds/60;
-    timeRecord->seconds %= 60;
+    time_record->minutes = time_record->seconds/60;
+    time_record->seconds %= 60;
 
-    timeRecord->hours = timeRecord->minutes / 60;
-    timeRecord->minutes %= 60;
+    time_record->hours = time_record->minutes / 60;
+    time_record->minutes %= 60;
 
-    timeRecord->days = timeRecord->hours/24;
-    timeRecord->hours %= 24;
+    time_record->days = time_record->hours/24;
+    time_record->hours %= 24;
     
-    timeRecord->years = timeRecord->days/365;
-    timeRecord->days %= 365;
+    time_record->years = time_record->days/365;
+    time_record->days %= 365;
 
-    //Note: Currently, populateUptime works as intended
-    LOG("SECONDS:\t%d\n:\t", timeRecord->seconds);
-    LOG("MINUTES:\t%d\n:\t", timeRecord->minutes);
-    LOG("HOURS:\t%d\n:\t", timeRecord->hours);
-    LOG("DAYS:\t%d\n:\t", timeRecord->days);
-    LOG("YEARS:\t%d\n:\t", timeRecord->years);
+    //Note: Currently, populate_uptime works as intended
+    LOG("SECONDS:\t%d\n:\t", time_record->seconds);
+    LOG("MINUTES:\t%d\n:\t", time_record->minutes);
+    LOG("HOURS:\t%d\n:\t", time_record->hours);
+    LOG("DAYS:\t%d\n:\t", time_record->days);
+    LOG("YEARS:\t%d\n:\t", time_record->years);
 
 
 
 }
 
-int writeTime(Uptime *timeRecord, char *uptime_buf)
+int write_time(Uptime *time_record, char *uptime_buf)
 {
-    if (timeRecord == NULL) {
+    if (time_record == NULL) {
         return -1;
     }
 
-    char timeString[256] = {0};
+    char time_string[256] = {0};
 
-    char years[64];
+    char* years = get_time_substring(time_record->years, "years,");
+    char* days = get_time_substring(time_record->days, "days,");
+    char* hours = get_time_substring(time_record->hours, "hours,");
+    char* minutes = get_time_substring(time_record->minutes, "minutes,");
+    char* seconds = get_time_substring(time_record->seconds, "seconds");
 
-    LOG("FINDING YEARS VAL FROM:\t%d",timeRecord->years);
-    if (timeRecord->years > 0) {
-        snprintf(years, strlen(years), "%d years, ", timeRecord->years);
-    } 
-    else {
-        /* Learned from https://cboard.cprogramming.com/c-programming/112370-setting-char-*-null.html that I can null a char* by 
-        setting char[0] to '\0'*/
-        years[0] = '\0';
-    }
-    LOG("YEARS POINTER VAL:\t%s\n", years);
+    LOG("CURRENT UPTIME:\t %s %s %s %s %s\n", years, days, hours, minutes, seconds);
 
 
     return -1;
 
+}
+
+char* get_time_substring(int time_in_units, char* append_text)
+{
+    char time_buf[64];
+    if (time_in_units > 0) {
+        snprintf(time_buf, strlen(time_buf), "%d %s", time_in_units, append_text);
+    } 
+    else {
+        /* Learned from https://cboard.cprogramming.com/c-programming/112370-setting-char-*-null.html that I can null a char* by 
+        setting char[0] to '\0'*/
+        time_buf[0] = '\0';
+    }
+    
+    return time_buf;
 }
 
 struct load_avg pfs_load_avg(char *proc_dir)
