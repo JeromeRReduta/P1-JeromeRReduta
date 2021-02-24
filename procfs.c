@@ -269,11 +269,16 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 
     // Do this twice to get to first cpu number
     sep_ptr = strsep(&buf_ptr, " ");
+
+    LOG("SEP_PTR VALUES: %d\n", 0);
+    LOG("\tSEP_PTR INIT:\t%s\n", sep_ptr);
     sep_ptr = strsep(&buf_ptr, " ");
+    LOG("\tSEP_PTR INIT 1:\t%s\n", sep_ptr);
 
     // 1st 3 #s
     for (int i = 0; i < 3; i++) {
         sep_ptr = strsep(&buf_ptr, " ");
+        LOG("\tSEP_PTR 0-2:\t%s\n", sep_ptr);
         stats->total += atol(sep_ptr);
 
     }
@@ -283,15 +288,17 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
     stats->idle = atol(sep_ptr);
     stats->total += atol(sep_ptr);
 
+    LOG("\tSEP_PTR 3:\t%s\n", sep_ptr);
     // Last 6 #s
     for (int i = 0; i < 6; i++) {
         sep_ptr = strsep(&buf_ptr, " ");
         stats->total += atol(sep_ptr);
+        LOG("\tSEP_PTR 4-9:\t%s\n", sep_ptr);
     }
 
     LOG("VALUES:\n"
-        "\tstats->total:\t%ld\n"
-        "\tstats->idle:\t%ld\n",
+        "\tstats->idle:\t%ld\n"
+        "\tstats->total:\t%ld\n",
         stats->total, stats->idle);
 
 
