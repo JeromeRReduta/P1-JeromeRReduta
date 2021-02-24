@@ -232,10 +232,10 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
     init_cpu_stats(proc_dir, curr);
 
     if (prev == NULL) {
+        LOG("ERROR - PREV == NULL%d", 0);
         return 0.0;
     }
 
-    //LOG(" (curr->idle - prev->idle) / (curr->total - prev->total):\n(%ld - %ld)/(%ld - %ld)\t=\t%ld/%ld\n", curr->idle, prev->idle, curr->total, prev->total, (curr->idle - prev-> idle), (curr->total - prev-> total));
     LOG("\n\tprev->idle:\t%ld\n\tprev->total:\t%ld\n\tcurrent->idle:\t%ld\n\tcurrent->total:\t%ld\n",
         prev->idle, prev->total, curr->idle, curr->total);
     double used = (double) ((curr->idle - prev->idle) / (curr->total - prev->total));
