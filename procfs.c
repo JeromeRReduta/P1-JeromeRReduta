@@ -326,7 +326,7 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
     char* mem_avail_ptr = mem_avail_head + 9;
 
     // index before 'k' in "# kb"
-    char* cutoff_index_total = strstr(mem_total_ptr, "k");
+    char* k_index_total = strstr(mem_total_ptr, "k");
     if (k_index_total != NULL) {
         *(k_index_total-1) = '\0';
     }
