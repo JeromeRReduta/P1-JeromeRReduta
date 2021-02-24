@@ -375,8 +375,8 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
           return -1;
       }
 
-      mstats->total = atof(mem_total);
-      mstats->used = atof(mem_total) - atof(mem_avail);
+      mstats->total = mem_total;
+      mstats->used = mem_total - mem_avail;
       return 0;
 
 
