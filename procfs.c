@@ -8,6 +8,7 @@
 void populate_uptime(double time, Uptime *time_record);
 int write_time(Uptime *time_record, char *uptime_buf);
 void get_time_substring(int time_in_units, char* append_text, char* time_buf, size_t time_sz);
+int init_cpu_stats(char *proc_dir, struct cpu_stats *stats);
 
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
@@ -225,15 +226,26 @@ struct load_avg pfs_load_avg(char *proc_dir)
 
 double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *curr)
 {
-
-    LOG("ATTEMPTING TO MAKE CURR:%d\n", 0);
     curr = calloc(1, sizeof(struct cpu_stats));
-    
-
     LOG("MADE CURR:%d\n", 0);
 
-
+    init_cpu_stats(proc_dir, curr);
     return 0.0;
+}
+
+int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
+{
+    char[256] buf;
+    char* buf_ptr;
+
+    if (pfs_get_aspect(proc_dir, buf_ptr, 256, "stat") == -1) {
+        return -1;
+    }
+
+    LOG("FIRST LINE:\t%s\n", buf_ptr);
+
+    return -1;
+
 }
 
 
