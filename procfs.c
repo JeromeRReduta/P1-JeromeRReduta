@@ -226,7 +226,7 @@ struct load_avg pfs_load_avg(char *proc_dir)
 
 double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *curr)
 {
-    curr = calloc(1, sizeof(struct cpu_stats));
+    
     LOG("MADE CURR:%d\n", 0);
 
     init_cpu_stats(proc_dir, curr);
@@ -282,7 +282,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 
     // Because of earlier calloc, don't have to init values of stats
 
-    return -1;
+    return 0;
 
 }
 
