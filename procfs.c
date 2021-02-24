@@ -149,7 +149,7 @@ int write_time(Uptime *time_record, char *uptime_buf)
 
     char* years = malloc(time_sz);
     char* days = malloc(time_sz);
-    char* hours = malloc(time_sz)
+    char* hours = malloc(time_sz);
     char* minutes = malloc(time_sz);
     char* seconds = malloc(time_sz);
 
