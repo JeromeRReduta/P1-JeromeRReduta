@@ -338,7 +338,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
         // Case: found key_name
 
         if (mem_avail_search != NULL) {
-            mem_avail_search = strstr(mem_avail_search, ":");
+            mem_avail_search = strstr(mem_avail_search, ":") + 1;
             char* txt;
 
             double mem_in_kb = strtod(mem_avail_search, &txt);
@@ -348,7 +348,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
         }
 
         if (mem_total_search != NULL) {
-            mem_total_search = strstr(mem_total_search, ":") + 5;
+            mem_total_search = strstr(mem_total_search, ":") + 1;
             char* txt;
 
             double mem_in_kb = strtod(mem_total_search, &txt);
