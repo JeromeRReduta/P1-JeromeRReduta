@@ -101,7 +101,7 @@ int pfs_format_uptime(double time, char *uptime_buf)
 {
     // Format for this from https://dyclassroom.com/c/c-dynamic-memory-allocation-calloc-function
     Uptime* time_record = (Uptime *)calloc(1, sizeof(Uptime));
-    populate_uptime(36000000, time_record);
+    populate_uptime(time, time_record);
     // Note: no segfault so far
 
     return write_time(time_record, uptime_buf);
@@ -145,7 +145,7 @@ int write_time(Uptime *time_record, char *uptime_buf)
     }
 
     size_t time_sz = 64;
-    char time_string[256] = {0};
+    char time_string[1024] = {0};
 
     char* years = malloc(time_sz);
     char* days = malloc(time_sz);
@@ -164,15 +164,17 @@ int write_time(Uptime *time_record, char *uptime_buf)
     LOG("SECONDS:\t%s", seconds);
     LOG("MINUTES:\t%s\n", minutes);
 
-    LOG("CURRENT UPTIME:\t %s %s %s %s %s\n", years, days, hours, minutes, seconds);
-
+    snprintf(time_string, strlen(time_string), "Uptime: %s %s %s %s %s\n", years, days, hours, minutes, seconds);
     free(years);
     free(days);
     free(hours);
     free(minutes);
     free(seconds);
 
-    return -1;
+    LOG("%s", time_string);
+    
+
+    return 0;
 
 }
 
