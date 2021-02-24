@@ -194,8 +194,10 @@ void get_time_substring(int time_in_units, char* append_text, char* time_buf, si
 struct load_avg pfs_load_avg(char *proc_dir)
 {
    struct load_avg lavg = { 0 };
-    char* line;
+    char line[256];
     pfs_get_aspect(proc_dir, line, 256, "loadavg");
+
+    LOG("LINE CONTENTS:\t%s\n", line);
 
 
 
