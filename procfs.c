@@ -76,7 +76,7 @@ double pfs_uptime(char *proc_dir)
     
     
     int uptime_fd = open_path(proc_dir, "uptime");
-
+    LOG("UPTIME_FD GOOD:\t%d\n", uptime_fd);
     if (uptime_fd == -1) {
         return -1;
     }
