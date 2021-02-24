@@ -62,8 +62,9 @@ int pfs_cpu_units(char *proc_dir)
     if (cpu_fd == -1) {
         return -1;
     }
+    char cpu_units[256] = {0};
 
-    char* cpu_units = copy_cpu_info(cpu_fd, "siblings", 200);
+    copy_cpu_info(cpu_fd, "siblings", cpu_units, 200);
 
 
     /* Wow problem was actually calling atoi twice for some reason:
