@@ -328,8 +328,8 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
     char line[256] = {0};
     ssize_t read_sz;
 
-    char mem_avail[256];
-    char mem_total[256];
+    double mem_total = -1;
+    double mem_avail = -1;
 
     while ( (read_sz = lineread(mem_fd, line, 256)) > 0) {
         char* mem_avail_search = strstr(line, "MemAvailable") + '\0';
@@ -341,18 +341,17 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
             mem_avail_search = strstr(mem_avail_search, ":") + 1;
             char* txt;
 
-            double mem_in_kb = strtod(mem_avail_search, &txt);
-            LOG("FOUND MEM_AVAIL:\t |%f|\n", mem_in_kb);
+            mem_avail = strtod(mem_avail_search, &txt);
+            LOG("FOUND MEM_AVAIL:\t |%f|\n", mem_avail);
             // mem_avail[?] = '\0' Set ? to index of "k" in "kb"
-            strcpy(mem_avail, mem_avail_search);
         }
 
         if (mem_total_search != NULL) {
             mem_total_search = strstr(mem_total_search, ":") + 1;
             char* txt;
 
-            double mem_in_kb = strtod(mem_total_search, &txt);
-            LOG("FOUND mem_total:\t |%f|\n", mem_in_kb);
+            mem_total = strtod(mem_total_search, &txt);
+            LOG("FOUND mem_total:\t |%f|\n", mem_total);
             // mem_total[?] = '\0' Set ? to index of "k" in "kb"
             strcpy(mem_total, mem_total_search);
 
@@ -361,16 +360,16 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
     }
 
     LOG("VALUES OUTSIDE OF LOOP:\n"
-          "\tmem_avail:\t%s\n"
-          "\tmem_total:\t%s\n",
+          "\tmem_avail:\t|%f|\n"
+          "\tmem_total:\t|%f|\n",
           mem_avail, mem_total);
     
       // Case: key_name not found in file
 
-      if (mem_avail == NULL || mem_total == NULL) {
+      if (mem_avail == -1 || mem_total == -1) {
           LOG("ONE OR MORE VALUES NULL:\n"
-          "\tmem_avail:\t%s\n"
-          "\tmem_total:\t%s\n",
+          "\tmem_avail:\t%f\n"
+          "\tmem_total:\t%f\n",
           mem_avail, mem_total);
 
           return -1;
