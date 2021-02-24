@@ -101,7 +101,7 @@ int pfs_format_uptime(double time, char *uptime_buf)
 {
     // Format for this from https://dyclassroom.com/c/c-dynamic-memory-allocation-calloc-function
     Uptime* time_record = (Uptime *)calloc(1, sizeof(Uptime));
-    populate_uptime(time, time_record);
+    populate_uptime(36000000, time_record);
     // Note: no segfault so far
 
     return write_time(time_record, uptime_buf);
