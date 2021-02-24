@@ -205,8 +205,8 @@ void get_time_substring(int time_in_units, char* append_text, char* time_buf, si
 struct load_avg pfs_load_avg(char *proc_dir)
 {
     
-   struct load_avg lavg = { 0 };
-    /*
+    struct load_avg lavg = { 0 };
+    
     char load_avg_txt[256];
     char* line = load_avg_txt;
 
@@ -220,30 +220,7 @@ struct load_avg pfs_load_avg(char *proc_dir)
     lavg.five = atof(strsep(&line, " "));
     lavg.fifteen = atof(strsep(&line, " "));
 
-*/
-    /*
-   LOG("READ SIZE:\t%d\n", read_sz);
-   
-   if (read_sz == -1) {
-       LOG("ERROR: lineread returned%d - returning null\n", read_sz);
-       return lavg;
-    }
-
-    LOG("DONE READING FROM LINE: %d", 0);
-
-    int temp = 1;
-    LOG("ALL GOOD SO FAR %d", temp-1);
-    lavg.one = atof(strsep(&line, " "));
-    LOG("ALL GOOD SO FAR %d", temp);
-    lavg.five = atof(strsep(&line, " "));
-    LOG("ALL GOOD SO FAR %d", temp * 5);
-    lavg.fifteen = atof(strsep(&line, " "));
-    LOG("ALL GOOD SO FAR %d", temp*15);
-
-
-   LOG("LOAD AVG:\n\t ONE:\t%f\n\t FIVE:\t%f\n\t FIFTEEN\t %f\n", lavg.one, lavg.five, lavg.fifteen);
-   */
-   return lavg;
+    return lavg;
 }
 
 double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *curr)
