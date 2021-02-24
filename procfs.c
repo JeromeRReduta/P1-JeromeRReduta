@@ -261,7 +261,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 
     // 4th # - idle time
     sep_ptr = strsep(&buf_ptr, " ");
-    stats->idle = strsep(&buf_ptr, " ");
+    stats->idle = atol(sep_ptr);
     LOG("SEP_PTR VAL:\t%s\n", sep_ptr);
     LOG("NEW STATS IDLE VALUE:\t%ld\n", stats->idle);
 
