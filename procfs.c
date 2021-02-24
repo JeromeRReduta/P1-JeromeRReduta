@@ -146,13 +146,15 @@ int writeTime(Uptime *timeRecord, char *uptime_buf)
     char timeString[256] = {0};
 
     char years[64];
-    
+
     LOG("FINDING YEARS VAL FROM:\t%d",timeRecord->years);
     if (timeRecord->years > 0) {
-        snprintf(years, "%d years, ", timeRecord->years);
+        snprintf(years, strlen(years), "%d years, ", timeRecord->years);
     } 
     else {
-        years = NULL;
+        /* Learned from https://cboard.cprogramming.com/c-programming/112370-setting-char-*-null.html that I can null a char* by 
+        setting char[0] to '\0'*/
+        years[0] = '\0';
     }
     LOG("YEARS POINTER VAL:\t%s\n", years);
 
