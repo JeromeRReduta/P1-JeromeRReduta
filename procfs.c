@@ -294,7 +294,6 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 
 }
 
-MemTotal: 1475464 kB = 1.475464 GB
 
 
 struct mem_stats pfs_mem_usage(char *proc_dir)
