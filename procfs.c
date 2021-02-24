@@ -333,8 +333,8 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
     
 
     LOG("MEM VALUES:\n"
-        "\t mem_total:\t%s\n"
-        "\t mem-avail:\t%s\n",
+        "\t mem_total:\t'%s'\n"
+        "\t mem-avail:\t'%s'\n",
         mem_total_ptr, mem_avail_ptr);
 
 
