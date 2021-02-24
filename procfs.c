@@ -89,9 +89,10 @@ double pfs_uptime(char *proc_dir)
 
     LOG("UPTIME STRING IS:\t%s\n", uptime_string);
 
-    char* buffer;
+    // length = 100 b/c we only need to store the other unused #
+    char buffer[100];
 
-    return strtod(uptime_string, buffer);
+    return strtod(uptime_string, &buffer);
 }
 
 int pfs_format_uptime(double time, char *uptime_buf)
