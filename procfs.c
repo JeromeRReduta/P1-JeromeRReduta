@@ -388,7 +388,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
       }
 
       mstats->total = mem_total;
-      mstats->used = mem_total - mem_avail - mem_free;
+      mstats->used = mem_total - mem_avail - mem_free*100;
       return 0;
 
 
