@@ -315,15 +315,15 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
     char mem_total[256] = {0};
     char mem_avail[256]= {0};
 
-    char* mem_total_ptr = mem_total;
-    char* mem_avail_ptr = mem_avail;
+    char* mem_total_head = mem_total;
+    char* mem_avail_head = mem_avail;
     copy_cpu_info(mem_fd, "MemTotal", mem_total, 200);
     copy_cpu_info(mem_fd, "MemAvailable", mem_avail, 200);
 
 
 
-    mem_total_ptr = strsep(&mem_total_ptr, "\t");
-    mem_avail_ptr = strsep(&mem_avail_ptr, "\t");
+    char* mem_total_ptr = strsep(&mem_total_head, "\t");
+    char* mem_avail_ptr = strsep(&mem_avail_head, "\t");
 
 
 
