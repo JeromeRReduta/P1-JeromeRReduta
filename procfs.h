@@ -45,7 +45,7 @@ struct task_info {
 };
 
 // Saw typedef from https://www.tutorialspoint.com/cprogramming/c_typedef.htm
-typdef struct uptime {
+typedef struct uptime {
     int seconds;
     int minutes;
     int hours;
