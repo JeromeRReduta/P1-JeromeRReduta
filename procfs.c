@@ -321,9 +321,10 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
     copy_cpu_info(mem_fd, "MemAvailable", mem_avail, 200);
 
 
-/*
+
     char* mem_total_ptr = strsep(&mem_total_head, "\t");
-    char* mem_avail_ptr = strsep(&mem_avail_head, "\t");
+    char* mem_avali_ptr = "NOTHING YET";
+/*    char* mem_avail_ptr = strsep(&mem_avail_head, "\t");
 */
 
 
