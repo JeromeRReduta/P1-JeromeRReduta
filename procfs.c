@@ -227,7 +227,8 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
 {
 
     LOG("ATTEMPTING TO MAKE CURR:%d\n", 0);
-    curr = {0};
+    curr = calloc(1, sizeof(struct cpu_stats));
+    
 
     LOG("MADE CURR:%d\n", 0);
 
