@@ -243,7 +243,7 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
 
 
     // Case - error: comparing the same entries or would divide by 0
-    if (curr->total == prev->total) {
+    if (curr->total == prev->total || idle < 0 || total < 0) {
         return 0.0;
     }
 
