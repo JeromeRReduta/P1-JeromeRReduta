@@ -315,8 +315,8 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
 
     
     
-    mem_total = copy_cpu_info(mem_fd, "MemTotal", 256);
-    mem_avail = copy_cpu_info(mem_fd, "MemAvailable", 256);
+    mem_total_ptr = copy_cpu_info(mem_fd, "MemTotal", 256);
+    mem_avail_ptr = copy_cpu_info(mem_fd, "MemAvailable", 256);
 
     LOG("MEM VALUES:\n"
         "\t mem_total:\t%s\n"
