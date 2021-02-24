@@ -207,14 +207,12 @@ struct load_avg pfs_load_avg(char *proc_dir)
    if (lineread_val == -1) {
        LOG("ERROR: lineread returned%d - returning null", lineread_val);
        return lavg;
-   }
+    }
 
-    double* load_avg_val = &lavg->one;
-   for (int i = 0; i < 3; i++) {
-        char* load_avg_string = strsep(&line, " ");
-        *(load_avg_val + i * sizeof(double)) = atof(load_avg_string);
+    lavg.one = atof(strsep(line, " "));
+    lavg.five = atof(strsep(line, " "));
+    lavg.fifteen = atof(strsep(line, " "));
 
-   }
 
    LOG("LOAD AVG:\n\t ONE:\t%f\n\t FIVE:\t%f\n\t FIFTEEN\t %f\n", lavg->one, lavg->five, lavg->fifteen);
    return lavg;
