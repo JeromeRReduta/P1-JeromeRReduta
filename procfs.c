@@ -194,16 +194,15 @@ void get_time_substring(int time_in_units, char* append_text, char* time_buf, si
 struct load_avg pfs_load_avg(char *proc_dir)
 {
    struct load_avg lavg = { 0 };
+    char* line;
+    pfs_get_aspect(proc_dir, line, 256, "loadavg");
 
-   int load_avg_fd = open_path(proc_dir, "loadavg");
-   if (load_avg_fd == -1) {
-       LOG("ERROR: open_path() returned%d - returning null", load_avg_fd);
-       return lavg;
-   }
-
-   char* line;
+   
    LOG("READING LINE FROM FD %d\n", load_avg_fd);
    // This line segfaults
+
+   
+
    LOG("FD IS %d\n", load_avg_fd);
 
     /*
