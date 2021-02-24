@@ -236,7 +236,7 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
     }
 
     LOG(" (curr->idle - prev->idle) / (curr->total - prev->total):\n(%ld - %ld)/(%ld - %ld)\n", curr->idle, prev->idle, curr->total, prev->total);
-    long used = (curr ->idle - prev->idle) / (curr->total - prev->total);
+    double used = (curr ->idle - prev->idle) / (curr->total - prev->total);
     
     LOG("USED:\t%f\t CPU_USAGE:\t%f\n", used, 1-used);
     return 1 - used;
