@@ -259,6 +259,9 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
     char buf[256];
     char* buf_ptr = buf;
 
+    stats->idle = 0;
+    stats->total = 0;
+
     if (pfs_get_aspect(proc_dir, buf_ptr, 256, "stat") == -1) {
         return -1;
     }
