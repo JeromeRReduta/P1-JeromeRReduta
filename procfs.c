@@ -97,8 +97,10 @@ double pfs_uptime(char *proc_dir)
 
 int pfs_format_uptime(double time, char *uptime_buf)
 {
+    // Saw typedef from https://dyclassroom.com/c/c-dynamic-memory-allocation-calloc-function
+    typedef struct uptime uptime;
 
-    struct uptime timeRecord = calloc(sizeof(uptime));
+    uptime *timeRecord = (uptime *) calloc(1, sizeof(uptime));
     LOG("NO SEGFAULT YET");
     return -1;
 }
