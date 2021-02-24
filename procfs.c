@@ -344,7 +344,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
             char* txt;
 
             mem_avail = strtod(mem_avail_search, &txt)/1000000;
-            LOG("FOUND MEM_AVAIL:\t |%f|\n", mem_avail);
+            LOG("FOUND MEM_AVAIL:\t |%s|\n", mem_avail_search);
             // mem_avail[?] = '\0' Set ? to index of "k" in "kb"
         }
 
@@ -353,7 +353,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
             char* txt;
 
             mem_total = strtod(mem_total_search, &txt)/1000000;
-            LOG("FOUND mem_total:\t |%f|\n", mem_total);
+            LOG("FOUND mem_total:\t |%s|\n", mem_total_search);
             // mem_total[?] = '\0' Set ? to index of "k" in "kb"
         }
 
@@ -361,7 +361,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
 
     }
 
-    LOG("VALUES OUTSIDE OF LOOP:\n"
+    LOG("VALUES:\n"
           "\tmem_avail:\t|%f|\n"
           "\tmem_total:\t|%f|\n",
           mem_avail, mem_total);
