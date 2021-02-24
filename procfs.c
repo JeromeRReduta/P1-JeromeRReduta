@@ -74,7 +74,7 @@ double pfs_uptime(char *proc_dir)
 
     char line[256];
     
-    if ( lineread(uptime_fd, line, strlen(line)) == -1) {
+    if ( lineread(uptime_fd, line, 256) == -1) {
         return -1;
     }
 
