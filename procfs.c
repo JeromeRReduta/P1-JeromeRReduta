@@ -241,7 +241,7 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
 
     LOG("\n\tIDLE:\t%ld\n\tTOTAL:\t%ld\n", idle, total);
 
-    double used = (double)(idle)/total;
+    long double used = (long double)(idle)/total;
 
     LOG("USED:\t%f", used);
     //LOG("FINAL ANSWER:%f", (1 - idle/total)*100);
