@@ -304,11 +304,11 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
 
     if (mem_fd == -1) {
         LOG("MEM_INFO = %d; RETURNING NULL", mem_fd);
-        return NULL;
+        return mstats;
     }
     
-    char* mem_total = copy_cpu_info(mem_fd, "MemTotal");
-    char* mem_avail = copy_cpu_info(mem_fd, "MemAvailable");
+    char* mem_total = copy_cpu_info(mem_fd, "MemTotal", 256);
+    char* mem_avail = copy_cpu_info(mem_fd, "MemAvailable", 256);
 
     LOG("MEM VALUES:\n"
         "\t mem_total:\t%s\n"
