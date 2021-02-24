@@ -233,7 +233,7 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
 
     if (prev == NULL || (prev->idle == 0 && prev->total == 0)) {
         LOG("PREV NOT INIT; initalizing prev:%d\n", 0);
-        prev = curr;
+        init_cpu_stats(proc_dir, prev);
         return 0.0;
     }
 
