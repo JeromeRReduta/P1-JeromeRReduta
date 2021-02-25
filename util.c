@@ -129,7 +129,7 @@ void uid_to_uname(char *name_buf, uid_t uid)
             LOG("%s\n", "FOUND MATCH");
 
             char name[256];
-            strcpy(name_buf, line);
+            strcpy(name_buf, line + '\0');
 
             LOG("\nFOUND NAME:\t|%s|\n", name);
 
