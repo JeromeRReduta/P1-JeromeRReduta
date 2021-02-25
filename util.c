@@ -61,7 +61,7 @@ void draw_percbar(char *buf, double frac) {
     get_number_display(safe_percent, number_display);
 
     LOG("CURRENT BUFFER:\t|%s|\n", buf);
-    snprintf((buf + 23), strlen(number_display), "%s", number_display);
+    snprintf((buf + 23), strlen(number_display) + 1, "%s", number_display);
 
 
 
