@@ -15,7 +15,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats);
 int read_proc(char *proc_dir, struct task_stats *tstats);
 void update_task_stats(int status_fd, struct task_stats *tstats);
 void get_task_state(char *state, char *line);
-pid_t get_task_pid(pid_t prev, char *line);
+int get_task_pid(int prev, char *line);
 
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
@@ -506,7 +506,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     ssize_t read_sz;
 
     char state[2] = {0};
-    pid_t pid = 0;
+    int pid = -1;
 
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
 
@@ -576,7 +576,7 @@ void get_task_state(char *state, char *line)
 
 }
 
-pid_t get_task_pid(pid_t prev, char *line)
+int get_task_pid(int prev, char *line)
 {
     char* pid_search = strstr(line, "Pid:") + '\0';
 
@@ -584,7 +584,7 @@ pid_t get_task_pid(pid_t prev, char *line)
     LOG("PID_SEARCH:\t%s\n", pid_search);
     // Case: found pid value
 
-    if (pid_search != NULL) {
+    if (pid_search != NULL and prev == -1) {
 
         
 
