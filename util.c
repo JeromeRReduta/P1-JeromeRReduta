@@ -128,7 +128,7 @@ void uid_to_uname(char *name_buf, uid_t uid)
             char name[256];
             strcpy(name, head);
 
-            LOG("FOUND NAME:\t%s\n", name);
+            LOG("\nFOUND NAME:\t|%s|\n", name);
 
             char* name_ptr = name;
 
