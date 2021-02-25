@@ -578,14 +578,14 @@ void update_task_stats(int status_fd, struct task_stats *tstats, char *pid_str)
     }
     else if (state[0] == 'D') {
         tstats->waiting++;
-        add_task(tstats, state, pid, uid, name, "waiting");
+        add_task(tstats, state, pid, uid, name, "disk sleep");
     }
     else if (state[0] == 'S' || state[0] == 'I') {
         //LOG("NOT ADDING %s TASK:\n", "sleeping");
         tstats->sleeping++;
 
     }
-    else if (state[0] == 'T' || state[0] == 't') {
+    else if (state[0] == 'T') {
         tstats->stopped++;
         add_task(tstats, state, pid, uid, name,  "stopped");
     }
