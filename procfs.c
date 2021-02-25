@@ -617,6 +617,16 @@ void get_task_name(char *name, char *line)
     if (name_search != NULL) {
 
         LOG("NAME MATCH FOUND:\t|%s|\n", name_search);
+
+        char name_copy[26];
+
+        strcpy(name_search + 7, name_copy);
+        LOG("name_copy now:\t%s\n", name_copy);
+        name_copy[25] = '\0';
+        LOG("name_copy now:\t%s\n", name_copy);
+
+        
+        }
     }
 
 /*
