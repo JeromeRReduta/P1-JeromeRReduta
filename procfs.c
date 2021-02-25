@@ -527,23 +527,33 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
     if (state[0] == 'R') {
         tstats->running++;
+        LOG("ADDING %s TASK:\n", "running");
         add_task(tstats, state, pid, uid, name,  "running");
+        LOG("DONE W/ %s TASK\n", "running");
+        
     }
     else if (state[0] == 'D') {
         tstats->waiting++;
+        LOG("ADDING %s TASK:\n", "waiting");
         add_task(tstats, state, pid, uid, name, "waiting");
+        LOG("DONE W/ %s TASK\n", "waiting");
     }
     else if (state[0] == 'S' || state[0] == 'I') {
+        LOG("NOT ADDING %s TASK:\n", "sleeping");
         tstats->sleeping++;
 
     }
     else if (state[0] == 'T' || state[0] == 't') {
         tstats->stopped++;
+        LOG("ADDING %s TASK:\n", "stopped");
         add_task(tstats, state, pid, uid, name,  "stopped");
+        LOG("DONE W/ %s TASK\n", "stopped");
     }
     else if (state[0] == 'Z') {
         tstats->zombie++;
+        LOG("ADDING %s TASK:\n", "zombie");
         add_task(tstats, state, pid, uid, name,  "zombie");
+        LOG("DONE W/ %s TASK\n", "zombie");
     }
 
   
