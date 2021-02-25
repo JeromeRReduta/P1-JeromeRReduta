@@ -215,10 +215,7 @@ int read_proc(char *proc_dir)
         if ( isdigit(entry->d_name[0]) != 0) {
             counter++;
 
-            if (lookup[atoi(entry->d_name)] == 1) {
-                LOG("DUPLICATE:\t%s\n", entry->d_name);
-            } 
-            lookup[atoi(entry->d_name)] = 1;
+            
 
             
         }
