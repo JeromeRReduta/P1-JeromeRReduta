@@ -208,7 +208,7 @@ int read_proc(char *proc_dir)
     int counter = 0;
    
     // Lookup table for finding duplicates
-    int lookup[1000000000000] = {0};
+    int lookup[2147483647] = {0};
     struct dirent *entry;
     while ((entry = readdir(directory)) != NULL) {
         
