@@ -15,7 +15,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats);
 int read_proc(char *proc_dir, struct task_stats *tstats);
 void update_task_stats(int status_fd, struct task_stats *tstats);
 void get_task_state(char *state, char *line);
-int get_task_pid(int prev, char *line);
+int get_task_id(int prev, char *line, char *search_term);
 
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
@@ -507,19 +507,22 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
     char state[2] = {0};
     int pid = -1;
+    int uid = -1;
 
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
 
 
         get_task_state(state, line);
-        pid = get_task_pid(pid, line);
+        pid = get_task_id(pid, line, "Pid:");
+        uid = get_task_id(uid, line, "Uid:");
 
     }
 
     LOG("INFO SO FAR:\n"
         "\tState Letter:\t%s\n"
-        "\tPID:\t%i\n",
-        state, pid);
+        "\tPID:\t%d\n"
+        "\tUID:\t%d\n",
+        state, pid, uid);
 
     switch(state[0]) {
         case 'R':
@@ -576,25 +579,25 @@ void get_task_state(char *state, char *line)
 
 }
 
-int get_task_pid(int prev, char *line)
+int get_task_id(int prev, char *line, char *search_term)
 {
-    char* pid_search = strstr(line, "Pid:") + '\0';
+    char* id_search = strstr(line, search_term) + '\0';
 
     
-    LOG("PID_SEARCH:\t%s\n", pid_search);
+    //LOG("id_SEARCH:\t%s\n", id_search); // Uncomment in case of debugging id_search
     // Case: found pid value
 
-    if (pid_search != NULL && prev == -1) {
+    if (id_search != NULL && prev == -1) {
 
         
 
-        //LOG("PID_SEARCH:\t%s\n", pid_search);
-        char* pid_str = strsep(&pid_search, "Pid:") + 5;
-        LOG("\t\tMATCH FOUND:\t%s\n", pid_str);
+       
+        char* id_str = strsep(&id_search, search_term) + 5;
+        LOG("\t\tMATCH FOUND:\t%s\n", id_str);
 
-        LOG("ATOUI(PID_STR) = %i\n", atoi(pid_str));
+        LOG("ATOI(id_STR) = %i\n", atoi(id_str));
 
-        return atoi(pid_str);
+        return atoi(id_str);
 
 
     }
