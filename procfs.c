@@ -55,10 +55,6 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
         return -1;
     }
 
-    // Case: cpu_info not found
-    if (model_name == NULL) {
-        return -1;
-    }
     // Case: cpu_info found
     strcpy(model_buf, model_name);
     close(model_fd);
