@@ -562,8 +562,9 @@ void get_task_state(char *state, char *line)
     // Case: found key_name
 
         if (state_search != NULL) {
-            LOG("%s\n", "FOUND STATE_SEARCH");
+            
             char* state_copy = strsep(&state_search, "State:") + 7;
+            LOG("STATE_COPY:\t%s\n", state_copy);
             state_copy[1] = '\0';
             strcpy(state, state_copy);
 
