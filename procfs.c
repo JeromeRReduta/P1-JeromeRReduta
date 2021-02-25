@@ -587,6 +587,10 @@ pid_t get_task_pid(pid_t prev, char *line)
         char* pid_str = strsep(&pid_search, "Pid:") + 5;
         LOG("MATCH FOUND:\t%s\n", pid_str);
 
+        LOG("ATOUI(PID_STR) = %i", atoui(pid_str));
+
+        return atoui(pid_str);
+
 
     }
 
