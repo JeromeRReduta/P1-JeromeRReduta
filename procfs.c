@@ -274,30 +274,29 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 
     LOG("LINE:\t|%s|\n", buf_ptr);
 
-    char* sep_ptr = buf_ptr + 5;
+    buf_ptr += 5;
+    char* sep_ptr = buf_ptr;
 
-    LOG("SEP_PTR:\t|%s\n", sep_ptr);
-
-    // Do this twice to get to first cpu number
-    sep_ptr = strsep(&buf_ptr, " ");
-    sep_ptr = strsep(&buf_ptr, " ");
+    LOG("BUF_PTR:\t|%s|\n", buf_ptr);
 
     // 1st 3 #s
     for (int i = 0; i < 3; i++) {
-        sep_ptr = strsep(&buf_ptr, " ");
         stats->total += atol(sep_ptr);
+        sep_ptr = strsep(&buf_ptr, " ");
+        
 
     }
 
     // 4th # - idle time
-    sep_ptr = strsep(&buf_ptr, " ");
     stats->idle = atol(sep_ptr);
     stats->total += atol(sep_ptr);
+    sep_ptr = strsep(&buf_ptr, " ");
 
     // Last 6 #s
     for (int i = 0; i < 6; i++) {
-        sep_ptr = strsep(&buf_ptr, " ");
+        
         stats->total += atol(sep_ptr);
+        sep_ptr = strsep(&buf_ptr, " ");
     }
 
     LOG("VALUES:\n"
