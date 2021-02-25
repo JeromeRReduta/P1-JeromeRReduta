@@ -397,6 +397,8 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
 
 struct task_stats *pfs_create_tstats()
 {
+
+    
     return NULL;
 }
 
@@ -407,6 +409,7 @@ void pfs_destroy_tstats(struct task_stats *tstats)
 
 int pfs_tasks(char *proc_dir, struct task_stats *tstats)
 {
+    int read_dir_return = read_proc(proc_dir);
     return -1;
 }
 

@@ -4,6 +4,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <dirent.h>
 
 #include "util.h"
 #include "logger.h"
@@ -193,4 +194,25 @@ void *copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz)
 
 
 }
+
+int read_proc(char *proc_dir)
+{
+    DIR *directory;
+    if ((directory = opendir(proc_dir) == NULL) {
+        perror("opendir");
+        return 1;
+    }
+
+    struct dirent *entry;
+    while ((entry = readdir(directory)) != NULL) {
+        printf("-> %s\n", entry->d_name);
+    }
+
+    closedir(directory);
+
+    return 0;
+
+}
+
+
 
