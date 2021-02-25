@@ -457,19 +457,20 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
         
 
         if ( isdigit(entry->d_name[0]) != 0) {
+            LOG("%s\n", "STARTING ISDIGIT IF BLOCK")
             char extension[256] = {0};
 
             strcpy(extension, entry->d_name);
             strcat(extension, "/status");
 
             int status_fd = open_path(proc_dir, extension);
-
-            if (status_fd != -1) {
-                update_task_stats(status_fd, tstats);
-                close(status_fd);
-            }
-
             
+            LOG("%s\n", "\n\tSTRCPY:\tSUCCESS\n\tSTRCAT:\tSUCCESS\n\tOPEN_PATH:\tSUCCESS");
+
+            update_task_stats(status_fd, tstats);
+            LOG("%s\n", "UPDATE_TASK_STATS:\tSUCCESS");
+            close(status_fd);
+            LOG("%s\n", "CLOSING STATUS_FD:\tSUCCESS");
             
         }
         
@@ -478,6 +479,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
 
     closedir(directory);
+    LOG("%s\n", "CLOSING DIR:\tSUCCESS");
     
     LOG("TSTATS:\n"
             "\t->total:\t%u\n"
