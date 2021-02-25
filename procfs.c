@@ -522,10 +522,10 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     }
 
     LOG("INFO SO FAR:\n"
-        "\tState Letter:\t%s\n"
-        "\tPID:\t%d\n"
-        "\tUID:\t%d\n"
-        "\tName:\t%s\n",
+        "\tState Letter:\t|%s|\n"
+        "\tPID:\t|%d|\n"
+        "\tUID:\t|%d|\n"
+        "\tName:\t|%s|\n",
         state, pid, uid, name);
 
     switch(state[0]) {
