@@ -657,6 +657,8 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
         tstats->active_tasks_size);
 
     tstats->active_tasks_size++;
+
+    LOG("INCREMENTED SIZE: %d, func is complete\n", tstats->active_tasks_size);
 }
 
 
