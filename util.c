@@ -10,14 +10,14 @@
 
 void draw_percbar(char *buf, double frac) {
 
-    if (frac < 0) {
-        frac = 0;
-    }
+    // Error checking - my_fraction is = 0 if frac is invalid, = frac otherwise
+    double my_fraction = (frac < 0 || isnan(frac) != 0) ? 0.0 : frac;
+ 
 
     /* idk why I need to add 0.1 at the end, but 
     adding it means that 4.4% has 0 #s, and 4.5%
     has 1 */
-    int num_of_hashes = frac * 20 / 100 + 0.1;
+    int num_of_hashes = my_fraction * 20 / 100 + 0.1;
 
     LOG("NUM OF HASHES:\t%d\n", num_of_hashes);
     buf[0] = '[';
@@ -32,7 +32,7 @@ void draw_percbar(char *buf, double frac) {
     buf[21] = ']';
     buf[22] = ' ';
 
-    double percent = frac * 100;
+    double percent = my_fraction * 100;
 
     LOG("PERCENT = %f\n", percent);
 
