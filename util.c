@@ -132,7 +132,7 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
             char* name_ptr = name;
 
-            name_ptr = strsep(&head, ":")
+            name_ptr = strsep(&head, ":");
         }
     }
 
