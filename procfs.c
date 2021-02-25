@@ -533,7 +533,27 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         state[0], pid, uid, name);
 
 
+    if (state[0] == 'R') {
+        tstats->running++;
+        add_task(tstats, state, pid, uid, name,  "running");
+    }
+    else if (state[0] == 'D') {
+        tstats->waiting++;
+        add_task(tstats, state, pid, uid, name, "waiting");
+    }
+    else if (state[0] == 'S' || state[0] == 'I') {
+        tstats->sleeping++;
+    }
+    else if (state[0] == 'T' || state[0] == 't') {
+        tstats->stopped++;
+        add_task(tstats, state, pid, uid, name,  "stopped");
+    }
+    else if (state[0] == 'Z') {
+        tstats->zombie++;
+        add_task(tstats, state, pid, uid, name,  "zombie");
+    }
 
+/*
     switch(state[0]) {
         case 'R':
             tstats->running++;
@@ -565,6 +585,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
             LOG("DEFAULT OPTION%s", "\n");
             break;            
     }
+    */
 
     tstats->total++;
 
