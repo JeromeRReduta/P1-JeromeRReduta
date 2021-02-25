@@ -210,8 +210,10 @@ int read_proc(char *proc_dir)
     while ((entry = readdir(directory)) != NULL) {
         
         if ( isdigit(entry->d_name[0]) != 0) {
-            //printf("-> %s\n", entry->d_name);
             counter++;
+        }
+        else {
+            LOG("NOT DIGIT:\t%s\n", entry->dname);
         }
         
         
