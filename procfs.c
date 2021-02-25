@@ -524,8 +524,9 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     LOG("INFO SO FAR:\n"
         "\tState Letter:\t%s\n"
         "\tPID:\t%d\n"
-        "\tUID:\t%d\n",
-        state, pid, uid);
+        "\tUID:\t%d\n"
+        "\tName:\t%s\n",
+        state, pid, uid, name);
 
     switch(state[0]) {
         case 'R':
@@ -620,10 +621,10 @@ void get_task_name(char *name, char *line)
 
         char name_copy[26] = {0};
 
-        strcpy(name_copy, name_search + 7);
+        strcpy(name_copy, name_search + 6);
         LOG("name_copy now:\t%s\n", name_copy);
         name_copy[25] = '\0';
-        LOG("name_copy now:\t%s\n", name_copy);
+        strcpy(name_copy, name);
 
         
         }
