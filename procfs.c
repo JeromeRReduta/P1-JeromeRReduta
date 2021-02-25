@@ -17,7 +17,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats);
 void get_task_state(char *state, char *line);
 int get_task_id(int prev, char *line, char *search_term);
 void get_task_name(char *name, char *line);
-
+void add_task(struct task_stats *tstats, char *state_letter);
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
@@ -414,13 +414,16 @@ struct task_stats *pfs_create_tstats()
     }
     
     // Attempt to calloc active_tasks
-    stats->active_tasks = calloc(1, sizeof(struct task_info));
+    stats->active_tasks = calloc(2, sizeof(struct task_info));
+
 
     if (stats->active_tasks == NULL) {
         LOG("ERROR: ACTIVE TASKS IS NULL:%d\n", 1);
         return NULL;
     }
-    
+
+    stats->active_tasks_size = 0;
+    stats->active_tasks_max_len = 2;    
     return stats;
 }
 
@@ -511,6 +514,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     int uid = -1;
     char name[26];
 
+
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
 
 
@@ -526,15 +530,19 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         "\tPID:\t|%d|\n"
         "\tUID:\t|%d|\n"
         "\tName:\t|%s|\n",
-        state, pid, uid, name);
+        state[0], pid, uid, name);
+
+
 
     switch(state[0]) {
         case 'R':
             tstats->running++;
+            add_task(tstats, state, pid, uid, name,  "running");
             break;
 
         case 'D':
             tstats->waiting++;
+            add_task(tstats, state, pid, uid, name, "waiting");
             break;
 
         case 'S':
@@ -545,10 +553,12 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         case 'T':
         case 't':
             tstats->stopped++;
+            add_task(tstats, state, pid, uid, name,  "stopped");
             break;
 
         case 'Z':
             tstats->zombie++;
+            add_task(tstats, state, pid, uid, name,  "zombie");
             break;
 
         default:
@@ -577,7 +587,7 @@ void get_task_state(char *state, char *line)
             char state_copy[26] = {0};
             strcpy(state_copy, state_search + 7);
             LOG("state_copy now:\t%s\n", state_copy);
-            state_copy[2] = '\0';
+            state_copy[1] = '\0';
             strcpy(state, state_copy);
             /*
             char* state_copy = strsep(&state_search, "State:") + 7;
@@ -635,20 +645,43 @@ void get_task_name(char *name, char *line)
         
         }
     }
+void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* name, char *state_str)
+{
+    int size = tstats->active_tasks_size;
+    struct task_info* tasks = tstats->active_tasks;
 
-/*
-        // Case: found state value
-        if (state_search != NULL) {
-            
-            char* state_copy = strsep(&state_search, "State:") + 7;
-            state_copy[1] = '\0';
-            strcpy(state, state_copy);
+    if (tstats-> active_tasks_size + 1 >= tstats->active_tasks_max_len) {
 
-            //LOG("STATE AND STATE COPY:\n\t%s\n\t%s\n",state, state_copy );
-        }
-*/
+        int new_max_len = tstats->active_tasks_max_len * 2;
+        LOG("\n\ttask size + 1 would be:%d\n"
+            "\ttask_max len is:\t%d\n"
+            "\tnew max len will be:\t%d\n",
+            size + 1, tstats->active_tasks_max_len, new_max_len);
 
+        
+        tstats->active_tasks = (struct task_info *)realloc(tasks, new_max_len * sizeof(struct task_info)); 
 
+        tstats->active_tasks_max_len = new_max_len;
+
+    }
+
+    struct task_info* curr_task = tstats->active_tasks[tstats->active_tasks_size];
+
+    curr_task.pid = pid;
+    curr_task.uid = uid;
+
+    strcpy(curr_task.name, name);
+    strcpy(curr_task.state, state);
+
+    tstats->active_tasks_size++;
+
+    LOG("CURRENT TASK:\n"
+        "\t->PID:\t%i\n"
+        "\t->UID:\t%i\n"
+        "\t->name:\t%i\n"
+        "\t->state:\t%i\n",
+        curr_task.pid, curr_task.uid, curr_task.name, curr_task.state);
+}
 
 
 
