@@ -96,6 +96,7 @@ void get_number_display(double safe_percent, char* number_display)
 void uid_to_uname(char *name_buf, uid_t uid)
 {
 
+    int len_limit = 15;
 
     char uid_str[256] = {0};
 
@@ -134,6 +135,8 @@ void uid_to_uname(char *name_buf, uid_t uid)
         
             strcpy(name_buf, line + '\0');
 
+            name_buf[len_limit] = '\0';
+
             LOG("\nFOUND NAME:\t|%s|\n", name_buf);
 
             close(passwd_fd);
@@ -149,6 +152,8 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
     close(passwd_fd);
     strcpy(name_buf, uid_str + '\0');
+
+    name_buf[len_limit] = '\0';
     LOG("VALUES:\n"
         "\tUID_STR:\t%s\n"
         "\tNAME_BUF:\t%s\n",
