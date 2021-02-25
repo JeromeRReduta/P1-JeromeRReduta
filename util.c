@@ -206,7 +206,10 @@ int read_proc(char *proc_dir)
 
     struct dirent *entry;
     while ((entry = readdir(directory)) != NULL) {
-        printf("-> %s\n", entry->d_name);
+
+        if (isdigit(entry[0]) != 0) {
+            printf("-> %s\n", entry->d_name);
+        }
     }
     
 
