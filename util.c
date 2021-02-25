@@ -218,7 +218,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
             counter++;
             LOG("ENTRY:\t%s\n", entry->d_name);
 
-            char* extension = entry->dname + "\\status";
+            char* extension = entry->d_name + "\\status";
 
             int fd = open_path(proc_dir, extension);
             close(fd);
