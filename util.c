@@ -24,7 +24,7 @@ double get_safe_percent(double frac)
         return 100.0;
     }
     // Case: frac is between 0 and 100
-    return frac * 100;
+    return frac * 100 + 0.0001; // Secret offset for numbers that end in .000999 c:
 }
 
 void draw_percbar(char *buf, double frac) {
