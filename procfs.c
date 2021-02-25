@@ -281,24 +281,26 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 
     // 1st 3 #s
     for (int i = 0; i < 3; i++) {
-        stats->total += atol(sep_ptr);
         sep_ptr = strsep(&buf_ptr, " ");
+        stats->total += atol(sep_ptr);
+        
         LOG("sep_ptr val:\t%s\n", sep_ptr);
         
 
     }
 
     // 4th # - idle time
+    sep_ptr = strsep(&buf_ptr, " ");
     stats->idle = atol(sep_ptr);
     stats->total += atol(sep_ptr);
-    sep_ptr = strsep(&buf_ptr, " ");
+    
     LOG("sep_ptr val:\t%s\n", sep_ptr);
 
     // Last 6 #s
     for (int i = 0; i < 6; i++) {
-        
-        stats->total += atol(sep_ptr);
         sep_ptr = strsep(&buf_ptr, " ");
+        stats->total += atol(sep_ptr);
+        
         LOG("sep_ptr val:\t%s\n", sep_ptr);
     }
 
