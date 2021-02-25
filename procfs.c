@@ -643,7 +643,7 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
         tstats->active_tasks[tstats->active_tasks_size].pid,
         tstats->active_tasks[tstats->active_tasks_size].uid,
         tstats->active_tasks[tstats->active_tasks_size].state,
-        tstats->active_tasks[tstats->active_tasks_size].name
+        tstats->active_tasks[tstats->active_tasks_size].name,
         tstats->active_tasks_size);
 
     tstats->active_tasks_size++;
