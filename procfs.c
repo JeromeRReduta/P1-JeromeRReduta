@@ -533,7 +533,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
         case 'S':
         case 'I':
-            tstats->idle++;
+            tstats->sleeping++;
             break;
 
         case 'T':
