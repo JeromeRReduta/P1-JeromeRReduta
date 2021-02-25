@@ -100,11 +100,9 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
     snprintf(uid_str, strlen(uid_str), "%i", uid);
 
-    LOG("INPUT UID:\t%i\n", uid);
 
     int passwd_fd = open_path("/etc", "passwd");
 
-    LOG("PASSWD_FD:%d\n", passwd_fd);
 
     char line[256] = {0};
     ssize_t read_sz;
@@ -112,7 +110,6 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
     while ( (read_sz = lineread(passwd_fd, line, 256)) > 0) {
         char* head = line;
-        LOG("LINE:\t|%s|\n", head);
         char* num_search;
 
 
@@ -126,7 +123,16 @@ void uid_to_uname(char *name_buf, uid_t uid)
             uid, num_search);
 
         if (uid == atoi(num_search)) {
-            LOG("%s", "FOUND MATCH");
+            LOG("%s\n", "FOUND MATCH");
+
+            char name[256];
+            strcpy(name, head);
+
+            LOG("FOUND NAME:\t%s\n", name);
+
+            char* name_ptr = name;
+
+            name_ptr = strsep(&head, ":")
         }
     }
 
