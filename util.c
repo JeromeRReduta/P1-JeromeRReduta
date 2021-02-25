@@ -109,7 +109,8 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
     while ( (read_sz = lineread(passwd_fd, line, 256)) > 0) {
 
-        char* num_search = strstr(line, ":");
+        char* num_search = strsep(&line, ":");
+        num_search = strsep(&line, ":");
         LOG("NUM_SEARCH:\t%s\n", num_search);
     }
 
