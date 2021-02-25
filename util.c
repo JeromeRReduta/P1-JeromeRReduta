@@ -10,6 +10,10 @@
 
 void draw_percbar(char *buf, double frac) {
 
+    if (frac < 0) {
+        frac = 0;
+    }
+
     /* idk why I need to add 0.1 at the end, but 
     adding it means that 4.4% has 0 #s, and 4.5%
     has 1 */
