@@ -79,11 +79,10 @@ void get_number_display(double safe_percent, char* number_display)
 
     
 
-    int decimal_loc = strstr(safe_percent_str, ".");
+    char *decimal = strstr(safe_percent_str, ".");
 
-    LOG("CURRENT safe_percent_decimal_loc:\t%d\n", decimal_loc);
-    safe_percent_str[decimal_loc + 2] = '%';
-    safe_percent_str[decimal_loc + 3] = '\0';
+    *(decimal + 2) = '%';
+    *(decimal + 3) = '\0';
     LOG("CURRENT safe_percent_str:\t%s\n", safe_percent_str);
 
 }
