@@ -554,48 +554,9 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         add_task(tstats, state, pid, uid, name,  "zombie");
     }
 
-/*
-    switch(state[0]) {
-        case 'R':
-            tstats->running++;
-            add_task(tstats, state, pid, uid, name,  "running");
-            break;
-
-        case 'D':
-            tstats->waiting++;
-            add_task(tstats, state, pid, uid, name, "waiting");
-            break;
-
-        case 'S':
-        case 'I':
-            tstats->sleeping++;
-            break;
-
-        case 'T':
-        case 't':
-            tstats->stopped++;
-            add_task(tstats, state, pid, uid, name,  "stopped");
-            break;
-
-        case 'Z':
-            tstats->zombie++;
-            add_task(tstats, state, pid, uid, name,  "zombie");
-            break;
-
-        default:
-            LOG("DEFAULT OPTION%s", "\n");
-            break;            
-    }
-    */
-
+    LOG("%s\n", "ABOUT TO INCREMENT TSTATS->TOTAL");
     tstats->total++;
-
-
-
-
-
-
-
+    LOG("%s\n", "DONE");
 
 }
 
