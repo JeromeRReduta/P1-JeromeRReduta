@@ -620,7 +620,7 @@ void get_task_name(char *name, char *line)
 
         char name_copy[26] = {0};
 
-        strcpy(name_search + 7, name_copy);
+        strcpy(name_copy, name_search + 7);
         LOG("name_copy now:\t%s\n", name_copy);
         name_copy[25] = '\0';
         LOG("name_copy now:\t%s\n", name_copy);
