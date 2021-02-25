@@ -514,7 +514,16 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         
         
         
-        get_task_state(state, line);
+            char* state_search = strstr(line, "State:") + '\0';
+    // Case: found state
+
+        if (state_search != NULL) {
+            char* state_copy = strsep(&state_search, "State:") + 7;
+            state_copy[1] = '\0';
+            strcpy(state, state_copy);
+
+            LOG("STATE AND STATE COPY:\n\t%s\n\t%s\n",state, state_copy );
+        }
         
 
 
@@ -561,16 +570,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
 void get_task_state(char *state, char *line)
 {
-    char* state_search = strstr(line, "State:") + '\0';
-    // Case: found state
-
-        if (state_search != NULL) {
-            char* state_copy = strsep(&state_search, "State:") + 7;
-            state_copy[1] = '\0';
-            strcpy(state, state_copy);
-
-            LOG("STATE AND STATE COPY:\n\t%s\n\t%s\n",state, state_copy );
-        }
+    printf("return\n");
 
 }
 
