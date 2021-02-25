@@ -111,6 +111,8 @@ void uid_to_uname(char *name_buf, uid_t uid)
         char* head = line;
         char* num_search = strsep(&head, ":");
 
+        LOG("LINE:\t%s\n", head);
+
         
         num_search = strsep(&head, ":");
         num_search = strsep(&head, ":");
