@@ -503,28 +503,17 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     char line[256] = {0};
     ssize_t read_sz;
 
-    char* state;
+    char* state = 0;
 
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
-        char* state_search = strstr(line, "State:") + '\0';
 
 
- // Case: found key_name
-        if (state_search != NULL) {
+        get_task_state(state, line);
 
-            state = strsep(&state_search, "State:") + 7;
-            state[1] = '\0';
-
-            break;
-
-        }
     }
-struct task_info {
-    pid_t pid;
-    uid_t uid;
-    char name[26];
-    char state[13];
-};
+
+    LOG("STATE:\t%s\n", state);
+
     switch(state[0]) {
         case 'R':
             tstats->running++;
@@ -560,6 +549,21 @@ struct task_info {
 
 
 
+
+}
+
+void get_task_state(char *state, char *line)
+{
+    char* state_search = strstr(line, "State:") + '\0';
+    // Case: found key_name
+
+        if (state_search != NULL) {
+            char* state_copy = strsep(&state_search, "State:") + 7;
+            state_copy[1] = '\0';
+            strcpy(state, state_copy);
+
+            LOG("STATE AND STATE COPY:\n\t%s\n\t%s\n",state, state_copy );
+        }
 
 }
 
