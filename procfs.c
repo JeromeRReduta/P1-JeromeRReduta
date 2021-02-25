@@ -495,7 +495,6 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
 void update_task_stats(int status_fd, struct task_stats *tstats)
 {
-    LOG("\n\n%s\n\n", "___________________________________________Starting update_task_stats____________________________");
     if (status_fd == -1) {
         LOG("STATUS_FD FAILED: %d\n", status_fd);
         return;
@@ -512,27 +511,13 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     int uid = -1;
     char name[26];
 
-    LOG("Initialized vars:\n"
-        "\tline:\t%s\n"
-        "\tread_sz:\t%ld\n"
-        "\tstate:\t%s\n"
-        "\tpid:\t%d\n"
-        "\tuid:\t%d\n"
-        "\tname:\t%s\n\n",
-        line, read_sz, state, pid, uid, name);
-
 
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
 
-        LOG("CURRENT LINE VAL:\t%s\n", line);
 
-        LOG("%s\n", "Get_task_state...");
         get_task_state(state, line);
-        LOG("%s\n", "Done. Get_task pid...");
         pid = get_task_id(pid, line, "Pid:");
-        LOG("%s\n", "Done. Get_task uid...");
         uid = get_task_id(uid, line, "Uid:");
-        LOG("%s\n", "Done. Get task_name...");
         get_task_name(name, line);
 
         LOG("%s\n", "Done");
@@ -549,16 +534,12 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
     if (state[0] == 'R') {
         tstats->running++;
-        LOG("ADDING %s TASK:\n", "running");
         add_task(tstats, state, pid, uid, name,  "running");
-        LOG("DONE W/ %s TASK\n", "running");
         
     }
     else if (state[0] == 'D') {
         tstats->waiting++;
-        LOG("ADDING %s TASK:\n", "waiting");
         add_task(tstats, state, pid, uid, name, "waiting");
-        LOG("DONE W/ %s TASK\n", "waiting");
     }
     else if (state[0] == 'S' || state[0] == 'I') {
         //LOG("NOT ADDING %s TASK:\n", "sleeping");
@@ -567,23 +548,20 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     }
     else if (state[0] == 'T' || state[0] == 't') {
         tstats->stopped++;
-        LOG("ADDING %s TASK:\n", "stopped");
         add_task(tstats, state, pid, uid, name,  "stopped");
-        LOG("DONE W/ %s TASK\n", "stopped");
+    }
+
+    else if (state[0] == 't') {
+        tstats->stopped++;
+        add_task(tstats, state, pid, uid, name,  "tracing stop");
     }
     else if (state[0] == 'Z') {
         tstats->zombie++;
-        LOG("ADDING %s TASK:\n", "zombie");
         add_task(tstats, state, pid, uid, name,  "zombie");
-        LOG("DONE W/ %s TASK\n", "zombie");
     }
 
   
-    LOG("ATTEMPTING TO INCREMENT TOTAL:%s", "\n");
     tstats->total++;
-    LOG("DONE W/ INCREMENTING: %d\n", 1);
-
-    LOG("FUNC IS DONE\n%s\n", "___________________________________________________________");
 
 
 }
@@ -685,7 +663,6 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
 
     tstats->active_tasks_size++;
 
-    LOG("INCREMENTED SIZE: %d, func is complete\n", tstats->active_tasks_size);
 }
 
 
