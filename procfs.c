@@ -524,14 +524,14 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         get_task_name(name, line);
 
     }
-
+/*
     LOG("INFO SO FAR:\n"
         "\tState Letter:\t|%c|\n"
         "\tPID:\t|%d|\n"
         "\tUID:\t|%d|\n"
         "\tName:\t|%s|\n",
         state[0], pid, uid, name);
-
+*/
 
     if (state[0] == 'R') {
         tstats->running++;
@@ -543,7 +543,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     }
     else if (state[0] == 'S' || state[0] == 'I') {
         tstats->sleeping++;
-        LOG("%s\n", "ASLEEP");
+
     }
     else if (state[0] == 'T' || state[0] == 't') {
         tstats->stopped++;
