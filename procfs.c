@@ -275,7 +275,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
     LOG("LINE:\t|%s|\n", buf_ptr);
 
     buf_ptr += 5;
-    char* sep_ptr = buf_ptr;
+    char* sep_ptr;
 
     LOG("BUF_PTR:\t|%s|\n", buf_ptr);
 
