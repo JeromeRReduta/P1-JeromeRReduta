@@ -13,6 +13,7 @@ void get_time_substring(int time_in_units, char* append_text, char* time_buf, si
 int init_cpu_stats(char *proc_dir, struct cpu_stats *stats);
 int init_mstats(int mem_fd, struct mem_stats *mstats);
 int read_proc(char *proc_dir, struct task_stats *tstats);
+void update_task_stats(int status_fd, struct task_stats *tstats);
 
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
@@ -479,7 +480,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
 }
 
-int update_task_stats(int status_fd, struct task_stats *tstats)
+void update_task_stats(int status_fd, struct task_stats *tstats)
 {
 
     if (status_fd == -1) {
