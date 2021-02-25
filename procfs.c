@@ -503,7 +503,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     char line[256] = {0};
     ssize_t read_sz;
 
-    char* state = 0;
+    char state[2] = {0};
 
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
 
