@@ -15,8 +15,8 @@ double get_safe_percent(double frac)
 {
     // Error checking - safe_percent is = 0 if frac is invalid, = frac otherwise
     
-    // Case: frac too low or NaN
-    if (frac < 0.0 || isnan(frac) != 0) {
+    // Case: frac too low (or -0) or NaN
+    if (frac <= 0.0 || isnan(frac) != 0) {
         return 0.0;
     }
     // Case: frac too high
@@ -61,7 +61,7 @@ void draw_percbar(char *buf, double frac) {
     get_number_display(safe_percent, number_display);
 
     LOG("CURRENT BUFFER:\t|%s|\n", buf);
-    snprintf((buf + 23), 8, "%f", safe_percent);
+    snprintf((buf + 23), strlen(number_display), "%s", number_display);
 
 
 
