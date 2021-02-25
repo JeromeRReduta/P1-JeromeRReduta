@@ -19,7 +19,7 @@ int get_task_id(int prev, char *line, char *search_term);
 void get_task_name(char *name, char *line);
 void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* name, char *state_str);
 
-int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
+int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)A
 {
    return pfs_get_aspect(proc_dir, hostname_buf, buf_sz, "sys/kernel/hostname");
 }
@@ -435,8 +435,8 @@ void pfs_destroy_tstats(struct task_stats *tstats)
 
 int pfs_tasks(char *proc_dir, struct task_stats *tstats)
 {
-    int read_dir_return = read_proc(proc_dir, tstats);
-    return -1;
+    read_proc(proc_dir, tstats);
+    return 0;
 }
 
 // Copy of readdir.c from class page
@@ -500,7 +500,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
     if (status_fd == -1) {
         LOG("STATUS_FD FAILED: %d\n", status_fd);
-        return -1;
+        return;
     }
 
 
