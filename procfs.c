@@ -624,7 +624,7 @@ void get_task_name(char *name, char *line)
         strcpy(name_copy, name_search + 6);
         LOG("name_copy now:\t%s\n", name_copy);
         name_copy[25] = '\0';
-        strcpy(name_copy, name);
+        strcpy(name, name_copy);
 
         
         }
