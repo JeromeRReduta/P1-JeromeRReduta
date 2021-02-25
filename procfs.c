@@ -626,21 +626,23 @@ void get_task_name(char *name, char *line)
 void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* name, char *state_str)
 {
     // TODO: Add resize case
+    // Note: Maybe trying to do curr_task is causing stack smashing?
 
-    struct task_info curr_task = tstats->active_tasks[tstats->active_tasks_size];
-
-    curr_task.pid = pid;
-    curr_task.uid = uid;
-    strcpy(curr_task.state, state_str);
-    strcpy(curr_task.name, name);
-
+    tstats->active_tasks[tstats->active_tasks_size].uid = uid;
+    tstats->active_tasks[tstats->active_tasks_size].pid = pid;
+    strcpy(tstats->active_tasks[tstats->active_tasks_size].state, state_str);
+    strcpy(tstats->active_tasks[tstats->active_tasks_size], name);
+    
     tstats->active_tasks_size++;
     LOG("TASK:\t\n"
         "\t->pid:\t%i\n"
         "\t->uid:\t%i\n"
         "\t->state:\t%s\n"
         "\t->name:\t%s\n",
-        curr_task.pid, curr_task.uid, curr_task.state, curr_task.name);
+        tstats->active_tasks[tstats->active_tasks_size].pid,
+        tstats->active_tasks[tstats->active_tasks_size].uid,
+        tstats->active_tasks[tstats->active_tasks_size].state,
+        tstats->active_tasks[tstats->active_tasks_size].name);
 }
 
 
