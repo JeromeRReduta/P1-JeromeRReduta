@@ -616,7 +616,7 @@ void get_task_name(char *name, char *line)
 
     if (name_search != NULL) {
 
-        LOG("NAME MATCH FOUND:\t%s\n", name_search);
+        LOG("NAME MATCH FOUND:\t|%s|\n", name_search);
     }
 
 /*
