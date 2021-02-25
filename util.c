@@ -51,9 +51,12 @@ void draw_percbar(char *buf, double frac) {
     buf[21] = ']';
     buf[22] = ' ';
 
-    double percent = safe_percent * 100;
+    LOG("CURRENT BUFFER:\t%s\n", buf);
+    snprintf(buf[23], 8, "%f", safe_percent);
 
-    LOG("PERCENT = %f\n", percent);
+
+
+    LOG("CURRENT BUFFER:\t%s\n", buf);
 
 
 }
