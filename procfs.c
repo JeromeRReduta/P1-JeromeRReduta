@@ -409,7 +409,7 @@ struct task_stats *pfs_create_tstats()
     // Attempt to calloc active_tasks
     stats->active_tasks = calloc(1, sizeof(struct task_info));
 
-    if (stats.active_tasks == NULL) {
+    if (stats->active_tasks == NULL) {
         LOG("ERROR: ACTIVE TASKS IS NULL:%d\n", 1);
         return NULL;
     }
@@ -421,7 +421,6 @@ void pfs_destroy_tstats(struct task_stats *tstats)
 {
     free(tstats->active_tasks);
     free(tstats);
-    D
 }
 
 int pfs_tasks(char *proc_dir, struct task_stats *tstats)
