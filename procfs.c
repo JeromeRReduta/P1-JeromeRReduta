@@ -494,6 +494,8 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
     while ((entry = readdir(directory)) != NULL) {
 
         
+        LOG("ENTRY:\t%s\n", entry->d_name);
+        
 
         if ( isdigit(entry->d_name[0]) != 0) {
             // LOG("%s\n", "-----------------STARTING ISDIGIT IF BLOCK------------------");
@@ -687,7 +689,7 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
     strcpy(tstats->active_tasks[tstats->active_tasks_size].name, name);
     
     
-    /*
+    
     LOG("TASK:\t\n"
         "\t->pid:\t'%i'\n"
         "\t->uid:\t'%i'\n"
@@ -700,7 +702,7 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
         tstats->active_tasks[tstats->active_tasks_size].name,
         tstats->active_tasks_size);
 
-        */
+        En
 
     tstats->active_tasks_size++;
 
