@@ -18,7 +18,7 @@ void get_task_state(char *state, char *line);
 int get_task_id(int prev, char *line, char *search_term);
 void get_task_name(char *name, char *line);
 void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* name, char *state_str);
-int compare_pids(void *task_one, void *task_two);
+int compare_pids(const void *task_one, const void *task_two);
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
@@ -670,7 +670,7 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
 
 }
 
-int compare_pids(void *task_one, void *task_two)
+int compare_pids(const void *task_one, const void *task_two)
 {
     struct task_info* t1 = (struct task_info*) task_one;
     struct task_info* t2 = (struct task_info*) task_two;
