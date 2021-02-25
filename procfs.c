@@ -457,7 +457,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
         
 
         if ( isdigit(entry->d_name[0]) != 0) {
-            LOG("%s\n", "-----------------STARTING ISDIGIT IF BLOCK------------------");
+            // LOG("%s\n", "-----------------STARTING ISDIGIT IF BLOCK------------------");
             char extension[256] = {0};
 
             strcpy(extension, entry->d_name);
@@ -465,12 +465,12 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
             int status_fd = open_path(proc_dir, extension);
             
-            LOG("%s\n", "\n\tSTRCPY:\tSUCCESS\n\tSTRCAT:\tSUCCESS\n\tOPEN_PATH:\tSUCCESS");
+            // LOG("%s\n", "\n\tSTRCPY:\tSUCCESS\n\tSTRCAT:\tSUCCESS\n\tOPEN_PATH:\tSUCCESS");
 
             update_task_stats(status_fd, tstats);
-            LOG("%s\n", "UPDATE_TASK_STATS:\tSUCCESS");
+            // LOG("%s\n", "UPDATE_TASK_STATS:\tSUCCESS");
             close(status_fd);
-            LOG("%s\n", "-------------------------CLOSING STATUS_FD:\tSUCCESS----------------");
+            // LOG("%s\n", "-------------------------CLOSING STATUS_FD:\tSUCCESS----------------");
             
         }
         
@@ -495,7 +495,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
 void update_task_stats(int status_fd, struct task_stats *tstats)
 {
-
+    LOG("\n\n%s\n\n", "___________________________________________Starting update_task_stats____________________________")
     if (status_fd == -1) {
         LOG("STATUS_FD FAILED: %d\n", status_fd);
         return;
@@ -505,21 +505,37 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     
 
     char line[256] = {0};
-    ssize_t read_sz;
+    ssize_t read_sz = 0;
 
     char state[2] = {0};
     int pid = -1;
     int uid = -1;
     char name[26];
 
+    LOG("Initialized vars:\n"
+        "\tline:\t%s\n"
+        "\tread_sz:\t%d\n"
+        "\tstate:\t%s\n"
+        "\tpid:\t%d\n"
+        "\tuid:\t%d\n"
+        "\tname:\t%s\n\n",
+        line, read_sz, state, pid, uid, name);
+
 
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
 
+        LOG("CURRENT LINE VAL:\t%s\n", line);
 
+        LOG("%s\n", "Get_task_state...");
         get_task_state(state, line);
+        LOG("%s\n", "Done. Get_task pid...");
         pid = get_task_id(pid, line, "Pid:");
+        LOG("%s\n", "Done. Get_task uid...");
         uid = get_task_id(uid, line, "Uid:");
+        LOG("%s\n", "Done. Get task_name...");
         get_task_name(name, line);
+
+        LOG("%s\n", "Done");
 
     }
 /*
