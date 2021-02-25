@@ -128,13 +128,11 @@ void uid_to_uname(char *name_buf, uid_t uid)
             LOG("%s\n", "FOUND MATCH");
 
             char name[256];
-            strcpy(name, line);
+            strcpy(name_buf, line);
 
             LOG("\nFOUND NAME:\t|%s|\n", name);
 
-            char* name_ptr = name;
-
-            name_ptr = strsep(&head, ":");
+            break;
         }
     }
 
@@ -145,111 +143,6 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
 close(passwd_fd);
 
-/*
-    while ( (read_sz = lineread(passwd_fd, line, 256)) > 0) {
-        
-        char* num_search = strstr(line, )
-    }
-
-    while ( (read_sz = lineread(mem_fd, line, 256)) > 0) {
-        char* mem_avail_search = strstr(line, "MemAvailable") + '\0';
-        char* mem_total_search = strstr(line,"MemTotal") + '\0';
-
-        // Case: found key_name
-
-        if (mem_avail_search != NULL) {
-            mem_avail_search = strstr(mem_avail_search, ":") + 1;
-            char* txt;
-
-            mem_avail = strtod(mem_avail_search, &txt)/kb_to_mb;
-            LOG("FOUND MEM_AVAIL:\t |%s|\n", mem_avail_search);
-            // mem_avail[?] = '\0' Set ? to index of "k" in "kb"
-        }
-
-        if (mem_total_search != NULL) {
-            mem_total_search = strstr(mem_total_search, ":") + 1;
-            char* txt;
-
-            mem_total = strtod(mem_total_search, &txt)/kb_to_mb;
-            LOG("FOUND mem_total:\t |%s|\n", mem_total_search);
-            // mem_total[?] = '\0' Set ? to index of "k" in "kb"
-        }
-
-      
-
-    }
-
-    LOG("VALUES:\n"
-          "\tmem_avail:\t|%f|\n"
-          "\tmem_total:\t|%f|\n",
-          mem_avail, mem_total);
-    
-      // Case: key_name not found in file
-
-      if (mem_avail == -1 || mem_total == -1) {
-          LOG("ONE OR MORE VALUES NULL:\n"
-          "\tmem_avail:\t%f\n"
-          "\tmem_total:\t%f\n",
-          mem_avail, mem_total);
-
-          return -1;
-      }
-
-    
-    strcpy(name_buf, "(UNKNOWN)");
-    */
-}
-
-// Lovingly ripped out of lab code - Note: HAVE to close @ end of func
-int open_path(char *base, char *extension)
-{
-    // Case: Invalid base or extension
-    if (base == NULL || extension == NULL) {
-        return -1;
-    }
-
-    // Add 2 for null terminators
-    size_t path_size = (strlen(base) + strlen(extension) + 2) * sizeof(char);
-    char* path = malloc(path_size);
-    // Apparently this will concat base and extension, and make it the value of path
-    snprintf(path, path_size, "%s/%s", base, extension);
-
-    // Case: Invalid full path
-    if (path == NULL) {
-        return -1;
-    }
-
-    LOG("Opening path: %s\n", path);
-    int path_fd = open(path, O_RDONLY);
-
-    // Once we have our fd, can free path
-    free(path);
-
-    return path_fd;
-}
-
-ssize_t lineread(int fd, char *buf, size_t sz)
-{
-
-    for (size_t i = 0; i < sz; i++) {
-        char c;
-        ssize_t bytesRead = read(fd, &c, 1);
-
-        // Case: EOF or error - return 0 (EOF) or -1 (error)
-        if (bytesRead <= 0) {
-            return bytesRead;
-        }
-        // Case: read is successful
-        buf[i] = c;
-       
-        if (c == '\n') {
-            buf[i] = '\0';
-            return i + 1;
-        }
-    }
-
-    // Case: All sz bytes have been read
-    return sz;
 }
 
 int pfs_get_aspect(char *proc_dir, char *buf, size_t buf_sz, char *extension)
