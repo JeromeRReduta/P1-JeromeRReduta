@@ -119,11 +119,12 @@ void uid_to_uname(char *name_buf, uid_t uid)
             num_search = strsep(&head, ":");
 
         }
+        /*
         LOG("COMPARING:\n"
             "\tUID:\t%i\n"
             "\tNUM_SEARCH\t%s\n",
             uid, num_search);
-
+*/
         if (uid == atoi(num_search)) {
             LOG("%s\n", "FOUND MATCH");
 
