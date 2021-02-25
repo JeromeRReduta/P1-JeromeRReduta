@@ -213,7 +213,7 @@ int read_proc(char *proc_dir)
             counter++;
         }
         else {
-            LOG("NOT DIGIT:\t%s\n", entry->dname);
+            LOG("NOT DIGIT:\t%s\n", entry->d_name);
         }
         
         
