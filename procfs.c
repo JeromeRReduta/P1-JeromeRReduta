@@ -562,6 +562,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
             break;
 
         default:
+            LOG("DEFAULT OPTION%s", "\n");
             break;            
     }
 
@@ -586,7 +587,7 @@ void get_task_state(char *state, char *line)
             
             char state_copy[26] = {0};
             strcpy(state_copy, state_search + 7);
-            LOG("state_copy now:\t%s\n", state_copy);
+            //LOG("state_copy now:\t%s\n", state_copy);
             state_copy[1] = '\0';
             strcpy(state, state_copy);
             /*
@@ -613,9 +614,9 @@ int get_task_id(int prev, char *line, char *search_term)
 
        
         char* id_str = strsep(&id_search, search_term) + 5;
-        LOG("\t\tMATCH FOUND:\t%s\n", id_str);
+        //LOG("\t\tMATCH FOUND:\t%s\n", id_str);
 
-        LOG("ATOI(id_STR) = %i\n", atoi(id_str));
+        //LOG("ATOI(id_STR) = %i\n", atoi(id_str));
 
         return atoi(id_str);
 
@@ -633,12 +634,12 @@ void get_task_name(char *name, char *line)
 
     if (name_search != NULL) {
 
-        LOG("NAME MATCH FOUND:\t|%s|\n", name_search);
+        //LOG("NAME MATCH FOUND:\t|%s|\n", name_search);
 
         char name_copy[26] = {0};
 
         strcpy(name_copy, name_search + 6);
-        LOG("name_copy now:\t%s\n", name_copy);
+        //LOG("name_copy now:\t%s\n", name_copy);
         name_copy[25] = '\0';
         strcpy(name, name_copy);
 
