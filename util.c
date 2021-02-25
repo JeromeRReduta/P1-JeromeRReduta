@@ -104,7 +104,7 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
     int passwd_fd = open_path("etc", "passwd");
 
-    LOG("PASSWD_FD:%s\n", passwd_fd);
+    LOG("PASSWD_FD:%d\n", passwd_fd);
 
     char line[256] = {0};
     ssize_t read_sz;
@@ -209,7 +209,7 @@ int open_path(char *base, char *extension)
         return -1;
     }
 
-    //LOG("Opening path: %s\n", path);
+    LOG("Opening path: %s\n", path);
     int path_fd = open(path, O_RDONLY);
 
     // Once we have our fd, can free path
