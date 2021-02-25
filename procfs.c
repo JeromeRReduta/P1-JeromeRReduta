@@ -549,7 +549,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats, char *pid_str)
     ssize_t read_sz = 0;
 
     char state[2] = {0};
-    int pid = atoi(uid_str);
+    int pid = atoi(pid_str);
     int uid = -1;
     char name[26];
 
@@ -558,7 +558,6 @@ void update_task_stats(int status_fd, struct task_stats *tstats, char *pid_str)
 
 
         get_task_state(state, line);
-        pid = atoi();
         uid = get_task_id(uid, line, "Uid:");
         get_task_name(name, line);
 
