@@ -581,16 +581,16 @@ pid_t get_task_pid(pid_t prev, char *line)
     char* pid_search = strstr(line, "Pid:") + '\0';
 
     
-
+    LOG("PID_SEARCH:\t%s\n", pid_search);
     // Case: found pid value
 
     if (pid_search != NULL) {
 
-        LOG("PID_SEARCH:\t%s\n", pid_search);
+        
 
         //LOG("PID_SEARCH:\t%s\n", pid_search);
         char* pid_str = strsep(&pid_search, "Pid:") + 5;
-        LOG("MATCH FOUND:\t%s\n", pid_str);
+        LOG("\t\tMATCH FOUND:\t%s\n", pid_str);
 
         LOG("ATOUI(PID_STR) = %i\n", atoi(pid_str));
 
