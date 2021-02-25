@@ -198,47 +198,6 @@ void copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz)
 
 }
 
-// Copy of readdir.c from class page
-int read_proc(char *proc_dir, struct task_stats *tstats)
-{
-    DIR *directory;
-    if ((directory = opendir(proc_dir)) == NULL) {
-        perror("opendir");
-        return 1;
-    }
-
-    int counter = 0;
-   
-    struct dirent *entry;
-    while ((entry = readdir(directory)) != NULL) {
-        
-        
-
-        if ( isdigit(entry->d_name[0]) != 0) {
-            counter++;
-            LOG("ENTRY:\t%s\n", entry->d_name);
-
-            char* extension = entry->d_name + "\\status";
-
-            int fd = open_path(proc_dir, extension);
-            close(fd);
-        }
-      
-        
-        
-    }
-
-    // Note: We end up counting multiple files, but maybe this is fine? Maybe 3 files just don't have statuses?
-    LOG("COUNTER:\n"
-        "\tSHOULD BE:\t%d\n"
-        "\tIS:\t%d\n",
-        1487, counter);
-
-    closedir(directory);
-    LOG("DONE READING ENTRIES:%d\n", 1);
-    return 0;
-
-}
 
 
 
