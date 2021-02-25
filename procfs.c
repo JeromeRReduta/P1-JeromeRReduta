@@ -516,7 +516,11 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
     }
 
-    LOG("STATE:\t%s\n", state);
+    LOG("INFO SO FAR:\n"
+        "\tState Letter:\t%s\n"
+        "\tPID:\t%i\n",
+        state;
+        pid);
 
     switch(state[0]) {
         case 'R':
@@ -583,11 +587,11 @@ pid_t get_task_pid(pid_t prev, char *line)
 
     if (pid_search != NULL) {
 
-        LOG("PID_SEARCH:\t%s\n", pid_search);
+        //LOG("PID_SEARCH:\t%s\n", pid_search);
         char* pid_str = strsep(&pid_search, "Pid:") + 5;
         LOG("MATCH FOUND:\t%s\n", pid_str);
 
-        LOG("ATOUI(PID_STR) = %i", atoi(pid_str));
+        LOG("ATOUI(PID_STR) = %i\n", atoi(pid_str));
 
         return atoi(pid_str);
 
