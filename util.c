@@ -8,8 +8,8 @@
 #include "util.h"
 #include "logger.h"
 
-double get_safe_frac(double frac) {
-    // Error checking - safe_frac is = 0 if frac is invalid, = frac otherwise
+double get_safe_percent(double frac) {
+    // Error checking - safe_percent is = 0 if frac is invalid, = frac otherwise
     
     // Case: frac too low or NaN
     if (frac < 0.0 || isnan(frac) != 0) {
@@ -20,23 +20,23 @@ double get_safe_frac(double frac) {
         return 100.0;
     }
     // Case: frac is between 0 and 100
-    return frac;
+    return frac * 100;
 }
 
 void draw_percbar(char *buf, double frac) {
 
     
-    double safe_frac = get_safe_frac(frac);
+    double safe_percent = get_safe_percent(frac);
     
-    LOG("FRAC AND SAFE_FRAC:\n"
+    LOG("FRAC AND safe_percent:\n"
         "\tFRAC:\t%f\n"
-        "\tSAFE_FRAC:%f\n",
-        frac, safe_frac);
+        "\tsafe_percent:%f\n",
+        frac, safe_percent);
 
     /* idk why I need to add 0.1 at the end, but 
     adding it means that 4.4% has 0 #s, and 4.5%
     has 1 */
-    int num_of_hashes = safe_frac * 20 / 100 + 0.1;
+    int num_of_hashes = safe_percent * 20 / 100 + 0.1;
 
     LOG("NUM OF HASHES:\t%d\n", num_of_hashes);
     buf[0] = '[';
@@ -51,7 +51,7 @@ void draw_percbar(char *buf, double frac) {
     buf[21] = ']';
     buf[22] = ' ';
 
-    double percent = safe_frac * 100;
+    double percent = safe_percent * 100;
 
     LOG("PERCENT = %f\n", percent);
 
