@@ -577,13 +577,14 @@ pid_t get_task_pid(pid_t prev, char *line)
 {
     char* pid_search = strstr(line, "Pid:") + '\0';
 
-    LOG("PID_SEARCH:\t%s\n", pid_search);
+    
 
     // Case: found pid value
 
     if (pid_search != NULL) {
 
-        char* pid_str = strsep(&pid_search, "Pid:") + 8;
+        LOG("PID_SEARCH:\t%s\n", pid_search);
+        char* pid_str = strsep(&pid_search, "Pid:") + 5;
         LOG("MATCH FOUND:\t%s\n", pid_str);
 
 
