@@ -231,7 +231,7 @@ int pfs_get_aspect(char *proc_dir, char *buf, size_t buf_sz, char *extension)
 /* Parses proc/cpuinfo for given key string
  * Returns pointer to value of key string if key exists
  * Else returns NULL */
-void copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz)
+int copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz)
 {
 
     /* I was told to add this comment in lab:
@@ -256,11 +256,11 @@ void copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz)
             key_name[buf_sz-1] = '\0';
 
             strcpy(buf, key_name);
-            break;
+            return 0;
         }
     }
       // Case: key_name not found in file
-
+    return -1;
 
 
 }

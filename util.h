@@ -32,7 +32,7 @@ void uid_to_uname(char *name_buf, uid_t uid);
 
 
 int pfs_get_aspect(char *proc_dir, char *buf, size_t buf_sz, char *extension);
-void copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz);
+int copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz);
 
 
 

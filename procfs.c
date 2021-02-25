@@ -50,7 +50,10 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
 
     char model_name[256];
 
-    copy_cpu_info(model_fd, "model name", model_name, buf_sz);
+    // Case: cpu_info not found
+    if (copy_cpu_info(model_fd, "model name", model_name, buf_sz) == -1) {
+        return -1;
+    }
 
     // Case: cpu_info not found
     if (model_name == NULL) {
@@ -71,9 +74,7 @@ int pfs_cpu_units(char *proc_dir)
     if (cpu_fd == -1) {
         return -1;
     }
-    char cpu_units[256] = {0};
-
-    copy_cpu_info(cpu_fd, "siblings", cpu_units, 200);
+    char cpu_units[256];
 
 
     /* Wow problem was actually calling atoi twice for some reason:
@@ -81,7 +82,8 @@ int pfs_cpu_units(char *proc_dir)
      * atoi(cpu_units) * 2, which gave correct result in log
      * but incorrect result in return val
      * I have no idea why */ 
-    return cpu_units == NULL ? -1 : atoi(cpu_units) * 2;
+    return copy_cpu_info(cpu_fd, "siblings", cpu_units, 200) == -1 ? -1 : atoi(cpu_units)*2;
+
     
 }
 
