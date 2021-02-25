@@ -554,10 +554,15 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
 void get_task_state(char *state, char *line)
 {
+
+    LOG("STARTING FUNC:\t%s\n", " yea ");
     char* state_search = strstr(line, "State:") + '\0';
+
+
     // Case: found key_name
 
         if (state_search != NULL) {
+            LOG("%s\n", "FOUND STATE_SEARCH");
             char* state_copy = strsep(&state_search, "State:") + 7;
             state_copy[1] = '\0';
             strcpy(state, state_copy);
