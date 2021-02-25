@@ -520,8 +520,6 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         uid = get_task_id(uid, line, "Uid:");
         get_task_name(name, line);
 
-        LOG("%s\n", "Done");
-
     }
 /*
     LOG("INFO SO FAR:\n"
