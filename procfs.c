@@ -554,9 +554,9 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         add_task(tstats, state, pid, uid, name,  "zombie");
     }
 
-    LOG("%s\n", "ABOUT TO INCREMENT TSTATS->TOTAL");
+  
     tstats->total++;
-    LOG("%s\n", "DONE");
+
 
 }
 
