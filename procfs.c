@@ -453,7 +453,9 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
    
     struct dirent *entry;
     while ((entry = readdir(directory)) != NULL) {
+
         
+        LOG("ENTRY:\t%s\n", entry->d_name);
         
 
         if ( isdigit(entry->d_name[0]) != 0) {
@@ -466,6 +468,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
             int status_fd = open_path(proc_dir, extension);
             
             // LOG("%s\n", "\n\tSTRCPY:\tSUCCESS\n\tSTRCAT:\tSUCCESS\n\tOPEN_PATH:\tSUCCESS");
+
 
             update_task_stats(status_fd, tstats);
             // LOG("%s\n", "UPDATE_TASK_STATS:\tSUCCESS");
