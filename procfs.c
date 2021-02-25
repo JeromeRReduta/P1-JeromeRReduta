@@ -498,6 +498,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         char* state_search = strstr(line, "State:") + '\0';
 
 
+ // Case: found key_name
         if (state_search != NULL) {
             LOG("FOUND STATE_SEARCH:\t%s\n", state_search);
 
@@ -508,17 +509,6 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
             state[1] = '\0';
         }
 
-
-
-        // Case: found key_name
-
-        if (state_search != NULL) {
-            LOG("FOUND STATE:\t%s\n", state);
-        }
-
-        
-
-      
 
     }
 
