@@ -539,7 +539,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         LOG("DONE W/ %s TASK\n", "waiting");
     }
     else if (state[0] == 'S' || state[0] == 'I') {
-        LOG("NOT ADDING %s TASK:\n", "sleeping");
+        //LOG("NOT ADDING %s TASK:\n", "sleeping");
         tstats->sleeping++;
 
     }
