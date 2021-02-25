@@ -474,12 +474,6 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
         
     }
 
-    // Note: We end up counting multiple files, but maybe this is fine? Maybe 3 files just don't have statuses?
-    // Note: 3 files really didn't matter
-    LOG("COUNTER:\n"
-        "\tSHOULD BE:\t%d\n"
-        "\tIS:\t%d\n",
-        1487, counter);
 
     closedir(directory);
     
@@ -641,7 +635,7 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
 
     if (tstats-> active_tasks_size + 1 >= tstats->active_tasks_max_len) {
 
-        int new_max_len = tstats->active_tasks_max_len * 2;
+        int new_max_len = tstats->active_tasks_max_len + 10;
         LOG("\n\ttask size + 1 would be:%d\n"
             "\ttask_max len is:\t%d\n"
             "\tnew max len will be:\t%d\n",
