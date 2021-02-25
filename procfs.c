@@ -463,14 +463,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
             update_task_stats(status_fd, tstats);
             close(status_fd);
 
-            LOG("TSTATS:\n"
-            "\t->total:\t%u\n"
-            "\t->running:\t%u\n"
-            "\t->waiting:\t%u\n"
-            "\t->sleeping:\t%u\n"
-            "\t->stopped:\t%u\n"
-            "\t->zombie:\t%u\n",
-            tstats->total, tstats->running, tstats->waiting, tstats->sleeping, tstats->stopped, tstats->zombie);
+            
         }
         
         
@@ -483,7 +476,15 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
         1487, counter);
 
     closedir(directory);
-    LOG("DONE READING ENTRIES:%d\n", 1);
+    
+    LOG("TSTATS:\n"
+            "\t->total:\t%u\n"
+            "\t->running:\t%u\n"
+            "\t->waiting:\t%u\n"
+            "\t->sleeping:\t%u\n"
+            "\t->stopped:\t%u\n"
+            "\t->zombie:\t%u\n",
+            tstats->total, tstats->running, tstats->waiting, tstats->sleeping, tstats->stopped, tstats->zombie);
     return 0;
 
 }
