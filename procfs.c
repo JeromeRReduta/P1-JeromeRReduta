@@ -647,7 +647,8 @@ void get_task_name(char *name, char *line)
 
         //LOG("NAME MATCH FOUND:\t|%s|\n", name_search);
 
-        char name_copy[26] = {0};
+        // Added buffer to allow for really long, probably super-cool process names
+        char name_copy[256] = {0};
 
         strcpy(name_copy, name_search + 6);
         //LOG("name_copy now:\t%s\n", name_copy);
