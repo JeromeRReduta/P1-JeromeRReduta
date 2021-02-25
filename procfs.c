@@ -497,13 +497,16 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
         char* state_search = strstr(line, "State:") + '\0';
 
-        LOG("FOUND STATE_SEARCH:\t%s\n", state_search);
 
-        char* state = strsep(&state_search, "State:  ");
+        if (state_search != NULL) {
+            LOG("FOUND STATE_SEARCH:\t%s\n", state_search);
 
-        LOG("STATE = %s\n", state);
+            char* state = strsep(&state_search, "State:  ");
 
-        state[1] = '\0';
+            LOG("STATE = %s\n", state);
+
+            state[1] = '\0';
+        }
 
 
 
