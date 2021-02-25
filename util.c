@@ -198,7 +198,7 @@ void *copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz)
 int read_proc(char *proc_dir)
 {
     DIR *directory;
-    if ((directory = opendir(proc_dir) == NULL) {
+    if ((directory = opendir(proc_dir)) == NULL) {
         perror("opendir");
         return 1;
     }
