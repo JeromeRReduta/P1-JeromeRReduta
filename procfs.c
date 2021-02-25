@@ -14,7 +14,6 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats);
 int init_mstats(int mem_fd, struct mem_stats *mstats);
 int read_proc(char *proc_dir, struct task_stats *tstats);
 void update_task_stats(int status_fd, struct task_stats *tstats);
-void get_task_state(char *state, char *line);
 
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
@@ -504,34 +503,30 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     char line[256] = {0};
     ssize_t read_sz;
 
-    char* state = 0;
-    char* pid;
-    char* uid;
-    char* state_str; // Make string literal based on state
-    char* name;
+    char* state;
 
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
-        
-        
-        
-            char* state_search = strstr(line, "State:") + '\0';
-    // Case: found state
+        char* state_search = strstr(line, "State:") + '\0';
 
+
+ // Case: found key_name
         if (state_search != NULL) {
-            char* state_copy = strsep(&state_search, "State:") + 7;
-            state_copy[1] = '\0';
-            strcpy(state, state_copy);
 
-            LOG("STATE AND STATE COPY:\n\t%s\n\t%s\n",state, state_copy );
+            state = strsep(&state_search, "State:") + 7;
+            state[1] = '\0';
+
+            break;
+
         }
-        
-
-
     }
-
+struct task_info {
+    pid_t pid;
+    uid_t uid;
+    char name[26];
+    char state[13];
+};
     switch(state[0]) {
         case 'R':
-            //pfs_create_task('R');
             tstats->running++;
             break;
 
@@ -567,13 +562,6 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
 
 }
-
-void get_task_state(char *state, char *line)
-{
-    printf("return\n");
-
-}
-
 
 
 
