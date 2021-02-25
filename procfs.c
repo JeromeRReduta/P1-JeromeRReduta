@@ -543,6 +543,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     }
     else if (state[0] == 'S' || state[0] == 'I') {
         tstats->sleeping++;
+        LOG("%s\n", "ASLEEP");
     }
     else if (state[0] == 'T' || state[0] == 't') {
         tstats->stopped++;
