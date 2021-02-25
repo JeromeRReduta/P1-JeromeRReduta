@@ -95,7 +95,72 @@ void get_number_display(double safe_percent, char* number_display)
 
 void uid_to_uname(char *name_buf, uid_t uid)
 {
+
+    char uid_str[256];
+
+    snprintf(line, strlen(line), "%i", uid);
+
+    LOG("UID:\t%i\n", uid);
+
+    int passwd_fd = open_path("etc", "passwd");
+
+    char line[256] = {0};
+    ssize_t read_sz;
+
+
+/*
+    while ( (read_sz = lineread(passwd_fd, line, 256)) > 0) {
+        
+        char* num_search = strstr(line, )
+    }
+
+    while ( (read_sz = lineread(mem_fd, line, 256)) > 0) {
+        char* mem_avail_search = strstr(line, "MemAvailable") + '\0';
+        char* mem_total_search = strstr(line,"MemTotal") + '\0';
+
+        // Case: found key_name
+
+        if (mem_avail_search != NULL) {
+            mem_avail_search = strstr(mem_avail_search, ":") + 1;
+            char* txt;
+
+            mem_avail = strtod(mem_avail_search, &txt)/kb_to_mb;
+            LOG("FOUND MEM_AVAIL:\t |%s|\n", mem_avail_search);
+            // mem_avail[?] = '\0' Set ? to index of "k" in "kb"
+        }
+
+        if (mem_total_search != NULL) {
+            mem_total_search = strstr(mem_total_search, ":") + 1;
+            char* txt;
+
+            mem_total = strtod(mem_total_search, &txt)/kb_to_mb;
+            LOG("FOUND mem_total:\t |%s|\n", mem_total_search);
+            // mem_total[?] = '\0' Set ? to index of "k" in "kb"
+        }
+
+      
+
+    }
+
+    LOG("VALUES:\n"
+          "\tmem_avail:\t|%f|\n"
+          "\tmem_total:\t|%f|\n",
+          mem_avail, mem_total);
+    
+      // Case: key_name not found in file
+
+      if (mem_avail == -1 || mem_total == -1) {
+          LOG("ONE OR MORE VALUES NULL:\n"
+          "\tmem_avail:\t%f\n"
+          "\tmem_total:\t%f\n",
+          mem_avail, mem_total);
+
+          return -1;
+      }
+
+    
     strcpy(name_buf, "(UNKNOWN)");
+    */
 }
 
 // Lovingly ripped out of lab code - Note: HAVE to close @ end of func
