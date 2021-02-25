@@ -413,8 +413,9 @@ struct task_stats *pfs_create_tstats()
         return NULL;
     }
     
+    int active_tasks_len = 3000;
     // Attempt to calloc active_tasks
-    stats->active_tasks = calloc(2, sizeof(struct task_info));
+    stats->active_tasks = calloc(active_tasks_len, sizeof(struct task_info));
 
 
     if (stats->active_tasks == NULL) {
@@ -423,7 +424,7 @@ struct task_stats *pfs_create_tstats()
     }
 
     stats->active_tasks_size = 0;
-    stats->active_tasks_max_len = 2;    
+    stats->active_tasks_max_len = active_tasks_len;    
     return stats;
 }
 
@@ -448,7 +449,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
         return 1;
     }
 
-    int counter = 0;
+
    
     struct dirent *entry;
     while ((entry = readdir(directory)) != NULL) {
@@ -456,8 +457,6 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
         
 
         if ( isdigit(entry->d_name[0]) != 0) {
-            counter++;
-
             char extension[256] = {0};
 
             strcpy(extension, entry->d_name);
@@ -467,7 +466,6 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
             update_task_stats(status_fd, tstats);
             close(status_fd);
-
             
         }
         
@@ -623,47 +621,26 @@ void get_task_name(char *name, char *line)
         
         }
     }
+
+    // Stack smashing, likely due to overflow - might have to just rewrite entire func
 void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* name, char *state_str)
 {
-    LOG("STARTING ADD_TASK%s\n", " ");
-    int size = tstats->active_tasks_size;
-    struct task_info* tasks = tstats->active_tasks;
+    // TODO: Add resize case
 
-    LOG("\n\ttask size + 1 would be:%d\n"
-            "\ttask_max len is:\t%d\n",
-            size + 1, tstats->active_tasks_max_len);
-
-    if (tstats-> active_tasks_size + 1 >= tstats->active_tasks_max_len) {
-
-        int new_max_len = tstats->active_tasks_max_len + 10;
-        LOG("\n\ttask size + 1 would be:%d\n"
-            "\ttask_max len is:\t%d\n"
-            "\tnew max len will be:\t%d\n",
-            size + 1, tstats->active_tasks_max_len, new_max_len);
-
-        
-        tstats->active_tasks = (struct task_info *)realloc(tasks, new_max_len * sizeof(struct task_info)); 
-
-        tstats->active_tasks_max_len = new_max_len;
-
-    }
-
-    struct task_info curr_task = tstats->active_tasks[tstats->active_tasks_size];
+    struct task_info* curr_task = tstats->active_tasks[tstats->active_tasks_size];
 
     curr_task.pid = pid;
     curr_task.uid = uid;
-
-    strcpy(curr_task.name, name);
     strcpy(curr_task.state, state_str);
+    strcpy(curr_task.name, name);
 
     tstats->active_tasks_size++;
-
-    LOG("CURRENT TASK:\n"
-        "\t.PID:\t%i\n"
-        "\t.UID:\t%i\n"
-        "\t.name:\t%s\n"
-        "\t.state:\t%s\n",
-        curr_task.pid, curr_task.uid, curr_task.name, curr_task.state);
+    LOG("TASK:\t\n"
+        "\t->pid:\t%i\n"
+        "\t->uid:\t%i\n"
+        "\t->state:\t%s\n"
+        "\t->name:\t%s\n",
+        curr_task.pid, curr_task.uid, curr_task.state, curr_task.name);
 }
 
 
