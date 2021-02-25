@@ -439,8 +439,43 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats)
 {
     read_proc(proc_dir, tstats);
 
-    // Sort tstats
+    
+    LOG("%s\n", "---------------------BEFORE SORTING:");
+
+    for (int i = 0; i < tstats->active_tasks_size; i++) {
+        struct task_info curr = tstats->active_tasks[i];
+
+        LOG("TASK:\t\n"
+        "\t->pid:\t'%i'\n"
+        "\t->uid:\t'%i'\n"
+        "\t->state:\t'%s'\n"
+        "\t->name:\t'%s'\n"
+        "CURRENT T_STATS SIZE:\t'%d'\n",
+        curr.pid,
+        curr.uid,
+        curr.state,
+        curr.name,
+        tstats->active_tasks_size);
+    }
     qsort(tstats->active_tasks, tstats->active_tasks_size, sizeof(struct task_info), compare_pids);
+
+     LOG("%s\n", "---------------------AFTER SORTING:");
+
+    for (int i = 0; i < tstats->active_tasks_size; i++) {
+        struct task_info curr = tstats->active_tasks[i];
+
+        LOG("TASK:\t\n"
+        "\t->pid:\t'%i'\n"
+        "\t->uid:\t'%i'\n"
+        "\t->state:\t'%s'\n"
+        "\t->name:\t'%s'\n"
+        "CURRENT T_STATS SIZE:\t'%d'\n",
+        curr.pid,
+        curr.uid,
+        curr.state,
+        curr.name,
+        tstats->active_tasks_size);
+    }
     return 0;
 }
 
@@ -458,8 +493,6 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
     struct dirent *entry;
     while ((entry = readdir(directory)) != NULL) {
 
-        
-        LOG("ENTRY:\t%s\n", entry->d_name);
         
 
         if ( isdigit(entry->d_name[0]) != 0) {
@@ -654,6 +687,7 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
     strcpy(tstats->active_tasks[tstats->active_tasks_size].name, name);
     
     
+    /*
     LOG("TASK:\t\n"
         "\t->pid:\t'%i'\n"
         "\t->uid:\t'%i'\n"
@@ -665,6 +699,8 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
         tstats->active_tasks[tstats->active_tasks_size].state,
         tstats->active_tasks[tstats->active_tasks_size].name,
         tstats->active_tasks_size);
+
+        */
 
     tstats->active_tasks_size++;
 
