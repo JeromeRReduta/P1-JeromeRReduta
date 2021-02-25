@@ -526,7 +526,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     }
 
     LOG("INFO SO FAR:\n"
-        "\tState Letter:\t|%s|\n"
+        "\tState Letter:\t|%c|\n"
         "\tPID:\t|%d|\n"
         "\tUID:\t|%d|\n"
         "\tName:\t|%s|\n",
@@ -678,8 +678,8 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
     LOG("CURRENT TASK:\n"
         "\t->PID:\t%i\n"
         "\t->UID:\t%i\n"
-        "\t->name:\t%i\n"
-        "\t->state:\t%i\n",
+        "\t->name:\t%s\n"
+        "\t->state:\t%s\n",
         curr_task->pid, curr_task->uid, curr_task->name, curr_task->state);
 }
 
