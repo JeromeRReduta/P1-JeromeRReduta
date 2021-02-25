@@ -104,6 +104,8 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
     int passwd_fd = open_path("etc", "passwd");
 
+    LOG("PASSWD_FD:%s\n", passwd_fd);
+
     char line[256] = {0};
     ssize_t read_sz;
 
@@ -126,6 +128,12 @@ void uid_to_uname(char *name_buf, uid_t uid)
         LOG("NUM_SEARCH:\t%s\n", num_search);
     }
 
+
+
+
+
+
+close(passwd_fd);
 
 /*
     while ( (read_sz = lineread(passwd_fd, line, 256)) > 0) {
