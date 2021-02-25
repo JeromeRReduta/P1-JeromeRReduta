@@ -274,7 +274,9 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 
     LOG("LINE:\t|%s|\n", buf_ptr);
 
-    char* sep_ptr;
+    char* sep_ptr = buf_ptr + 5;
+
+    LOG("SEP_PTR:\t|%s\n", sep_ptr);
 
     // Do this twice to get to first cpu number
     sep_ptr = strsep(&buf_ptr, " ");
