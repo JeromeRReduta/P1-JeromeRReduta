@@ -8,7 +8,11 @@
 #include "util.h"
 #include "logger.h"
 
-double get_safe_percent(double frac) {
+double get_safe_percent(double frac);
+void get_number_display(double safe_percent, char* number_display);
+
+double get_safe_percent(double frac) 
+{
     // Error checking - safe_percent is = 0 if frac is invalid, = frac otherwise
     
     // Case: frac too low or NaN
@@ -51,13 +55,29 @@ void draw_percbar(char *buf, double frac) {
     buf[21] = ']';
     buf[22] = ' ';
 
-    LOG("CURRENT BUFFER:\t%s\n", buf);
+    // Ik the number won't be larger than 10 chars
+    char number_display[10];
+
+    get_number_display(safe_percent, number_display);
+
+    LOG("CURRENT BUFFER:\t|%s|\n", buf);
     snprintf(buf[23], 8, "%f", safe_percent);
 
 
 
-    LOG("CURRENT BUFFER:\t%s\n", buf);
+    LOG("CURRENT BUFFER:\t|%s|\n", buf);
 
+
+}
+
+void get_number_display(double safe_percent, char* number_display)
+{
+
+    char safe_percent_str[256];
+    
+    snprintf(safe_percent_str, 256, "%d", safe_percent);
+
+    LOG("CURRENT safe_percent_str:\t%s\n", safe_percent_str);
 
 }
 
