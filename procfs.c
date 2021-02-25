@@ -495,7 +495,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
 void update_task_stats(int status_fd, struct task_stats *tstats)
 {
-    LOG("\n\n%s\n\n", "___________________________________________Starting update_task_stats____________________________")
+    LOG("\n\n%s\n\n", "___________________________________________Starting update_task_stats____________________________");
     if (status_fd == -1) {
         LOG("STATUS_FD FAILED: %d\n", status_fd);
         return;
@@ -514,7 +514,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
     LOG("Initialized vars:\n"
         "\tline:\t%s\n"
-        "\tread_sz:\t%d\n"
+        "\tread_sz:\t%ld\n"
         "\tstate:\t%s\n"
         "\tpid:\t%d\n"
         "\tuid:\t%d\n"
@@ -582,6 +582,8 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     LOG("ATTEMPTING TO INCREMENT TOTAL:%s", "\n");
     tstats->total++;
     LOG("DONE W/ INCREMENTING: %d\n", 1);
+
+    LOG("FUNC IS DONE\n%s\n", "___________________________________________________________");
 
 
 }
