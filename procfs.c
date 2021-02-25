@@ -497,11 +497,16 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
         char* state_search = strstr(line, "State:") + '\0';
 
+        char* state = strsep(&line, "State:  ");
+
+        state[1] = '\0';
+
+
 
         // Case: found key_name
 
         if (state_search != NULL) {
-            LOG("FOUND STATE:\t%s\n", state_search);
+            LOG("FOUND STATE:\t%s\n", state);
         }
 
         
