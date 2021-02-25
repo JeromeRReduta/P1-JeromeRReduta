@@ -13,7 +13,7 @@ void draw_percbar(char *buf, double frac) {
     /* idk why I need to add 0.1 at the end, but 
     adding it means that 4.4% has 0 #s, and 4.5%
     has 1 */
-    int num_of_hashes = frac * 20 / 100 + 0.1
+    int num_of_hashes = frac * 20 / 100 + 0.1;
     buf[0] = '[';
     for (int i = 1; i < num_of_hashes + 1; i++) {
         buf[i] = '#';
