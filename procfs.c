@@ -586,6 +586,8 @@ pid_t get_task_pid(pid_t prev, char *line)
 
     if (pid_search != NULL) {
 
+        LOG("PID_SEARCH:\t%s\n", pid_search);
+
         //LOG("PID_SEARCH:\t%s\n", pid_search);
         char* pid_str = strsep(&pid_search, "Pid:") + 5;
         LOG("MATCH FOUND:\t%s\n", pid_str);
