@@ -98,7 +98,7 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
     char uid_str[256];
 
-    snprintf(line, strlen(line), "%i", uid);
+    snprintf(uid_str, strlen(uid_str), "%i", uid);
 
     LOG("UID:\t%i\n", uid);
 
