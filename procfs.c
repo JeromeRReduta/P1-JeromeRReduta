@@ -398,13 +398,30 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
 struct task_stats *pfs_create_tstats()
 {
 
+    // Attempt to calloc task_stats
+    struct task_stats stats = calloc(1, sizeof(struct task_stats));
+
+    //From lecture - if tstats doesn't exist then after calloc we're out of memory
+    if (stats == NULL) {
+        return NULL;
+    }
     
-    return NULL;
+    // Attempt to calloc active_tasks
+    stats.active_tasks = calloc(1, sizeof(struct active_tasks));
+
+    if (stats.active_tasks == NULL) {
+        LOG("ERROR: ACTIVE TASKS IS NULL:%d\n", 1);
+        return NULL;
+    }
+    
+    return stats;
 }
 
 void pfs_destroy_tstats(struct task_stats *tstats)
 {
-
+    free(tstats->active_tasks);
+    free(tstats);
+    
 }
 
 int pfs_tasks(char *proc_dir, struct task_stats *tstats)
