@@ -460,7 +460,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
             int status_fd = open_path(proc_dir, extension);
 
             update_task_stats(status_fd, tstats);
-            close(fd);
+            close(status_fd);
         }
       
         
@@ -493,14 +493,14 @@ int update_task_stats(int status_fd, struct task_stats *tstats)
     char line[256] = {0};
     ssize_t read_sz;
 
-    while ( (read_sz = lineread(int_fd, line, 256)) > 0) {
+    while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
         char* state_search = strstr(line, "State:") + '\0';
 
 
         // Case: found key_name
 
         if (state_search != NULL) {
-            LOG("FOUND STATE:\t%s\n",)
+            LOG("FOUND STATE:\t%s\n", state_search);
         }
 
         
