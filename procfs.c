@@ -13,7 +13,7 @@ void get_time_substring(int time_in_units, char* append_text, char* time_buf, si
 int init_cpu_stats(char *proc_dir, struct cpu_stats *stats);
 int init_mstats(int mem_fd, struct mem_stats *mstats);
 int read_proc(char *proc_dir, struct task_stats *tstats);
-void update_task_stats(int status_fd, struct task_stats *tstats);
+void update_task_stats(int status_fd, struct task_stats *tstats, char *pid_str);
 void get_task_state(char *state, char *line);
 int get_task_id(int prev, char *line, char *search_term);
 void get_task_name(char *name, char *line);
@@ -509,7 +509,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
             // LOG("%s\n", "\n\tSTRCPY:\tSUCCESS\n\tSTRCAT:\tSUCCESS\n\tOPEN_PATH:\tSUCCESS");
 
 
-            update_task_stats(status_fd, tstats);
+            update_task_stats(status_fd, tstats, entry->d_name);
             // LOG("%s\n", "UPDATE_TASK_STATS:\tSUCCESS");
             close(status_fd);
             // LOG("%s\n", "-------------------------CLOSING STATUS_FD:\tSUCCESS----------------");
@@ -535,7 +535,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
 }
 
-void update_task_stats(int status_fd, struct task_stats *tstats)
+void update_task_stats(int status_fd, struct task_stats *tstats, char *pid_str)
 {
     if (status_fd == -1) {
         LOG("STATUS_FD FAILED: %d\n", status_fd);
@@ -549,7 +549,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     ssize_t read_sz = 0;
 
     char state[2] = {0};
-    int pid = -1;
+    int pid = atoi(uid_str);
     int uid = -1;
     char name[26];
 
@@ -558,7 +558,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
 
         get_task_state(state, line);
-        pid = get_task_id(pid, line, "Pid:");
+        pid = atoi();
         uid = get_task_id(uid, line, "Uid:");
         get_task_name(name, line);
 
