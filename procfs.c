@@ -665,7 +665,7 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
 
     }
 
-    struct task_info* curr_task = tstats->active_tasks[tstats->active_tasks_size];
+    struct task_info curr_task = tstats->active_tasks[tstats->active_tasks_size];
 
     curr_task->pid = pid;
     curr_task->uid = uid;
