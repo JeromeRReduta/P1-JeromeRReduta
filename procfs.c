@@ -516,13 +516,11 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
             state = strsep(&state_search, "State:") + 7;
             state[1] = '\0';
 
-            LOG("STATE = |%s|\n", state);
             break;
 
         }
     }
 
-    LOG("NOW ADDING TO TSTATS:\t%d", 0);
     switch(state[0]) {
         case 'R':
             tstats->running++;
