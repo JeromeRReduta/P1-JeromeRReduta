@@ -498,7 +498,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
     while ((entry = readdir(directory)) != NULL) {
 
         
-        LOG("ENTRY:\t%s\n", entry->d_name);
+        //LOG("ENTRY:\t%s\n", entry->d_name);
         
 
         if ( isdigit(entry->d_name[0]) != 0) {
