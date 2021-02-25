@@ -633,16 +633,20 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
     strcpy(tstats->active_tasks[tstats->active_tasks_size].state, state_str);
     strcpy(tstats->active_tasks[tstats->active_tasks_size].name, name);
     
-    tstats->active_tasks_size++;
+    
     LOG("TASK:\t\n"
         "\t->pid:\t%i\n"
         "\t->uid:\t%i\n"
         "\t->state:\t%s\n"
-        "\t->name:\t%s\n",
+        "\t->name:\t%s\n"
+        "CURRENT T_STATS SIZE:\t%d\n",
         tstats->active_tasks[tstats->active_tasks_size].pid,
         tstats->active_tasks[tstats->active_tasks_size].uid,
         tstats->active_tasks[tstats->active_tasks_size].state,
-        tstats->active_tasks[tstats->active_tasks_size].name);
+        tstats->active_tasks[tstats->active_tasks_size].name
+        tstats->active_tasks_size);
+
+    tstats->active_tasks_size++;
 }
 
 
