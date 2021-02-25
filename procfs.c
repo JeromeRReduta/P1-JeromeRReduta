@@ -504,7 +504,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     char line[256] = {0};
     ssize_t read_sz;
 
-    char* state;
+    char* state = 0;
     char* pid;
     char* uid;
     char* state_str; // Make string literal based on state
@@ -522,7 +522,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
     switch(state[0]) {
         case 'R':
-            pfs_create_task('R');
+            //pfs_create_task('R');
             tstats->running++;
             break;
 
