@@ -4,6 +4,7 @@
 #include "procfs.h"
 #include "util.h"
 #include <dirent.h>
+#include <ctype.h>
 
 // Function prototypes
 void populate_uptime(double time, Uptime *time_record);
