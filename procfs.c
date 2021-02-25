@@ -504,6 +504,8 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
             char* state = strsep(&state_search, "State:");
 
+            state = state + 7;
+
             LOG("STATE = |%s|\n", state);
 
             state[1] = '\0';
