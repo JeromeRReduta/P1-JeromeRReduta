@@ -102,7 +102,7 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
     LOG("INPUT UID:\t%i\n", uid);
 
-    int passwd_fd = open_path("etc", "passwd");
+    int passwd_fd = open_path("/etc", "passwd");
 
     LOG("PASSWD_FD:%d\n", passwd_fd);
 
