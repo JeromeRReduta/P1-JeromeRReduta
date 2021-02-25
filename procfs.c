@@ -451,7 +451,6 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
         if ( isdigit(entry->d_name[0]) != 0) {
             counter++;
-            LOG("ENTRY:\t%s\n", entry->d_name);
 
             char extension[256] = {0};
 
@@ -470,6 +469,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
     }
 
     // Note: We end up counting multiple files, but maybe this is fine? Maybe 3 files just don't have statuses?
+    // Note: 3 files really didn't matter
     LOG("COUNTER:\n"
         "\tSHOULD BE:\t%d\n"
         "\tIS:\t%d\n",

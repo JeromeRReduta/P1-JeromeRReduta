@@ -117,7 +117,7 @@ int open_path(char *base, char *extension)
         return -1;
     }
 
-    LOG("Opening path: %s\n", path);
+    //LOG("Opening path: %s\n", path);
     int path_fd = open(path, O_RDONLY);
 
     // Once we have our fd, can free path
