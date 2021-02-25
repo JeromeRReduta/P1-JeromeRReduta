@@ -462,8 +462,16 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
             update_task_stats(status_fd, tstats);
             close(status_fd);
+
+            LOG("TSTATS:\n"
+            "\t->total:\t%u\n"
+            "\t->running:\t%u\n"
+            "\t->waiting:\t%u\n"
+            "\t->sleeping:\t%u\n"
+            "\t->stopped:\t%u\n"
+            "\t->zombie:\t%u\n",
+            tstats->total, tstats->running, tstats->waiting, tstats->sleeping, tstats->stopped, tstats->zombie);
         }
-      
         
         
     }
@@ -489,7 +497,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     }
 
 
-    tstats->total += 1;
+    
 
     char line[256] = {0};
     ssize_t read_sz;
@@ -508,11 +516,43 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
             state[1] = '\0';
 
             LOG("STATE = |%s|\n", state);
+            break;
 
         }
-
-
     }
+
+    LOG("NOW ADDING TO TSTATS:\t%d", 0);
+    switch(state[0]) {
+        case 'R':
+            tstats->running++;
+            break;
+
+        case 'D':
+            tstats->waiting++;
+            break;
+
+        case 'S':
+        case 'I':
+            tstats->idle++;
+            break;
+
+        case 'T':
+        case 't':
+            tstats->stopped++;
+            break;
+
+        case 'Z':
+            tstats->zombie++;
+            break;
+
+        default:
+            break;            
+    }
+
+    tstats->total++;
+
+
+
 
 
 
