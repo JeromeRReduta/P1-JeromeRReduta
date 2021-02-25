@@ -584,7 +584,7 @@ int get_task_pid(int prev, char *line)
     LOG("PID_SEARCH:\t%s\n", pid_search);
     // Case: found pid value
 
-    if (pid_search != NULL and prev == -1) {
+    if (pid_search != NULL && prev == -1) {
 
         
 
