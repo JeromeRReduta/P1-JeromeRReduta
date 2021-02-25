@@ -457,7 +457,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
         
 
         if ( isdigit(entry->d_name[0]) != 0) {
-            LOG("%s\n", "STARTING ISDIGIT IF BLOCK")
+            LOG("%s\n", "STARTING ISDIGIT IF BLOCK");
             char extension[256] = {0};
 
             strcpy(extension, entry->d_name);
