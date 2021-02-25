@@ -96,7 +96,7 @@ void get_number_display(double safe_percent, char* number_display)
 void uid_to_uname(char *name_buf, uid_t uid)
 {
 
-    char uid_str[256];
+    char uid_str[256] = {0};
 
     snprintf(uid_str, strlen(uid_str), "%i", uid);
 
