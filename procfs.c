@@ -48,7 +48,7 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
         return -1;
     }
 
-    char model_name[256] = {0};
+    char model_name[256];
 
     copy_cpu_info(model_fd, "model name", model_name, buf_sz);
 
