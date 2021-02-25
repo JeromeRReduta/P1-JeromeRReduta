@@ -125,6 +125,8 @@ void uid_to_uname(char *name_buf, uid_t uid)
         
         num_search = strsep(&head, ":");
         num_search = strsep(&head, ":");
+        num_search = strsep(&head, ":");
+
         LOG("NUM_SEARCH:\t%s\n", num_search);
     }
 
