@@ -212,7 +212,7 @@ int read_proc(char *proc_dir)
         
         if ( isdigit(entry->d_name[0]) != 0) {
             counter++;
-            LOG("ENTRY:\t%s\n, entry->d_name");
+            LOG("ENTRY:\t%s\n," entry->d_name);
             
         }
       
