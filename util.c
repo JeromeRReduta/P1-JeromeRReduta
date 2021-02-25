@@ -13,21 +13,7 @@
 double get_safe_percent(double frac);
 void get_number_display(double safe_percent, char* number_display);
 
-double get_safe_percent(double frac) 
-{
-    // Error checking - safe_percent is = 0 if frac is invalid, = frac otherwise
-    
-    // Case: frac too low (or -0) or NaN
-    if (frac <= 0.0 || isnan(frac) != 0) {
-        return 0.0;
-    }
-    // Case: frac too high
-    if (frac > 1.0) {
-        return 100.0;
-    }
-    // Case: frac is between 0 and 100
-    return frac * 100 + 0.0001; // Secret offset for numbers that end in .000999 c:
-}
+
 
 void draw_percbar(char *buf, double frac) {
 
@@ -70,6 +56,22 @@ void draw_percbar(char *buf, double frac) {
     LOG("CURRENT BUFFER:\t|%s|\n", buf);
 
 
+}
+
+double get_safe_percent(double frac) 
+{
+    // Error checking - safe_percent is = 0 if frac is invalid, = frac otherwise
+    
+    // Case: frac too low (or -0) or NaN
+    if (frac <= 0.0 || isnan(frac) != 0) {
+        return 0.0;
+    }
+    // Case: frac too high
+    if (frac > 1.0) {
+        return 100.0;
+    }
+    // Case: frac is between 0 and 100
+    return frac * 100 + 0.0001; // Secret offset for numbers that end in .000999 c:
 }
 
 void get_number_display(double safe_percent, char* number_display)
@@ -210,10 +212,16 @@ int read_proc(char *proc_dir)
     struct dirent *entry;
     while ((entry = readdir(directory)) != NULL) {
         
+        
+
         if ( isdigit(entry->d_name[0]) != 0) {
             counter++;
             LOG("ENTRY:\t%s\n", entry->d_name);
-            
+
+            char* extension = entry->dname + "\\status";
+
+            int fd = open_path(proc_dir, extension);
+            close(fd);
         }
       
         

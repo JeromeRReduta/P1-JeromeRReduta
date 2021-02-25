@@ -425,7 +425,7 @@ void pfs_destroy_tstats(struct task_stats *tstats)
 
 int pfs_tasks(char *proc_dir, struct task_stats *tstats)
 {
-    int read_dir_return = read_proc(proc_dir);
+    int read_dir_return = read_proc(proc_dir, tstats);
     return -1;
 }
 
