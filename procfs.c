@@ -684,7 +684,7 @@ void get_task_name(char *name, char *line)
 void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* name, char *state_str)
 {
     int size = tstats->active_tasks_size;
-    if (size == tstats->active_tasks_max_len - 1) {
+    if (size == tstats->active_tasks_max_len) {
         tstats->active_tasks = realloc(tstats->active_tasks, 2 * size * sizeof(struct task_info));
         tstats->active_tasks_max_len *= 2;
     }
