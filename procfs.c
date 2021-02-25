@@ -14,6 +14,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats);
 int init_mstats(int mem_fd, struct mem_stats *mstats);
 int read_proc(char *proc_dir, struct task_stats *tstats);
 void update_task_stats(int status_fd, struct task_stats *tstats);
+void get_task_state(char *state, char *line);
 pid_t get_task_pid(pid_t prev, char *line);
 
 
