@@ -647,6 +647,7 @@ void get_task_name(char *name, char *line)
     }
 void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* name, char *state_str)
 {
+    LOG("STARTING ADD_TASK%s\n", " ");
     int size = tstats->active_tasks_size;
     struct task_info* tasks = tstats->active_tasks;
 
