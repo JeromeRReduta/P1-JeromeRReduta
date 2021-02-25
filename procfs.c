@@ -14,6 +14,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats);
 int init_mstats(int mem_fd, struct mem_stats *mstats);
 int read_proc(char *proc_dir, struct task_stats *tstats);
 void update_task_stats(int status_fd, struct task_stats *tstats);
+pid_t get_task_pid(pid_t prev, char *line);
 
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
@@ -504,11 +505,13 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     ssize_t read_sz;
 
     char state[2] = {0};
+    pid_t pid = 0;
 
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
 
 
         get_task_state(state, line);
+        pid = get_task_pid(pid, line);
 
     }
 
@@ -554,22 +557,39 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
 
 void get_task_state(char *state, char *line)
 {
-
-    LOG("STARTING FUNC:\t%s\n", " yea ");
     char* state_search = strstr(line, "State:") + '\0';
 
 
-    // Case: found key_name
-
+        // Case: found state value
         if (state_search != NULL) {
             
             char* state_copy = strsep(&state_search, "State:") + 7;
-            LOG("STATE_COPY:\t%s\n", state_copy);
             state_copy[1] = '\0';
             strcpy(state, state_copy);
 
-            LOG("STATE AND STATE COPY:\n\t%s\n\t%s\n",state, state_copy );
+            //LOG("STATE AND STATE COPY:\n\t%s\n\t%s\n",state, state_copy );
         }
+
+}
+
+pid_t get_task_pid(pid_t prev, char *line)
+{
+    char* pid_search = strstr(line, "Pid:") + '\0';
+
+    LOG("PID_SEARCH:\t%s\n", pid_search);
+
+    // Case: found pid value
+
+    if (pid_search != NULL) {
+
+        char* pid_str = strsep(&pid_search, "Pid:") + 1;
+        LOG("MATCH FOUND:\t%s\n", pid_str);
+
+
+    }
+
+    return prev;
+
 
 }
 
