@@ -16,7 +16,7 @@ double get_safe_percent(double frac) {
         return 0.0;
     }
     // Case: frac too high
-    if (frac > 100.0) {
+    if (frac > 1.0) {
         return 100.0;
     }
     // Case: frac is between 0 and 100
