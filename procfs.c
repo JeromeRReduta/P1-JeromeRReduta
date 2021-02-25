@@ -494,6 +494,8 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     char line[256] = {0};
     ssize_t read_sz;
 
+    char* state;
+
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
         char* state_search = strstr(line, "State:") + '\0';
 
@@ -502,9 +504,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         if (state_search != NULL) {
             LOG("FOUND STATE_SEARCH:\t|%s|\n", state_search);
 
-            char* state = strsep(&state_search, "State:");
-
-            state = state + 7;
+            state = strsep(&state_search, "State:") + 7;
             state[1] = '\0';
 
             LOG("STATE = |%s|\n", state);
