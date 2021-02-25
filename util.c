@@ -206,18 +206,28 @@ int read_proc(char *proc_dir)
     }
 
     int counter = 0;
+   
+    // Lookup table for finding duplicates
+    int lookup[1000000000000] = {0};
     struct dirent *entry;
     while ((entry = readdir(directory)) != NULL) {
         
         if ( isdigit(entry->d_name[0]) != 0) {
             counter++;
 
-            LOG("IS THIS DIGIT:\t%s\n", entry->d_name);
+            if (lookup[atoi(entry->d_name)] == 1) {
+                LOG("DUPLICATE:\t%s\n", entry->d_name);
+            } 
+            lookup[atoi(entry->d_name)] = 1;
+
+            
         }
       
         
         
     }
+
+    // Note: We end up counting multiple files, but maybe this is fine? Maybe 3 files just don't have statuses?
     LOG("COUNTER:\n"
         "\tSHOULD BE:\t%d\n"
         "\tIS:\t%d\n",
