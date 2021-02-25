@@ -34,6 +34,8 @@ struct task_stats {
     unsigned int stopped;
     unsigned int zombie;
 
+    int active_tasks_size;
+    int active_tasks_max_len;
     struct task_info *active_tasks;
 };
 
