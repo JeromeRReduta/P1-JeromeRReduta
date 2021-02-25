@@ -3,6 +3,7 @@
 #include "logger.h"
 #include "procfs.h"
 #include "util.h"
+#include <dirent.h>
 
 // Function prototypes
 void populate_uptime(double time, Uptime *time_record);
@@ -450,7 +451,10 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
             counter++;
             LOG("ENTRY:\t%s\n", entry->d_name);
 
-            char* extension = entry->d_name + "\\status";
+            char extension[256] = {0};
+
+            strcpy(extension, entry->d_name);
+            strcat(extension, "\\status");
 
             int fd = open_path(proc_dir, extension);
             close(fd);

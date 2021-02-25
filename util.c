@@ -4,7 +4,7 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <dirent.h>
+
 #include <ctype.h>
 
 #include "util.h"
