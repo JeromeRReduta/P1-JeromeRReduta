@@ -211,10 +211,10 @@ int read_proc(char *proc_dir)
         
         if ( isdigit(entry->d_name[0]) != 0) {
             counter++;
+
+            LOG("IS THIS DIGIT:\t%s\n", entry->d_name);
         }
-        else {
-            LOG("NOT DIGIT:\t%s\n", entry->d_name);
-        }
+      
         
         
     }
