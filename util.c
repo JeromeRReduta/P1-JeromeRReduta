@@ -107,6 +107,13 @@ void uid_to_uname(char *name_buf, uid_t uid)
     char line[256] = {0};
     ssize_t read_sz;
 
+    if ((read_sz = lineread(passwd_fd, line, 256)) > 0) {
+        LOG("LINE READ: YES %d\n", 1);
+    } 
+    else {
+        LOG("LINE READ: FAILURE %d\n", 1);
+    }
+
     while ( (read_sz = lineread(passwd_fd, line, 256)) > 0) {
         char* head = line;
         char* num_search = strsep(&head, ":");
