@@ -85,6 +85,8 @@ void get_number_display(double safe_percent, char* number_display)
     *(decimal + 3) = '\0';
     LOG("CURRENT safe_percent_str:\t%s\n", safe_percent_str);
 
+    strcpy(number_display, safe_percent_str);
+
 }
 
 void uid_to_uname(char *name_buf, uid_t uid)
