@@ -132,7 +132,9 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
             LOG("\nFOUND NAME:\t|%s|\n", name);
 
-            break;
+            close(passwd_fd);
+            return;
+            
         }
     }
 
@@ -142,6 +144,7 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
 
     close(passwd_fd);
+    return;
 
 }
 
