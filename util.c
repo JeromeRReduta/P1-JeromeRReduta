@@ -27,6 +27,11 @@ void draw_percbar(char *buf, double frac) {
 
     
     double safe_frac = get_safe_frac(frac);
+    
+    LOG("FRAC AND SAFE_FRAC:\n"
+        "\tFRAC:\t%f\n"
+        "\tSAFE_FRAC:%f\n",
+        frac, safe_frac);
 
     /* idk why I need to add 0.1 at the end, but 
     adding it means that 4.4% has 0 #s, and 4.5%
