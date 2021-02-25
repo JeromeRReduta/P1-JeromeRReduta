@@ -418,7 +418,7 @@ struct task_stats *pfs_create_tstats()
         return NULL;
     }
     
-    int active_tasks_len = 3000;
+    int active_tasks_len = 2;
     // Attempt to calloc active_tasks
     stats->active_tasks = calloc(active_tasks_len, sizeof(struct task_info));
 
@@ -683,8 +683,11 @@ void get_task_name(char *name, char *line)
     // Stack smashing, likely due to overflow - might have to just rewrite entire func
 void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* name, char *state_str)
 {
-    // TODO: Add resize case
-    // Note: Maybe trying to do curr_task is causing stack smashing?
+    int size = tstats->active_tasks_size;
+    if (size == tstats->active_tasks_max_len - 1) {
+        tstats->active_tasks = realloc(tstats->active_tasks, 2 * size * sizeof(struct task_info));
+        tstats->active_tasks_max_len *= 2;
+    }
 
     tstats->active_tasks[tstats->active_tasks_size].uid = uid;
     tstats->active_tasks[tstats->active_tasks_size].pid = pid;
