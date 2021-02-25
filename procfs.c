@@ -464,8 +464,12 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
             int status_fd = open_path(proc_dir, extension);
 
-            update_task_stats(status_fd, tstats);
-            close(status_fd);
+            if (status_fd != -1) {
+                update_task_stats(status_fd, tstats);
+                close(status_fd);
+            }
+
+            
             
         }
         
