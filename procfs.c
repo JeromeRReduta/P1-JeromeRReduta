@@ -519,8 +519,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     LOG("INFO SO FAR:\n"
         "\tState Letter:\t%s\n"
         "\tPID:\t%i\n",
-        state;
-        pid);
+        state, pid);
 
     switch(state[0]) {
         case 'R':
