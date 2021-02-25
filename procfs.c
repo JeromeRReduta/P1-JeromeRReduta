@@ -574,10 +574,16 @@ void get_task_state(char *state, char *line)
         // Case: found state value
         if (state_search != NULL) {
             
+            char state_copy[26] = {0};
+            strcpy(state_copy, state_search + 7);
+            LOG("state_copy now:\t%s\n", state_copy);
+            state_copy[2] = '\0';
+            strcpy(state, state_copy);
+            /*
             char* state_copy = strsep(&state_search, "State:") + 7;
             state_copy[1] = '\0';
             strcpy(state, state_copy);
-
+*/
             //LOG("STATE AND STATE COPY:\n\t%s\n\t%s\n",state, state_copy );
         }
 
