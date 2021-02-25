@@ -272,7 +272,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
         return -1;
     }
 
-    LOG("LINE:\t%s\n", buf_ptr);
+    LOG("LINE:\t|%s|\n", buf_ptr);
 
     char* sep_ptr;
 
