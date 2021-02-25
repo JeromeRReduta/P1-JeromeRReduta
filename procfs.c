@@ -689,11 +689,12 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
         tstats->active_tasks_max_len *= 2;
     }
 
-    struct task_stats* task = &(tstats->active_tasks[tstats->active_tasks_size]);
-    task->uid = uid;
-    task->pid = pid;
-    strcpy(task->state, state_str);
-    strcpy(task->name, name);
+
+    tstats->active_tasks[tstats->active_tasks_size].uid = uid;
+    tstats->active_tasks[tstats->active_tasks_size].pid = pid;
+    strcpy(tstats->active_tasks[tstats->active_tasks_size].state, state_str);
+    strcpy(tstats->active_tasks[tstats->active_tasks_size].name, name);
+    
     
     
     LOG("TASK:\t\n"
