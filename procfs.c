@@ -455,9 +455,11 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
             char extension[256] = {0};
 
             strcpy(extension, entry->d_name);
-            strcat(extension, "\\status");
+            strcat(extension, "/status");
 
-            int fd = open_path(proc_dir, extension);
+            int status_fd = open_path(proc_dir, extension);
+
+            update_task_stats(status_fd, tstats);
             close(fd);
         }
       
@@ -476,4 +478,43 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
     return 0;
 
 }
+
+int update_task_stats(int status_fd, struct task_stats *tstats)
+{
+
+    if (status_fd == -1) {
+        LOG("STATUS_FD FAILED: %d\n", status_fd);
+        return -1;
+    }
+
+
+    tstats->total += 1;
+
+    char line[256] = {0};
+    ssize_t read_sz;
+
+    while ( (read_sz = lineread(int_fd, line, 256)) > 0) {
+        char* state_search = strstr(line, "State:") + '\0';
+
+
+        // Case: found key_name
+
+        if (state_search != NULL) {
+            LOG("FOUND STATE:\t%s\n",)
+        }
+
+        
+
+      
+
+    }
+
+
+
+
+
+}
+
+
+
 
