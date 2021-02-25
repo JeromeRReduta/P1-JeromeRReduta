@@ -16,6 +16,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats);
 void update_task_stats(int status_fd, struct task_stats *tstats);
 void get_task_state(char *state, char *line);
 int get_task_id(int prev, char *line, char *search_term);
+void get_task_name(char *name, char *line);
 
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
@@ -508,6 +509,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     char state[2] = {0};
     int pid = -1;
     int uid = -1;
+    char name[26];
 
     while ( (read_sz = lineread(status_fd, line, 256)) > 0) {
 
@@ -515,6 +517,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
         get_task_state(state, line);
         pid = get_task_id(pid, line, "Pid:");
         uid = get_task_id(uid, line, "Uid:");
+        get_task_name(name, line);
 
     }
 
@@ -604,6 +607,29 @@ int get_task_id(int prev, char *line, char *search_term)
 
     return prev;
 
+
+}
+
+void get_task_name(char *name, char *line)
+{
+    char* name_search = strstr(line, "Name:") + '\0';
+
+    if (name_search != NULL) {
+
+        LOG("NAME MATCH FOUND:\t%s\n", name_search);
+    }
+
+/*
+        // Case: found state value
+        if (state_search != NULL) {
+            
+            char* state_copy = strsep(&state_search, "State:") + 7;
+            state_copy[1] = '\0';
+            strcpy(state, state_copy);
+
+            //LOG("STATE AND STATE COPY:\n\t%s\n\t%s\n",state, state_copy );
+        }
+*/
 
 }
 
