@@ -146,6 +146,10 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
     close(passwd_fd);
     strcpy(name_buf, uid_str + '\0');
+    LOG("VALUES:\n"
+        "\tUID_STR:\t%s\n"
+        "\tNAME_BUF:\t%s\n",
+        uid_str, name_buf);
 
     LOG("USING UID INSTEAD:\t%s\n", name_buf);
     return;
