@@ -205,16 +205,21 @@ int read_proc(char *proc_dir)
         return 1;
     }
 
+    int counter = 0;
     struct dirent *entry;
     while ((entry = readdir(directory)) != NULL) {
-        /*
+        
         if ( isdigit(entry->d_name[0]) != 0) {
-            printf("-> %s\n", entry->d_name);
+            //printf("-> %s\n", entry->d_name);
+            counter++;
         }
-        */
+        
         
     }
-    
+    LOG("COUNTER:\n"
+        "\tSHOULD BE:\t%d\n"
+        "\tIS:\t%d\n",
+        1487, counter);
 
     closedir(directory);
     LOG("DONE READING ENTRIES:%d\n", 1);
