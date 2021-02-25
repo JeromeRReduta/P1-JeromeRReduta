@@ -557,7 +557,9 @@ void update_task_stats(int status_fd, struct task_stats *tstats)
     }
 
   
+    LOG("ATTEMPTING TO INCREMENT TOTAL:%s", "\n");
     tstats->total++;
+    LOG("DONE W/ INCREMENTING: %d\n", 1);
 
 
 }
@@ -656,7 +658,7 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
         tstats->active_tasks[tstats->active_tasks_size].name,
         tstats->active_tasks_size);
 
-    //tstats->active_tasks_size++;
+    tstats->active_tasks_size++;
 
     LOG("INCREMENTED SIZE: %d, func is complete\n", tstats->active_tasks_size);
 }
