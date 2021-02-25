@@ -128,10 +128,10 @@ void uid_to_uname(char *name_buf, uid_t uid)
         if (uid == atoi(num_search)) {
             LOG("%s\n", "FOUND MATCH");
 
-            char name[256];
+        
             strcpy(name_buf, line + '\0');
 
-            LOG("\nFOUND NAME:\t|%s|\n", name);
+            LOG("\nFOUND NAME:\t|%s|\n", name_buf);
 
             close(passwd_fd);
             return;
@@ -145,7 +145,9 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
 
     close(passwd_fd);
-    strcpy(name_buf, uid_str);
+    strcpy(name_buf, uid_str + '\0');
+
+    LOG("USING UID INSTEAD:\t%s\n", name_buf);
     return;
 
 }
