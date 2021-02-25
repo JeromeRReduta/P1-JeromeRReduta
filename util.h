@@ -3,10 +3,7 @@
 
 #include <sys/types.h>
 
-void draw_percbar(char *buf, double frac);
-void uid_to_uname(char *name_buf, uid_t uid);
 int open_path(char *base, char *extension);
-
 /**
  * Reads a line from a file descriptor and copies its contents into a buffer.
  * 
@@ -26,6 +23,13 @@ int open_path(char *base, char *extension);
  * @return number of bytes read, 0 if EOF is reached, -1 on error
  */
 ssize_t lineread(int fd, char *buf, size_t sz);
+
+void draw_percbar(char *buf, double frac);
+
+void uid_to_uname(char *name_buf, uid_t uid);
+
+
+
 
 int pfs_get_aspect(char *proc_dir, char *buf, size_t buf_sz, char *extension);
 void copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz);
