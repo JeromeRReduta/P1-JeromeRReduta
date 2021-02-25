@@ -100,6 +100,8 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
     snprintf(uid_str, strlen(uid_str), "%i", uid);
 
+    LOG("WHAT IS UID_STR:\t%s\n", uid_str);
+
 
     int passwd_fd = open_path("/etc", "passwd");
 
