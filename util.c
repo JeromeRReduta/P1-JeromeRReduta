@@ -100,12 +100,18 @@ void uid_to_uname(char *name_buf, uid_t uid)
 
     snprintf(uid_str, strlen(uid_str), "%i", uid);
 
-    LOG("UID:\t%i\n", uid);
+    LOG("INPUT UID:\t%i\n", uid);
 
     int passwd_fd = open_path("etc", "passwd");
 
     char line[256] = {0};
     ssize_t read_sz;
+
+    while ( (read_sz = lineread(passwd_fd, line, 256)) > 0) {
+
+        char* num_search = strstr(line, ":");
+        LOG("NUM_SEARCH:\t%s\n", num_search);
+    }
 
 
 /*
