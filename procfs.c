@@ -17,7 +17,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats);
 void get_task_state(char *state, char *line);
 int get_task_id(int prev, char *line, char *search_term);
 void get_task_name(char *name, char *line);
-void add_task(struct task_stats *tstats, char *state_letter);
+void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* name, char *state_str);
 
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
