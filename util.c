@@ -199,7 +199,7 @@ void copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz)
 }
 
 // Copy of readdir.c from class page
-int read_proc(char *proc_dir)
+int read_proc(char *proc_dir, struct task_stats *tstats)
 {
     DIR *directory;
     if ((directory = opendir(proc_dir)) == NULL) {

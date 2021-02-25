@@ -29,5 +29,5 @@ ssize_t lineread(int fd, char *buf, size_t sz);
 
 int pfs_get_aspect(char *proc_dir, char *buf, size_t buf_sz, char *extension);
 void copy_cpu_info(int cpu_fd, char* key, char* buf, size_t buf_sz);
-int read_proc(char *proc_dir);
+int read_proc(char *proc_dir, struct task_stats *tstats);
 #endif
