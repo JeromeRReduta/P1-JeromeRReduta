@@ -6,7 +6,7 @@ According to the man pages, top "provides a dynamic real-time view of a running 
 This is done by reading through /proc, which holds info on every (nearly every?) process running the KVM.
 
 This program has command-line options, given through the following:
-
+<pre>
 -a: Show all
 -h: help
 -l: Task list
@@ -14,6 +14,7 @@ This program has command-line options, given through the following:
 -r: Hardware info
 -s: System info
 -t: Task info
+</pre>
 
 Commandline arg info is based off the sample readme (https://www.cs.usfca.edu/~mmalensek/cs326/schedule/materials/kylie-readme.html).
 
