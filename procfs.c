@@ -20,11 +20,14 @@ void get_task_name(char *name, char *line);
 void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* name, char *state_str);
 int compare_pids(const void *task_one, const void *task_two);
 
+
+// Searches for pfs_hostname and copies it to hostname_buf
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
    return pfs_get_aspect(proc_dir, hostname_buf, buf_sz, "sys/kernel/hostname");
 }
 
+// Searches for pfs_kernel_version and copies it to hostname_buf
 int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
 {
     if (pfs_get_aspect(proc_dir, version_buf, buf_sz, "sys/kernel/osrelease") == -1) {
@@ -39,6 +42,7 @@ int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
     return 0;
 }
 
+// Searches for pfs_cpu_model and copies it to model_buf
 int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
 {
     int model_fd = open_path(proc_dir, "cpuinfo");
@@ -62,6 +66,7 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
   
 }
 
+// Returns number of cpu processes this OS has (note: # of cpu processes = # of siblings * 2)
 int pfs_cpu_units(char *proc_dir)
 {
     int cpu_fd = open_path(proc_dir, "cpuinfo");
@@ -83,7 +88,7 @@ int pfs_cpu_units(char *proc_dir)
     
 }
 
-// Segfault occurred when running ./inspector due to this func - have to fix
+// Returns uptime of OS
 double pfs_uptime(char *proc_dir)
 {
     
@@ -121,6 +126,7 @@ double pfs_uptime(char *proc_dir)
     
 }
 
+// Formats output of pfs_uptime()
 int pfs_format_uptime(double time, char *uptime_buf)
 {
     // Format for this from https://dyclassroom.com/c/c-dynamic-memory-allocation-calloc-function
@@ -131,6 +137,7 @@ int pfs_format_uptime(double time, char *uptime_buf)
     return write_time(time_record, uptime_buf);
 }
 
+// Helper func - populates Uptime struct
 // Requires existing uptime so that I can calloc and free in the same func
 // Makes debugging a lot easier in the long run - only have to check for calloc
 // and free in one func @ a time
@@ -162,6 +169,7 @@ void populate_uptime(double time, Uptime *time_record)
 
 }
 
+// Writes formatted time to uptime_buf
 int write_time(Uptime *time_record, char *uptime_buf)
 {
     if (time_record == NULL) {
@@ -202,6 +210,7 @@ int write_time(Uptime *time_record, char *uptime_buf)
 
 }
 
+// If time_in_units > 0, return time_units with the units attached; else return null
 void get_time_substring(int time_in_units, char* append_text, char* time_buf, size_t time_sz)
 {
     if (time_in_units > 0) {
@@ -215,6 +224,7 @@ void get_time_substring(int time_in_units, char* append_text, char* time_buf, si
     }
 }
 
+// Creates load_avg struct and populates it with info from proc/loadavg
 struct load_avg pfs_load_avg(char *proc_dir)
 {
     
@@ -236,6 +246,7 @@ struct load_avg pfs_load_avg(char *proc_dir)
     return lavg;
 }
 
+// Returns cpu usage stats, calculated as 1 - (curr->idle - prev->idle) / (curr-> total - prev->total)
 double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *curr)
 {
     init_cpu_stats(proc_dir, curr);
@@ -260,6 +271,7 @@ double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *c
     return (double)(1 - used);
 }
 
+// Initializes cpu_stats struct
 int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 {
     char buf[256];
@@ -319,8 +331,7 @@ int init_cpu_stats(char *proc_dir, struct cpu_stats *stats)
 
 }
 
-
-
+// creates and populates mem_stats struct
 struct mem_stats pfs_mem_usage(char *proc_dir)
 {
     struct mem_stats mstats = { 0 };
@@ -407,6 +418,7 @@ int init_mstats(int mem_fd, struct mem_stats *mstats)
 
 }
 
+// Creates task_stats struct
 struct task_stats *pfs_create_tstats()
 {
 
@@ -433,12 +445,14 @@ struct task_stats *pfs_create_tstats()
     return stats;
 }
 
+// Frees task_stats
 void pfs_destroy_tstats(struct task_stats *tstats)
 {
     free(tstats->active_tasks);
     free(tstats);
 }
 
+// Creates task_stats and populates it, including array of active tasks
 int pfs_tasks(char *proc_dir, struct task_stats *tstats)
 {
     read_proc(proc_dir, tstats);
@@ -502,7 +516,6 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
         
 
         if ( isdigit(entry->d_name[0]) != 0) {
-            // LOG("%s\n", "-----------------STARTING ISDIGIT IF BLOCK------------------");
             char extension[256] = {0};
 
             strcpy(extension, entry->d_name);
@@ -510,13 +523,10 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
             int status_fd = open_path(proc_dir, extension);
             
-            // LOG("%s\n", "\n\tSTRCPY:\tSUCCESS\n\tSTRCAT:\tSUCCESS\n\tOPEN_PATH:\tSUCCESS");
 
 
             update_task_stats(status_fd, tstats, entry->d_name);
-            // LOG("%s\n", "UPDATE_TASK_STATS:\tSUCCESS");
             close(status_fd);
-            // LOG("%s\n", "-------------------------CLOSING STATUS_FD:\tSUCCESS----------------");
             
         }
         
@@ -539,6 +549,7 @@ int read_proc(char *proc_dir, struct task_stats *tstats)
 
 }
 
+// Updates task_stats struct based off reading proc PIDs
 void update_task_stats(int status_fd, struct task_stats *tstats, char *pid_str)
 {
     if (status_fd == -1) {
@@ -609,6 +620,7 @@ void update_task_stats(int status_fd, struct task_stats *tstats, char *pid_str)
 
 }
 
+// Gets state of each stack and copies it to state
 void get_task_state(char *state, char *line)
 {
     char* state_search = strstr(line, "State:") + '\0';
@@ -622,34 +634,19 @@ void get_task_state(char *state, char *line)
             //LOG("state_copy now:\t%s\n", state_copy);
             state_copy[1] = '\0';
             strcpy(state, state_copy);
-            /*
-            char* state_copy = strsep(&state_search, "State:") + 7;
-            state_copy[1] = '\0';
-            strcpy(state, state_copy);
-*/
-            //LOG("STATE AND STATE COPY:\n\t%s\n\t%s\n",state, state_copy );
+
         }
 
 }
 
+// Gets task id of process
 int get_task_id(int prev, char *line, char *search_term)
 {
     char* id_search = strstr(line, search_term) + '\0';
 
-    
-    //LOG("id_SEARCH:\t%s\n", id_search); // Uncomment in case of debugging id_search
-    // Case: found pid value
-
     if (id_search != NULL && prev == -1) {
-
-        
-
        
         char* id_str = strsep(&id_search, search_term) + 5;
-        //LOG("\t\tMATCH FOUND:\t%s\n", id_str);
-
-        //LOG("ATOI(id_STR) = %i\n", atoi(id_str));
-
         return atoi(id_str);
 
 
@@ -660,6 +657,7 @@ int get_task_id(int prev, char *line, char *search_term)
 
 }
 
+// Gets process task name
 void get_task_name(char *name, char *line)
 {
     char* name_search = strstr(line, "Name:") + '\0';
@@ -680,7 +678,7 @@ void get_task_name(char *name, char *line)
         }
     }
 
-    // Stack smashing, likely due to overflow - might have to just rewrite entire func
+// Adds a task to tstats
 void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* name, char *state_str)
 {
     int size = tstats->active_tasks_size;
@@ -713,6 +711,7 @@ void add_task(struct task_stats *tstats, char *state, int pid, int uid, char* na
 
 }
 
+// Compare func used to sort processes by pid
 int compare_pids(const void *task_one, const void *task_two)
 {
     struct task_info* t1 = (struct task_info*) task_one;

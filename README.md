@@ -1,5 +1,10 @@
 # Project 1: System Inspector
 
+
+According to the man pages, top
+
+
+
 See: https://www.cs.usfca.edu/~mmalensek/cs326/assignments/project-1.html 
 
 To compile and run:

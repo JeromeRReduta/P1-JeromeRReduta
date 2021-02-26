@@ -14,7 +14,7 @@ double get_safe_percent(double frac);
 void get_number_display(double safe_percent, char* number_display);
 
 
-
+// Draws percent bar [######] filled up to (frac * 100)% with hashes
 void draw_percbar(char *buf, double frac) {
 
     
@@ -58,6 +58,7 @@ void draw_percbar(char *buf, double frac) {
 
 }
 
+// Error checks frac and returns either 0, 100, or frac as a percent (w/ secret offset)
 double get_safe_percent(double frac) 
 {
     // Error checking - safe_percent is = 0 if frac is invalid, = frac otherwise
@@ -74,6 +75,7 @@ double get_safe_percent(double frac)
     return frac * 100 + 0.0001; // Secret offset for numbers that end in .000999 c:
 }
 
+// Converts safe_percent to string
 void get_number_display(double safe_percent, char* number_display)
 {
 
@@ -93,6 +95,7 @@ void get_number_display(double safe_percent, char* number_display)
 
 }
 
+// Takes uid and gets uname; copeis to name_buf
 void uid_to_uname(char *name_buf, uid_t uid)
 {
 
@@ -192,6 +195,7 @@ int open_path(char *base, char *extension)
     return path_fd;
 }
 
+// Also ripped out of lab code - reads one line from file
 ssize_t lineread(int fd, char *buf, size_t sz)
 {
 
@@ -216,7 +220,7 @@ ssize_t lineread(int fd, char *buf, size_t sz)
     return sz;
 }
 
-
+// Gets 1st line from a file
 int pfs_get_aspect(char *proc_dir, char *buf, size_t buf_sz, char *extension)
 {
     int hostname_fd = open_path(proc_dir, extension);
