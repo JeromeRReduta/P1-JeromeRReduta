@@ -6,7 +6,7 @@ Vars:
 
 		host_r_globals: Host_R_Public_Data* // Holds global vars:
 
-			+ hostname: char* // the hostname of OS, used for displaying in display.c - this char buffer is a copy of buf from procfs funcs, including the size
+			+ hostname: char* // the hostname of OS, used for displaying in display.c - 
 
 		
 		host_r_locals: Host_R_Private_Data* // Holds local vars:
@@ -21,23 +21,31 @@ Vars:
 
 Funcs:
 
-		+host_r_init_data(char *proc_dir, size_t buf_sz):
+		+ host_r_init_data(char *proc_dir, size_t buf_sz):
 
 			Inits pub and private structs, including copying  proc_dir and buf_sz values from procfs to this file
 
 			This includes searching for hostname (i.e. host_r_get_hostname())
 
-		+host_r_safe_init_data(char *proc_dir, size_t buf_sz):
+		+ host_r_safe_init_data(char *proc_dir, size_t buf_sz):
 
 			same as init(), but only if vars haven't been initialized (if var structs == NULL)
 
-		+host_r_destroy_data():
+		+ host_r_destroy_data():
 
 			 resets pub and private struct data, including freeing memory structs and setting them to NULL
-			 
+
 			 const vars are unaffected
 
-		- host_r_get_hostname():
+		- host_r_reset_struct_internals():
+			Helper func for destroy_data()
+			Frees dynamically allocated mem for struct's internal members
+
+		- host_r_reset_ptrs():
+			Helper func for destroy_data()
+			Frees and nulls public and private data structs
+
+		- host_r_search():
 
 			only called by init_data()
 

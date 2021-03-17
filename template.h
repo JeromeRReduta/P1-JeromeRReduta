@@ -4,8 +4,8 @@
  * REPLACE_THIS_WITH_INFO
  */
 
-#ifndef _REPLACE_WITH_NAME_H
-#define _REPLACE_WITH_NAME_H
+#ifndef _REPLACE_WITH_NAME_H_
+#define _REPLACE_WITH_NAME_H_
 
 
 /**
