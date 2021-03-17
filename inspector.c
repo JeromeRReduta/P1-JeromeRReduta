@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <fcntl.h>
 
 #include "logger.h"
 #include "display.h"
@@ -95,6 +96,15 @@ int main(int argc, char *argv[])
 
     if (alt_proc == true) {
         LOG("Using alternative proc directory: %s\n", options.procfs_loc);
+
+        int proc_fd = open(options.procfs_loc, O_RDONLY);
+
+            
+        if (proc_fd == -1) {
+            LOG("Invalid alternative proc directory: %s; shutting down", options.procfs_loc);
+            close(proc_fd);
+            return -1;
+        }
     }
 
     if (options.one_shot == true) {
