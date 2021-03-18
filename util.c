@@ -7,7 +7,7 @@
 #include "util.h"
 #include "logger.h"
 
-int open_path(char *base, char *extension);
+int open_path(const char *base, const char *extension);
 ssize_t lineread(int fd, char *buf, size_t sz);
 char *next_token(char **str_ptr, const char *delim);
 int reference_for_how_to_use_next_token(void); // TODO: Delete this when done
@@ -25,7 +25,7 @@ void uid_to_uname(char *name_buf, uid_t uid)
 }
 
 // Lovingly ripped out of lab code - Note: HAVE to close @ end of func
-int open_path(char *base, char *extension)
+int open_path(const char *base, const char *extension)
 {
     // Case: Invalid base or extension
     if (base == NULL || extension == NULL) {

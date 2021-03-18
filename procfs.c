@@ -1,5 +1,6 @@
 #include "logger.h"
 #include "hostname_reader.h"
+#include "string.h"
 
 #include "procfs.h"
 
@@ -7,18 +8,16 @@
 // Todo: Create big buffer logPs for each func we're currently working on, and remove them once done
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {
-    LOGP("STARTING PFS_HOSTNAME()___________________________________________________\n");
+    host_r_safe_init_data(proc_dir, buf_sz);
 
-    test_host_r_destroy_data();
+    if (host_r_globals->hostname == NULL) {
+        return -1;
+    }
 
-
-
-
-
-
-
-    LOGP("FINISHED w/ PFS_HOSTNAME()___________________________________________________\n");
-    return -1;
+    strcpy(hostname_buf, host_r_globals->hostname);
+    host_r_destroy_data();
+    
+    return 0;
 }
 
 int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)

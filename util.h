@@ -5,5 +5,8 @@
 
 void draw_percbar(char *buf, double frac);
 void uid_to_uname(char *name_buf, uid_t uid);
+int open_path(const char *base, const char *extension);
+ssize_t lineread(int fd, char *buf, size_t sz);
+char *next_token(char **str_ptr, const char *delim);
 
 #endif

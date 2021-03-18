@@ -105,6 +105,8 @@ int main(int argc, char *argv[])
             close(proc_fd);
             return -1;
         }
+        close(proc_fd);
+
     }
 
     if (options.one_shot == true) {
@@ -126,6 +128,7 @@ int main(int argc, char *argv[])
     }
 
     display_stop();
+
     return 0;
 }
 
