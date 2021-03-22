@@ -10,6 +10,12 @@
 
 #include <sys/types.h>
 
+/* Constants */
+extern const char* pfs_hostname_path;
+extern const char* pfs_kernel_path;
+extern const char* pfs_cpu_path;
+
+
 struct load_avg {
     double one;
     double five;

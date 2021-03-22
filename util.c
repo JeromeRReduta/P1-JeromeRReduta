@@ -11,6 +11,7 @@ int open_path(const char *base, const char *extension);
 ssize_t lineread(int fd, char *buf, size_t sz);
 char *next_token(char **str_ptr, const char *delim);
 int reference_for_how_to_use_next_token(void); // TODO: Delete this when done
+void free_string(char **string_ptr);
 
 
 
@@ -156,4 +157,69 @@ int reference_for_how_to_use_next_token(void)
     }
 
     return 0;
+}
+
+void free_string(char **string_ptr)
+{
+    LOGP("STARTING FREE_STRING\n");
+    LOG("Value of string ptr: '%s'\n", string_ptr != NULL ? *string_ptr : "NULL");
+
+    if (string_ptr != NULL && *string_ptr != NULL) {
+        free(*string_ptr);
+        *string_ptr = NULL;
+    }
+
+    LOG("Value of string ptr now: '%s'\n", string_ptr != NULL ? *string_ptr : "NULL");
+}
+
+int copy_if_present(char *dest, char *src)
+{
+    if (dest == NULL || src == NULL) {
+        return -1;
+    }
+
+    strcpy(dest, src);
+    return 0;
+}
+
+void test_copy_if_present()
+{
+
+    LOGP("TEST - SRC IS NULL\n");
+
+    char* test0_src = NULL;
+    char test0_dest[256];
+
+    strcpy(test0_dest, "Bubba");
+
+    LOG("NULL SRC: '%s'\t test0_dest: '%s'\n", test0_src, test0_dest);
+
+    LOG("RETURN VALUE OF COPY_IF_PRESENT IS %d\n", copy_if_present(test0_dest, test0_src));
+
+
+    LOGP("TEST - DEST IS NULL\n");
+
+    char* test1_src = "Bubba";
+    char* test1_dest = NULL;
+
+    LOG("SRC: '%s'\t DEST: '%s'\n", test1_src, test1_dest);
+
+    LOG("RETURN VALUE OF COPY_IF_PRESENT IS %d\n", copy_if_present(test1_dest, test1_src));
+
+
+
+
+    LOGP("TEST - NEITHER NULL\n");
+    char* test2_src = "Bradley";
+    char test2_dest[256];
+
+    strcpy(test2_dest, "Bubba");
+    LOG("SRC: '%s'\t DEST: '%s'\n", test2_src, test2_dest);
+
+    LOG("RETURN VALUE OF COPY_IF_PRESENT IS %d\n", copy_if_present(test2_dest, test2_src));
+
+    LOG("Value of test2_dest now: '%s'\n", test2_dest);
+
+
+
 }

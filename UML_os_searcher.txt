@@ -1,0 +1,39 @@
+UML for os_searcher.c:
+
+File whose sole responsibility is to search the OS for data and return what it finds. Used to
+populate os_static_data.c.
+
+Prefix: search
+
+Vars:
+	
+	(This file has no vars.)
+
+Funcs:
+
+	+ search_file_first_line(const char *proc_dir, const char *extension): char*
+
+		Tries to open the file with the path proc_dir/extension
+
+		If the file doesn't exist, or is empty, return NULL
+
+		Otherwise, return the first line in this file as a string.
+
+	+ search_file_with_key(const char *proc_dir, const char* extension, const char* key): char*
+
+		Tries to open the file with the path proc_dir/extension
+
+		If the file doesn't exist, or is empty, return NULL
+
+		Note that if the file does exist, it's assumed to have this format:
+
+		key0: value0
+		key1: value1
+		...
+
+		Searches the file for the first line that contains key.
+
+		If it can't find it, return NULL.
+
+		Else, return THE WHOLE LINE containing key.
+

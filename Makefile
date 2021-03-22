@@ -10,7 +10,7 @@ LDLIBS += -lm -lncurses
 LDFLAGS +=
 
 # Source C files
-src=inspector.c procfs.c display.c util.c hostname_reader.c
+src=inspector.c procfs.c display.c util.c os_searcher.c string_extractor.c
 obj=$(src:.c=.o)
 
 # Makefile recipes --
@@ -34,7 +34,8 @@ inspector.o: inspector.c logger.h hostname_reader.c hostname_reader.h
 procfs.o: procfs.c procfs.h logger.h
 display.o: display.c display.h procfs.h util.h logger.h
 util.o: util.c util.h logger.h
-hostname_reader.o: hostname_reader.c hostname_reader.h logger.h
+os_searcher.o: os_searcher.c os_searcher.h
+string_extractor.o: string_extractor.c string_extractor.h
 
 
 # Tests --
