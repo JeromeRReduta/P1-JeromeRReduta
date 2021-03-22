@@ -44,6 +44,11 @@ char *search_for_cpu_cores(char *proc_dir, size_t buf_sz)
 	return search_file_with_key(proc_dir, pfs_cpu_path, buf_sz, "siblings");
 }
 
+char *search_for_uptime(char *proc_dir)
+{
+	return search_file_first_line(proc_dir, pfs_uptime_path, 256);
+}
+
 /**
  * @brief      Searches for the file proc_dir/extension and returns the first line as a string
  *
@@ -250,4 +255,22 @@ void test_search_for_cpu_cores(char *proc_dir, size_t buf_sz)
 	char *cores_line = search_for_cpu_cores(proc_dir, buf_sz);
 	LOG("Should be non-null: '%s'\n", cores_line);
 	free(cores_line);
+}
+
+/**
+ * @brief      Tests search_for_uptime()
+ *
+ * @param      proc_dir  proc_directory
+ */
+void test_search_for_uptime(char *proc_dir)
+{
+	LOGP("TESTING INVALID PROC_DIR - SHOULD BE NULL\n");
+	char *null_uptime = search_for_uptime("invalid");
+	LOG("SHOULD BE NULL: '%s'\n", null_uptime);
+	free(null_uptime);
+
+	LOGP("TESTING ACTUAL PROC_DIR - SHOULD BE NON-NULL\n");
+	char *uptime_line = search_for_uptime(proc_dir);
+	LOG("Should be non-null: '%s'\n", uptime_line);
+	free(uptime_line);
 }

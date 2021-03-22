@@ -11,6 +11,7 @@
 const char* pfs_hostname_path = "sys/kernel/hostname";
 const char* pfs_kernel_path = "sys/kernel/osrelease";
 const char* pfs_cpu_path = "cpuinfo";
+const char* pfs_uptime_path = "uptime";
 
 /* Func prototypes */
 void pfs_destroy_line_and_token(char **line_ptr, char **token_ptr);
@@ -60,7 +61,11 @@ int pfs_cpu_units(char *proc_dir)
 
 double pfs_uptime(char *proc_dir)
 {
-    return 0.0;
+    char* uptime_line = search_for_uptime(proc_dir);
+    double return_val = uptime_line != NULL ? atof(uptime_line) : -1.0;
+
+    pfs_destroy_line_and_token(&uptime_line, NULL);
+    return return_val;
 }
 
 int pfs_format_uptime(double time, char *uptime_buf)
