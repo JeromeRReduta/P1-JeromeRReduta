@@ -172,17 +172,19 @@ void free_string(char **string_ptr)
     LOG("Value of string ptr now: '%s'\n", string_ptr != NULL ? *string_ptr : "NULL");
 }
 
-int copy_if_present(char *dest, char *src)
+int n_copy_if_present(char *dest, char *src, int n)
 {
-    if (dest == NULL || src == NULL) {
+    if (dest == NULL || src == NULL || n == 0) {
         return -1;
     }
 
-    strcpy(dest, src);
+    /* Copy src into dest, then set its last index to NULL terminator */
+    strncpy(dest, src, n-1);
+    dest[n-1] = '\0';
     return 0;
 }
 
-void test_copy_if_present()
+void test_n_copy_if_present()
 {
 
     LOGP("TEST - SRC IS NULL\n");
@@ -194,7 +196,7 @@ void test_copy_if_present()
 
     LOG("NULL SRC: '%s'\t test0_dest: '%s'\n", test0_src, test0_dest);
 
-    LOG("RETURN VALUE OF COPY_IF_PRESENT IS %d\n", copy_if_present(test0_dest, test0_src));
+    LOG("RETURN VALUE OF n_copy_if_present IS %d\n", n_copy_if_present(test0_dest, test0_src, 256));
 
 
     LOGP("TEST - DEST IS NULL\n");
@@ -204,7 +206,7 @@ void test_copy_if_present()
 
     LOG("SRC: '%s'\t DEST: '%s'\n", test1_src, test1_dest);
 
-    LOG("RETURN VALUE OF COPY_IF_PRESENT IS %d\n", copy_if_present(test1_dest, test1_src));
+    LOG("RETURN VALUE OF n_copy_if_present IS %d\n", n_copy_if_present(test1_dest, test1_src, 256));
 
 
 
@@ -216,9 +218,17 @@ void test_copy_if_present()
     strcpy(test2_dest, "Bubba");
     LOG("SRC: '%s'\t DEST: '%s'\n", test2_src, test2_dest);
 
-    LOG("RETURN VALUE OF COPY_IF_PRESENT IS %d\n", copy_if_present(test2_dest, test2_src));
+    LOG("RETURN VALUE OF n_copy_if_present IS %d\n", n_copy_if_present(test2_dest, test2_src, 256));
 
     LOG("Value of test2_dest now: '%s'\n", test2_dest);
+
+    LOGP("TEST - TRUNCATE - SHOULD BE AB\\0\n");
+    char* test3_src = "ABC";
+    char test3_dest[256];
+
+    n_copy_if_present(test3_dest, test3_src, 2);
+
+    LOG("test3_dest is now '%s'\n", test3_dest);
 
 
 

@@ -9,9 +9,9 @@ int open_path(const char *base, const char *extension);
 ssize_t lineread(int fd, char *buf, size_t sz);
 char *next_token(char **str_ptr, const char *delim);
 void free_string(char **string_ptr);
-int copy_if_present(char *dest, char *src);
+int n_copy_if_present(char *dest, char *src, int n);
 
 
-void test_copy_if_present();
+void test_n_copy_if_present();
 
 #endif

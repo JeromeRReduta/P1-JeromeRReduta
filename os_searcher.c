@@ -17,7 +17,7 @@
 
 /** Func prototypes */
 char *search_file_first_line(const char *proc_dir, const char *extension, size_t buf_sz);
-char *search_file_with_key(const char* proc_dir, const char *extension, const char *key);
+char *search_file_with_key(const char *proc_dir, const char *extension, size_t buf_sz, const char *key);
 
 
 
@@ -36,8 +36,12 @@ char *search_for_kernel(char *proc_dir, size_t buf_sz)
 
 char *search_for_cpu_model(char *proc_dir, size_t buf_sz)
 {
+	return search_file_with_key(proc_dir, pfs_cpu_path, buf_sz, "model name");
+}
 
-	
+char *search_for_cpu_cores(char *proc_dir, size_t buf_sz)
+{
+	return search_file_with_key(proc_dir, pfs_cpu_path, buf_sz, "siblings");
 }
 
 /**
@@ -51,7 +55,6 @@ char *search_for_cpu_model(char *proc_dir, size_t buf_sz)
  */
 char *search_file_first_line(const char *proc_dir, const char *extension, size_t buf_sz)
 {
-	// TODO: fix open_path leak
 	int fd = open_path(proc_dir, extension);
 
 	if (fd == -1) {
@@ -67,6 +70,51 @@ char *search_file_first_line(const char *proc_dir, const char *extension, size_t
 
 	return read_size > 0 ? strdup(lineread_buf) : NULL;
 
+}
+
+/**
+ * @brief      Searches the file proc_dir/extension, and returns the first line containing key, up to buf_sz bytes
+ *
+ * @param[in]  proc_dir   proc directory
+ * @param[in]  extension  extension path
+ * @param[in]  buf_sz     buffer size
+ * @param[in]  key        search key
+ *
+ * @return     If proc_dir/extension exists and contains a line with key, returns that line. Otherwise, returns NULL
+ * 
+ * @note This func allocates memory - have to free later
+ */
+char *search_file_with_key(const char *proc_dir, const char *extension, size_t buf_sz, const char *key)
+{
+
+	if (key == NULL) {
+		LOGP("ERROR - NULL KEY - RETURNING NULL\n");
+		return NULL;
+	}
+	int fd = open_path(proc_dir, extension);
+
+	if (fd == -1) {
+		LOGP("ERROR - OPEN_PATH() FAILED - RETURNING NULL\n");
+		return NULL;
+	}
+
+	char lineread_buf[256] = {0};
+
+	ssize_t read_size;
+
+	while ( (read_size = lineread(fd, lineread_buf, 256)) > 0) {
+		char* key_name = strstr(lineread_buf, key);
+
+		if (key_name != NULL) {
+			LOG("FOUND KEY: '%s'\n", key_name);
+			close(fd);
+			return strdup(key_name);
+		}
+	}
+
+	LOGP("CANNOT FIND KEY - RETURNING NULL\n");
+	close(fd);
+	return NULL;
 }
 
 /**
@@ -100,6 +148,42 @@ void test_search_file_first_line(const char *proc_dir)
 
 
 }
+
+
+/**
+ * @brief      Tests search_file_with_key()
+ *
+ * @param[in]  proc_dir   The proc dir
+ * @param[in]  extension  The extension
+ * @param[in]  buf_sz     The buffer size
+ */
+void test_search_file_with_key(const char *proc_dir, const char *extension, size_t buf_sz)
+{
+
+	LOG("STATS:\n"
+		"\t->path: '%s/%s'\n"
+		"\t->buf_sz: %lu\n", proc_dir, extension, buf_sz);
+
+	LOGP("TEST - INVALID PATH - SHOULD RETURN NULL\n");
+	char* test_invalid = search_file_with_key(NULL, NULL, buf_sz, "bubbaKey");
+
+	LOG("value of string is '%s'\n", test_invalid);
+
+
+	LOGP("TEST - NULL KEY - SHOULD RETURN NULL\n");
+	char* test_null_key = search_file_with_key(proc_dir, extension, buf_sz, NULL);
+	LOG("value of string is '%s'\n", test_null_key);
+
+	LOGP("TEST - THIS OS'S PROC FILE - SHOULD RETURN 'AMD EPYC Processor (with IBPB)'\n");
+
+	char* test_proc = search_file_with_key(proc_dir, extension, buf_sz, "model name");
+	LOG("value of string is '%s'\n", test_proc);
+
+
+
+}
+
+
 
 
 
@@ -143,3 +227,27 @@ void test_search_for_kernel(char *proc_dir, size_t buf_sz)
 }
 
 
+
+void test_search_for_cpu_model(char *proc_dir, size_t buf_sz)
+{
+
+	char *model_line = search_for_cpu_model(proc_dir, buf_sz);
+	LOG("MODEL SHOULD BE AMD PROCESSOR... : '%s'\n", model_line);
+	free(model_line);
+}
+
+/**
+ * @brief      Tests search_for_cpu_cores
+ *
+ * @param      proc_dir  proc dir
+ * @param[in]  buf_sz    buffer size
+ * 
+ * @note Confirmed success
+ */
+void test_search_for_cpu_cores(char *proc_dir, size_t buf_sz)
+{
+
+	char *cores_line = search_for_cpu_cores(proc_dir, buf_sz);
+	LOG("Should be non-null: '%s'\n", cores_line);
+	free(cores_line);
+}
