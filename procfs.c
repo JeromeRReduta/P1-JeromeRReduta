@@ -108,6 +108,25 @@ void pfs_init_load_avg_with(struct load_avg *lavg_ptr, const char *load_avg_line
     pfs_init_load_avg_values(lavg_ptr, &current, &next);
 }
 
+/**
+ * @brief      Equivalent of: <br>
+ *             <pre>
+ *                  if ( (current = next_token(...) != NULL)) {
+ *                      lavg_ptr->one = current;
+ *                  }
+ *                  if ( (current = next_token(...) != NULL)) {
+ *                      lavg_ptr->five = current;
+ *                  }
+ *                  if ( (current = next_token(...) != NULL)) {
+ *                      lavg_ptr->fifteen = current;
+ *                  }
+ *             </pre>
+ * 
+ *
+ * @param      lavg_ptr     pointer to struct load_avg
+ * @param      current_ptr  pointer to current string, for next_token()
+ * @param      next_ptr     pointer to next string, for next_token()
+ */
 void pfs_init_load_avg_values(struct load_avg *lavg_ptr, char **current_ptr, char **next_ptr)
 {
     pfs_set_value(&(lavg_ptr->one), current_ptr, next_ptr);
