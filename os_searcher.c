@@ -49,6 +49,11 @@ char *search_for_uptime(char *proc_dir)
 	return search_file_first_line(proc_dir, pfs_uptime_path, 256);
 }
 
+char *search_for_load_avg(char *proc_dir)
+{
+	return search_file_first_line(proc_dir, pfs_load_avg_path, 256);
+}
+
 /**
  * @brief      Searches for the file proc_dir/extension and returns the first line as a string
  *
@@ -61,6 +66,8 @@ char *search_for_uptime(char *proc_dir)
 char *search_file_first_line(const char *proc_dir, const char *extension, size_t buf_sz)
 {
 	int fd = open_path(proc_dir, extension);
+
+	LOG("PATH: '%s/%s'\n", proc_dir, extension);
 
 	if (fd == -1) {
 		LOGP("ERROR - OPEN_PATH() FAILED - RETURNING NULL\n");
@@ -273,4 +280,26 @@ void test_search_for_uptime(char *proc_dir)
 	char *uptime_line = search_for_uptime(proc_dir);
 	LOG("Should be non-null: '%s'\n", uptime_line);
 	free(uptime_line);
+}
+
+/**
+ * @brief      Tests search_for_proc_dir()
+ *
+ * @param      proc_dir  proc directory
+ * 
+ * @note       Confirmed success for:
+ * 				1. Invalid proc (Note: Gives default values of 78.10 40.40 40.40 2/86 5867)
+ * 				2. Real proc - gives actual load_avg values
+ */
+void test_search_for_load_avg(char *proc_dir)
+{
+	LOGP("TESTING INVALID PROC_DIR - SHOULD BE NULL\n");
+	char *null_load_avg = search_for_load_avg("invalid-proc");
+	LOG("SHOULD BE NULL: '%s'\n", null_load_avg); // Note - apparently when doing any-non-existent-proc/loadavg, you get the following values: 78.10 40.40 40.40 2/86 5867 - this is fine
+	free_string(&null_load_avg);
+
+	LOGP("TESTING REAL PROC_DIR - SHOULD BE 3 DOUBLES\n");
+	char *real_load_avg = search_for_load_avg(proc_dir);
+	LOG("SHOULD BE 3 doubles: '%s'\n", real_load_avg);
+	free_string(&real_load_avg);
 }

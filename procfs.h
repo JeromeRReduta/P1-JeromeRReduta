@@ -15,6 +15,7 @@ extern const char* pfs_hostname_path;
 extern const char* pfs_kernel_path;
 extern const char* pfs_cpu_path;
 extern const char* pfs_uptime_path;
+extern const char* pfs_load_avg_path;
 
 
 struct load_avg {

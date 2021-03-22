@@ -12,9 +12,19 @@ const char* pfs_hostname_path = "sys/kernel/hostname";
 const char* pfs_kernel_path = "sys/kernel/osrelease";
 const char* pfs_cpu_path = "cpuinfo";
 const char* pfs_uptime_path = "uptime";
+const char* pfs_load_avg_path = "loadavg";
 
 /* Func prototypes */
 void pfs_destroy_line_and_token(char **line_ptr, char **token_ptr);
+void pfs_init_load_avg_with(struct load_avg *lavg_ptr, const char *load_avg_line);
+void pfs_log_lavg_info(struct load_avg *lavg);
+void pfs_init_load_avg_with(struct load_avg *lavg_ptr, const char *load_avg_line);
+void pfs_init_load_avg_values(struct load_avg *lavg_ptr, char **current_ptr, char **next_ptr);
+void pfs_set_value(double *lavg_value, char **current_ptr, char **next_ptr);
+
+
+void test_pfs_log_lavg_info();
+void test_pfs_init_load_avg_with(char *proc_dir);
 
 
 // Todo: Create big buffer logPs for each func we're currently working on, and remove them once done
@@ -55,7 +65,7 @@ int pfs_cpu_units(char *proc_dir)
     char* cores_token = extract_token_after(cores_line, ":");
 
     int return_val = cores_token != NULL ? atoi(cores_token) * 2 : -1;
-    pfs_destroy_line_and_token(&cores_line, NULL);
+    pfs_destroy_line_and_token(&cores_line, &cores_token);
     return return_val;
 }
 
@@ -76,7 +86,40 @@ int pfs_format_uptime(double time, char *uptime_buf)
 struct load_avg pfs_load_avg(char *proc_dir)
 {
    struct load_avg lavg = { 0 };
+   char* load_avg_line = search_for_load_avg(proc_dir);
+   pfs_init_load_avg_with(&lavg, load_avg_line);
+
+   pfs_destroy_line_and_token(&load_avg_line, NULL);
    return lavg;
+}
+
+void pfs_init_load_avg_with(struct load_avg *lavg_ptr, const char *load_avg_line)
+{
+    if (lavg_ptr == NULL || load_avg_line == NULL) {
+        LOGP("ERROR - LOAD_AVG OR LOAD_AVG_LINE IS NULL PTR\n");
+        return;
+    }
+
+    char load_avg_line_copy[256] = {0};
+    strcpy(load_avg_line_copy, load_avg_line);
+
+    char *next = load_avg_line_copy;
+    char *current;
+    pfs_init_load_avg_values(lavg_ptr, &current, &next);
+}
+
+void pfs_init_load_avg_values(struct load_avg *lavg_ptr, char **current_ptr, char **next_ptr)
+{
+    pfs_set_value(&(lavg_ptr->one), current_ptr, next_ptr);
+    pfs_set_value(&(lavg_ptr->five), current_ptr, next_ptr);
+    pfs_set_value(&(lavg_ptr->fifteen), current_ptr, next_ptr);
+}
+
+void pfs_set_value(double *lavg_value, char **current_ptr, char **next_ptr)
+{
+    if ( (*current_ptr = next_token(next_ptr, " ,?!")) != NULL) {
+        *lavg_value = atof(*current_ptr);
+    }
 }
 
 double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *curr)
@@ -110,4 +153,75 @@ void pfs_destroy_line_and_token(char **line_ptr, char **token_ptr)
 {
     free_string(line_ptr);
     free_string(token_ptr);
+}
+
+/**
+ * @brief      Tests pfs_init_load_avg
+ *
+ * @param[in]  proc_dir  proc directory
+ */
+void test_pfs_init_load_avg_with(char *proc_dir)
+{
+    
+    LOGP("TEST - INVALID PROC_DIR - SHOULD HAVE ALL DEFAULT VALUES\n");
+
+    struct load_avg invalid_proc_lavg = {0};
+    char* invalid_proc_line = search_for_load_avg("invalid-proc");
+    pfs_init_load_avg_with(&invalid_proc_lavg, invalid_proc_line);
+
+    pfs_log_lavg_info(&invalid_proc_lavg);
+
+
+    LOGP("TEST - NULL LOAD_AVG PTR - SHOULD GIVE ERROR MESSAGE\n");
+
+    char* null_test_line = search_for_load_avg(proc_dir);
+    pfs_init_load_avg_with(NULL, null_test_line);
+
+    LOGP("TEST - ACTUAL LOAD_AVG - SHOULD BE NON-NULL\n");
+
+    struct load_avg real_lavg = {0};
+    char* real_test_line = search_for_load_avg(proc_dir);
+
+    pfs_init_load_avg_with(&real_lavg, real_test_line);
+
+    pfs_log_lavg_info(&real_lavg);
+
+
+
+}
+
+void pfs_log_lavg_info(struct load_avg* lavg)
+{
+    if (lavg == NULL) {
+        LOGP("LOAD_AVG PTR IS NULL\n");
+        return;
+    }
+
+    LOG("LOAD_AVG STATS: \n"
+        "\t->one: %f\n"
+        "\t->five: %f\n"
+        "\t->fifteen: %f\n", lavg->one, lavg->five, lavg->fifteen);
+
+
+}
+
+/**
+ * @brief      Tests pfs_log_lavg_info()
+ * 
+ * @note       Confirmed success
+ */
+void test_pfs_log_lavg_info()
+{
+
+    LOGP("TEST - NULL PTR\n");
+    pfs_log_lavg_info(NULL);
+
+    LOGP("TEST - INITALIZED BUT ALL 0\n");
+    struct load_avg all_zero = {0};
+    pfs_log_lavg_info(&all_zero);
+
+    LOGP("TEST - INITALIZED W/ ANY VALUE\n");
+
+    struct load_avg init = {1, 2, 3};
+    pfs_log_lavg_info(&init);
 }
