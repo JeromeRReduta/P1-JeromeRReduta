@@ -13,8 +13,8 @@
 #include "logger.h"
 #include "display.h"
 #include "procfs.h"
-#include "hostname_reader.h"
 #include "util.h"
+#include "perc_bar_drawer.h"
 
 #define DISP_PRINT(y, x, fmt, ...) \
     do { \

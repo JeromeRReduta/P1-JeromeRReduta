@@ -4,8 +4,15 @@
 #include <string.h>
 #include <fcntl.h>
 
-#include "util.h"
+#include "os_searcher.h"
+#include "string_extractor.h"
 #include "logger.h"
+#include "util.h"
+
+
+
+
+void add_n_symbols_to_buf(int n, char *symbol, char *buf);
 
 int open_path(const char *base, const char *extension);
 ssize_t lineread(int fd, char *buf, size_t sz);
@@ -16,13 +23,24 @@ void free_string(char **string_ptr);
 
 
 
-void draw_percbar(char *buf, double frac) {
-
+void add_n_symbols_to_buf(int n, char *symbol, char *buf)
+{
+    for (int i = 0; i < n; i++) {
+        strcat(buf, symbol);
+    }
 }
 
+
+// Note: Figure out how to find uname from uid again
 void uid_to_uname(char *name_buf, uid_t uid)
 {
-    strcpy(name_buf, "(UNKNOWN)");
+    char uid_str[256];
+    sprintf(uid_str, "%d", uid);
+
+    char* uname_token = search_for_uname(uid_str);
+    n_copy_if_present_with_default(name_buf, uname_token, 16, uid_str);
+
+    free_string(&uname_token);
 }
 
 // Lovingly ripped out of lab code - Note: HAVE to close @ end of func
@@ -184,6 +202,16 @@ int n_copy_if_present(char *dest, char *src, int n)
     return 0;
 }
 
+int n_copy_if_present_with_default(char *dest, char *src, int n, char *default_value)
+{
+    if (n_copy_if_present(dest, src, n) == -1) {
+        strncpy(dest, default_value, n-1);
+        dest[n-1] = '\0';
+    }
+    return 0;
+
+}
+
 void test_n_copy_if_present()
 {
 
@@ -230,6 +258,13 @@ void test_n_copy_if_present()
 
     LOG("test3_dest is now '%s'\n", test3_dest);
 
+
+    LOGP("TEST - DEFAULT VALUE\n");
+    char* test_default_src = NULL;
+    char test_default_dest[256] = {0};
+
+    LOG("RETURN VALUE OF n_copy_if_present w/ default value IS %d\n", n_copy_if_present_with_default(test_default_dest, test_default_src, 256, "Placeholder"));
+    LOG("DEST IS NOW: '%s'\n", test_default_dest);
 
 
 }
