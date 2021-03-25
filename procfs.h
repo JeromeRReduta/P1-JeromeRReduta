@@ -16,6 +16,8 @@ extern const char* pfs_kernel_path;
 extern const char* pfs_cpu_path;
 extern const char* pfs_uptime_path;
 extern const char* pfs_load_avg_path;
+extern const char* pfs_cpu_usage_path;
+extern const char* pfs_mem_usage_path;
 
 
 struct load_avg {
@@ -28,6 +30,7 @@ struct cpu_stats {
     long idle;
     long total;
 };
+
 
 struct mem_stats {
     double used;

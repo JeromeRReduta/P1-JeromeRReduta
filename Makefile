@@ -10,7 +10,7 @@ LDLIBS += -lm -lncurses
 LDFLAGS +=
 
 # Source C files
-src=inspector.c procfs.c display.c util.c os_searcher.c string_extractor.c perc_bar_drawer.c uptime_formatter.c
+src=inspector.c procfs.c display.c util.c os_searcher.c string_extractor.c perc_bar_drawer.c uptime_formatter.c cpu_usage.c mem_usage.c
 obj=$(src:.c=.o)
 
 # Makefile recipes --
@@ -38,7 +38,8 @@ os_searcher.o: os_searcher.c os_searcher.h
 string_extractor.o: string_extractor.c string_extractor.h
 perc_bar_drawer.o: perc_bar_drawer.c perc_bar_drawer.h
 uptime_formatter.o: uptime_formatter.c uptime_formatter.h
-
+cpu_usage.o: cpu_usage.c cpu_usage.h
+mem_usage.o: mem_usage.c mem_usage.h
 
 # Tests --
 test: $(bin) libinspector.so ./tests/run_tests

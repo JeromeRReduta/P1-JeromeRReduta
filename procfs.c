@@ -5,6 +5,8 @@
 #include "util.h"
 #include "string_extractor.h"
 #include "uptime_formatter.h"
+#include "cpu_usage.h"
+#include "mem_usage.h"
 
 #include "procfs.h"
 
@@ -14,9 +16,11 @@ const char* pfs_kernel_path = "sys/kernel/osrelease";
 const char* pfs_cpu_path = "cpuinfo";
 const char* pfs_uptime_path = "uptime";
 const char* pfs_load_avg_path = "loadavg";
+const char* pfs_cpu_usage_path = "stat";
+const char* pfs_mem_usage_path = "meminfo";
 
 /* Func prototypes */
-void pfs_destroy_line_and_token(char **line_ptr, char **token_ptr);
+
 void pfs_init_load_avg_with(struct load_avg *lavg_ptr, const char *load_avg_line);
 void pfs_log_lavg_info(struct load_avg *lavg);
 void pfs_init_load_avg_with(struct load_avg *lavg_ptr, const char *load_avg_line);
@@ -34,7 +38,7 @@ int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
     char* hostname = search_for_hostname(proc_dir);
     int return_val = n_copy_if_present(hostname_buf, hostname, buf_sz);
 
-    pfs_destroy_line_and_token(&hostname, NULL);
+    destroy_line_and_token(&hostname, NULL);
     return return_val;
 }
 
@@ -44,7 +48,7 @@ int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
     char* kernel_token = extract_token_before(kernel_line, "-");
     int return_val = n_copy_if_present(version_buf, kernel_token, buf_sz);
 
-    pfs_destroy_line_and_token(&kernel_line, &kernel_token);
+    destroy_line_and_token(&kernel_line, &kernel_token);
     return return_val;
 }
 
@@ -54,7 +58,7 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
     char* model_token = extract_token_after(model_line, ":");
     int return_val = n_copy_if_present(model_buf, model_token, buf_sz);
 
-    pfs_destroy_line_and_token(&model_line, &model_token);
+    destroy_line_and_token(&model_line, &model_token);
     return return_val;
 }
 
@@ -65,7 +69,7 @@ int pfs_cpu_units(char *proc_dir)
     char* cores_token = extract_token_after(cores_line, ":");
 
     int return_val = cores_token != NULL ? atoi(cores_token) * 2 : -1;
-    pfs_destroy_line_and_token(&cores_line, &cores_token);
+    destroy_line_and_token(&cores_line, &cores_token);
     return return_val;
 }
 
@@ -74,7 +78,7 @@ double pfs_uptime(char *proc_dir)
     char* uptime_line = search_for_uptime(proc_dir);
     double return_val = uptime_line != NULL ? atof(uptime_line) : -1.0;
 
-    pfs_destroy_line_and_token(&uptime_line, NULL);
+    destroy_line_and_token(&uptime_line, NULL);
     return return_val;
 }
 
@@ -92,7 +96,7 @@ struct load_avg pfs_load_avg(char *proc_dir)
    char* load_avg_line = search_for_load_avg(proc_dir);
    pfs_init_load_avg_with(&lavg, load_avg_line);
 
-   pfs_destroy_line_and_token(&load_avg_line, NULL);
+   destroy_line_and_token(&load_avg_line, NULL);
    return lavg;
 }
 
@@ -146,12 +150,14 @@ void pfs_set_value(double *lavg_value, char **current_ptr, char **next_ptr)
 
 double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *curr)
 {
-    return 0.0;
+    cpu_init(proc_dir, curr);
+    return cpu_calc_usage(prev, curr);
 }
 
 struct mem_stats pfs_mem_usage(char *proc_dir)
 {
     struct mem_stats mstats = { 0 };
+    mem_init(&mstats, proc_dir);
     return mstats;
 }
 
@@ -171,11 +177,6 @@ int pfs_tasks(char *proc_dir, struct task_stats *tstats)
 }
 
 
-void pfs_destroy_line_and_token(char **line_ptr, char **token_ptr)
-{
-    free_string(line_ptr);
-    free_string(token_ptr);
-}
 
 /**
  * @brief      Tests pfs_init_load_avg

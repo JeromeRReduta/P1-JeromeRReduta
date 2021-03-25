@@ -67,7 +67,7 @@ char *extract_token_after(char *line, char *delim)
     // Can probably refactor into trim_leading_whitespace()
     LOG("LINE IS CURRENTLY: '%s'\n", current);
     while (current[0] == ' ' && current[0] != '\0') {
-    	LOG("current[0] is '%c'\n", current[0]);
+    	//LOG("current[0] is '%c'\n", current[0]);
     	current++;
     }
 

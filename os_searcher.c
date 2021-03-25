@@ -19,6 +19,7 @@
 char *search_file_first_line(const char *base, const char *extension);
 char *search_file_with_key(const char *base, const char *extension, const char *key);
 char *search_passwd_for_uid(char *uid_str, int fd);
+void search_file_for_memory_usage(const char *base, const char *extension, char *avail_buf, char *total_buf);
 bool contains_uid_str(char *lineread_buf, int fd, char *uid_str);
 char *get_nth_token(int n, char **current_ptr, char **next_ptr, const char *delim);
 
@@ -68,6 +69,28 @@ char *search_for_uname(char *uid_str)
 		close(fd);
 	}
 	return uname;
+}
+
+
+char *search_for_cpu_usage(char *proc_dir)
+{
+	return search_file_first_line(proc_dir, pfs_cpu_usage_path);
+}
+
+void search_for_mem_info(char *proc_dir, char *mem_avail_buf, char *mem_total_buf)
+{
+	search_file_for_memory_usage(proc_dir, pfs_mem_usage_path, mem_avail_buf, mem_total_buf);
+}
+
+char *search_for_mem_available(char *proc_dir)
+{
+	return search_file_with_key(proc_dir, pfs_mem_usage_path, "MemAvailable");
+
+}
+
+char *search_for_mem_total(char *proc_dir)
+{
+	return search_file_with_key(proc_dir, pfs_mem_usage_path, "MemTotal");
 }
 
 /**
@@ -151,6 +174,39 @@ char *search_file_with_key(const char *base, const char *extension, const char *
 	LOGP("CANNOT FIND KEY - RETURNING NULL\n");
 	close(fd);
 	return NULL;
+}
+
+void search_file_for_memory_usage(const char *base, const char *extension, char *avail_buf, char *total_buf)
+{
+	int fd = open_path(base, extension);
+
+	if (fd == -1) {
+		LOGP("ERROR - OPEN_PATH() FAILED - RETURNING\n");
+		return;
+	}
+
+	char lineread_buf[256] = {0};
+
+	ssize_t read_size;
+
+	while ( (read_size = lineread(fd, lineread_buf, 256)) > 0) {
+		char *mem_avail = strstr(lineread_buf, "MemAvailable");
+		char *mem_total = strstr(lineread_buf, "MemTotal");
+
+		if (mem_avail != NULL) {
+			LOG("FOUND KEY: '%s'\n", mem_avail);
+			strcpy(avail_buf, mem_avail);
+		}
+		else if (mem_total != NULL) {
+			LOG("FOUND KEY: '%s'\n", mem_total);
+			strcpy(total_buf, mem_total);
+		}
+
+	}
+	close(fd);
+
+
+
 }
 
 /**
@@ -349,7 +405,7 @@ void test_search_for_uptime(char *proc_dir)
 void test_search_for_load_avg(char *proc_dir)
 {
 	LOGP("TESTING INVALID PROC_DIR - SHOULD BE NULL\n");
-	char *null_load_avg = search_for_load_avg("invalid-proc");
+	char *null_load_avg = search_for_load_avg("iawegawgeawegwgegec");
 	LOG("SHOULD BE NULL: '%s'\n", null_load_avg); // Note - apparently when doing any-non-existent-proc/loadavg, you get the following values: 78.10 40.40 40.40 2/86 5867 - this is fine
 	free_string(&null_load_avg);
 
@@ -374,4 +430,87 @@ void test_search_passwd_for_uid()
 	LOGP("VALID TEST - SHOULD BE 'ROOT'\n");
 	char* root_uid_line = search_passwd_for_uid("0", fd);
 	LOG("SHOULD BE 'ROOT': '%s'\n", root_uid_line);
+}
+
+/**
+ * @brief      Tests search_for_cpu_usage()
+ *
+ * @param      proc_dir  proc directory
+ * 
+ * @note       Confirmed success for:
+ * 				1. Invalid proc (Note: gives default value of 'cpu: 20 20 20 40 0 0...')
+ * 				2. Real proc - gives actual cpu stats
+ */
+void test_search_for_cpu_usage(char *proc_dir)
+{
+	LOGP("TEST - INVALID PROC - SHOULD RETURN NULL\n");
+	char* invalid_proc_usage = search_for_cpu_usage("invalid-proc");
+	LOG("Invalid proc usage is : '%s'\n", invalid_proc_usage);
+
+	LOGP("TEST - REAL PROC - SHOULD RETURN LINE\n");
+	char* real_proc_usage = search_for_cpu_usage(proc_dir);
+	LOG("Real proc usage is : '%s'\n", real_proc_usage);
+
+}
+
+/**
+ * @brief      Tests search_for_mem_available()
+ *
+ * @param      proc_dir  proc directory
+ * 
+ * @note       Confirmed success for:
+ * 				1. Null proc (returns NULL)
+ * 				2. Invalid proc (returns default value? 'MemAvailable:           287322793 kB')
+ * 				3. Real proc  (returns value)
+ */
+void test_search_for_mem_available(char *proc_dir)
+{
+
+	LOGP("TEST - NULL PROC - SHOULD RETURN NULL\n");
+	char* null_mem_avail = search_for_mem_available(NULL);
+	LOG("null_mem_avail is %s\n", null_mem_avail);
+
+	LOGP("TEST - INVALID PROC - SHOULD (PROBABLY) RETURN NULL\n");
+	char* invalid_mem_avail = search_for_mem_available("invalid-proc");
+	LOG("invalid_proc_avail is '%s'\n", invalid_mem_avail);
+
+	LOGP("TEST - REAL PROC - SHOULD RETURN LINE\n");
+	char* real_mem_avail = search_for_mem_available(proc_dir);
+	LOG("real_mem_avail is '%s'\n", real_mem_avail);
+
+	free_string(&null_mem_avail);
+	free_string(&invalid_mem_avail);
+	free_string(&real_mem_avail);
+
+}
+
+/**
+ * @brief      Tests search_for_mem_total()
+ *
+ * @param      proc_dir  proc directory
+ * 
+ * @note       Confirmed success for:
+ * 				1. Null proc (returns NULL)
+ * 				2. Invalid proc (returns default value? 'MemTotal:        1006012696 kB')
+ * 				3. Real proc (returns value)
+ */
+void test_search_for_mem_total(char *proc_dir)
+{
+
+	LOGP("TEST - NULL PROC - SHOULD RETURN NULL\n");
+	char* null_mem_total = search_for_mem_total(NULL);
+	LOG("null_mem_total is '%s'\n", null_mem_total);
+	free_string(&null_mem_total);
+
+	LOGP("TEST - INVALID PROC - SHOULD (PROBABLY) RETURN NULL\n");
+	char* invalid_mem_total = search_for_mem_total("invalid-proc");
+	LOG("invalid_mem_total is '%s'\n", invalid_mem_total);
+	free_string(&invalid_mem_total);
+
+	LOGP("TEST - REAL PROC - SHOULD RETURN LINE\n");
+	char* real_mem_total = search_for_mem_total(proc_dir);
+	LOG("real_mem_total is'%s'\n", real_mem_total);
+	free_string(&real_mem_total);
+
+
 }

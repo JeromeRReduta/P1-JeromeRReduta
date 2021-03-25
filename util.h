@@ -5,6 +5,7 @@
 
 
 extern void draw_percbar(char *buf, double frac); // Added this so test wouldn't have warning :D
+void destroy_line_and_token(char **line_ptr, char **token_ptr);
 void uid_to_uname(char *name_buf, uid_t uid);
 int open_path(const char *base, const char *extension);
 ssize_t lineread(int fd, char *buf, size_t sz);

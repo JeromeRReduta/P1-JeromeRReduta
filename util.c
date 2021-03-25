@@ -12,6 +12,8 @@
 
 
 
+
+void destroy_line_and_token(char **line_ptr, char **token_ptr);
 void add_n_symbols_to_buf(int n, char *symbol, char *buf);
 
 int open_path(const char *base, const char *extension);
@@ -21,6 +23,11 @@ int reference_for_how_to_use_next_token(void); // TODO: Delete this when done
 void free_string(char **string_ptr);
 
 
+void destroy_line_and_token(char **line_ptr, char **token_ptr)
+{
+    free_string(line_ptr);
+    free_string(token_ptr);
+}
 
 
 void add_n_symbols_to_buf(int n, char *symbol, char *buf)
