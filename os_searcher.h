@@ -1,6 +1,8 @@
 #ifndef _OS_SEARCHER_H_
 #define _OS_SEARCHER_H_
 
+#include "task_finder.h"
+
 char *search_for_hostname(char *proc_dir);
 char *search_for_kernel(char *proc_dir);
 char *search_for_cpu_model(char *proc_dir);
@@ -11,7 +13,8 @@ char *search_for_uname(char *uid_str);
 char *search_for_cpu_usage(char *proc_dir);
 char *search_for_mem_available(char *proc_dir);
 char *search_for_mem_total(char *proc_dir);
-void search_for_mem_info(char *proc_dir, char *mem_avail_buf, char *mem_total_buf);
+int search_for_mem_info(char *proc_dir, char *mem_avail_buf, char *mem_total_buf);
+void search_for_task_info(char *proc_dir, char *entry_name, Task_Status_File_Info *status_file_info);
 
 char *search_file_first_line(const char *proc_dir, const char *extension);
 char *search_file_with_key(const char *proc_dir, const char *extension, const char *key);

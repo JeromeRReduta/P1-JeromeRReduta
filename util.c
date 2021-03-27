@@ -186,15 +186,15 @@ int reference_for_how_to_use_next_token(void)
 
 void free_string(char **string_ptr)
 {
-    LOGP("STARTING FREE_STRING\n");
-    LOG("Value of string ptr: '%s'\n", string_ptr != NULL ? *string_ptr : "NULL");
+    //LOGP("STARTING FREE_STRING\n");
+    //LOG("Value of string ptr: '%s'\n", string_ptr != NULL ? *string_ptr : "NULL");
 
     if (string_ptr != NULL && *string_ptr != NULL) {
         free(*string_ptr);
         *string_ptr = NULL;
     }
 
-    LOG("Value of string ptr now: '%s'\n", string_ptr != NULL ? *string_ptr : "NULL");
+    //LOG("Value of string ptr now: '%s'\n", string_ptr != NULL ? *string_ptr : "NULL");
 }
 
 int n_copy_if_present(char *dest, char *src, int n)

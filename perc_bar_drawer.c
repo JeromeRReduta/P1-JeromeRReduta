@@ -5,6 +5,7 @@
 #include "util.h"
 #include "logger.h"
 #include "perc_bar_drawer.h"
+
 /**
  * @File file whose sole responsibility is to fill a buffer with percent bar info
  * 
@@ -21,9 +22,12 @@
  * </pre>
  */
 
-
-
-// Found out format for formatted float from https://stackoverflow.com/questions/1343890/how-do-i-restrict-a-float-value-to-only-two-places-after-the-decimal-point-in-c
+/**
+ * @brief      Draws the whole percent bar
+ *
+ * @param      buf   buffer to put percent bar in
+ * @param[in]  frac  fraction input
+ */
 void draw_percbar(char *buf, double frac)
 {
     Percbar_Info pb_info = {
@@ -35,25 +39,47 @@ void draw_percbar(char *buf, double frac)
     fill_in_perc_bar(buf, &pb_info);
 }
 
-
+/**
+ * @brief      Converts frac into a percent. If frac is not a number, or is out of bounds (less than 0.0 or -0.0 or greater than 1.0), gives a default value instead 
+ *
+ * @param[in]  frac  The frac
+ *
+ * @return     frac * 100, or a default value if frac is not a number, or is out of bounds.
+ */
 double get_safe_percent_from(double frac)
 {
+    // Case: frac too high - return 100
     if (frac > 1.0) {
         return 100;
     }
+    // Case: frac not a number or too low - return 0
     // For some reason, if we don't check for -0.00, then get_safe_percent_from(-0.00) returns -0.00...
     else if (isnan(frac) || frac < 0.0 || frac == -0.0) {
         return 0;
     }
+    // Case: valid frac - return frac * 100
     return frac * 100;
 }
 
+/**
+ * @brief      Gets the number of hashes, based of safe_percent and max_hashes
+ *
+ * @param[in]  safe_percent  safe percent
+ * @param[in]  max_hashes    max hashes
+ *
+ * @return     safe_percent, rounded to nearest whole number, divided by 100 and multipled by max_hashes
+ */
 int get_num_of_hashes_from(double safe_percent, int max_hashes)
 {
-    double rounded_percent = round(safe_percent); // Adding 0.1 so 99.5 rounds to 100 instead of 99
-    return rounded_percent / 100 * max_hashes;
+    return round(safe_percent) / 100 * max_hashes;
 }
 
+/**
+ * @brief      Given Percbar_Info struct, draws the percent bar
+ *
+ * @param      buf      buffer to write into
+ * @param      pb_info  Percbar_Info struct
+ */
 void fill_in_perc_bar(char *buf, Percbar_Info *pb_info)
 {
     if (buf == NULL || pb_info == NULL) {
@@ -64,6 +90,12 @@ void fill_in_perc_bar(char *buf, Percbar_Info *pb_info)
     add_percent_string(buf, pb_info);
 }
 
+/**
+ * @brief      Writes the <pre>[###----]</pre> part of the percent bar
+ *
+ * @param      buf      buffer to write into
+ * @param      pb_info  Percbar_Info struct
+ */
 void make_bar(char *buf, Percbar_Info *pb_info)
 {
     buf[0] = '\0';
@@ -73,6 +105,14 @@ void make_bar(char *buf, Percbar_Info *pb_info)
     add_n_symbols_to_buf(1, "]", buf);  
 }
 
+/**
+ * @brief      Writes the <pre> ab.c% </pre> part of the percent bar
+ *
+ * @param      buf      buffer to write into
+ * @param      pb_info  Percbar_Info struct
+ * 
+ * @note       Found out format for formatted float from https://stackoverflow.com/questions/1343890/how-do-i-restrict-a-float-value-to-only-two-places-after-the-decimal-point-in-c
+ */
 void add_percent_string(char *buf, Percbar_Info *pb_info)
 {
     char percent_string[256];

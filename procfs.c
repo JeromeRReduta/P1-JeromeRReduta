@@ -7,6 +7,7 @@
 #include "uptime_formatter.h"
 #include "cpu_usage.h"
 #include "mem_usage.h"
+#include "task_finder.h"
 
 #include "procfs.h"
 
@@ -31,8 +32,15 @@ void pfs_set_value(double *lavg_value, char **current_ptr, char **next_ptr);
 void test_pfs_log_lavg_info();
 void test_pfs_init_load_avg_with(char *proc_dir);
 
-
-// Todo: Create big buffer logPs for each func we're currently working on, and remove them once done
+/**
+ * @brief      Copies this OS's hostname to hostname_buf
+ *
+ * @param      proc_dir      proc directory
+ * @param      hostname_buf  buffer
+ * @param[in]  buf_sz        buffer size
+ *
+ * @return     0 on success, -1 on error
+ */
 int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
 {     
     char* hostname = search_for_hostname(proc_dir);
@@ -42,6 +50,15 @@ int pfs_hostname(char *proc_dir, char *hostname_buf, size_t buf_sz)
     return return_val;
 }
 
+/**
+ * @brief      Copies this OS's kernel version to version_buf
+ *
+ * @param      proc_dir     proc directory
+ * @param      version_buf  buffer
+ * @param[in]  buf_sz       buffer size
+ *
+ * @return     0 on success, -1 on error
+ */
 int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
 {
     char* kernel_line = search_for_kernel(proc_dir);
@@ -52,6 +69,15 @@ int pfs_kernel_version(char *proc_dir, char *version_buf, size_t buf_sz)
     return return_val;
 }
 
+/**
+ * @brief      Copies this OS's cpu model to model_buf
+ *
+ * @param      proc_dir   proc directory
+ * @param      model_buf  buffer
+ * @param[in]  buf_sz     buffer size
+ *
+ * @return     0 on success, -1 on error
+ */
 int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
 {
     char* model_line = search_for_cpu_model(proc_dir);
@@ -62,6 +88,13 @@ int pfs_cpu_model(char *proc_dir, char *model_buf, size_t buf_sz)
     return return_val;
 }
 
+/**
+ * @brief      Gets the num of cpu_units
+ *
+ * @param      proc_dir  proc directory
+ *
+ * @return     number of cpu_units, or -1 on error
+ */
 int pfs_cpu_units(char *proc_dir)
 {
 
@@ -73,6 +106,13 @@ int pfs_cpu_units(char *proc_dir)
     return return_val;
 }
 
+/**
+ * @brief      Gets the uptime of this OS
+ *
+ * @param      proc_dir  proc directory
+ *
+ * @return     uptime of OS
+ */
 double pfs_uptime(char *proc_dir)
 {
     char* uptime_line = search_for_uptime(proc_dir);
@@ -82,6 +122,14 @@ double pfs_uptime(char *proc_dir)
     return return_val;
 }
 
+/**
+ * @brief      Formats the OS's uptime and writes it to uptime_buf
+ *
+ * @param[in]  time        uptime
+ * @param      uptime_buf  uptime buffer, to write formatted uptime into
+ *
+ * @return     0 on success, -1 on error
+ */
 int pfs_format_uptime(double time, char *uptime_buf)
 {
     char* time_str = time_f_get_time_str(time, uptime_buf);
@@ -90,6 +138,13 @@ int pfs_format_uptime(double time, char *uptime_buf)
     return return_val;
 }
 
+/**
+ * @brief      Creates a struct containing load average values and returns it
+ *
+ * @param      proc_dir  proc directory
+ *
+ * @return     load_avg struct holding load average values
+ */
 struct load_avg pfs_load_avg(char *proc_dir)
 {
    struct load_avg lavg = { 0 };
@@ -100,6 +155,12 @@ struct load_avg pfs_load_avg(char *proc_dir)
    return lavg;
 }
 
+/**
+ * @brief      Initalizes load_avg info with load_avg_line
+ *
+ * @param      lavg_ptr       ptr to load_avg struct
+ * @param[in]  load_avg_line  line containing load avg values
+ */
 void pfs_init_load_avg_with(struct load_avg *lavg_ptr, const char *load_avg_line)
 {
     if (lavg_ptr == NULL || load_avg_line == NULL) {
@@ -141,6 +202,13 @@ void pfs_init_load_avg_values(struct load_avg *lavg_ptr, char **current_ptr, cha
     pfs_set_value(&(lavg_ptr->fifteen), current_ptr, next_ptr);
 }
 
+/**
+ * @brief      Sets a value in load_avg struct to the next token
+ *
+ * @param      lavg_value   ptr to load_avg_one or load_avg_five or load_avg_fifteen
+ * @param      current_ptr  pointer to current, used in next_token
+ * @param      next_ptr     pointer to next, used in next_token
+ */
 void pfs_set_value(double *lavg_value, char **current_ptr, char **next_ptr)
 {
     if ( (*current_ptr = next_token(next_ptr, " ,?!")) != NULL) {
@@ -148,12 +216,28 @@ void pfs_set_value(double *lavg_value, char **current_ptr, char **next_ptr)
     }
 }
 
+/**
+ * @brief      calculates this OS's cpu usage from cpu_usage file
+ *
+ * @param      proc_dir  proc directory
+ * @param      prev      previous cpu_stats struct, from the last time this function is called
+ * @param      curr      new cpu_stats struct, populated when this function is called
+ *
+ * @return     this OS's cpu usage, or 0 on error
+ */
 double pfs_cpu_usage(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *curr)
 {
     cpu_init(proc_dir, curr);
     return cpu_calc_usage(prev, curr);
 }
 
+/**
+ * @brief      Populates and returns a mem_stats struct with data from meminfo
+ *
+ * @param      proc_dir  proc directory
+ *
+ * @return     a populated mem_stats struct with data from meminfo, or NULL on error
+ */
 struct mem_stats pfs_mem_usage(char *proc_dir)
 {
     struct mem_stats mstats = { 0 };
@@ -161,19 +245,38 @@ struct mem_stats pfs_mem_usage(char *proc_dir)
     return mstats;
 }
 
+/**
+ * @brief      Initalizes a task_stats struct
+ *
+ * @return     a task_stats struct, used to keep track of all processes in the OS
+ */
 struct task_stats *pfs_create_tstats()
 {
-    return NULL;
+    return task_init_stats();
 }
 
+/**
+ * @brief      Destroys task_stats data, including freeing allocated memory
+ *
+ * @param      tstats  task_stats struct
+ */
 void pfs_destroy_tstats(struct task_stats *tstats)
 {
-
+    task_destroy_stats(&tstats);
 }
 
+/**
+ * @brief      Returns the number of tasks/processes in this OS
+ *
+ * @param      proc_dir  proc directory
+ * @param      tstats    task_stats struct
+ *
+ * @return     0, for success
+ */
 int pfs_tasks(char *proc_dir, struct task_stats *tstats)
 {
-    return -1;
+    task_get_tasks_from_proc(proc_dir, tstats);
+    return 0;
 }
 
 

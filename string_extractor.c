@@ -29,13 +29,13 @@ char *extract_token_before(char *line, char *delim)
 	char line_copy[256];
 	strcpy(line_copy, line);
 
-	LOG("LINE IS '%s'\t DELIM IS '%s'\n", line_copy, delim);
+	//LOG("LINE IS '%s'\t DELIM IS '%s'\n", line_copy, delim);
     char* next = line_copy;
     char* current;
 
     current = next_token(&next, delim);
 
-    LOG("LINE_COPY IS '%s'\t CURRENT IS: '%s'\t NEXT IS: '%s'\n", line_copy, current, next);
+    //LOG("LINE_COPY IS '%s'\t CURRENT IS: '%s'\t NEXT IS: '%s'\n", line_copy, current, next);
 
 
 	return current != NULL ? strdup(current) : NULL;
@@ -56,7 +56,7 @@ char *extract_token_after(char *line, char *delim)
 	char line_copy[256];
 	strcpy(line_copy, line);
 
-	LOG("LINE IS '%s'\t DELIM IS '%s'\n", line_copy, delim);
+	//LOG("LINE IS '%s'\t DELIM IS '%s'\n", line_copy, delim);
     char* next = line_copy;
     char* current;
 
@@ -65,14 +65,14 @@ char *extract_token_after(char *line, char *delim)
 
 
     // Can probably refactor into trim_leading_whitespace()
-    LOG("LINE IS CURRENTLY: '%s'\n", current);
+    //LOG("LINE IS CURRENTLY: '%s'\n", current);
     while (current[0] == ' ' && current[0] != '\0') {
     	//LOG("current[0] is '%c'\n", current[0]);
     	current++;
     }
 
 
-    LOG("LINE_COPY IS '%s'\t CURRENT IS: '%s'\t NEXT IS: '%s'\n", line_copy, current, next);
+    //LOG("LINE_COPY IS '%s'\t CURRENT IS: '%s'\t NEXT IS: '%s'\n", line_copy, current, next);
 
 
 	return current != NULL ? strdup(current) : NULL;

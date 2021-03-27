@@ -189,4 +189,3 @@ void display_stop(void)
     curs_set(1);
     endwin();
 }
-
