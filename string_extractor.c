@@ -5,46 +5,48 @@
 
 #include "string_extractor.h"
 
-/*
- *@file File whose sole responsibility is to extract tokens from a larger string
+/**
+ * @file File whose sole responsibility is to extract strings from larger strings
  */
 
 /**
- * @brief      { function_description }
+ * @brief      Extracts token in line before the first appearance of delimiter
  *
- * @param      line   The line
- * @param      delim  The delimiter
+ * @param      line   line
+ * @param      delim  delimiter
  *
- * @return     { description_of_the_return_value }
+ * @return     If delimiter exists, returns token in line before first appearance of delimiter. Else, returns NULL.
+ * 
+ * @note       Allocates memory. Must free() later. May segfault if get_nth_token() segfaults.
  */
 char *extract_token_before(char *line, char *delim)
 {
-
 	if (line == NULL) {
 		LOG("ERROR - LINE IS NULL: '%s' - returning NULL\n", line);
 		return NULL;
 	}
-
-	// We duplicate line so we don't mutate our data
-	char line_copy[256];
+	
+	char line_copy[256]; // We duplicate line so we don't mutate our data
 	strcpy(line_copy, line);
 
-	//LOG("LINE IS '%s'\t DELIM IS '%s'\n", line_copy, delim);
     char* next = line_copy;
     char* current;
 
-    current = next_token(&next, delim);
-
-    //LOG("LINE_COPY IS '%s'\t CURRENT IS: '%s'\t NEXT IS: '%s'\n", line_copy, current, next);
-
+    current = extract_nth_token(1, &current, &next, delim);
 
 	return current != NULL ? strdup(current) : NULL;
-
 }
 
-
-
-
+/**
+ * @brief      Extracts token in line after the first appearance of delimiter.
+ *
+ * @param      line   line
+ * @param      delim  delimiter
+ *
+ * @return     If delimiter exists, returns token in line after first apperance of delimiter. Else, returns NULL.
+ * 
+ * @note       Allocates memory. Must free() later. May segfault if get_nth_token segfaults.
+ */
 char *extract_token_after(char *line, char *delim)
 {
 	if (line == NULL) {
@@ -52,28 +54,16 @@ char *extract_token_after(char *line, char *delim)
 		return NULL;
 	}
 
-	// We duplicate line so we don't mutate our data
-	char line_copy[256];
+
+	char line_copy[256]; // We duplicate line so we don't mutate our data
 	strcpy(line_copy, line);
 
-	//LOG("LINE IS '%s'\t DELIM IS '%s'\n", line_copy, delim);
     char* next = line_copy;
     char* current;
 
-    next_token(&next, delim);
-    current = next_token(&next, delim);
+    current = extract_nth_token(2, &current, &next, delim);
 
-
-    // Can probably refactor into trim_leading_whitespace()
-    //LOG("LINE IS CURRENTLY: '%s'\n", current);
-    while (current[0] == ' ' && current[0] != '\0') {
-    	//LOG("current[0] is '%c'\n", current[0]);
-    	current++;
-    }
-
-
-    //LOG("LINE_COPY IS '%s'\t CURRENT IS: '%s'\t NEXT IS: '%s'\n", line_copy, current, next);
-
+    trim_leading_whitespace(&current);
 
 	return current != NULL ? strdup(current) : NULL;
 }
@@ -98,80 +88,3 @@ char *extract_nth_token(int n, char **current_ptr, char **next_ptr, const char *
 	}
 	return *current_ptr;
 }
-
-/**
- * @brief      Tests extract_token_before()
- * 
- * @note       Confirmed success for:
- * 				1. Matching key:value pair (returns key)
- * 				2. Line w/ no match (returns whole line)
- * 				3. NULL ptr (returns NULL)
- */
-void test_extract_token_before()
-{
-
-	char valid_str[256];
-	char no_delim[256];
-	char test_null_str[256] = {0};
-
-	strcpy(valid_str, "BubbaKey: BubbaValue");
-	strcpy(no_delim, "There is no delim!");
-
-	LOG("STARTING VALUES:\n"
-		"\t->valid_str: '%s'\n"
-		"\t->no_delim: '%s'\n"
-		"\test_null_str: '%s'\n", valid_str, no_delim, test_null_str);
-
-
-	char* key_valid = extract_token_before(valid_str, ":"); // Should be "BubbaKey"
-	char* key_no_delim = extract_token_before(no_delim, ":"); // No idea what this should be
-	char* key_null = extract_token_before(test_null_str, ":"); // Should be NULL
-
-	LOG("KEY VALUES:\n"
-		"\t->valid_str: '%s'\n"
-		"\t->no_delim: '%s'\n"
-		"\test_null_str: '%s'\n", key_valid, key_no_delim, key_null);
-
-
-
-
-}
-
-
-/**
- * @brief      Tests extract_token_after()
- * 
- * @note       Confirmed success for:
- * 				1. Matching key:value pair (returns value)
- * 				2. Line w/ no match (returns NULL)
- * 				3. NULL ptr (returns NULL)
- */
-void test_extract_token_after()
-{
-	char valid_str[256];
-	char no_delim[256];
-	char test_null_str[256] = {0};
-
-	strcpy(valid_str, "BubbaKey: BubbaValue");
-	strcpy(no_delim, "There is no delim!");
-
-	LOG("STARTING VALUES:\n"
-		"\t->valid_str: '%s'\n"
-		"\t->no_delim: '%s'\n"
-		"\test_null_str: '%s'\n", valid_str, no_delim, test_null_str);
-
-
-	char* key_valid = extract_token_after(valid_str, ": "); // Should be "BubbaValue"
-	char* key_no_delim = extract_token_after(no_delim, ": "); // No idea what this should be
-	char* key_null = extract_token_after(test_null_str, ": "); // Should be NULL
-
-	LOG("KEY VALUES:\n"
-		"\t->valid_str: '%s'\n"
-		"\t->no_delim: '%s'\n"
-		"\test_null_str: '%s'\n", key_valid, key_no_delim, key_null);
-
-
-
-
-}
-

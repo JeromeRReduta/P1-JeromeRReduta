@@ -32,6 +32,20 @@ void task_destroy_status_file_info(Task_Status_File_Info *status_file_info);
 void task_log_status_file_info(Task_Status_File_Info *status_file_info);
 
 /**
+ * @brief      Initalizes task_info struct with info from status_file_info
+ *
+ * @param      current_task      	task_info struct
+ * @param      status_file_info  	Task_Status_File_Info struct
+ */			
+void task_init_info(struct task_info *current_task, Task_Status_File_Info *status_file_info)
+{
+	current_task->pid = atoi(status_file_info->pid_token);
+	current_task->uid = atoi(status_file_info->uid_token);
+	task_process_and_copy_state(current_task, status_file_info->state_token);
+	strncpy(current_task->name, status_file_info->name_token, 25);
+}
+
+/**
  * @brief      Reads info from proc_dir/entry_name/status and populates status_file_info with the info
  *
  * @param      proc_dir          proc directory
@@ -156,21 +170,7 @@ void task_add_active_task_to(struct task_stats *stats, Task_Status_File_Info *st
 }
 
 /**
- * @brief      Initalizes task_info struct with info from status_file_info
- *
- * @param      current_task      	task_info struct
- * @param      status_file_info  	Task_Status_File_Info struct
- */			
-void task_init_info(struct task_info *current_task, Task_Status_File_Info *status_file_info)
-{
-	current_task->pid = atoi(status_file_info->pid_token);
-	current_task->uid = atoi(status_file_info->uid_token);
-	task_process_and_copy_state(current_task, status_file_info->state_token);
-	strncpy(current_task->name, status_file_info->name_token, 25);
-}
-
-/**
- * @brief      Removes the parantheses from <pre>(state)</pre> and copies processed string to buffer
+ * @brief      Removes the paraetheses from <pre>(state)</pre> and copies processed string to buffer
  *
  * @param      current_task  	task_stats struct
  * @param      state_token   	string representing state

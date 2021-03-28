@@ -8,7 +8,6 @@
 #include "procfs.h"
 #include "mem_usage.h"
 
-
 /**
  * @file File whose sole responsibility is to track the OS's memory usage
  * 
@@ -40,7 +39,9 @@ typedef struct {
 void mem_init(struct mem_stats *mstats, char *proc_dir);
 int mem_read_file_and_store_into(char *proc_dir, Mem_File_Info *read_file_info);
 void mem_populate_mem_stats_with(struct mem_stats *mstats, Mem_File_Info *read_file_info);
+
 void destroy_mem_file_info(Mem_File_Info *read_file_info);
+
 void mem_log_stats(struct mem_stats *mstats);
 
 /**
@@ -110,7 +111,7 @@ void destroy_mem_file_info(Mem_File_Info *read_file_info)
 }
 
 /**
- * @brief      Convience function, for debugging. Logs all info in mem_stats
+ * @brief      Convenience function, for debugging. Logs all info in mem_stats
  *
  * @param      mstats  mem_stats struct
  */

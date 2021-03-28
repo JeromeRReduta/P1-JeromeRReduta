@@ -19,42 +19,93 @@ extern const char* pfs_load_avg_path;
 extern const char* pfs_cpu_usage_path;
 extern const char* pfs_mem_usage_path;
 
-
+/**
+ * @brief      Struct holding load average info
+ */
 struct load_avg {
+
+    /** load average over one second */
     double one;
+
+    /** load average over five seconds */
     double five;
+
+    /** load average over fifteen seconds */
     double fifteen;
 };
 
+/**
+ * @brief      Struct holding cpu_stats info
+ */
 struct cpu_stats {
+
+    /** measure of idle cpu usage */
     long idle;
+
+    /** measure of total cpu usage */
     long total;
 };
 
-
+/**
+ * @brief      Struct holding memory usage info
+ */
 struct mem_stats {
+
+    /** Memory used */
     double used;
+
+    /** Memory total */
     double total;
 };
 
+/**
+ * @brief      Struct holding task stats info
+ */
 struct task_stats {
+
+    /** Number of tasks in this OS */
     unsigned int total;
+
+    /** Number of running tasks */
     unsigned int running;
+
+    /** Number of waiting tasks */
     unsigned int waiting;
+
+    /** Number of sleeping tasks */
     unsigned int sleeping;
+
+    /** Number of stopped tasks */
     unsigned int stopped;
+
+    /** Number of zombie tasks */
     unsigned int zombie;
 
+    /** Current size of active_tasks */
     unsigned int active_tasks_size;
+
+    /** Max size of active_tasks */
     unsigned int active_tasks_max_len;
 
+    /** Array of task_info structs - how many active_tasks are in OS */
     struct task_info *active_tasks;
 };
 
+/**
+ * @brief      Struct holding task info
+ */
 struct task_info {
+
+    /** Pid */
     pid_t pid;
+
+    /** Uid */
     uid_t uid;
+
+    /** Name */
     char name[26];
+
+    /** State */
     char state[13];
 };
 

@@ -7,7 +7,7 @@
 #include "uptime_formatter.h"
 
 /**
- * @File file whose sole responbility is to format a time number into a string readable by humans, and write it to a buffer.
+ * @File file whose sole responbility is to format a time number into a string readable by humans.
  * 
  * Prefix: time_f
  */
@@ -18,6 +18,7 @@
 char *time_f_get_time_str(double time);
 void time_f_init_uptime_info(Uptime_Info *time_info, double time);
 void time_f_normalize(int *smaller_unit, int *larger_unit, int base);
+
 char *time_f_make_time_str(Uptime_Info *time_info);
 void time_f_add_years_days_and_hours(char *time_str, Uptime_Info *time_info);
 void time_f_add_minutes_and_seconds(char *time_str, Uptime_Info *time_info);

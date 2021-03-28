@@ -6,11 +6,8 @@
 #include "string_extractor.h"
 #include <dirent.h>
 #include <ctype.h>
-
 #include "procfs.h"
-
 #include "task_finder.h"
-
 
 /**
  * @file File whose sole responsibility is to find and hold a list of the OS's tasks (currently running processes)

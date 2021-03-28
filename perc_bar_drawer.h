@@ -22,10 +22,5 @@ typedef struct {
 } Percbar_Info;
 
 void draw_percbar(char *buf, double frac);
-double get_safe_percent_from(double frac);
-int get_num_of_hashes_from(double safe_percent, int max_hashes);
-void fill_in_perc_bar(char *buf, Percbar_Info *pb_info);
-void make_bar(char *buf, Percbar_Info *pb_info);
-void add_percent_string(char *buf, Percbar_Info *pb_info);
 
 #endif

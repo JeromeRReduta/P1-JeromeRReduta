@@ -12,4 +12,5 @@ struct mem_stats;
 
 void mem_init(struct mem_stats *mstats, char *proc_dir);
 void mem_log_stats(struct mem_stats *mstats);
+
 #endif

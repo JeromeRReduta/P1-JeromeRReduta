@@ -18,6 +18,14 @@
 /** This file has no vars */
 
 /** Func prototypes */
+char *search_for_cpu_cores(char *proc_dir);
+char *search_for_uptime(char *proc_dir);
+char *search_for_load_avg(char *proc_dir);
+char *search_for_cpu_usage(char *proc_dir);
+int search_for_mem_info(char *proc_dir, char *mem_avail_buf, char *mem_total_buf);
+void search_for_task_info(char *proc_dir, char *entry_name, Task_Status_File_Info *status_file_info);
+char *search_for_uname(char *uid_str);
+
 char *search_file_first_line(const char *base, const char *extension);
 char *search_file_with_key(const char *base, const char *extension, const char *key);
 char *search_passwd_for_uid(char *uid_str, int fd);
@@ -110,24 +118,6 @@ char *search_for_load_avg(char *proc_dir)
 }
 
 /**
- * @brief      Given a UID as a string, searches for the associated username in /etc/passwd
- *
- * @param      uid_str  UID, as a string
- *
- * @return     the username associated with uid_str, or NULL on error
- */
-char *search_for_uname(char *uid_str)
-{
-	int fd = open_path("/etc", "passwd");
-	char* uname =  uid_str != NULL && fd != -1 ? search_passwd_for_uid(uid_str, fd) : NULL;
-
-	if (fd != -1) {
-		close(fd);
-	}
-	return uname;
-}
-
-/**
  * @brief      Searches the OS for its cpu usage numbers
  *
  * @param      proc_dir  proc directory
@@ -177,6 +167,25 @@ void search_for_task_info(char *proc_dir, char *entry_name, Task_Status_File_Inf
 	sprintf(extension, "%s/%s", entry_name, "/status");
 
 	search_file_for_task_stats(proc_dir, extension, status_file_info);
+}
+
+/**
+ * @brief      Given a UID as a string, searches for the associated username in /etc/passwd
+ *
+ * @param      uid_str  UID, as a string
+ *
+ * @return     the username associated with uid_str, or NULL on error
+ */
+
+char *search_for_uname(char *uid_str)
+{
+	int fd = open_path("/etc", "passwd");
+	char* uname =  uid_str != NULL && fd != -1 ? search_passwd_for_uid(uid_str, fd) : NULL;
+
+	if (fd != -1) {
+		close(fd);
+	}
+	return uname;
 }
 
 /**

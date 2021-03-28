@@ -9,7 +9,6 @@
 #include "procfs.h"
 #include "cpu_usage.h"
 
-
 /**
  * @file File whose sole responsibility is to track the OS's cpu-usage
  * 
@@ -18,9 +17,10 @@
 
 /* Func prototypes */
 void cpu_init(char *proc_dir, struct cpu_stats *curr);
-void cpu_reset(struct cpu_stats *curr);
 void populate_cpu_stats(struct cpu_stats *curr, char *cpu_usage_line);
 void add_token_to_cpu_stats(struct cpu_stats *curr, long current_num, int counter);
+
+void cpu_reset(struct cpu_stats *curr);
 
 double cpu_calc_usage(struct cpu_stats *prev, struct cpu_stats *curr);
 
@@ -41,17 +41,6 @@ void cpu_init(char *proc_dir, struct cpu_stats *curr)
 
 	cpu_log_info(curr);
 	free_string(&cpu_usage_line);
-}
-
-/**
- * @brief      Resets cpu_stats values to 0
- *
- * @param      curr  current cpu_stats struct
- */
-void cpu_reset(struct cpu_stats *curr)
-{
-	curr->idle = 0;
-	curr->total = 0;
 }
 
 /**
@@ -91,6 +80,17 @@ void add_token_to_cpu_stats(struct cpu_stats *curr, long current_num, int counte
 }
 
 /**
+ * @brief      Resets cpu_stats values to 0
+ *
+ * @param      curr  current cpu_stats struct
+ */
+void cpu_reset(struct cpu_stats *curr)
+{
+	curr->idle = 0;
+	curr->total = 0;
+}
+
+/**
  * @brief      Calculates cpu usage. If given invalid values, returns 0.0 instead.
  *
  * @param      prev  previous cpu_stats struct from the previous pfs_cpu_usage() call
@@ -109,7 +109,7 @@ double cpu_calc_usage(struct cpu_stats *prev, struct cpu_stats *curr)
 }
 
 /**
- * @brief      Convienience function, for logging info in a cpu_stats struct
+ * @brief      Convenience function, for debugging. Logs info in a cpu_stats struct.
  *
  * @param      curr  current cpu_stats struct
  */

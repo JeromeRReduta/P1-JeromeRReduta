@@ -3,24 +3,24 @@
 #include <stdlib.h>
 #include <string.h>
 #include <fcntl.h>
+#include <sys/types.h>
 
 #include "os_searcher.h"
 #include "string_extractor.h"
 #include "logger.h"
 #include "util.h"
 
-
-
-
-
 void destroy_line_and_token(char **line_ptr, char **token_ptr);
 void add_n_symbols_to_buf(int n, char *symbol, char *buf);
-
+void uid_to_uname(char *name_buf, uid_t uid);
 int open_path(const char *base, const char *extension);
 ssize_t lineread(int fd, char *buf, size_t sz);
 char *next_token(char **str_ptr, const char *delim);
-int reference_for_how_to_use_next_token(void); // TODO: Delete this when done
 void free_string(char **string_ptr);
+int n_copy_if_present(char *dest, char *src, int n);
+int n_copy_if_present_with_default(char *dest, char *src, int n, char *default_value);
+void trim_leading_whitespace(char **current_ptr);
+int reference_for_how_to_use_next_token(void);
 
 /**
  * @brief      Destroys one line and one token, including freeing allocated memory
@@ -194,25 +194,7 @@ char *next_token(char **str_ptr, const char *delim)
     return current_ptr;
 }
 
-/**
- * @brief      Do not use this function. It's just here so I remember how to use next_token(). Signed, Jerome.
- *
- * @return     Always 0.
- */
-int reference_for_how_to_use_next_token(void)
-{
-    char str[] = "     This is a really great string, is it not?!";
 
-    int tokens = 0;
-    char *next_tok = str;
-    char *curr_tok;
-    /* Tokenize. Note that ' ,?!' will all be removed. */
-    while ((curr_tok = next_token(&next_tok, " ,?!")) != NULL) {
-        printf("Token %02d: '%s'\n", tokens++, curr_tok);
-    }
-
-    return 0;
-}
 
 /**
  * @brief      Frees a string pointer and sets it to null. If the pointers are already null, does nothing.
@@ -267,12 +249,12 @@ int n_copy_if_present_with_default(char *dest, char *src, int n, char *default_v
     return 0;
 }
 
-
 /**
  * @brief      Moves a pointer to a string forward past any whitespace chars, effectively trimming leading whitespace from the string.
  *
  * @param      current_ptr      pointer to string
  */
+
 void trim_leading_whitespace(char **current_ptr)
 {
     while (**current_ptr == ' ') {
@@ -281,63 +263,22 @@ void trim_leading_whitespace(char **current_ptr)
 }
 
 /**
- * @brief      Tests n_copy_if_present() and n_copy_if_present_with_default().
- * 
- * @note       Confirmed success.
+ * @brief      Do not use this function. It's just here so I remember how to use next_token(). Signed, Jerome.
+ *
+ * @return     Always 0.
  */
-void test_n_copy_if_present()
+int reference_for_how_to_use_next_token(void)
 {
+    char str[] = "     This is a really great string, is it not?!";
 
-    LOGP("TEST - SRC IS NULL\n");
+    int tokens = 0;
+    char *next_tok = str;
+    char *curr_tok;
+    /* Tokenize. Note that ' ,?!' will all be removed. */
+    while ((curr_tok = next_token(&next_tok, " ,?!")) != NULL) {
+        printf("Token %02d: '%s'\n", tokens++, curr_tok);
+    }
 
-    char* test0_src = NULL;
-    char test0_dest[256];
-
-    strcpy(test0_dest, "Bubba");
-
-    LOG("NULL SRC: '%s'\t test0_dest: '%s'\n", test0_src, test0_dest);
-
-    LOG("RETURN VALUE OF n_copy_if_present IS %d\n", n_copy_if_present(test0_dest, test0_src, 256));
-
-
-    LOGP("TEST - DEST IS NULL\n");
-
-    char* test1_src = "Bubba";
-    char* test1_dest = NULL;
-
-    LOG("SRC: '%s'\t DEST: '%s'\n", test1_src, test1_dest);
-
-    LOG("RETURN VALUE OF n_copy_if_present IS %d\n", n_copy_if_present(test1_dest, test1_src, 256));
-
-
-
-
-    LOGP("TEST - NEITHER NULL\n");
-    char* test2_src = "Bradley";
-    char test2_dest[256];
-
-    strcpy(test2_dest, "Bubba");
-    LOG("SRC: '%s'\t DEST: '%s'\n", test2_src, test2_dest);
-
-    LOG("RETURN VALUE OF n_copy_if_present IS %d\n", n_copy_if_present(test2_dest, test2_src, 256));
-
-    LOG("Value of test2_dest now: '%s'\n", test2_dest);
-
-    LOGP("TEST - TRUNCATE - SHOULD BE AB\\0\n");
-    char* test3_src = "ABC";
-    char test3_dest[256];
-
-    n_copy_if_present(test3_dest, test3_src, 2);
-
-    LOG("test3_dest is now '%s'\n", test3_dest);
-
-
-    LOGP("TEST - DEFAULT VALUE\n");
-    char* test_default_src = NULL;
-    char test_default_dest[256] = {0};
-
-    LOG("RETURN VALUE OF n_copy_if_present w/ default value IS %d\n", n_copy_if_present_with_default(test_default_dest, test_default_src, 256, "Placeholder"));
-    LOG("DEST IS NOW: '%s'\n", test_default_dest);
-
-
+    return 0;
 }
+

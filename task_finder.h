@@ -13,16 +13,9 @@
 struct task_stats;
 struct task_info;
 
-
-extern const int task_init_max_len;
-
-
 struct task_stats *task_init_stats();
 void task_destroy_stats(struct task_stats **stats);
 void task_get_tasks_from_proc(char *proc_dir, struct task_stats *stats);
-
-void task_log_stats(struct task_stats *stats);
 void task_log_all_active_tasks(struct task_stats *stats);
-void task_log_info(struct task_info info);
 
 #endif
