@@ -10,7 +10,7 @@ LDLIBS += -lm -lncurses
 LDFLAGS +=
 
 # Source C files
-src=inspector.c procfs.c display.c util.c os_searcher.c string_extractor.c perc_bar_drawer.c uptime_formatter.c cpu_usage.c mem_usage.c task_finder.c task_adder.c
+src=inspector.c procfs.c display.c util.c os_searcher.c string_extractor.c perc_bar_drawer.c uptime_formatter.c cpu_usage.c mem_usage.c task_finder.c task_adder.c load_avg.c
 obj=$(src:.c=.o)
 
 # Makefile recipes --
@@ -30,7 +30,7 @@ clean:
 	rm -rf docs
 
 # Individual dependencies --
-inspector.o: inspector.c logger.h hostname_reader.c hostname_reader.h
+inspector.o: inspector.c logger.h
 procfs.o: procfs.c procfs.h logger.h
 display.o: display.c display.h procfs.h util.h logger.h
 util.o: util.c util.h logger.h
@@ -42,6 +42,7 @@ cpu_usage.o: cpu_usage.c cpu_usage.h
 mem_usage.o: mem_usage.c mem_usage.h
 task_finder.o: task_finder.c task_finder.h os_searcher.c os_searcher.h
 task_adder.o: task_adder.c task_adder.h os_searcher.c os_searcher.h task_finder.c task_finder.h
+load_avg.o: load_avg.c load_avg.h	
 # Tests --
 test: $(bin) libinspector.so ./tests/run_tests
 	@DEBUG="$(debug)" ./tests/run_tests $(run)

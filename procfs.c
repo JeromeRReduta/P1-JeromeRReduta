@@ -8,6 +8,7 @@
 #include "cpu_usage.h"
 #include "mem_usage.h"
 #include "task_finder.h"
+#include "load_avg.h"
 
 #include "procfs.h"
 
@@ -20,13 +21,6 @@ const char* pfs_load_avg_path = "loadavg";
 const char* pfs_cpu_usage_path = "stat";
 const char* pfs_mem_usage_path = "meminfo";
 
-/* Func prototypes */
-
-void pfs_init_load_avg_with(struct load_avg *lavg_ptr, const char *load_avg_line);
-void pfs_log_lavg_info(struct load_avg *lavg);
-void pfs_init_load_avg_with(struct load_avg *lavg_ptr, const char *load_avg_line);
-void pfs_init_load_avg_values(struct load_avg *lavg_ptr, char **current_ptr, char **next_ptr);
-void pfs_set_value(double *lavg_value, char **current_ptr, char **next_ptr);
 
 /**
  * @brief      Copies this OS's hostname to hostname_buf
@@ -144,72 +138,13 @@ struct load_avg pfs_load_avg(char *proc_dir)
 {
    struct load_avg lavg = { 0 };
    char* load_avg_line = search_for_load_avg(proc_dir);
-   pfs_init_load_avg_with(&lavg, load_avg_line);
+   load_avg_init_with(&lavg, load_avg_line);
 
    destroy_line_and_token(&load_avg_line, NULL);
    return lavg;
 }
 
-/**
- * @brief      Initalizes load_avg info with load_avg_line
- *
- * @param      lavg_ptr       ptr to load_avg struct
- * @param[in]  load_avg_line  line containing load avg values
- */
-void pfs_init_load_avg_with(struct load_avg *lavg_ptr, const char *load_avg_line)
-{
-    if (lavg_ptr == NULL || load_avg_line == NULL) {
-        LOGP("ERROR - LOAD_AVG OR LOAD_AVG_LINE IS NULL PTR\n");
-        return;
-    }
 
-    char load_avg_line_copy[256] = {0};
-    strcpy(load_avg_line_copy, load_avg_line);
-
-    char *next = load_avg_line_copy;
-    char *current;
-    pfs_init_load_avg_values(lavg_ptr, &current, &next);
-}
-
-/**
- * @brief      Equivalent of: <br>
- *             <pre>
- *                  if ( (current = next_token(...) != NULL)) {
- *                      lavg_ptr->one = current;
- *                  }
- *                  if ( (current = next_token(...) != NULL)) {
- *                      lavg_ptr->five = current;
- *                  }
- *                  if ( (current = next_token(...) != NULL)) {
- *                      lavg_ptr->fifteen = current;
- *                  }
- *             </pre>
- * 
- *
- * @param      lavg_ptr     pointer to struct load_avg
- * @param      current_ptr  pointer to current string, for next_token()
- * @param      next_ptr     pointer to next string, for next_token()
- */
-void pfs_init_load_avg_values(struct load_avg *lavg_ptr, char **current_ptr, char **next_ptr)
-{
-    pfs_set_value(&(lavg_ptr->one), current_ptr, next_ptr);
-    pfs_set_value(&(lavg_ptr->five), current_ptr, next_ptr);
-    pfs_set_value(&(lavg_ptr->fifteen), current_ptr, next_ptr);
-}
-
-/**
- * @brief      Sets a value in load_avg struct to the next token
- *
- * @param      lavg_value   ptr to load_avg_one or load_avg_five or load_avg_fifteen
- * @param      current_ptr  pointer to current, used in next_token
- * @param      next_ptr     pointer to next, used in next_token
- */
-void pfs_set_value(double *lavg_value, char **current_ptr, char **next_ptr)
-{
-    if ( (*current_ptr = next_token(next_ptr, " ,?!")) != NULL) {
-        *lavg_value = atof(*current_ptr);
-    }
-}
 
 /**
  * @brief      calculates this OS's cpu usage from cpu_usage file
