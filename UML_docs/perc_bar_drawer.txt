@@ -1,0 +1,39 @@
+perc_bar_drawer.c:
+
+File whose sole responsibility is to create a percent bar.
+
+Vars:
+
+	+ Percbar_Info: struct containing info to create a percent bar. Contains the following vars:
+
+		safe_percent: double
+			How full the bar should be in percent. If get_safe_percent_from() is given an invalid
+			fraction, this var is a default value instead.
+
+		max_hashes: int
+			Max # of hashes that can be in this percent bar (essentially, size of percent bar - 2 brackets)
+
+		num_of_hashes: int
+			# of hashes that are actually in this percent bar
+
+Funcs:
+	
+	+ draw_percbar(char *buf, double *frac): void
+		Draws the percent bar.
+
+	- get_safe_percent_from(double frac): double
+		If frac is < 0, or = -0.0, or not a number, returns 0
+		If frac is > 1, returns 100
+		Else, returns frac * 100 (i.e. fraction as a percent)
+
+	- get_num_of_hashes_from(double safe_percent, int max_hashes): int
+		returns the number of hashes this percent bar should have, based on safe_percent
+
+	- fill_in_perc_bar(char *buf, Percbar_Info *pb_info): void
+		fills in perc bar info
+
+	- make_bar(char *buf, Percbar_Info *pb_info): void
+		fills in the bar part of the percent bar
+
+	- add_percent_string(char *buf, Percbar_Info *pb_info): void
+		fills in the percent part of the percent bar

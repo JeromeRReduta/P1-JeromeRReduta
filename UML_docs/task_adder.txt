@@ -1,0 +1,68 @@
+task_adder.c:
+
+File whose sole responsibility is to add tasks to a task_stats struct
+
+Prefix: task
+
+Vars:
+
+	+ Task_Status_File_Info: struct containing info gained from reading proc/entry_name/status. Contains the following vars:
+
+		pid_buf: char[]
+			Line of pid info
+
+		uid_buf: char[]
+			Line of uid info
+
+		name_buf: char[]
+			Line of name info
+
+		state_buf: char[]
+			Line of state info
+
+		pid_token: char*
+			Formatted pid token
+
+		uid_token: char*
+			Formatted uid token
+
+		name_token: char*
+			Formatted name token
+
+		state_token: char*
+			Formatted state token
+
+Funcs:
+	
+	+ task_read_status_and_store_into(char *proc_dir, char *entry_name, Task_Status_File_Info *status_file_info): int
+		Reads proc_dir/entry_name/status and stores info into status_file_info struct
+
+	+ task_populate_task_stats_with(struct task_stats *stats, Task_Status_File_Info *status_file_info): void
+		Adds one task from status_file info to stats
+
+	+ task_destroy_status_file_info(Task_Status_File_Info *status_file_info): void
+		Destroys status file info, including freeing allocated memory
+
+	+ task_log_status_file_info(Task_Status_File_Info *status_file_info): void
+		Convenience function, for debugging. Logs all info from status_file_info
+
+	- task_init_info(struct task_info *current_task, Task_Status_File_Info *status_file_info): void
+		Initalizes a task_info struct
+
+	- task_init_status_file_info_tokens(Task_Status_File_Info *status_file_info): int
+		Initalizes status_file_info tokens
+
+	- grow_active_tasks(struct task_stats *stats): int
+		Doubles the size of active_tasks array
+
+	- task_add_to_stats_count(struct task_stats *stats, char state): void
+		Increases the appropriate task_stats counter
+
+	- task_process_and_copy_state(struct task_info* current_task, char *state_token): void
+		Removes parentheses from "(state)" and copies processed string to buffer
+
+	- task_destroy_status_file_info(Task_Status_File_Info *status_file_info): void
+		Destroys Task_Status_File_Info struct
+
+	- task_log_status_file_info(Task_Status_File_Info *status_file_info): void
+		Convenience function, for debugging. Logs all info in status_file_info

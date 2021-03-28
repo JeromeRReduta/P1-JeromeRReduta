@@ -1,0 +1,21 @@
+string_extractor.c:
+	
+	File whose sole responsibility is to extract strings from larger strings.
+
+	Prefix: extract
+
+Vars:
+	None
+
+Funcs:
+	+ extract_token_before(char *line, char *delim): char*
+		Extracts token in line before the first appearance of the delimiter.
+		Identical to extract_nth_token(1, ...)
+
+	+ extract_token_after(char *line, char *delim): char*
+		Extracts token in line after the first apperance of the delimiter.
+		Identical to extract_nth_token(2, ...)
+
+	+ extract_nth_token(int n, char **current_ptr, char **next_ptr, const char *delim): char*
+		Extracts the nth token in line, where 1st token is token in line before the first
+		appearance of the delimiter.

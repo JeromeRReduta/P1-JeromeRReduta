@@ -1,0 +1,63 @@
+os_searcher.c
+
+File whose sole responsibility is to search the OS for data and return the line containing that 
+data. 
+
+The exception to this is search_for_mem_info() and search_for_task_info(). It seems that
+reading one file multiple times doesn't work, so in order to get memory info and task info,
+we copy each element to a buffer.
+
+Prefix: search
+
+Vars:
+	None
+
+Funcs:
+
+	+ search_for_hostname(char *proc_dir): char*
+		searches and returns the OS the hostname
+
+	+ search_for_kernel(char *proc_dir): char*
+		searches and returns the OS kernel
+
+	+ search_for_cpu_model(char *proc_dir): char*
+		searches and returns the OS cpu model
+
+	+ search_for_cpu_cores(char *proc_dir): char*
+		searches and returns the number of cpu cores in this OS
+
+	+ search_for_uptime(char *proc_dir): char*
+		searches and returns the OS uptime
+
+	+ search_for_load_avg(char *proc_dir): char*
+		searches and returns the OS's load average info
+
+	+ search_for_cpu_usage(char *proc_dir): char*
+		searches and returns this OS's cpu usage.
+
+	+ search_for_mem_info(char *proc_dir, char *mem_avail_buf, char *mem_total_buf): int
+		searches this OS's memory info and copies them into buffers
+
+	+ search_for_task_info(char *proc_dir, char *entry_name, Task_Status_File_Info *status_file_info): void
+		searches the task info for every process in proc, and stores them into a Task_Status_File_Info struct.
+
+	+ search_for_uname(char *uid_str): char*
+		searches and returns the username associated with uid_str
+
+	- search_file_first_line(const char *base, const char *extension): char*
+		searches a file and returns the first line
+
+	- search_file_with_key(const char *base, const char *extension, const char *key): char*
+		searches a file and returns the line containing the key
+	
+	- search_file_for_memory_usage(const char *base, const char *extension, char *avail_buf, char *total_buf): void
+		searches meminfo file and copies the info into buffers
+
+	- search_file_for_task_stats(const char *base, const char *extension, Task_Status_File_Info *status_file_info): void
+		Searches each processes's status file and copies their info into buffers
+
+	- search_passwd_for_uid(char *uid_str, int fd): char*
+		Searches /etc/passwd and returns the line containing the uid_str.
+
+	- contains_uid_str(char *lineread_buf, char *uid_str): bool
+		Returns whether the lineread_buf contains uid_str

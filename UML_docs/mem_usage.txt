@@ -1,0 +1,39 @@
+mem_usage.c:
+
+File whose sole responsibility is to track the OS's memory usage.
+
+Prefix: mem_
+
+Vars:
+
+	+ mem_stats: struct
+		Imported from procfs.h to avoid errors/warnings
+
+
+
+	- Mem_File_Info: struct - contains info from reading memory file. Contains the following vars:
+
+			mem_available_buf: char[]
+				Line holding MemAvailable data
+
+			mem_total_buf: char[]
+				Line holding MemTotal data
+
+			mem_available_token: char*
+				Holds formatted version of mem_available_buf
+
+			mem_total_token: char*
+				Holds formatted version of mem_total buf
+
+	c mem_kb_to_mb: const int
+		# of kb in 1 mb. Used for conversions.
+
+Funcs:
+
+	+ mem_init(struct mem_stats *mstats, char *proc_dir): void
+		Initalizes mem_stat struct
+
+	+ mem_log_stats(struct mem_stats *mstats): void
+		Convenience function, for debugging. Logs all info in mem_stats struct.
+
+

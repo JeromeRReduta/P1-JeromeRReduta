@@ -1,0 +1,40 @@
+task_finder.c:
+
+File whose sole responsibility is to find and hold a list of the OS's tasks (currently running processes)
+
+Prefix: task
+
+Vars:
+
+	c task_init_max_len: const int
+		The number we should set task_stat_struct->active_tasks_max_len to
+
+Funcs:
+	
+	+ task_init_stats(): struct task_stats*
+		Initalizes a task_stats struct
+
+	+ task_destroy_stats(struct task_stats **stats): void
+		Destroys task_stats struct struct and sets pointer to NULL. Also frees any allocated memory.
+
+	+ task_get_tasks_from_proc(char *proc_dir, struct task_stats *stats): void
+		Populates task_stats struct with status files from EVERY process in proc.
+		A process is anything in proc whose name is a number.
+
+	+ task_log_stats(struct task_stats *stats): void
+		Logging function. Logs task_stats data
+
+	- task_add_status_info_if_process(char *proc_dir, struct task_stats *stats, struct dirent *entry): void
+		Adds status info for an entry in proc, if that entry is a process.
+
+	- task_add_status_info(char *proc_dir, struct task_stats *stats, struct dirent *entry):
+		Unsafe version of task_add_status_info_if_process(). Use that one instead.
+
+	- task_log_all_active_tasks(struct task_stats *stats): void
+		Logs all active tasks in stats.
+
+	- task_log_info(struct task_info info): void
+		Logs one active task in stats.
+
+
+

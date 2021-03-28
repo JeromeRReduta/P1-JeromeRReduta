@@ -1,0 +1,29 @@
+cpu_usage.c:
+
+
+File whose sole responsibility is to track the OS's cpu usage.
+
+Prefix: cpu
+
+
+
+Vars:
+	+ extern struct cpu_stats curr:
+		Just imported over from procfs.h to avoid getting warning/error
+
+Funcs:
+
+	+ cpu_init(char *proc_dir, struct cpu_stats *curr): void
+		Initalizes cpu_stats
+
+	+ cpu_calc_usage(struct cpu_stats *prev, struct cpu_stats *curr): double
+		Resets cpu_stats values to 0
+
+	+ cpu_log_info(struct cpu_stats *curr): void
+		Convenience function, for debugging. Logs info in a cpu_stats struct.
+
+	- popluate_cpu_stats(struct cpu_stats *curr, char *cpu_usage_line): void
+		Populates cpu_stats struct
+
+	- add_token_to_cpu_stats(struct cpu_stast *curr, long current_num, int counter): void
+		Adds a token (turned into a long) to cpu_stats struct

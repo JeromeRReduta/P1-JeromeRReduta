@@ -1,0 +1,43 @@
+util.c:
+
+Collection of utility functions.
+
+No prefix.
+
+Vars:
+
+	None
+
+Funcs:
+	
+	+ destroy_line_and_token(char **line_ptr, char **token_ptr): void
+		Applies free_string() to both a line and a token. Used because this project kept creating
+		both one line and one token.
+
+	+ add_n_symbols_to_buf(int n, char *symbol, char *buf): void
+		Concatenates symbol to buf, n times
+
+	+ open_path(const char *base, const char *extension): int
+		Opens a file descriptor to base/extension
+
+	+ lineread(int fd, char *buf, size_t sz): ssize_t
+		Reads one line from a file descriptor. Repeated calls read the following lines.
+
+	+ next_token(char **str_ptr, const char *delim): char*
+		Tokenizes a string, and gets the next token from that string
+
+	
+	+ free_string(char **string_ptr): void
+		If *string_ptr exists, frees string and sets *string_ptr to NULL
+
+	- n_copy_if_present(char *dest, char *src, int n): int
+		Copies up to n bytes from src to dest if src exists
+
+	- n_copy_if_present_with_default(char *dest, char *src, int n, char *default_value): int
+		Copies up to n bytes from src to dest if src exists. On any error, copies default_value instead.
+
+	- trim_leading_whitespace(char **current_ptr): void
+		moves current ptr forward while it's pointing at whitespace, effectively trimming leading whitespace
+
+	- reference_for_how_to_use_next_token(void): int
+		Don't use this. Just a reference for me to know how to use next_token.	

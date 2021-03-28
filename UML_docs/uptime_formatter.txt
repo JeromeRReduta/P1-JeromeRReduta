@@ -1,0 +1,52 @@
+uptime_formatter.c:
+
+File whose sole responsibility is to format an uptime number into a string readable by humans.
+
+Prefix: time_f
+
+Vars:
+	
+	Uptime_Info: struct that holds uptime info for this OS. Contains the following vars:
+
+		seconds: int
+
+		minutes: int
+
+		hours: int
+
+		days: int
+
+		years: int
+
+
+Funcs:
+
+	+ time_f_get_time_str(double time): char*
+		Formats time (usually a huge double) into a string readable by humans and returns it.
+
+	+ time_f_log_info(Uptime_Info *time_info): void
+		Logs all time_info info	
+
+	- time_f_init_uptime_info(Uptime_Info *time_info, double time): void
+		Initalizes Uptime_Info struct
+
+	- time_f_normalize(int *smaller_unit, int *larger_unit, int base): void
+		"Normalizes a smaller unit of time by setting it to a base, and carrying the rest over to the larger unit".
+
+		E.g.:
+		seconds = 425, minutes = 0
+		time_f_normalize(&seconds, &minutes, 60)
+		Now seconds = 5, minutes = 7
+
+	- time_f_make_time_str(Uptime_Info *time_info): char*
+		Using time_info, creates formatted time string
+
+	- time_f_add_years_days_and_hours(char *time_str, Uptime_Info *time_info): void
+		Adds years, days, and hours (if necessary) to time_str
+
+	- time_f_add_minutes_and_seconds(char *time_str, Uptime_Info *time_info): void
+		Adds minutes and seconds to time_str
+
+	- time_f_add_time_to_str(char *time_str, int time, char *unit_str, bool always_add): void
+		If always_add is true, or time > 0, add the time and unit str to time_str.
+
