@@ -9,6 +9,6 @@ typedef struct {
 	int years;
 } Uptime_Info;
 
-char *time_f_get_time_str(double time, char *uptime_buf);
+char *time_f_get_time_str(double time);
 
 #endif

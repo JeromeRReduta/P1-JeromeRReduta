@@ -1,0 +1,83 @@
+UML for os_static_data.c:
+
+File whose sole responsibility is to hold and get static data for OS. os_searcher.c to populate
+the data.
+
+Static data is info about the OS that is (almost) guaranteed to stay the same during
+./inspector's run time.
+
+Prefix: os_s
+
+Vars:
+
+	(This file has no public, non-constant vars.)
+
+	- os_s_locals: OS_S_Private_Data*  // Holds the following private vars:
+
+		- proc_dir: char* // Proc dir string
+		- buf_sz: siz_t // buffer size, mostly used for lineread - same as buf_sz from procfs
+
+				TODO: Might have to add more buf_sz if all the buf_sz's are different for each func
+
+		- hostname: char* // name of OS
+		- kernel: char* // name of kernel
+		- cpu_model: char* // name of cpu model
+		- cpu_units: int // # of cpu cores this OS has
+
+	c os_s_hostname_path: const char*
+	c os_s_kernel_path: const char*
+	c os_s_cpu_path: const char* // Used for both cpu_model and cpu_units
+
+
+Funcs:
+
+
+	+ os_s_init_data(char *proc_dir, size_t buf_sz): // TODO: Might have to add more buf_sz's
+		// if buf_sz's are diff for each func
+
+		Inits pub and private structs, including copying  proc_dir and buf_sz values from procfs to this file
+
+		By default, everything is 0 (except for proc_dir and buf_sz)
+
+		Only populates proc_dir and buf_sz - have to call the other funcs to populate the other data
+
+		+ os_s_safe_init_data(char *proc_dir, size_t buf_sz):
+
+			same as init(), but only if vars haven't been initialized (if var structs == NULL)
+
+		+ os_s_destroy_data():
+
+			 resets pub and private struct data, including freeing memory structs and setting them to NULL
+
+			 const vars are unaffected
+
+		- os_s_reset_struct_internals():
+			Helper func for destroy_data()
+			Frees dynamically allocated mem for struct's internal members
+
+		- os_s_reset_ptrs():
+			Helper func for destroy_data()
+			Frees and nulls public and private data structs
+
+		+ os_s_get_hostname():
+			If hostname == NULL, set it to search_file_first_line(proc_dir, hostname_path)
+
+			Return hostname
+
+		+ os_s_get_kernel():
+			If kernel == NULL, set it to search_file_first_line(proc_dir, kernel_path)
+
+			Return kernel
+
+		+ os_s_get_cpu_model():
+			If cpu_model == NULL, set it to search_file_with_key(proc_dir, kernel_path,
+				key for cpu_model)
+
+			return cpu_model
+
+		+ os_s_get_cpu_units():
+			If cpu_units == 0, set it to search_file_with_key(proc_dir, kernel_path,
+				key for num of cpu cores) <-- turn this string into an int
+
+
+			Return cpu_units

@@ -15,7 +15,7 @@
 /** This file has no vars */
 
 /** Func prototypes */
-char *time_f_get_time_str(double time, char *uptime_buf);
+char *time_f_get_time_str(double time);
 void time_f_init_uptime_info(Uptime_Info *time_info, double time);
 void time_f_normalize(int *smaller_unit, int *larger_unit, int base);
 char *time_f_make_time_str(Uptime_Info *time_info);
@@ -23,28 +23,29 @@ void time_f_add_years_days_and_hours(char *time_str, Uptime_Info *time_info);
 void time_f_add_minutes_and_seconds(char *time_str, Uptime_Info *time_info);
 void time_f_add_time_to_str(char *time_str, int time, char *unit_str, bool always_add);
 
-
-
 void time_f_log_info(Uptime_Info *time_info);
 
-
-
-char *time_f_get_time_str(double time, char *uptime_buf)
+/**
+ * @brief      Converts uptime to a formatted uptime string and returns it
+ *
+ * @param[in]  time        uptime
+ *
+ * @return     A formatted uptime string, readable by humans
+ */
+char *time_f_get_time_str(double time)
 {
-
 	Uptime_Info time_info = {0};
-	time_f_log_info(&time_info);
-
 	time_f_init_uptime_info(&time_info, time);
-	LOGP("TIME INFO IS NOW:\n");
-	time_f_log_info(&time_info);
 
 	return time_f_make_time_str(&time_info);
-
-
-
-
 }
+
+/**
+ * @brief      Initalizes time_info struct
+ *
+ * @param      time_info  	time_info struct
+ * @param[in]  time       	OS uptime
+ */
 void time_f_init_uptime_info(Uptime_Info *time_info, double time)
 {
 	time_info->seconds = (int)time;
@@ -70,17 +71,28 @@ void time_f_normalize(int *smaller_unit, int *larger_unit, int base)
 
 }
 
+/**
+ * @brief      Given info from Uptime_Info struct, creates a formatted time string
+ *
+ * @param      time_info  	Uptime_Info struct
+ *
+ * @return     	A formatted time string, readable by humans
+ */
 char *time_f_make_time_str(Uptime_Info *time_info)
 {
 	char time_str[512] = {0};
 	time_f_add_years_days_and_hours(time_str, time_info);
 	time_f_add_minutes_and_seconds(time_str, time_info);
+
 	return strdup(time_str);
-
-
-
 }
 
+/**
+ * @brief      Adds years, days, and hours to formatted time string, but will only add each if they are greater than 0.
+ *
+ * @param      time_str   	time string
+ * @param      time_info  	Uptime_Info struct
+ */
 void time_f_add_years_days_and_hours(char *time_str, Uptime_Info *time_info)
 {
 	time_f_add_time_to_str(time_str, time_info->years, "years, ", false);
@@ -89,12 +101,26 @@ void time_f_add_years_days_and_hours(char *time_str, Uptime_Info *time_info)
 
 }
 
+/**
+ * @brief      Adds minutes and seconds to formatted time string.
+ *
+ * @param      time_str   	time string
+ * @param      time_info  	Uptime_Info struct
+ */
 void time_f_add_minutes_and_seconds(char *time_str, Uptime_Info *time_info)
 {
 	time_f_add_time_to_str(time_str, time_info->minutes, "minutes, ", true);
 	time_f_add_time_to_str(time_str, time_info->seconds, "seconds", true);
 }
 
+/**
+ * @brief      If time is greater than 0, or we are always supposed to add the string, adds a string with the format <pre> time unit_str </pre> to time_str.
+ *
+ * @param      time_str    	time string
+ * @param[in]  time        	time
+ * @param      unit_str    	unit string - essentially, something we concat onto the formatted time
+ * @param[in]  always_add  	whether to always add this string
+ */
 void time_f_add_time_to_str(char *time_str, int time, char *unit_str, bool always_add)
 {
 	if (always_add || time > 0) {
@@ -107,6 +133,11 @@ void time_f_add_time_to_str(char *time_str, int time, char *unit_str, bool alway
 	}
 }
 
+/**
+ * @brief      Convenience function, for debugging. Logs all info from Uptime_Info struct
+ *
+ * @param      time_info  	Uptime_Info struct
+ */
 void time_f_log_info(Uptime_Info *time_info)
 {
 	LOG("STATS:\n"

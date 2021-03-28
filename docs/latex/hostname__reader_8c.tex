@@ -1,0 +1,187 @@
+\hypertarget{hostname__reader_8c}{}\doxysection{hostname\+\_\+reader.\+c File Reference}
+\label{hostname__reader_8c}\index{hostname\_reader.c@{hostname\_reader.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}logger.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}util.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}hostname\+\_\+reader.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structHost__R__Private__Data}{Host\+\_\+\+R\+\_\+\+Private\+\_\+\+Data}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{hostname__reader_8c_a478de34066376a68596ec9af7d9283d3}{host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data}} (char $\ast$proc\+\_\+dir, size\+\_\+t buf\+\_\+sz)
+\begin{DoxyCompactList}\small\item\em Initalizes public and private structs, ONLY if these structs are not already initalized. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{hostname__reader_8c_a4ebc3da709e63b63b050db2a33cfd66f}{host\+\_\+r\+\_\+init\+\_\+data}} (char $\ast$proc\+\_\+dir, size\+\_\+t buf\+\_\+sz)
+\begin{DoxyCompactList}\small\item\em Initializes public and private structs, including copying proc\+\_\+dir and buf\+\_\+sz values from proc\+\_\+fs to this file. This includes finding the hostname. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hostname__reader_8c_ab5f2a80f61b87d7128e64586ebf1d1e0}\label{hostname__reader_8c_ab5f2a80f61b87d7128e64586ebf1d1e0}} 
+void \mbox{\hyperlink{hostname__reader_8c_ab5f2a80f61b87d7128e64586ebf1d1e0}{host\+\_\+r\+\_\+destroy\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Resets all data in public and private structs (not constants though), including freeing allocated memory. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hostname__reader_8c_abe2ee341224718aa137e765c1b9c9097}\label{hostname__reader_8c_abe2ee341224718aa137e765c1b9c9097}} 
+void \mbox{\hyperlink{hostname__reader_8c_abe2ee341224718aa137e765c1b9c9097}{host\+\_\+r\+\_\+reset\+\_\+struct\+\_\+internals}} ()
+\begin{DoxyCompactList}\small\item\em Helper func for destroy\+\_\+data() ~\newline
+Frees dynamically allocated mem for struct\textquotesingle{}s internal members. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hostname__reader_8c_a22ee2523f43fe608801e816c9fcae091}\label{hostname__reader_8c_a22ee2523f43fe608801e816c9fcae091}} 
+void \mbox{\hyperlink{hostname__reader_8c_a22ee2523f43fe608801e816c9fcae091}{host\+\_\+r\+\_\+reset\+\_\+structs}} ()
+\begin{DoxyCompactList}\small\item\em Helper func for destroy\+\_\+data() ~\newline
+Frees and nulls public and private data structs. \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{hostname__reader_8c_ad19f7d9f05c1414c91a594d9d48646ed}{host\+\_\+r\+\_\+search}} ()
+\begin{DoxyCompactList}\small\item\em Finds hostname string and allocates memory for it. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hostname__reader_8c_a93e431bd80d3ec4e231f333013ba1660}\label{hostname__reader_8c_a93e431bd80d3ec4e231f333013ba1660}} 
+void \mbox{\hyperlink{hostname__reader_8c_a93e431bd80d3ec4e231f333013ba1660}{log\+\_\+info}} ()
+\begin{DoxyCompactList}\small\item\em Helper func, for logging all the public, private, and constant info in the file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{hostname__reader_8c_ad3e37625138cbbeb38cd0da17f1f4114}{test\+\_\+host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Tests \mbox{\hyperlink{hostname__reader_8c_a478de34066376a68596ec9af7d9283d3}{host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{hostname__reader_8c_aa39600c1411581b0000d38bfae4ea6e4}{test\+\_\+host\+\_\+r\+\_\+init\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Tests \mbox{\hyperlink{hostname__reader_8c_a4ebc3da709e63b63b050db2a33cfd66f}{host\+\_\+r\+\_\+init\+\_\+data()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{hostname__reader_8c_a23d8a1b21af607c5d06483b1e3fb38a2}{test\+\_\+host\+\_\+r\+\_\+destroy\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Tests \mbox{\hyperlink{hostname__reader_8c_ab5f2a80f61b87d7128e64586ebf1d1e0}{host\+\_\+r\+\_\+destroy\+\_\+data()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{hostname__reader_8c_a2c7d9796cf01aebe50f9a3ea5a813186}{test\+\_\+host\+\_\+r\+\_\+search}} (char $\ast$real\+\_\+proc\+\_\+dir, size\+\_\+t real\+\_\+buf\+\_\+sz)
+\begin{DoxyCompactList}\small\item\em Tests \mbox{\hyperlink{hostname__reader_8c_ad19f7d9f05c1414c91a594d9d48646ed}{host\+\_\+r\+\_\+search()}} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structHost__R__Public__Data}{Host\+\_\+\+R\+\_\+\+Public\+\_\+\+Data}} $\ast$ \mbox{\hyperlink{hostname__reader_8c_a306690ab6baed813651f849ac790685e}{host\+\_\+r\+\_\+globals}}
+\item 
+const char $\ast$ \mbox{\hyperlink{hostname__reader_8c_a483b425df9e96f8fc5fbba8c9a713807}{host\+\_\+r\+\_\+path}} = \char`\"{}sys/kernel/hostname\char`\"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+File for holding and returning a string representation of this OS\textquotesingle{}s hostname. ~\newline
+ File prefix is \char`\"{}host\+\_\+r\char`\"{} 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hostname__reader_8c_a4ebc3da709e63b63b050db2a33cfd66f}\label{hostname__reader_8c_a4ebc3da709e63b63b050db2a33cfd66f}} 
+\index{hostname\_reader.c@{hostname\_reader.c}!host\_r\_init\_data@{host\_r\_init\_data}}
+\index{host\_r\_init\_data@{host\_r\_init\_data}!hostname\_reader.c@{hostname\_reader.c}}
+\doxysubsubsection{\texorpdfstring{host\_r\_init\_data()}{host\_r\_init\_data()}}
+{\footnotesize\ttfamily void host\+\_\+r\+\_\+init\+\_\+data (\begin{DoxyParamCaption}\item[{char $\ast$}]{proc\+\_\+dir,  }\item[{size\+\_\+t}]{buf\+\_\+sz }\end{DoxyParamCaption})}
+
+
+
+Initializes public and private structs, including copying proc\+\_\+dir and buf\+\_\+sz values from proc\+\_\+fs to this file. This includes finding the hostname. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em proc\+\_\+dir} & proc directory \\
+\hline
+\mbox{\texttt{ in}}  & {\em buf\+\_\+sz} & buffer size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{hostname__reader_8c_a478de34066376a68596ec9af7d9283d3}\label{hostname__reader_8c_a478de34066376a68596ec9af7d9283d3}} 
+\index{hostname\_reader.c@{hostname\_reader.c}!host\_r\_safe\_init\_data@{host\_r\_safe\_init\_data}}
+\index{host\_r\_safe\_init\_data@{host\_r\_safe\_init\_data}!hostname\_reader.c@{hostname\_reader.c}}
+\doxysubsubsection{\texorpdfstring{host\_r\_safe\_init\_data()}{host\_r\_safe\_init\_data()}}
+{\footnotesize\ttfamily void host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data (\begin{DoxyParamCaption}\item[{char $\ast$}]{proc\+\_\+dir,  }\item[{size\+\_\+t}]{buf\+\_\+sz }\end{DoxyParamCaption})}
+
+
+
+Initalizes public and private structs, ONLY if these structs are not already initalized. 
+
+Func prototypes
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em proc\+\_\+dir} & The proc dir \\
+\hline
+\mbox{\texttt{ in}}  & {\em buf\+\_\+sz} & The buffer size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{hostname__reader_8c_ad19f7d9f05c1414c91a594d9d48646ed}\label{hostname__reader_8c_ad19f7d9f05c1414c91a594d9d48646ed}} 
+\index{hostname\_reader.c@{hostname\_reader.c}!host\_r\_search@{host\_r\_search}}
+\index{host\_r\_search@{host\_r\_search}!hostname\_reader.c@{hostname\_reader.c}}
+\doxysubsubsection{\texorpdfstring{host\_r\_search()}{host\_r\_search()}}
+{\footnotesize\ttfamily char $\ast$ host\+\_\+r\+\_\+search (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Finds hostname string and allocates memory for it. 
+
+\begin{DoxyReturn}{Returns}
+hostname string
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This allocates memory -\/ need to free later 
+\end{DoxyNote}
+\mbox{\Hypertarget{hostname__reader_8c_a23d8a1b21af607c5d06483b1e3fb38a2}\label{hostname__reader_8c_a23d8a1b21af607c5d06483b1e3fb38a2}} 
+\index{hostname\_reader.c@{hostname\_reader.c}!test\_host\_r\_destroy\_data@{test\_host\_r\_destroy\_data}}
+\index{test\_host\_r\_destroy\_data@{test\_host\_r\_destroy\_data}!hostname\_reader.c@{hostname\_reader.c}}
+\doxysubsubsection{\texorpdfstring{test\_host\_r\_destroy\_data()}{test\_host\_r\_destroy\_data()}}
+{\footnotesize\ttfamily void test\+\_\+host\+\_\+r\+\_\+destroy\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tests \mbox{\hyperlink{hostname__reader_8c_ab5f2a80f61b87d7128e64586ebf1d1e0}{host\+\_\+r\+\_\+destroy\+\_\+data()}} 
+
+\begin{DoxyNote}{Note}
+Confirmed success for\+:
+\begin{DoxyEnumerate}
+\item Initializing data, then destroying it
+\item Not initalizing data, then destroying it
+\item Initalizing data, destroying it, and then trying to destroy it again (testing safety checks) 
+\end{DoxyEnumerate}
+\end{DoxyNote}
+\mbox{\Hypertarget{hostname__reader_8c_aa39600c1411581b0000d38bfae4ea6e4}\label{hostname__reader_8c_aa39600c1411581b0000d38bfae4ea6e4}} 
+\index{hostname\_reader.c@{hostname\_reader.c}!test\_host\_r\_init\_data@{test\_host\_r\_init\_data}}
+\index{test\_host\_r\_init\_data@{test\_host\_r\_init\_data}!hostname\_reader.c@{hostname\_reader.c}}
+\doxysubsubsection{\texorpdfstring{test\_host\_r\_init\_data()}{test\_host\_r\_init\_data()}}
+{\footnotesize\ttfamily void test\+\_\+host\+\_\+r\+\_\+init\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tests \mbox{\hyperlink{hostname__reader_8c_a4ebc3da709e63b63b050db2a33cfd66f}{host\+\_\+r\+\_\+init\+\_\+data()}} 
+
+\begin{DoxyNote}{Note}
+Confirmed success 
+\end{DoxyNote}
+\mbox{\Hypertarget{hostname__reader_8c_ad3e37625138cbbeb38cd0da17f1f4114}\label{hostname__reader_8c_ad3e37625138cbbeb38cd0da17f1f4114}} 
+\index{hostname\_reader.c@{hostname\_reader.c}!test\_host\_r\_safe\_init\_data@{test\_host\_r\_safe\_init\_data}}
+\index{test\_host\_r\_safe\_init\_data@{test\_host\_r\_safe\_init\_data}!hostname\_reader.c@{hostname\_reader.c}}
+\doxysubsubsection{\texorpdfstring{test\_host\_r\_safe\_init\_data()}{test\_host\_r\_safe\_init\_data()}}
+{\footnotesize\ttfamily void test\+\_\+host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tests \mbox{\hyperlink{hostname__reader_8c_a478de34066376a68596ec9af7d9283d3}{host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data()}} 
+
+\begin{DoxyNote}{Note}
+Confirmed success 
+\end{DoxyNote}
+\mbox{\Hypertarget{hostname__reader_8c_a2c7d9796cf01aebe50f9a3ea5a813186}\label{hostname__reader_8c_a2c7d9796cf01aebe50f9a3ea5a813186}} 
+\index{hostname\_reader.c@{hostname\_reader.c}!test\_host\_r\_search@{test\_host\_r\_search}}
+\index{test\_host\_r\_search@{test\_host\_r\_search}!hostname\_reader.c@{hostname\_reader.c}}
+\doxysubsubsection{\texorpdfstring{test\_host\_r\_search()}{test\_host\_r\_search()}}
+{\footnotesize\ttfamily void test\+\_\+host\+\_\+r\+\_\+search (\begin{DoxyParamCaption}\item[{char $\ast$}]{real\+\_\+proc\+\_\+dir,  }\item[{size\+\_\+t}]{real\+\_\+buf\+\_\+sz }\end{DoxyParamCaption})}
+
+
+
+Tests \mbox{\hyperlink{hostname__reader_8c_ad19f7d9f05c1414c91a594d9d48646ed}{host\+\_\+r\+\_\+search()}} 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em real\+\_\+proc\+\_\+dir} & actual proc directory \\
+\hline
+\mbox{\texttt{ in}}  & {\em real\+\_\+buf\+\_\+sz} & actual buffer size \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{hostname__reader_8c_a306690ab6baed813651f849ac790685e}\label{hostname__reader_8c_a306690ab6baed813651f849ac790685e}} 
+\index{hostname\_reader.c@{hostname\_reader.c}!host\_r\_globals@{host\_r\_globals}}
+\index{host\_r\_globals@{host\_r\_globals}!hostname\_reader.c@{hostname\_reader.c}}
+\doxysubsubsection{\texorpdfstring{host\_r\_globals}{host\_r\_globals}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structHost__R__Public__Data}{Host\+\_\+\+R\+\_\+\+Public\+\_\+\+Data}}$\ast$ host\+\_\+r\+\_\+globals}
+
+Ptrs to public and private data \mbox{\Hypertarget{hostname__reader_8c_a483b425df9e96f8fc5fbba8c9a713807}\label{hostname__reader_8c_a483b425df9e96f8fc5fbba8c9a713807}} 
+\index{hostname\_reader.c@{hostname\_reader.c}!host\_r\_path@{host\_r\_path}}
+\index{host\_r\_path@{host\_r\_path}!hostname\_reader.c@{hostname\_reader.c}}
+\doxysubsubsection{\texorpdfstring{host\_r\_path}{host\_r\_path}}
+{\footnotesize\ttfamily const char$\ast$ host\+\_\+r\+\_\+path = \char`\"{}sys/kernel/hostname\char`\"{}}
+
+Constants 

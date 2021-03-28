@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structTask__Status__File__Info" kind="struct" language="C++" prot="public">
+    <compoundname>Task_Status_File_Info</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structTask__Status__File__Info_1a13bfd1e8850d3a800625b14c846f17de" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char Task_Status_File_Info::pid_buf[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>pid_buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_adder.h" line="9" column="6" bodyfile="task_adder.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structTask__Status__File__Info_1a31024a668f462a7c28cb2dadda2f07ce" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char Task_Status_File_Info::uid_buf[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>uid_buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_adder.h" line="10" column="6" bodyfile="task_adder.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structTask__Status__File__Info_1a5aa01b4c98b9d7eefe1f86b1d44a958f" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char Task_Status_File_Info::name_buf[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>name_buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_adder.h" line="11" column="6" bodyfile="task_adder.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structTask__Status__File__Info_1a4af9256ef2d8b8047e963c39db7cf8b8" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char Task_Status_File_Info::state_buf[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>state_buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_adder.h" line="12" column="6" bodyfile="task_adder.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structTask__Status__File__Info_1ad2627e0c083541c5aaa39c3565a82c06" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* Task_Status_File_Info::pid_token</definition>
+        <argsstring></argsstring>
+        <name>pid_token</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_adder.h" line="14" column="6" bodyfile="task_adder.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structTask__Status__File__Info_1a710ba76dbf43ae7280e65a4100417127" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* Task_Status_File_Info::uid_token</definition>
+        <argsstring></argsstring>
+        <name>uid_token</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_adder.h" line="15" column="6" bodyfile="task_adder.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structTask__Status__File__Info_1a1c843737ae2c79deb2de89b5abf2f15f" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* Task_Status_File_Info::name_token</definition>
+        <argsstring></argsstring>
+        <name>name_token</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_adder.h" line="16" column="6" bodyfile="task_adder.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structTask__Status__File__Info_1acc2393374f5342ea1239c69222b1fb1c" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* Task_Status_File_Info::state_token</definition>
+        <argsstring></argsstring>
+        <name>state_token</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_adder.h" line="17" column="6" bodyfile="task_adder.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="task_adder.h" line="8" column="1" bodyfile="task_adder.h" bodystart="8" bodyend="18"/>
+    <listofallmembers>
+      <member refid="structTask__Status__File__Info_1a5aa01b4c98b9d7eefe1f86b1d44a958f" prot="public" virt="non-virtual"><scope>Task_Status_File_Info</scope><name>name_buf</name></member>
+      <member refid="structTask__Status__File__Info_1a1c843737ae2c79deb2de89b5abf2f15f" prot="public" virt="non-virtual"><scope>Task_Status_File_Info</scope><name>name_token</name></member>
+      <member refid="structTask__Status__File__Info_1a13bfd1e8850d3a800625b14c846f17de" prot="public" virt="non-virtual"><scope>Task_Status_File_Info</scope><name>pid_buf</name></member>
+      <member refid="structTask__Status__File__Info_1ad2627e0c083541c5aaa39c3565a82c06" prot="public" virt="non-virtual"><scope>Task_Status_File_Info</scope><name>pid_token</name></member>
+      <member refid="structTask__Status__File__Info_1a4af9256ef2d8b8047e963c39db7cf8b8" prot="public" virt="non-virtual"><scope>Task_Status_File_Info</scope><name>state_buf</name></member>
+      <member refid="structTask__Status__File__Info_1acc2393374f5342ea1239c69222b1fb1c" prot="public" virt="non-virtual"><scope>Task_Status_File_Info</scope><name>state_token</name></member>
+      <member refid="structTask__Status__File__Info_1a31024a668f462a7c28cb2dadda2f07ce" prot="public" virt="non-virtual"><scope>Task_Status_File_Info</scope><name>uid_buf</name></member>
+      <member refid="structTask__Status__File__Info_1a710ba76dbf43ae7280e65a4100417127" prot="public" virt="non-virtual"><scope>Task_Status_File_Info</scope><name>uid_token</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

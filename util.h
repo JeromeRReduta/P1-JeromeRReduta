@@ -13,10 +13,10 @@ char *next_token(char **str_ptr, const char *delim);
 void free_string(char **string_ptr);
 int n_copy_if_present(char *dest, char *src, int n);
 int n_copy_if_present_with_default(char *dest, char *src, int n, char *default_value);
-
 void add_n_symbols_to_buf(int n, char *symbol, char *buf);
+void trim_leading_whitespace(char **current_ptr);
 
 
-void test_n_copy_if_present();
+
 
 #endif

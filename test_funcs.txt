@@ -1,0 +1,541 @@
+TESTS
+
+--------------------|cpu_usage.c|--------------------
+No tests
+
+--------------------|mem_usage.c|--------------------
+No tests
+
+--------------------|display.c, inspector.c|--------------------
+/* display.c and inspector.c and procfs.c */
+Not my own files, so no tests
+
+--------------------|os_searcher.c|--------------------
+
+/**
+ * @brief      Tests search_file_first_line()
+ *
+ * @param[in]  proc_dir  proc_dir, copied from procfs funcs
+ * 
+ * @note Confirmed success for: 1) invalid path (fails as it should), 2) hostname
+ */
+void test_search_file_first_line(const char *proc_dir)
+{
+
+	LOGP("INVALID TEST - should return NULL\n");
+	char *test_invalid = search_file_first_line("invalid", "path");
+
+	LOG("Should be NULL: '%s'\n", test_invalid);
+
+	if (test_invalid != NULL) {
+		free(test_invalid);
+	}
+
+	LOGP("HOSTNAME TEST - should return 'KevinM'\n");
+
+	char* test_hostname = search_file_first_line(proc_dir, "sys/kernel/hostname");
+
+	LOG("Hostname is: '%s'\n", test_hostname);
+
+	if (test_hostname != NULL) {
+		free(test_hostname);
+	}
+
+
+}
+
+/**
+ * @brief      Tests search_file_with_key()
+ *
+ * @param[in]  proc_dir   The proc dir
+ * @param[in]  extension  The extension
+ * @param[in]  buf_sz     The buffer size
+ */
+void test_search_file_with_key(const char *proc_dir, const char *extension, size_t buf_sz)
+{
+
+	LOG("STATS:\n"
+		"\t->path: '%s/%s'\n"
+		"\t->buf_sz: %lu\n", proc_dir, extension, buf_sz);
+
+	LOGP("TEST - INVALID PATH - SHOULD RETURN NULL\n");
+	char* test_invalid = search_file_with_key(NULL, NULL, "bubbaKey");
+
+	LOG("value of string is '%s'\n", test_invalid);
+
+
+	LOGP("TEST - NULL KEY - SHOULD RETURN NULL\n");
+	char* test_null_key = search_file_with_key(proc_dir, extension, NULL);
+	LOG("value of string is '%s'\n", test_null_key);
+
+	LOGP("TEST - THIS OS'S PROC FILE - SHOULD RETURN 'AMD EPYC Processor (with IBPB)'\n");
+
+	char* test_proc = search_file_with_key(proc_dir, extension, "model name");
+	LOG("value of string is '%s'\n", test_proc);
+}
+
+/**
+ * @brief      Tests search_for_hostname()
+ *
+ * @param      proc_dir  Proc dir, from procfs func
+ * @param[in]  buf_sz    Buf_sz, from procfs func
+ * 
+ * @note       	Confirmed success
+ */
+void test_search_for_hostname(char *proc_dir)
+{
+
+	LOGP("GETTING HOSTNAME - SHOULD BE 'KevinM'\n");
+
+	char* hostname = search_for_hostname(proc_dir);
+
+	LOG("Hostname is '%s'\n", hostname);
+
+	free(hostname);
+}
+
+/**
+ * @brief      Tests search_for_kernel()
+ *
+ * @param      proc_dir  Proc dir, from procfs func
+ * @param[in]  buf_sz    Proc dir, from procfs func
+ */
+void test_search_for_kernel(char *proc_dir)
+{
+	char *kernel_line = search_for_kernel(proc_dir);
+	LOG("KERNEL SHOULD BE 5.10.11: '%s'\n", kernel_line);
+
+}
+
+void test_search_for_cpu_model(char *proc_dir)
+{
+
+	char *model_line = search_for_cpu_model(proc_dir);
+	LOG("MODEL SHOULD BE AMD PROCESSOR... : '%s'\n", model_line);
+	free(model_line);
+}
+
+/**
+ * @brief      Tests search_for_cpu_cores
+ *
+ * @param      proc_dir  proc dir
+ * @param[in]  buf_sz    buffer size
+ * 
+ * @note Confirmed success
+ */
+void test_search_for_cpu_cores(char *proc_dir)
+{
+	char *cores_line = search_for_cpu_cores(proc_dir);
+	LOG("Should be non-null: '%s'\n", cores_line);
+	free(cores_line);
+}
+
+/**
+ * @brief      Tests search_for_uptime()
+ *
+ * @param      proc_dir  proc_directory
+ */
+void test_search_for_uptime(char *proc_dir)
+{
+	LOGP("TESTING INVALID PROC_DIR - SHOULD BE NULL\n");
+	char *null_uptime = search_for_uptime("invalid");
+	LOG("SHOULD BE NULL: '%s'\n", null_uptime);
+	free(null_uptime);
+
+	LOGP("TESTING ACTUAL PROC_DIR - SHOULD BE NON-NULL\n");
+	char *uptime_line = search_for_uptime(proc_dir);
+	LOG("Should be non-null: '%s'\n", uptime_line);
+	free(uptime_line);
+}
+
+/**
+ * @brief      Tests search_for_proc_dir()
+ *
+ * @param      proc_dir  proc directory
+ * 
+ * @note       Confirmed success for:
+ * 				1. Invalid proc (Note: Gives default values of 78.10 40.40 40.40 2/86 5867)
+ * 				2. Real proc - gives actual load_avg values
+ */
+void test_search_for_load_avg(char *proc_dir)
+{
+	LOGP("TESTING INVALID PROC_DIR - SHOULD BE NULL\n");
+	char *null_load_avg = search_for_load_avg("iawegawgeawegwgegec");
+	LOG("SHOULD BE NULL: '%s'\n", null_load_avg); // Note - apparently when doing any-non-existent-proc/loadavg, you get the following values: 78.10 40.40 40.40 2/86 5867 - this is fine
+	free_string(&null_load_avg);
+
+	LOGP("TESTING REAL PROC_DIR - SHOULD BE 3 DOUBLES\n");
+	char *real_load_avg = search_for_load_avg(proc_dir);
+	LOG("SHOULD BE 3 doubles: '%s'\n", real_load_avg);
+	free_string(&real_load_avg);
+}
+
+
+/**
+ * @brief      Tests search_passwd_for_uid()
+ */
+void test_search_passwd_for_uid()
+{
+
+	int fd = open_path("/etc", "passwd");
+	LOGP("INVALID TEST - PROB SHOULD BE NULL\n");
+	char* invalid_uid_line = search_passwd_for_uid("3", fd);
+	LOG("SHOULD BE NULL: '%s'\n", invalid_uid_line);
+
+	LOGP("VALID TEST - SHOULD BE 'ROOT'\n");
+	char* root_uid_line = search_passwd_for_uid("0", fd);
+	LOG("SHOULD BE 'ROOT': '%s'\n", root_uid_line);
+}
+
+/**
+ * @brief      Tests search_for_cpu_usage()
+ *
+ * @param      proc_dir  proc directory
+ * 
+ * @note       Confirmed success for:
+ * 				1. Invalid proc (Note: gives default value of 'cpu: 20 20 20 40 0 0...')
+ * 				2. Real proc - gives actual cpu stats
+ */
+void test_search_for_cpu_usage(char *proc_dir)
+{
+	LOGP("TEST - INVALID PROC - SHOULD RETURN NULL\n");
+	char* invalid_proc_usage = search_for_cpu_usage("invalid-proc");
+	LOG("Invalid proc usage is : '%s'\n", invalid_proc_usage);
+
+	LOGP("TEST - REAL PROC - SHOULD RETURN LINE\n");
+	char* real_proc_usage = search_for_cpu_usage(proc_dir);
+	LOG("Real proc usage is : '%s'\n", real_proc_usage);
+
+}
+
+
+--------------------|perc_bar_drawer.c|--------------------
+
+No tests
+
+--------------------|string_extractor.c|--------------------
+
+
+/**
+ * @brief      Tests extract_token_before()
+ * 
+ * @note       Confirmed success for:
+ * 				1. Matching key:value pair (returns key)
+ * 				2. Line w/ no match (returns whole line)
+ * 				3. NULL ptr (returns NULL)
+ */
+void test_extract_token_before()
+{
+
+	char valid_str[256];
+	char no_delim[256];
+	char test_null_str[256] = {0};
+
+	strcpy(valid_str, "BubbaKey: BubbaValue");
+	strcpy(no_delim, "There is no delim!");
+
+	LOG("STARTING VALUES:\n"
+		"\t->valid_str: '%s'\n"
+		"\t->no_delim: '%s'\n"
+		"\test_null_str: '%s'\n", valid_str, no_delim, test_null_str);
+
+
+	char* key_valid = extract_token_before(valid_str, ":"); // Should be "BubbaKey"
+	char* key_no_delim = extract_token_before(no_delim, ":"); // No idea what this should be
+	char* key_null = extract_token_before(test_null_str, ":"); // Should be NULL
+
+	LOG("KEY VALUES:\n"
+		"\t->valid_str: '%s'\n"
+		"\t->no_delim: '%s'\n"
+		"\test_null_str: '%s'\n", key_valid, key_no_delim, key_null);
+}
+
+/**
+ * @brief      Tests extract_token_after()
+ * 
+ * @note       Confirmed success for:
+ * 				1. Matching key:value pair (returns value)
+ * 				2. Line w/ no match (returns NULL)
+ * 				3. NULL ptr (returns NULL)
+ */
+void test_extract_token_after()
+{
+	char valid_str[256];
+	char no_delim[256];
+	char test_null_str[256] = {0};
+
+	strcpy(valid_str, "BubbaKey: BubbaValue");
+	strcpy(no_delim, "There is no delim!");
+
+	LOG("STARTING VALUES:\n"
+		"\t->valid_str: '%s'\n"
+		"\t->no_delim: '%s'\n"
+		"\test_null_str: '%s'\n", valid_str, no_delim, test_null_str);
+
+
+	char* key_valid = extract_token_after(valid_str, ": "); // Should be "BubbaValue"
+	char* key_no_delim = extract_token_after(no_delim, ": "); // No idea what this should be
+	char* key_null = extract_token_after(test_null_str, ": "); // Should be NULL
+
+	LOG("KEY VALUES:\n"
+		"\t->valid_str: '%s'\n"
+		"\t->no_delim: '%s'\n"
+		"\test_null_str: '%s'\n", key_valid, key_no_delim, key_null);
+}
+
+--------------------|task_adder.c|--------------------
+
+No tests
+
+
+--------------------|task_finder.c|--------------------
+
+/**
+ * @brief      Tests task_log_stats()
+ * 
+ * @note       Confirmed success for:
+ *				1. Null tstats ptr (error msg)
+ *				2. Good tstats ptr, null active_tasks (prints tstats info but gives error msg on active_tasks)
+ *				3. Good tstats ptr, good active_tasks (prints info for both, ASSUMING size is accurate/increases when a task is added)
+ *				4. Good tstats ptr, good active_tasks, adding more tasks than max_len should allow (should make sure
+ *					that we realloc as necessary for task_info, especially since it doesn't show as a warning)
+*/
+void test_task_log_stats()
+{
+	LOGP("TEST - NULL TSTATS POINTER - SHOULD GIVE ERROR MSG\n");
+	struct task_stats* null_stats = NULL;
+	task_log_stats(null_stats);
+
+	LOGP("TEST - TSTATS IS GOOD BUT TASK INFO IS NULL - SHOULD LOG TSTATS AND GIVE ERROR MSG\n");
+	struct task_stats* good_stats_null_info = calloc(1, sizeof(struct task_stats));
+	good_stats_null_info->zombie = 1;
+	good_stats_null_info->stopped = 2;
+	good_stats_null_info->sleeping = 3;
+	good_stats_null_info->waiting = 4;
+	good_stats_null_info->running = 5;
+	good_stats_null_info->total = 1 + 2 + 3 + 4 + 5;
+	good_stats_null_info->active_tasks_size = 0;
+	good_stats_null_info->active_tasks_max_len = 2;
+
+	task_log_stats(good_stats_null_info);
+			
+	LOGP("TEST - TSTATS AND TASK INFO ARE GOOD - SHOULD LOG BOTH\n");
+
+	struct task_stats* all_good_tasks = calloc(1, sizeof(struct task_stats));
+	all_good_tasks->active_tasks = calloc(2, sizeof(struct task_info));
+
+	all_good_tasks->zombie = 1;
+	all_good_tasks->stopped = 2;
+	all_good_tasks->sleeping = 3;
+	all_good_tasks->waiting = 4;
+	all_good_tasks->running = 5;
+	all_good_tasks->total = 1 + 2 + 3 + 4 + 5;
+	all_good_tasks->active_tasks_size = 0;
+	all_good_tasks->active_tasks_max_len = 2;
+
+	task_init_info(all_good_tasks->active_tasks, "14", "15", "Yes", "also yes");
+	all_good_tasks->active_tasks_size++;
+
+	task_init_info(all_good_tasks->active_tasks + 1, "24", "25", "No", "also no");
+	all_good_tasks->active_tasks_size++;
+
+	// Case: Adding more tasks than max_len would allow
+	/*
+	all_good_tasks->active_tasks[2].pid = 24;
+	all_good_tasks->active_tasks[2].uid = 25;
+	strncpy(all_good_tasks->active_tasks[2].name, "No", 26);
+	strncpy(all_good_tasks->active_tasks[2].state, "Also no", 13);
+	all_good_tasks->active_tasks_size++;
+	*/
+	task_log_stats(all_good_tasks);
+
+}
+
+/**
+ * @brief      Tests task_init_stats()
+ * 
+ * @note       Confirmed success
+ */
+void test_task_init_stats()
+{
+	struct task_stats *tstats = task_init_stats();
+
+	//task_init_info(tstats->active_tasks, 14, 15, "Yes", "also yes");
+	tstats->active_tasks_size++;
+
+	//task_init_info(tstats->active_tasks + 1, 24, 25, "No", "also no");
+	tstats->active_tasks_size++;
+
+	task_log_stats(tstats);
+}
+
+/**
+ * @brief      Tests task_destroy_stats()
+ * 
+ * @note       Confirmed success for:
+ * 				1. non-null stats and info - frees both, sets stats to NULL
+ * 				2. null stats - error message
+ * 				3. non-null stats, null info - frees stats, sets stats to NULL
+ */
+void test_task_destroy_stats()
+{
+
+	LOGP("INITALIZING\n");
+	struct task_stats* tstats = task_init_stats();
+	struct task_info* info = tstats->active_tasks;
+	task_log_stats(tstats);
+	task_log_info(info[0]);
+
+	LOGP("AFTER DESTROYING\n");
+	task_destroy_stats(&tstats);
+
+	task_log_stats(tstats);
+	LOG("IS INFO PTR NULL? '%s'\n", info == NULL ? "true" : "false");
+	task_log_info(info[0]);
+
+	LOGP("TESTING NULL DESTROY - SHOULD GIVE ERROR MSG\n");
+	task_destroy_stats(NULL);
+
+	LOGP("TESTING DESTROY ON GOOD TASK STATS, NULL INFO - SHOULD GIVE ERROR MSG BUT FREE TASK_STATS\n");
+	struct task_stats* null_info = task_init_stats();
+	free(null_info->active_tasks);
+	null_info->active_tasks = NULL;
+	task_destroy_stats(&null_info);
+	task_log_stats(null_info);
+}
+
+
+--------------------|procfs.c|--------------------
+
+Note: Might move actual functions to different file (maybe something like load_avg_populator.c)
+
+/**
+ * @brief      Tests pfs_init_load_avg
+ *
+ * @param[in]  proc_dir  proc directory
+ */
+void test_pfs_init_load_avg_with(char *proc_dir)
+{
+    
+    LOGP("TEST - INVALID PROC_DIR - SHOULD HAVE ALL DEFAULT VALUES\n");
+
+    struct load_avg invalid_proc_lavg = {0};
+    char* invalid_proc_line = search_for_load_avg("invalid-proc");
+    pfs_init_load_avg_with(&invalid_proc_lavg, invalid_proc_line);
+
+    pfs_log_lavg_info(&invalid_proc_lavg);
+
+
+    LOGP("TEST - NULL LOAD_AVG PTR - SHOULD GIVE ERROR MESSAGE\n");
+
+    char* null_test_line = search_for_load_avg(proc_dir);
+    pfs_init_load_avg_with(NULL, null_test_line);
+
+    LOGP("TEST - ACTUAL LOAD_AVG - SHOULD BE NON-NULL\n");
+
+    struct load_avg real_lavg = {0};
+    char* real_test_line = search_for_load_avg(proc_dir);
+
+    pfs_init_load_avg_with(&real_lavg, real_test_line);
+
+    pfs_log_lavg_info(&real_lavg);
+}
+
+void pfs_log_lavg_info(struct load_avg* lavg)
+{
+    if (lavg == NULL) {
+        LOGP("LOAD_AVG PTR IS NULL\n");
+        return;
+    }
+
+    LOG("LOAD_AVG STATS: \n"
+        "\t->one: %f\n"
+        "\t->five: %f\n"
+        "\t->fifteen: %f\n", lavg->one, lavg->five, lavg->fifteen);
+}
+
+/**
+ * @brief      Tests pfs_log_lavg_info()
+ * 
+ * @note       Confirmed success
+ */
+void test_pfs_log_lavg_info()
+{
+    LOGP("TEST - NULL PTR\n");
+    pfs_log_lavg_info(NULL);
+
+    LOGP("TEST - INITALIZED BUT ALL 0\n");
+    struct load_avg all_zero = {0};
+    pfs_log_lavg_info(&all_zero);
+
+    LOGP("TEST - INITALIZED W/ ANY VALUE\n");
+
+    struct load_avg init = {1, 2, 3};
+    pfs_log_lavg_info(&init);
+}
+
+
+
+
+______
+/**
+ * @brief      Tests n_copy_if_present() and n_copy_if_present_with_default().
+ * 
+ * @note       Confirmed success.
+ */
+void test_n_copy_if_present()
+{
+
+    LOGP("TEST - SRC IS NULL\n");
+
+    char* test0_src = NULL;
+    char test0_dest[256];
+
+    strcpy(test0_dest, "Bubba");
+
+    LOG("NULL SRC: '%s'\t test0_dest: '%s'\n", test0_src, test0_dest);
+
+    LOG("RETURN VALUE OF n_copy_if_present IS %d\n", n_copy_if_present(test0_dest, test0_src, 256));
+
+
+    LOGP("TEST - DEST IS NULL\n");
+
+    char* test1_src = "Bubba";
+    char* test1_dest = NULL;
+
+    LOG("SRC: '%s'\t DEST: '%s'\n", test1_src, test1_dest);
+
+    LOG("RETURN VALUE OF n_copy_if_present IS %d\n", n_copy_if_present(test1_dest, test1_src, 256));
+
+
+
+
+    LOGP("TEST - NEITHER NULL\n");
+    char* test2_src = "Bradley";
+    char test2_dest[256];
+
+    strcpy(test2_dest, "Bubba");
+    LOG("SRC: '%s'\t DEST: '%s'\n", test2_src, test2_dest);
+
+    LOG("RETURN VALUE OF n_copy_if_present IS %d\n", n_copy_if_present(test2_dest, test2_src, 256));
+
+    LOG("Value of test2_dest now: '%s'\n", test2_dest);
+
+    LOGP("TEST - TRUNCATE - SHOULD BE AB\\0\n");
+    char* test3_src = "ABC";
+    char test3_dest[256];
+
+    n_copy_if_present(test3_dest, test3_src, 2);
+
+    LOG("test3_dest is now '%s'\n", test3_dest);
+
+
+    LOGP("TEST - DEFAULT VALUE\n");
+    char* test_default_src = NULL;
+    char test_default_dest[256] = {0};
+
+    LOG("RETURN VALUE OF n_copy_if_present w/ default value IS %d\n", n_copy_if_present_with_default(test_default_dest, test_default_src, 256, "Placeholder"));
+    LOG("DEST IS NOW: '%s'\n", test_default_dest);
+
+
+}

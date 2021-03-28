@@ -1,0 +1,84 @@
+\hypertarget{os__static__data_8h}{}\doxysection{os\+\_\+static\+\_\+data.\+h File Reference}
+\label{os__static__data_8h}\index{os\_static\_data.h@{os\_static\_data.h}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{os__static__data_8h_a5212d5d4e362f321b6074b6681bb5c87}{test\+\_\+os\+\_\+s\+\_\+init\+\_\+data}} ()
+\item 
+\mbox{\Hypertarget{os__static__data_8h_a4311fb580c66d4fd9e784a9058b2580d}\label{os__static__data_8h_a4311fb580c66d4fd9e784a9058b2580d}} 
+void {\bfseries test\+\_\+os\+\_\+s\+\_\+destroy\+\_\+data} ()
+\item 
+\mbox{\Hypertarget{os__static__data_8h_a70c631749674557111741412fcf82ece}\label{os__static__data_8h_a70c631749674557111741412fcf82ece}} 
+void {\bfseries test\+\_\+os\+\_\+s\+\_\+safe\+\_\+init\+\_\+data} ()
+\item 
+\mbox{\Hypertarget{os__static__data_8h_a77e544f09d764ab0841af2878c0ecbc9}\label{os__static__data_8h_a77e544f09d764ab0841af2878c0ecbc9}} 
+void {\bfseries test\+\_\+os\+\_\+s\+\_\+get\+\_\+kernel} (char $\ast$proc\+\_\+dir, size\+\_\+t buf\+\_\+sz)
+\item 
+\mbox{\Hypertarget{os__static__data_8h_aa2ddb1c744b32d9700d2ff6ad7580ebb}\label{os__static__data_8h_aa2ddb1c744b32d9700d2ff6ad7580ebb}} 
+void {\bfseries test\+\_\+os\+\_\+s\+\_\+get\+\_\+hostname} (char $\ast$proc\+\_\+dir, size\+\_\+t buf\+\_\+sz)
+\item 
+void \mbox{\hyperlink{os__static__data_8h_a14e6d465ccd937ceeb9ab2088efdf804}{os\+\_\+s\+\_\+safe\+\_\+init\+\_\+data}} (char $\ast$proc\+\_\+dir, size\+\_\+t buf\+\_\+sz)
+\begin{DoxyCompactList}\small\item\em Initalizes public and private structs, ONLY if these structs are not already initalized. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{os__static__data_8h_a5dbb363c90a10feab4a3203c9d635b23}\label{os__static__data_8h_a5dbb363c90a10feab4a3203c9d635b23}} 
+char $\ast$ {\bfseries os\+\_\+s\+\_\+get\+\_\+hostname} (char $\ast$proc\+\_\+dir, size\+\_\+t buf\+\_\+sz)
+\item 
+\mbox{\Hypertarget{os__static__data_8h_a2e741c8cd9c4adcc58a839e816026d70}\label{os__static__data_8h_a2e741c8cd9c4adcc58a839e816026d70}} 
+char $\ast$ {\bfseries os\+\_\+s\+\_\+get\+\_\+kernel} (char $\ast$proc\+\_\+dir, size\+\_\+t buf\+\_\+sz)
+\item 
+\mbox{\Hypertarget{os__static__data_8h_a5451dcc22002ef086f13734fb822d52d}\label{os__static__data_8h_a5451dcc22002ef086f13734fb822d52d}} 
+void \mbox{\hyperlink{os__static__data_8h_a5451dcc22002ef086f13734fb822d52d}{os\+\_\+s\+\_\+destroy\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Resets all data in public and private structs (not constants though), including freeing allocated memory. \end{DoxyCompactList}\item 
+char $\ast$ \mbox{\hyperlink{os__static__data_8h_a27fedde249b2c6cd9afa12ab97fc4cf2}{extract\+\_\+token\+\_\+before}} (char $\ast$line, char $\ast$delim)
+\begin{DoxyCompactList}\small\item\em \{ function\+\_\+description \} \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file for os\+\_\+static\+\_\+data.\+c 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{os__static__data_8h_a27fedde249b2c6cd9afa12ab97fc4cf2}\label{os__static__data_8h_a27fedde249b2c6cd9afa12ab97fc4cf2}} 
+\index{os\_static\_data.h@{os\_static\_data.h}!extract\_token\_before@{extract\_token\_before}}
+\index{extract\_token\_before@{extract\_token\_before}!os\_static\_data.h@{os\_static\_data.h}}
+\doxysubsubsection{\texorpdfstring{extract\_token\_before()}{extract\_token\_before()}}
+{\footnotesize\ttfamily char$\ast$ extract\+\_\+token\+\_\+before (\begin{DoxyParamCaption}\item[{char $\ast$}]{line,  }\item[{char $\ast$}]{delim }\end{DoxyParamCaption})}
+
+
+
+\{ function\+\_\+description \} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & The line \\
+\hline
+{\em delim} & The delimiter\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{ description\+\_\+of\+\_\+the\+\_\+return\+\_\+value \} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{os__static__data_8h_a14e6d465ccd937ceeb9ab2088efdf804}\label{os__static__data_8h_a14e6d465ccd937ceeb9ab2088efdf804}} 
+\index{os\_static\_data.h@{os\_static\_data.h}!os\_s\_safe\_init\_data@{os\_s\_safe\_init\_data}}
+\index{os\_s\_safe\_init\_data@{os\_s\_safe\_init\_data}!os\_static\_data.h@{os\_static\_data.h}}
+\doxysubsubsection{\texorpdfstring{os\_s\_safe\_init\_data()}{os\_s\_safe\_init\_data()}}
+{\footnotesize\ttfamily void os\+\_\+s\+\_\+safe\+\_\+init\+\_\+data (\begin{DoxyParamCaption}\item[{char $\ast$}]{proc\+\_\+dir,  }\item[{size\+\_\+t}]{buf\+\_\+sz }\end{DoxyParamCaption})}
+
+
+
+Initalizes public and private structs, ONLY if these structs are not already initalized. 
+
+Func prototypes
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em proc\+\_\+dir} & The proc dir \\
+\hline
+\mbox{\texttt{ in}}  & {\em buf\+\_\+sz} & The buffer size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{os__static__data_8h_a5212d5d4e362f321b6074b6681bb5c87}\label{os__static__data_8h_a5212d5d4e362f321b6074b6681bb5c87}} 
+\index{os\_static\_data.h@{os\_static\_data.h}!test\_os\_s\_init\_data@{test\_os\_s\_init\_data}}
+\index{test\_os\_s\_init\_data@{test\_os\_s\_init\_data}!os\_static\_data.h@{os\_static\_data.h}}
+\doxysubsubsection{\texorpdfstring{test\_os\_s\_init\_data()}{test\_os\_s\_init\_data()}}
+{\footnotesize\ttfamily void test\+\_\+os\+\_\+s\+\_\+init\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Public functions 

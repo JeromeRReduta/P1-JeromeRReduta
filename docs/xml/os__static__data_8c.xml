@@ -1,0 +1,493 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="os__static__data_8c" kind="file" language="C++">
+    <compoundname>os_static_data.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">string.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes refid="logger_8h" local="yes">logger.h</includes>
+    <includes refid="util_8h" local="yes">util.h</includes>
+    <includes refid="os__searcher_8h" local="yes">os_searcher.h</includes>
+    <includes refid="os__static__data_8h" local="yes">os_static_data.h</includes>
+    <incdepgraph>
+      <node id="4">
+        <label>stdbool.h</label>
+      </node>
+      <node id="2">
+        <label>stdlib.h</label>
+      </node>
+      <node id="12">
+        <label>task_adder.h</label>
+        <link refid="task__adder_8h_source"/>
+      </node>
+      <node id="10">
+        <label>os_searcher.h</label>
+        <link refid="os__searcher_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>sys/types.h</label>
+      </node>
+      <node id="3">
+        <label>string.h</label>
+      </node>
+      <node id="8">
+        <label>util.h</label>
+        <link refid="util_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>unistd.h</label>
+      </node>
+      <node id="5">
+        <label>logger.h</label>
+        <link refid="logger_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>os_static_data.c</label>
+        <link refid="os__static__data_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>os_static_data.h</label>
+        <link refid="os__static__data_8h"/>
+      </node>
+      <node id="11">
+        <label>task_finder.h</label>
+        <link refid="task__finder_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="structOS__S__Private__Data" prot="public">OS_S_Private_Data</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="os__static__data_8c_1ac1ae57a960c95bcd9a0e640623c41df6" prot="public" static="yes" mutable="no">
+        <type><ref refid="structOS__S__Private__Data" kindref="compound">OS_S_Private_Data</ref> *</type>
+        <definition>OS_S_Private_Data* os_s_locals</definition>
+        <argsstring></argsstring>
+        <name>os_s_locals</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="43" column="26" bodyfile="os_static_data.c" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="os__static__data_8c_1a12a00bca69ae030b1d662b9b8bd5b780" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* os_s_hostname_path</definition>
+        <argsstring></argsstring>
+        <name>os_s_hostname_path</name>
+        <initializer>= &quot;sys/kernel/hostname&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="46" column="12" bodyfile="os_static_data.c" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="os__static__data_8c_1ab08342b0df144b01bcc4b6b9481b09ee" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* os_s_kernel_path</definition>
+        <argsstring></argsstring>
+        <name>os_s_kernel_path</name>
+        <initializer>= &quot;sys/kernel/osrelease&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="47" column="12" bodyfile="os_static_data.c" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="os__static__data_8c_1a61625233abb3f785752b6b18507cf3f9" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* os_s_cpu_path</definition>
+        <argsstring></argsstring>
+        <name>os_s_cpu_path</name>
+        <initializer>= &quot;cpuinfo&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="48" column="12" bodyfile="os_static_data.c" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="os__static__data_8c_1a14e6d465ccd937ceeb9ab2088efdf804" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void os_s_safe_init_data</definition>
+        <argsstring>(char *proc_dir, size_t buf_sz)</argsstring>
+        <name>os_s_safe_init_data</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>buf_sz</declname>
+        </param>
+        <briefdescription>
+<para>Initalizes public and private structs, ONLY if these structs are not already initalized. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Func prototypes</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The proc dir </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buf_sz</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer size </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="75" column="6" bodyfile="os_static_data.c" bodystart="75" bodyend="85" declfile="os_static_data.c" declline="53" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="os__static__data_8c_1a93a7a99553b8231767b1088d787a2a63" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void os_s_init_data</definition>
+        <argsstring>(char *proc_dir, size_t buf_sz)</argsstring>
+        <name>os_s_init_data</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>buf_sz</declname>
+        </param>
+        <briefdescription>
+<para>Initializes private struct, including copying proc_dir and buf_sz values from proc_fs to this file. This does not populate any other data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buf_sz</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>buffer size </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="95" column="6" bodyfile="os_static_data.c" bodystart="95" bodyend="113" declfile="os_static_data.c" declline="54" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="os__static__data_8c_1a5451dcc22002ef086f13734fb822d52d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void os_s_destroy_data</definition>
+        <argsstring>()</argsstring>
+        <name>os_s_destroy_data</name>
+        <briefdescription>
+<para>Resets all data in public and private structs (not constants though), including freeing allocated memory. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="122" column="6" bodyfile="os_static_data.c" bodystart="122" bodyend="126" declfile="os_static_data.c" declline="56" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="os__static__data_8c_1a74aa3b0141bb58408d5ae83070f04ba2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void os_s_reset_struct_internals</definition>
+        <argsstring>()</argsstring>
+        <name>os_s_reset_struct_internals</name>
+        <briefdescription>
+<para>Helper func for destroy_data() <linebreak/>
+Frees dynamically allocated mem for struct&apos;s internal members. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="149" column="6" bodyfile="os_static_data.c" bodystart="149" bodyend="163" declfile="os_static_data.c" declline="57" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="os__static__data_8c_1ae0bcd51dc81e195b50c3fa0b34e6c568" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void os_s_reset_structs</definition>
+        <argsstring>()</argsstring>
+        <name>os_s_reset_structs</name>
+        <briefdescription>
+<para>Helper func for destroy_data() <linebreak/>
+Frees and nulls public and private data structs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="132" column="6" bodyfile="os_static_data.c" bodystart="132" bodyend="141" declfile="os_static_data.c" declline="58" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="os__static__data_8c_1a4b792fab3f5a8d8f72a2e0a81634be11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* os_s_get_hostname</definition>
+        <argsstring>()</argsstring>
+        <name>os_s_get_hostname</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="60" column="6" declfile="os_static_data.c" declline="60" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="os__static__data_8c_1a7e6f6b500db752922d17589a12c2b5c3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* os_s_get_kernel</definition>
+        <argsstring>()</argsstring>
+        <name>os_s_get_kernel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="61" column="6" declfile="os_static_data.c" declline="61" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="os__static__data_8c_1a2de62b9dbbb2d6eadf28c7bc01120117" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* os_s_get_cpu_model</definition>
+        <argsstring>()</argsstring>
+        <name>os_s_get_cpu_model</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="62" column="6" declfile="os_static_data.c" declline="62" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="os__static__data_8c_1aa2c1fdabc7f95e821984480a557d8994" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* os_s_get_cpu_units</definition>
+        <argsstring>()</argsstring>
+        <name>os_s_get_cpu_units</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="63" column="6" declfile="os_static_data.c" declline="63" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="os__static__data_8c_1a583dcc740051ff6282cf54077da19d28" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void os_s_log_info</definition>
+        <argsstring>()</argsstring>
+        <name>os_s_log_info</name>
+        <briefdescription>
+<para>Helper func, for logging all the public, private, and constant info in the file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="os_static_data.c" line="172" column="6" bodyfile="os_static_data.c" bodystart="172" bodyend="196" declfile="os_static_data.c" declline="65" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="logger_8h" kindref="compound">logger.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;util.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;os_searcher.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="os__static__data_8h" kindref="compound">os_static_data.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="structOS__S__Private__Data" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>proc_dir;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>buf_sz;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>hostname;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>kernel;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>cpu_model;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>cpu_units;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">}<sp/><ref refid="structOS__S__Private__Data" kindref="compound">OS_S_Private_Data</ref>;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structOS__S__Private__Data" kindref="compound">OS_S_Private_Data</ref>*<sp/>os_s_locals;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Constants<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>os_s_hostname_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;sys/kernel/hostname&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>os_s_kernel_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;sys/kernel/osrelease&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>os_s_cpu_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;cpuinfo&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Note:<sp/>Want<sp/>to<sp/>order<sp/>funcs<sp/>not<sp/>by<sp/>public/private,<sp/>but<sp/>in<sp/>terms<sp/>of<sp/>funcs<sp/>and<sp/>their<sp/>related<sp/>sub-funcs</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="os__static__data_8h_1a14e6d465ccd937ceeb9ab2088efdf804" kindref="member">os_s_safe_init_data</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>buf_sz);</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>os_s_init_data(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>buf_sz);</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="os__static__data_8h_1a5451dcc22002ef086f13734fb822d52d" kindref="member">os_s_destroy_data</ref>();</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>os_s_reset_struct_internals();</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>os_s_reset_structs();</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*os_s_get_hostname();</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*os_s_get_kernel();</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*os_s_get_cpu_model();</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*os_s_get_cpu_units();</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>os_s_log_info();</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="os__static__data_8h_1a14e6d465ccd937ceeb9ab2088efdf804" kindref="member">os_s_safe_init_data</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>buf_sz)</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Case:<sp/>Locals<sp/>already<sp/>init</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(os_s_locals<sp/>!=<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;WARNING<sp/>-<sp/>GLOBALS<sp/>AND/OR<sp/>LOCALS<sp/>IS<sp/>ALREADY<sp/>INITALIZED<sp/>-<sp/>will<sp/>not<sp/>overwrite<sp/>data\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Case:Locals<sp/>are<sp/>both<sp/>null<sp/>(safe<sp/>to<sp/>initialize)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;LOCALS<sp/>ARE<sp/>NULL<sp/>-<sp/>INITALIZING\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/>os_s_init_data(proc_dir,<sp/>buf_sz);</highlight></codeline>
+<codeline lineno="85"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="comment">//<sp/>TODO:<sp/>Rewrite<sp/>each<sp/>func<sp/>for<sp/>os_static_data<sp/>and<sp/>test<sp/>to<sp/>make<sp/>sure<sp/>they<sp/>still<sp/>work</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>os_s_init_data(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>buf_sz)</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/>os_s_locals<sp/>=<sp/>calloc(1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(<ref refid="structOS__S__Private__Data" kindref="compound">OS_S_Private_Data</ref>));</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(os_s_locals<sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;OUT<sp/>OF<sp/>MEM;<sp/>RETURNING\n&quot;</highlight><highlight class="normal">);<sp/></highlight><highlight class="comment">//<sp/>destroy_data()<sp/>is<sp/>called<sp/>every<sp/>time<sp/>display<sp/>refreshes,<sp/>so<sp/>don&apos;t<sp/>have<sp/>to<sp/>destroy<sp/>here</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1ae28e6811073de73a502af4fe0e2df76c" kindref="member">proc_dir</ref><sp/>=<sp/>strdup(proc_dir);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1ae28e6811073de73a502af4fe0e2df76c" kindref="member">proc_dir</ref><sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;OUT<sp/>OF<sp/>MEM;<sp/>RETURNING\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1af3290f9a3eee97bdeae394682a544fa2" kindref="member">buf_sz</ref><sp/>=<sp/>buf_sz;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Note:<sp/>Plan<sp/>is<sp/>to<sp/>safe_init()<sp/>data<sp/>in<sp/>procfs<sp/>funcs<sp/>and<sp/>destroy<sp/>data<sp/>@<sp/>end<sp/>of<sp/>every<sp/>display_refresh(),<sp/>when</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="comment">//<sp/>the<sp/>other<sp/>destroy()<sp/>funcs<sp/>are<sp/>called<sp/>(near<sp/>bottom<sp/>of<sp/>file?)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="os__static__data_8h_1a5451dcc22002ef086f13734fb822d52d" kindref="member">os_s_destroy_data</ref>()</highlight></codeline>
+<codeline lineno="123"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>os_s_reset_struct_internals();</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>os_s_reset_structs();</highlight></codeline>
+<codeline lineno="126"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>os_s_reset_structs()</highlight></codeline>
+<codeline lineno="133"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(os_s_locals<sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;WARNING<sp/>-<sp/>LOCALS<sp/>ALREADY<sp/>NULL\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>free(os_s_locals);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>os_s_locals<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>os_s_reset_struct_internals()</highlight></codeline>
+<codeline lineno="150"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="logger_8h_1a388edf12256bf73c3a8ee9734c3bd841" kindref="member">LOG</ref>(</highlight><highlight class="stringliteral">&quot;IS<sp/>LOCALS<sp/>NULL<sp/>RN?\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;locals:<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>os_s_locals<sp/>==<sp/>NULL<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;true&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;false&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(os_s_locals<sp/>!=<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>free_string(<sp/>&amp;(os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1ae28e6811073de73a502af4fe0e2df76c" kindref="member">proc_dir</ref>)<sp/>);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>free_string(<sp/>&amp;(os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1aa12c61918ef5da256825a47ae1785a3b" kindref="member">hostname</ref>)<sp/>);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>free_string(<sp/>&amp;(os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1a65d77028bfa737ba11582b774e4bc495" kindref="member">kernel</ref>)<sp/>);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>free_string(<sp/>&amp;(os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1a26f84d73d20512207d6a064c484d0df9" kindref="member">cpu_model</ref>)<sp/>);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>os_s_log_info()</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(os_s_locals<sp/>!=<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1a388edf12256bf73c3a8ee9734c3bd841" kindref="member">LOG</ref>(</highlight><highlight class="stringliteral">&quot;\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;LOCAL<sp/>INFO:<sp/>{\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\tproc_dir<sp/>=<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\tbuf_sz<sp/>=<sp/>%lu\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\thostname<sp/>=<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\tkernel<sp/>=<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\tcpu_model<sp/>=<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\tcpu_units<sp/>=<sp/>%d\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;}\n&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1ae28e6811073de73a502af4fe0e2df76c" kindref="member">proc_dir</ref>,<sp/>os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1af3290f9a3eee97bdeae394682a544fa2" kindref="member">buf_sz</ref>,<sp/>os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1aa12c61918ef5da256825a47ae1785a3b" kindref="member">hostname</ref>,</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1a65d77028bfa737ba11582b774e4bc495" kindref="member">kernel</ref>,<sp/>os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1a26f84d73d20512207d6a064c484d0df9" kindref="member">cpu_model</ref>,<sp/>os_s_locals-&gt;<ref refid="structOS__S__Private__Data_1a45221ae92c076e1bf6b1e5823f415e0e" kindref="member">cpu_units</ref>);</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1a388edf12256bf73c3a8ee9734c3bd841" kindref="member">LOG</ref>(</highlight><highlight class="stringliteral">&quot;LOCAL<sp/>INFO<sp/>PTR<sp/>IS:<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal">,<sp/>os_s_locals<sp/>==<sp/>NULL<sp/>?<sp/></highlight><highlight class="stringliteral">&quot;NULL&quot;</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="stringliteral">&quot;NOT<sp/>ACTUALLY<sp/>NULL&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="logger_8h_1a388edf12256bf73c3a8ee9734c3bd841" kindref="member">LOG</ref>(</highlight><highlight class="stringliteral">&quot;\nCONSTANTS:\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;os_s_hostname_path<sp/>=<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;,<sp/>os_s_kernel_path<sp/>=<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;<sp/>os_s_cpu_path<sp/>=<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>os_s_hostname_path,<sp/>os_s_kernel_path,<sp/>os_s_cpu_path);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="os_static_data.c"/>
+  </compounddef>
+</doxygen>

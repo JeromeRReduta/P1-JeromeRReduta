@@ -78,6 +78,26 @@ char *extract_token_after(char *line, char *delim)
 	return current != NULL ? strdup(current) : NULL;
 }
 
+/**
+ * @brief      Gets the nth token from a tokenized string
+ *
+ * @param[in]  n            n, to get nth token
+ * @param      current_ptr  pointer to current - used for next_token()
+ * @param      next_ptr     pointer to next - used for next_token()
+ * @param[in]  delim        delimiter
+ *
+ * @return     The nth token.
+ * 
+ * @note       Warning: This function will segfault if you try to go out of bounds, e.g. getting the 4th token when the string only has 3.
+ * 			   You must know the number of tokens in advance before you can safely use this function.
+ */
+char *extract_nth_token(int n, char **current_ptr, char **next_ptr, const char *delim)
+{
+	for (int i = 0; i < n; i++) {
+		*current_ptr = next_token(next_ptr, delim);
+	}
+	return *current_ptr;
+}
 
 /**
  * @brief      Tests extract_token_before()
@@ -154,5 +174,4 @@ void test_extract_token_after()
 
 
 }
-
 

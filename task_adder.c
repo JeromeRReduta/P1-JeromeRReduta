@@ -21,6 +21,7 @@
 /** Func prototypes */
 void task_init_info(struct task_info *current_task, Task_Status_File_Info *status_file_info);
 int task_read_status_and_store_into(char *proc_dir, char *entry_name, Task_Status_File_Info *status_file_info);
+int task_init_status_file_info_tokens(Task_Status_File_Info *status_file_info);
 void task_populate_task_stats_with(struct task_stats *stats, Task_Status_File_Info *status_file_info);
 int grow_active_tasks(struct task_stats *stats);
 void task_add_to_stats_count(struct task_stats *stats, char state);
@@ -30,10 +31,31 @@ void task_process_and_copy_state(struct task_info* current_task, char *state_tok
 void task_destroy_status_file_info(Task_Status_File_Info *status_file_info);
 void task_log_status_file_info(Task_Status_File_Info *status_file_info);
 
+/**
+ * @brief      Reads info from proc_dir/entry_name/status and populates status_file_info with the info
+ *
+ * @param      proc_dir          proc directory
+ * @param      entry_name        entry name
+ * @param      status_file_info  Task_Status_File_Info struct
+ *
+ * @return     0 if both tasks succeed, otherwise -1
+ */
 int task_read_status_and_store_into(char *proc_dir, char *entry_name, Task_Status_File_Info *status_file_info)
 {
 	search_for_task_info(proc_dir, entry_name, status_file_info);
+	return task_init_status_file_info_tokens(status_file_info);
+}
 
+/**
+ * @brief      Populates the status_file_info tokens with status_file_info bufs
+ *
+ * @param      status_file_info  Task_Status_File_Info struct
+ *
+ * @return     0 on success; -1 if one of the bufs is empty, which would mean we couldn't find all the required task info
+ */
+int task_init_status_file_info_tokens(Task_Status_File_Info *status_file_info)
+{
+	// Case: 1 of bufs is empty, which would mean we couldn't find all the required task info
 	if (strlen(status_file_info->pid_buf) == 0 || strlen(status_file_info->uid_buf) == 0 ||
 		strlen(status_file_info->name_buf) == 0 || strlen(status_file_info->state_buf) == 0) {
 		return -1;
@@ -46,8 +68,15 @@ int task_read_status_and_store_into(char *proc_dir, char *entry_name, Task_Statu
 	return 0;
 }
 
+/**
+ * @brief      Given info about one task from status_file info, adds that one task to stats
+ *
+ * @param      stats             task_stats struct
+ * @param      status_file_info  Task_Status_File_Info struct
+ */
 void task_populate_task_stats_with(struct task_stats *stats, Task_Status_File_Info *status_file_info)
 {
+	// Case: active tasks array is full -> attempt to grow array -> attempt fails - return
 	if (stats->active_tasks_size == stats->active_tasks_max_len && grow_active_tasks(stats) == -1) {
 		return;
 	}
@@ -55,11 +84,19 @@ void task_populate_task_stats_with(struct task_stats *stats, Task_Status_File_In
 	char state = status_file_info->state_token[0];
 	task_add_to_stats_count(stats, state);
 
+	// Case: Task is not sleeping ('I' counts as sleeping in this project) - add task info to active tasks
 	if (state != 'S' && state != 'I') {
 		task_add_active_task_to(stats, status_file_info);
 	}
 }
 
+/**
+ * @brief      Double the size of active_tasks array. This function should only be called when the active_tasks array is full.
+ *
+ * @param      stats  	task_stats_struct
+ *
+ * @return     0 on success; -1 on error
+ */
 int grow_active_tasks(struct task_stats *stats)
 {
 	stats->active_tasks_max_len *= 2;
@@ -76,9 +113,15 @@ int grow_active_tasks(struct task_stats *stats)
 	return 0;
 }
 
+/**
+ * @brief      Increases the appropriate task_stats counter for whatever state this task has
+ *
+ * @param      stats  	task_stats struct
+ * @param[in]  state  	char representing the task's state
+ */
 void task_add_to_stats_count(struct task_stats *stats, char state)
 {
-	stats->total++;
+	stats->total++; // Always increase total
 
 	if (state == 'R') {
 		stats->running++;
@@ -86,9 +129,11 @@ void task_add_to_stats_count(struct task_stats *stats, char state)
 	else if (state == 'D') {
 		stats->waiting++;
 	}
+	// 'S' (sleeping) and 'I' (idle) both count as sleeping in this project
 	else if (state == 'S' || state == 'I') {
 		stats->sleeping++;
 	}
+	// 'T' (stopped) and 't' (disk stopped) both count as stopped in this project
 	else if (state == 'T' || state == 't') {
 		stats->stopped++;
 	}
@@ -97,6 +142,12 @@ void task_add_to_stats_count(struct task_stats *stats, char state)
 	}
 }
 
+/**
+ * @brief      Adds an active task to task_stats
+ *
+ * @param      stats             	task_stats struct
+ * @param      status_file_info  	Task_Status_File_info struct
+ */	
 void task_add_active_task_to(struct task_stats *stats, Task_Status_File_Info *status_file_info)
 {
 	struct task_info* current_task = stats->active_tasks + stats->active_tasks_size;
@@ -104,6 +155,12 @@ void task_add_active_task_to(struct task_stats *stats, Task_Status_File_Info *st
 	stats->active_tasks_size++;
 }
 
+/**
+ * @brief      Initalizes task_info struct with info from status_file_info
+ *
+ * @param      current_task      	task_info struct
+ * @param      status_file_info  	Task_Status_File_Info struct
+ */			
 void task_init_info(struct task_info *current_task, Task_Status_File_Info *status_file_info)
 {
 	current_task->pid = atoi(status_file_info->pid_token);
@@ -112,15 +169,27 @@ void task_init_info(struct task_info *current_task, Task_Status_File_Info *statu
 	strncpy(current_task->name, status_file_info->name_token, 25);
 }
 
+/**
+ * @brief      Removes the parantheses from <pre>(state)</pre> and copies processed string to buffer
+ *
+ * @param      current_task  	task_stats struct
+ * @param      state_token   	string representing state
+ */
 void task_process_and_copy_state(struct task_info* current_task, char *state_token)
 {
 	char state_copy[256];
+
 	strcpy(state_copy, state_token + 3);
 	state_copy[strlen(state_copy) - 1] = '\0';
-	LOG("STATE_COPY: '%s'\n", state_copy);
+
 	strcpy(current_task->state, state_copy);
 }
 
+/**
+ * @brief      Destroys Task_Status_File_Info struct, including freeing allocated memory
+ *
+ * @param      status_file_info  	Task_Status_File_Info struct
+ */
 void task_destroy_status_file_info(Task_Status_File_Info *status_file_info)
 {
 	free_string( &(status_file_info->pid_token) );
@@ -129,6 +198,11 @@ void task_destroy_status_file_info(Task_Status_File_Info *status_file_info)
 	free_string( &(status_file_info->state_token) );
 }
 
+/**
+ * @brief      Convenience function, for debugging. Logs all the information in a Task_Status_File_Info struct.
+ *
+ * @param      status_file_info  Task_Status_File_Info struct
+ */
 void task_log_status_file_info(Task_Status_File_Info *status_file_info)
 {
 	LOG("STATUS FILE INFO:\n"

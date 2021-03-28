@@ -1,0 +1,112 @@
+\hypertarget{hostname__reader_8h}{}\doxysection{hostname\+\_\+reader.\+h File Reference}
+\label{hostname__reader_8h}\index{hostname\_reader.h@{hostname\_reader.h}}
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structHost__R__Public__Data}{Host\+\_\+\+R\+\_\+\+Public\+\_\+\+Data}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{hostname__reader_8h_aa39600c1411581b0000d38bfae4ea6e4}{test\+\_\+host\+\_\+r\+\_\+init\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Tests \mbox{\hyperlink{hostname__reader_8c_a4ebc3da709e63b63b050db2a33cfd66f}{host\+\_\+r\+\_\+init\+\_\+data()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{hostname__reader_8h_a23d8a1b21af607c5d06483b1e3fb38a2}{test\+\_\+host\+\_\+r\+\_\+destroy\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Tests \mbox{\hyperlink{hostname__reader_8c_ab5f2a80f61b87d7128e64586ebf1d1e0}{host\+\_\+r\+\_\+destroy\+\_\+data()}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{hostname__reader_8h_ad3e37625138cbbeb38cd0da17f1f4114}{test\+\_\+host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Tests \mbox{\hyperlink{hostname__reader_8c_a478de34066376a68596ec9af7d9283d3}{host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data()}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hostname__reader_8h_af84aac0ae71e906d65e40948669f935d}\label{hostname__reader_8h_af84aac0ae71e906d65e40948669f935d}} 
+void {\bfseries test\+\_\+host\+\_\+r\+\_\+search} ()
+\item 
+void \mbox{\hyperlink{hostname__reader_8h_a478de34066376a68596ec9af7d9283d3}{host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data}} (char $\ast$proc\+\_\+dir, size\+\_\+t buf\+\_\+sz)
+\begin{DoxyCompactList}\small\item\em Initalizes public and private structs, ONLY if these structs are not already initalized. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{hostname__reader_8h_ab5f2a80f61b87d7128e64586ebf1d1e0}\label{hostname__reader_8h_ab5f2a80f61b87d7128e64586ebf1d1e0}} 
+void \mbox{\hyperlink{hostname__reader_8h_ab5f2a80f61b87d7128e64586ebf1d1e0}{host\+\_\+r\+\_\+destroy\+\_\+data}} ()
+\begin{DoxyCompactList}\small\item\em Resets all data in public and private structs (not constants though), including freeing allocated memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structHost__R__Public__Data}{Host\+\_\+\+R\+\_\+\+Public\+\_\+\+Data}} $\ast$ \mbox{\hyperlink{hostname__reader_8h_a306690ab6baed813651f849ac790685e}{host\+\_\+r\+\_\+globals}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file for \mbox{\hyperlink{hostname__reader_8c}{hostname\+\_\+reader.\+c}} 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hostname__reader_8h_a478de34066376a68596ec9af7d9283d3}\label{hostname__reader_8h_a478de34066376a68596ec9af7d9283d3}} 
+\index{hostname\_reader.h@{hostname\_reader.h}!host\_r\_safe\_init\_data@{host\_r\_safe\_init\_data}}
+\index{host\_r\_safe\_init\_data@{host\_r\_safe\_init\_data}!hostname\_reader.h@{hostname\_reader.h}}
+\doxysubsubsection{\texorpdfstring{host\_r\_safe\_init\_data()}{host\_r\_safe\_init\_data()}}
+{\footnotesize\ttfamily void host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data (\begin{DoxyParamCaption}\item[{char $\ast$}]{proc\+\_\+dir,  }\item[{size\+\_\+t}]{buf\+\_\+sz }\end{DoxyParamCaption})}
+
+
+
+Initalizes public and private structs, ONLY if these structs are not already initalized. 
+
+Func prototypes
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em proc\+\_\+dir} & The proc dir \\
+\hline
+\mbox{\texttt{ in}}  & {\em buf\+\_\+sz} & The buffer size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{hostname__reader_8h_a23d8a1b21af607c5d06483b1e3fb38a2}\label{hostname__reader_8h_a23d8a1b21af607c5d06483b1e3fb38a2}} 
+\index{hostname\_reader.h@{hostname\_reader.h}!test\_host\_r\_destroy\_data@{test\_host\_r\_destroy\_data}}
+\index{test\_host\_r\_destroy\_data@{test\_host\_r\_destroy\_data}!hostname\_reader.h@{hostname\_reader.h}}
+\doxysubsubsection{\texorpdfstring{test\_host\_r\_destroy\_data()}{test\_host\_r\_destroy\_data()}}
+{\footnotesize\ttfamily void test\+\_\+host\+\_\+r\+\_\+destroy\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tests \mbox{\hyperlink{hostname__reader_8c_ab5f2a80f61b87d7128e64586ebf1d1e0}{host\+\_\+r\+\_\+destroy\+\_\+data()}} 
+
+\begin{DoxyNote}{Note}
+Confirmed success for\+:
+\begin{DoxyEnumerate}
+\item Initializing data, then destroying it
+\item Not initalizing data, then destroying it
+\item Initalizing data, destroying it, and then trying to destroy it again (testing safety checks) 
+\end{DoxyEnumerate}
+\end{DoxyNote}
+\mbox{\Hypertarget{hostname__reader_8h_aa39600c1411581b0000d38bfae4ea6e4}\label{hostname__reader_8h_aa39600c1411581b0000d38bfae4ea6e4}} 
+\index{hostname\_reader.h@{hostname\_reader.h}!test\_host\_r\_init\_data@{test\_host\_r\_init\_data}}
+\index{test\_host\_r\_init\_data@{test\_host\_r\_init\_data}!hostname\_reader.h@{hostname\_reader.h}}
+\doxysubsubsection{\texorpdfstring{test\_host\_r\_init\_data()}{test\_host\_r\_init\_data()}}
+{\footnotesize\ttfamily void test\+\_\+host\+\_\+r\+\_\+init\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tests \mbox{\hyperlink{hostname__reader_8c_a4ebc3da709e63b63b050db2a33cfd66f}{host\+\_\+r\+\_\+init\+\_\+data()}} 
+
+Public functions
+
+\begin{DoxyNote}{Note}
+Confirmed success 
+\end{DoxyNote}
+\mbox{\Hypertarget{hostname__reader_8h_ad3e37625138cbbeb38cd0da17f1f4114}\label{hostname__reader_8h_ad3e37625138cbbeb38cd0da17f1f4114}} 
+\index{hostname\_reader.h@{hostname\_reader.h}!test\_host\_r\_safe\_init\_data@{test\_host\_r\_safe\_init\_data}}
+\index{test\_host\_r\_safe\_init\_data@{test\_host\_r\_safe\_init\_data}!hostname\_reader.h@{hostname\_reader.h}}
+\doxysubsubsection{\texorpdfstring{test\_host\_r\_safe\_init\_data()}{test\_host\_r\_safe\_init\_data()}}
+{\footnotesize\ttfamily void test\+\_\+host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Tests \mbox{\hyperlink{hostname__reader_8c_a478de34066376a68596ec9af7d9283d3}{host\+\_\+r\+\_\+safe\+\_\+init\+\_\+data()}} 
+
+\begin{DoxyNote}{Note}
+Confirmed success 
+\end{DoxyNote}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{hostname__reader_8h_a306690ab6baed813651f849ac790685e}\label{hostname__reader_8h_a306690ab6baed813651f849ac790685e}} 
+\index{hostname\_reader.h@{hostname\_reader.h}!host\_r\_globals@{host\_r\_globals}}
+\index{host\_r\_globals@{host\_r\_globals}!hostname\_reader.h@{hostname\_reader.h}}
+\doxysubsubsection{\texorpdfstring{host\_r\_globals}{host\_r\_globals}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structHost__R__Public__Data}{Host\+\_\+\+R\+\_\+\+Public\+\_\+\+Data}}$\ast$ host\+\_\+r\+\_\+globals\hspace{0.3cm}{\ttfamily [extern]}}
+
+Global data struct ptr
+
+Ptrs to public and private data 

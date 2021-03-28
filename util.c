@@ -22,14 +22,25 @@ char *next_token(char **str_ptr, const char *delim);
 int reference_for_how_to_use_next_token(void); // TODO: Delete this when done
 void free_string(char **string_ptr);
 
-
+/**
+ * @brief      Destroys one line and one token, including freeing allocated memory
+ *
+ * @param      line_ptr   pointer to a line
+ * @param      token_ptr  pointer to a token
+ */
 void destroy_line_and_token(char **line_ptr, char **token_ptr)
 {
     free_string(line_ptr);
     free_string(token_ptr);
 }
 
-
+/**
+ * @brief      Adds a symbol to a buf, n times.
+ *
+ * @param[in]  n        number of times to add symbol to a buf
+ * @param      symbol   symbol to add
+ * @param      buf      buffer to add to
+ */
 void add_n_symbols_to_buf(int n, char *symbol, char *buf)
 {
     for (int i = 0; i < n; i++) {
@@ -37,8 +48,12 @@ void add_n_symbols_to_buf(int n, char *symbol, char *buf)
     }
 }
 
-
-// Note: Figure out how to find uname from uid again
+/**
+ * @brief      Gets a username from a uid and writes it to name_buf
+ *
+ * @param      name_buf     buffer to write to
+ * @param[in]  uid          uid
+ */
 void uid_to_uname(char *name_buf, uid_t uid)
 {
     char uid_str[256];
@@ -50,7 +65,16 @@ void uid_to_uname(char *name_buf, uid_t uid)
     free_string(&uname_token);
 }
 
-// Lovingly ripped out of lab code - Note: HAVE to close @ end of func
+/**
+ * @brief      Opens a path to base/extension. Lovingly ripped out of lab code.
+ *
+ * @param[in]  base         base path
+ * @param[in]  extension    extension path
+ *
+ * @return      A READ-ONLY file descriptor to this path. -1 on error.
+ * 
+ * @note This function opens a file descriptor. Must close() later.
+ */
 int open_path(const char *base, const char *extension)
 {
     // Case: Invalid base or extension
@@ -68,20 +92,22 @@ int open_path(const char *base, const char *extension)
     if (path == NULL) {
         return -1;
     }
-
-    //LOG("Opening path: %s\n", path);
     int path_fd = open(path, O_RDONLY);
-
-    // Once we have our fd, can free path
     free(path);
 
     return path_fd;
 }
-
-// Also ripped out of lab code - reads one line from file
+/**
+ * @brief      Reads one line (or up to sz bytes, whichever comes first) from a file. Also lovingly ripped out of lab code.
+ *
+ * @param[in]  fd    file descriptor   
+ * @param      buf   buffer to store read line into
+ * @param[in]  sz    max number of bytes to read
+ *
+ * @return     number of bytes read. If it's 0 or < sz, we've either encountered an error or reached the end of the line.
+ */
 ssize_t lineread(int fd, char *buf, size_t sz)
 {
-
     for (size_t i = 0; i < sz; i++) {
         char c;
         ssize_t bytesRead = read(fd, &c, 1);
@@ -108,27 +134,27 @@ ssize_t lineread(int fd, char *buf, size_t sz)
  * Lovingly and absolutely ripped from lab code
  */
 /**
- * Demonstrates string tokenization in C using the strspn(3) and strcspn(3)
- * functions. Unlike strtok(3), this implementation is thread safe. The code
- * is based on the following newsgroup post:
- *
- * https://groups.google.com/forum/message/raw?msg=comp.lang.c/ff0xFqRPH_Y/Cen0mgciXn8J
+
  */
 
 
 /**
- * Retrieves the next token from a string.
+ * @brief      Ripped so hard from lab code the formatting changed. The following description is word-for-word from Prof. Malensek:
+ * 
+ *             Demonstrates string tokenization in C using the strspn(3) and strcspn(3)
+ *             functions. Unlike strtok(3), this implementation is thread safe. The code
+ *             is based on the following newsgroup post:
  *
- * Parameters:
- * - str_ptr: maintains context in the string, i.e., where the next token in the
- *   string will be. If the function returns token N, then str_ptr will be
- *   updated to point to token N+1. To initialize, declare a char * that points
- *   to the string being tokenized. The pointer will be updated after each
- *   successive call to next_token.
+ *             https://groups.google.com/forum/message/raw?msg=comp.lang.c/ff0xFqRPH_Y/Cen0mgciXn8J
  *
- * - delim: the set of characters to use as delimiters
+ * @param      str_ptr  maintains context in the string, i.e., where the next token in the
+ *                      string will be. If the function returns token N, then str_ptr will be
+ *                      updated to point to token N+1. To initialize, declare a char * that points
+ *                      to the string being tokenized. The pointer will be updated after each
+ *                      successive call to next_token.
+ * @param[in]  delim    the set of characters to use as delimiters (Note from Jerome: This means that each one will count as a delimiter, not that the delimiter is all of them stuck together)
  *
- * Returns: char pointer to the next token in the string.
+ * @return     char pointer to the next token in the string.
  */
 char *next_token(char **str_ptr, const char *delim)
 {
@@ -168,7 +194,11 @@ char *next_token(char **str_ptr, const char *delim)
     return current_ptr;
 }
 
-// TODO: Remove once done using as reference
+/**
+ * @brief      Do not use this function. It's just here so I remember how to use next_token(). Signed, Jerome.
+ *
+ * @return     Always 0.
+ */
 int reference_for_how_to_use_next_token(void)
 {
     char str[] = "     This is a really great string, is it not?!";
@@ -184,19 +214,28 @@ int reference_for_how_to_use_next_token(void)
     return 0;
 }
 
+/**
+ * @brief      Frees a string pointer and sets it to null. If the pointers are already null, does nothing.
+ *
+ * @param      string_ptr  pointer to a string
+ */
 void free_string(char **string_ptr)
 {
-    //LOGP("STARTING FREE_STRING\n");
-    //LOG("Value of string ptr: '%s'\n", string_ptr != NULL ? *string_ptr : "NULL");
-
     if (string_ptr != NULL && *string_ptr != NULL) {
         free(*string_ptr);
         *string_ptr = NULL;
     }
-
-    //LOG("Value of string ptr now: '%s'\n", string_ptr != NULL ? *string_ptr : "NULL");
 }
 
+/**
+ * @brief      Copies up to n chars from src into dest. If n == 0 or there is an error, there is no copy, and the function returns -1.
+ *
+ * @param      dest     destination string
+ * @param      src      source string
+ * @param[in]  n        max number of chars to copy
+ *
+ * @return      0 on success. 1 on error.
+ */
 int n_copy_if_present(char *dest, char *src, int n)
 {
     if (dest == NULL || src == NULL || n == 0) {
@@ -204,11 +243,21 @@ int n_copy_if_present(char *dest, char *src, int n)
     }
 
     /* Copy src into dest, then set its last index to NULL terminator */
-    strncpy(dest, src, n-1);
+    strncpy(dest, src, n-1);        
     dest[n-1] = '\0';
     return 0;
 }
 
+/**
+ * @brief      Same as n_copy_if_present, but returns a default value if the function encounters any error
+ *
+ * @param      dest             destination string
+ * @param      src              source string
+ * @param[in]  n                max number of chars to copy
+ * @param      default_value    default value
+ *
+ * @return      0, as it always succeeds.
+ */
 int n_copy_if_present_with_default(char *dest, char *src, int n, char *default_value)
 {
     if (n_copy_if_present(dest, src, n) == -1) {
@@ -216,9 +265,26 @@ int n_copy_if_present_with_default(char *dest, char *src, int n, char *default_v
         dest[n-1] = '\0';
     }
     return 0;
-
 }
 
+
+/**
+ * @brief      Moves a pointer to a string forward past any whitespace chars, effectively trimming leading whitespace from the string.
+ *
+ * @param      current_ptr      pointer to string
+ */
+void trim_leading_whitespace(char **current_ptr)
+{
+    while (**current_ptr == ' ') {
+        (*current_ptr)++;
+    }
+}
+
+/**
+ * @brief      Tests n_copy_if_present() and n_copy_if_present_with_default().
+ * 
+ * @note       Confirmed success.
+ */
 void test_n_copy_if_present()
 {
 

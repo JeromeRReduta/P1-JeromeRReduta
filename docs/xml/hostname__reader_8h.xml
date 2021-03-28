@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="hostname__reader_8h" kind="file" language="C++">
+    <compoundname>hostname_reader.h</compoundname>
+    <includedby refid="hostname__reader_8c" local="yes">hostname_reader.c</includedby>
+    <invincdepgraph>
+      <node id="2">
+        <label>hostname_reader.c</label>
+        <link refid="hostname__reader_8c"/>
+      </node>
+      <node id="1">
+        <label>hostname_reader.h</label>
+        <link refid="hostname__reader_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structHost__R__Public__Data" prot="public">Host_R_Public_Data</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="hostname__reader_8h_1a306690ab6baed813651f849ac790685e" prot="public" static="no" mutable="no">
+        <type><ref refid="structHost__R__Public__Data" kindref="compound">Host_R_Public_Data</ref> *</type>
+        <definition>Host_R_Public_Data* host_r_globals</definition>
+        <argsstring></argsstring>
+        <name>host_r_globals</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Global data struct ptr</para>
+<para>Ptrs to public and private data </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="hostname_reader.h" line="22" column="27" bodyfile="hostname_reader.c" bodystart="31" bodyend="-1" declfile="hostname_reader.h" declline="22" declcolumn="27"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="hostname__reader_8h_1aa39600c1411581b0000d38bfae4ea6e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void test_host_r_init_data</definition>
+        <argsstring>()</argsstring>
+        <name>test_host_r_init_data</name>
+        <briefdescription>
+<para>Tests <ref refid="hostname__reader_8c_1a4ebc3da709e63b63b050db2a33cfd66f" kindref="member">host_r_init_data()</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Public functions</para>
+<para><simplesect kind="note"><para>Confirmed success </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="hostname_reader.h" line="25" column="6" bodyfile="hostname_reader.c" bodystart="256" bodyend="266" declfile="hostname_reader.h" declline="25" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="hostname__reader_8h_1a23d8a1b21af607c5d06483b1e3fb38a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void test_host_r_destroy_data</definition>
+        <argsstring>()</argsstring>
+        <name>test_host_r_destroy_data</name>
+        <briefdescription>
+<para>Tests <ref refid="hostname__reader_8c_1ab5f2a80f61b87d7128e64586ebf1d1e0" kindref="member">host_r_destroy_data()</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Confirmed success for:<orderedlist>
+<listitem><para>Initializing data, then destroying it</para>
+</listitem><listitem><para>Not initalizing data, then destroying it</para>
+</listitem><listitem><para>Initalizing data, destroying it, and then trying to destroy it again (testing safety checks) </para>
+</listitem></orderedlist>
+</para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="hostname_reader.h" line="26" column="6" bodyfile="hostname_reader.c" bodystart="276" bodyend="295" declfile="hostname_reader.h" declline="26" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="hostname__reader_8h_1ad3e37625138cbbeb38cd0da17f1f4114" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void test_host_r_safe_init_data</definition>
+        <argsstring>()</argsstring>
+        <name>test_host_r_safe_init_data</name>
+        <briefdescription>
+<para>Tests <ref refid="hostname__reader_8c_1a478de34066376a68596ec9af7d9283d3" kindref="member">host_r_safe_init_data()</ref> </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="note"><para>Confirmed success </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="hostname_reader.h" line="27" column="6" bodyfile="hostname_reader.c" bodystart="232" bodyend="249" declfile="hostname_reader.h" declline="27" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="hostname__reader_8h_1af84aac0ae71e906d65e40948669f935d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void test_host_r_search</definition>
+        <argsstring>()</argsstring>
+        <name>test_host_r_search</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="hostname_reader.h" line="28" column="6" declfile="hostname_reader.h" declline="28" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="hostname__reader_8h_1a478de34066376a68596ec9af7d9283d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void host_r_safe_init_data</definition>
+        <argsstring>(char *proc_dir, size_t buf_sz)</argsstring>
+        <name>host_r_safe_init_data</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>buf_sz</declname>
+        </param>
+        <briefdescription>
+<para>Initalizes public and private structs, ONLY if these structs are not already initalized. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Func prototypes</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The proc dir </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buf_sz</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The buffer size </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="hostname_reader.h" line="30" column="6" bodyfile="hostname_reader.c" bodystart="57" bodyend="68" declfile="hostname_reader.h" declline="30" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="hostname__reader_8h_1ab5f2a80f61b87d7128e64586ebf1d1e0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void host_r_destroy_data</definition>
+        <argsstring>()</argsstring>
+        <name>host_r_destroy_data</name>
+        <briefdescription>
+<para>Resets all data in public and private structs (not constants though), including freeing allocated memory. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="hostname_reader.h" line="31" column="6" bodyfile="hostname_reader.c" bodystart="109" bodyend="113" declfile="hostname_reader.h" declline="31" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Header file for <ref refid="hostname__reader_8c" kindref="compound">hostname_reader.c</ref> </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>_HOSTNAME_READER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_HOSTNAME_READER_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14" refid="structHost__R__Public__Data" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="structHost__R__Public__Data_1a5aa3054ceb472b43b9b45d9eed0abb22" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/><ref refid="structHost__R__Public__Data_1a5aa3054ceb472b43b9b45d9eed0abb22" kindref="member">hostname</ref>;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">}<sp/><ref refid="structHost__R__Public__Data" kindref="compound">Host_R_Public_Data</ref>;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="structHost__R__Public__Data" kindref="compound">Host_R_Public_Data</ref>*<sp/><ref refid="hostname__reader_8h_1a306690ab6baed813651f849ac790685e" kindref="member">host_r_globals</ref>;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="hostname__reader_8h_1aa39600c1411581b0000d38bfae4ea6e4" kindref="member">test_host_r_init_data</ref>();</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="hostname__reader_8h_1a23d8a1b21af607c5d06483b1e3fb38a2" kindref="member">test_host_r_destroy_data</ref>();</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="hostname__reader_8h_1ad3e37625138cbbeb38cd0da17f1f4114" kindref="member">test_host_r_safe_init_data</ref>();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="hostname__reader_8c_1a2c7d9796cf01aebe50f9a3ea5a813186" kindref="member">test_host_r_search</ref>();</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="hostname__reader_8h_1a478de34066376a68596ec9af7d9283d3" kindref="member">host_r_safe_init_data</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>buf_sz);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="hostname__reader_8h_1ab5f2a80f61b87d7128e64586ebf1d1e0" kindref="member">host_r_destroy_data</ref>();</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="hostname_reader.h"/>
+  </compounddef>
+</doxygen>

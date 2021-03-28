@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structUptime__Info" kind="struct" language="C++" prot="public">
+    <compoundname>Uptime_Info</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structUptime__Info_1ac4e2fc3e3ce93a87837b42c6719f5516" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Uptime_Info::seconds</definition>
+        <argsstring></argsstring>
+        <name>seconds</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="uptime_formatter.h" line="5" column="5" bodyfile="uptime_formatter.h" bodystart="5" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structUptime__Info_1a4a84a558600fd349d6955b6faf74beba" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Uptime_Info::minutes</definition>
+        <argsstring></argsstring>
+        <name>minutes</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="uptime_formatter.h" line="6" column="5" bodyfile="uptime_formatter.h" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structUptime__Info_1aabdf751e6439b27e25b1f1bd55c93412" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Uptime_Info::hours</definition>
+        <argsstring></argsstring>
+        <name>hours</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="uptime_formatter.h" line="7" column="5" bodyfile="uptime_formatter.h" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structUptime__Info_1a4848aace9ab7b16945e2c870ee662bfd" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Uptime_Info::days</definition>
+        <argsstring></argsstring>
+        <name>days</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="uptime_formatter.h" line="8" column="5" bodyfile="uptime_formatter.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structUptime__Info_1a05169249f1f075d5b13a9000b4b102f7" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Uptime_Info::years</definition>
+        <argsstring></argsstring>
+        <name>years</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="uptime_formatter.h" line="9" column="5" bodyfile="uptime_formatter.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="uptime_formatter.h" line="4" column="1" bodyfile="uptime_formatter.h" bodystart="4" bodyend="10"/>
+    <listofallmembers>
+      <member refid="structUptime__Info_1a4848aace9ab7b16945e2c870ee662bfd" prot="public" virt="non-virtual"><scope>Uptime_Info</scope><name>days</name></member>
+      <member refid="structUptime__Info_1aabdf751e6439b27e25b1f1bd55c93412" prot="public" virt="non-virtual"><scope>Uptime_Info</scope><name>hours</name></member>
+      <member refid="structUptime__Info_1a4a84a558600fd349d6955b6faf74beba" prot="public" virt="non-virtual"><scope>Uptime_Info</scope><name>minutes</name></member>
+      <member refid="structUptime__Info_1ac4e2fc3e3ce93a87837b42c6719f5516" prot="public" virt="non-virtual"><scope>Uptime_Info</scope><name>seconds</name></member>
+      <member refid="structUptime__Info_1a05169249f1f075d5b13a9000b4b102f7" prot="public" virt="non-virtual"><scope>Uptime_Info</scope><name>years</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

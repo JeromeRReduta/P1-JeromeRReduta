@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="structMem__File__Info" kind="struct" language="C++" prot="public">
+    <compoundname>Mem_File_Info</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structMem__File__Info_1ab7246f94e16ae958207fec850573ab96" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char Mem_File_Info::mem_available_buf[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>mem_available_buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Line holding MemAvailable data </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mem_usage.c" line="27" column="6" bodyfile="mem_usage.c" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structMem__File__Info_1a671587f3eccfa1a7f6a687916b7dbc8e" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char Mem_File_Info::mem_total_buf[256]</definition>
+        <argsstring>[256]</argsstring>
+        <name>mem_total_buf</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Line holding MemTotal data </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mem_usage.c" line="30" column="6" bodyfile="mem_usage.c" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structMem__File__Info_1ac8b116704042e10b9803506b9a7aa074" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* Mem_File_Info::mem_available_token</definition>
+        <argsstring></argsstring>
+        <name>mem_available_token</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Token holding formatted MemAvailable data </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mem_usage.c" line="33" column="6" bodyfile="mem_usage.c" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structMem__File__Info_1a8c5bb38309be349ebbcc84c6b6feb556" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* Mem_File_Info::mem_total_token</definition>
+        <argsstring></argsstring>
+        <name>mem_total_token</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Token holding formatted MemTotal data </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="mem_usage.c" line="36" column="6" bodyfile="mem_usage.c" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Struct for containing info from reading memory file once </para>
+    </detaileddescription>
+    <location file="mem_usage.c" line="24" column="1" bodyfile="mem_usage.c" bodystart="24" bodyend="37"/>
+    <listofallmembers>
+      <member refid="structMem__File__Info_1ab7246f94e16ae958207fec850573ab96" prot="public" virt="non-virtual"><scope>Mem_File_Info</scope><name>mem_available_buf</name></member>
+      <member refid="structMem__File__Info_1ac8b116704042e10b9803506b9a7aa074" prot="public" virt="non-virtual"><scope>Mem_File_Info</scope><name>mem_available_token</name></member>
+      <member refid="structMem__File__Info_1a671587f3eccfa1a7f6a687916b7dbc8e" prot="public" virt="non-virtual"><scope>Mem_File_Info</scope><name>mem_total_buf</name></member>
+      <member refid="structMem__File__Info_1a8c5bb38309be349ebbcc84c6b6feb556" prot="public" virt="non-virtual"><scope>Mem_File_Info</scope><name>mem_total_token</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

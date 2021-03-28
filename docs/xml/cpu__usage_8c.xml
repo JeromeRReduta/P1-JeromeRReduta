@@ -1,0 +1,417 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="cpu__usage_8c" kind="file" language="C++">
+    <compoundname>cpu_usage.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <includes refid="logger_8h" local="yes">logger.h</includes>
+    <includes refid="os__searcher_8h" local="yes">os_searcher.h</includes>
+    <includes local="yes">string.h</includes>
+    <includes refid="util_8h" local="yes">util.h</includes>
+    <includes refid="string__extractor_8h" local="yes">string_extractor.h</includes>
+    <includes refid="procfs_8h" local="yes">procfs.h</includes>
+    <includes refid="cpu__usage_8h" local="yes">cpu_usage.h</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>stdbool.h</label>
+      </node>
+      <node id="14">
+        <label>procfs.h</label>
+        <link refid="procfs_8h"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdlib.h</label>
+      </node>
+      <node id="9">
+        <label>task_adder.h</label>
+        <link refid="task__adder_8h_source"/>
+      </node>
+      <node id="7">
+        <label>os_searcher.h</label>
+        <link refid="os__searcher_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>cpu_usage.c</label>
+        <link refid="cpu__usage_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>cpu_usage.h</label>
+        <link refid="cpu__usage_8h_source"/>
+      </node>
+      <node id="12">
+        <label>sys/types.h</label>
+      </node>
+      <node id="10">
+        <label>string.h</label>
+      </node>
+      <node id="11">
+        <label>util.h</label>
+        <link refid="util_8h_source"/>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>unistd.h</label>
+      </node>
+      <node id="4">
+        <label>logger.h</label>
+        <link refid="logger_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>string_extractor.h</label>
+        <link refid="string__extractor_8h"/>
+      </node>
+      <node id="8">
+        <label>task_finder.h</label>
+        <link refid="task__finder_8h_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="cpu__usage_8c_1a1032f831df0306d33b28784894ea0ccc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cpu_init</definition>
+        <argsstring>(char *proc_dir, struct cpu_stats *curr)</argsstring>
+        <name>cpu_init</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> *</type>
+          <declname>curr</declname>
+        </param>
+        <briefdescription>
+<para>Initalizes <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>curr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>current <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="cpu_usage.c" line="35" column="6" bodyfile="cpu_usage.c" bodystart="35" bodyend="44" declfile="cpu_usage.c" declline="20" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="cpu__usage_8c_1a3bd5a596d449d7a66beb0b6b233a875f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cpu_reset</definition>
+        <argsstring>(struct cpu_stats *curr)</argsstring>
+        <name>cpu_reset</name>
+        <param>
+          <type>struct <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> *</type>
+          <declname>curr</declname>
+        </param>
+        <briefdescription>
+<para>Resets <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> values to 0. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>curr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>current <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="cpu_usage.c" line="51" column="6" bodyfile="cpu_usage.c" bodystart="51" bodyend="55" declfile="cpu_usage.c" declline="21" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="cpu__usage_8c_1afa4e972016359fbe8994580079882fbd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void populate_cpu_stats</definition>
+        <argsstring>(struct cpu_stats *curr, char *cpu_usage_line)</argsstring>
+        <name>populate_cpu_stats</name>
+        <param>
+          <type>struct <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> *</type>
+          <declname>curr</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>cpu_usage_line</declname>
+        </param>
+        <briefdescription>
+<para>Adds data from cpu_usage_line to current cpu struct. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>curr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>current <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cpu_usage_line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>line of cpu usage data </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="cpu_usage.c" line="63" column="6" bodyfile="cpu_usage.c" bodystart="63" bodyend="73" declfile="cpu_usage.c" declline="22" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="cpu__usage_8c_1af74216eaca8e60cd6ae4cf273f096b8f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void add_token_to_cpu_stats</definition>
+        <argsstring>(struct cpu_stats *curr, long current_num, int counter)</argsstring>
+        <name>add_token_to_cpu_stats</name>
+        <param>
+          <type>struct <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> *</type>
+          <declname>curr</declname>
+        </param>
+        <param>
+          <type>long</type>
+          <declname>current_num</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>counter</declname>
+        </param>
+        <briefdescription>
+<para>Adds a single token from a line of cpu usage data to curr&apos;s total usage. If it&apos;s the 4th token, adds it to curr&apos;s idle usage, too. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>curr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>current <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">current_num</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>token from line, converted to a long </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">counter</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>counter, to track which token this func is adding </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="cpu_usage.c" line="83" column="6" bodyfile="cpu_usage.c" bodystart="83" bodyend="91" declfile="cpu_usage.c" declline="23" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="cpu__usage_8c_1a68581dee15e124c8c0f0002fb6710886" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double cpu_calc_usage</definition>
+        <argsstring>(struct cpu_stats *prev, struct cpu_stats *curr)</argsstring>
+        <name>cpu_calc_usage</name>
+        <param>
+          <type>struct <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> *</type>
+          <declname>prev</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> *</type>
+          <declname>curr</declname>
+        </param>
+        <briefdescription>
+<para>Calculates cpu usage. If given invalid values, returns 0.0 instead. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>prev</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>previous <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> struct from the previous <ref refid="procfs_8h_1a866cac2f8014b4c83f23243ab0e01ab3" kindref="member">pfs_cpu_usage()</ref> call </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>curr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>current <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> struct from this <ref refid="procfs_8h_1a866cac2f8014b4c83f23243ab0e01ab3" kindref="member">pfs_cpu_usage()</ref> call</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The cpu_usage, defined as 1 - (curr-&gt;idle - prev-&gt;idle) / (curr-&gt;total - prev-&gt;total). If given invalid values, will return 0 instead. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="cpu_usage.c" line="102" column="8" bodyfile="cpu_usage.c" bodystart="102" bodyend="109" declfile="cpu_usage.c" declline="25" declcolumn="8"/>
+      </memberdef>
+      <memberdef kind="function" id="cpu__usage_8c_1aa08626f5645a9fa1e4baed16df23d65d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cpu_log_info</definition>
+        <argsstring>(struct cpu_stats *curr)</argsstring>
+        <name>cpu_log_info</name>
+        <param>
+          <type>struct <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> *</type>
+          <declname>curr</declname>
+        </param>
+        <briefdescription>
+<para>Convienience function, for logging info in a <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> struct. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>curr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>current <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="cpu_usage.c" line="116" column="6" bodyfile="cpu_usage.c" bodystart="116" bodyend="122" declfile="cpu_usage.c" declline="27" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="logger_8h" kindref="compound">logger.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;os_searcher.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;string.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;util.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="string__extractor_8h" kindref="compound">string_extractor.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="procfs_8h" kindref="compound">procfs.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;cpu_usage.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Func<sp/>prototypes<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>cpu_init(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>cpu_reset(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>populate_cpu_stats(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*cpu_usage_line);</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>add_token_to_cpu_stats(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr,<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>current_num,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>counter);</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cpu_calc_usage(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*prev,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>cpu_log_info(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>cpu_init(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr)</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>cpu_reset(curr);<sp/></highlight><highlight class="comment">//<sp/>Have<sp/>to<sp/>reset<sp/>current,<sp/>or<sp/>else<sp/>it<sp/>remembers<sp/>values<sp/>from<sp/>prev</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>cpu_usage_line<sp/>=<sp/>search_for_cpu_usage(proc_dir);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>populate_cpu_stats(curr,<sp/>cpu_usage_line);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>cpu_log_info(curr);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>free_string(&amp;cpu_usage_line);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>cpu_reset(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr)</highlight></codeline>
+<codeline lineno="52"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>curr-&gt;idle<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/>curr-&gt;total<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>populate_cpu_stats(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*cpu_usage_line)</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>next<sp/>=<sp/>cpu_usage_line;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>current<sp/>=<sp/>next_token(&amp;next,<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>counter<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(<sp/>(current<sp/>=<sp/>next_token(&amp;next,<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&quot;</highlight><highlight class="normal">))<sp/>!=<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>add_token_to_cpu_stats(curr,<sp/>atol(current),<sp/>counter++);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1a388edf12256bf73c3a8ee9734c3bd841" kindref="member">LOG</ref>(</highlight><highlight class="stringliteral">&quot;adding:<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal">,<sp/>current);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>add_token_to_cpu_stats(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr,<sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>current_num,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>counter)</highlight></codeline>
+<codeline lineno="84"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Case:<sp/>4th<sp/>token<sp/>(counter<sp/>==<sp/>3)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(counter<sp/>==<sp/>3)<sp/>{</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>curr-&gt;idle<sp/>+=<sp/>current_num;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>curr-&gt;total<sp/>+=<sp/>current_num;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>cpu_calc_usage(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*prev,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr)</highlight></codeline>
+<codeline lineno="103"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>idle<sp/>=<sp/>curr-&gt;idle<sp/>-<sp/>prev-&gt;idle;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>total<sp/>=<sp/>curr-&gt;total<sp/>-<sp/>prev-&gt;total;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>has_invalid_values<sp/>=<sp/>total<sp/>&lt;=<sp/>0<sp/>||<sp/>idle<sp/>&lt;<sp/>0<sp/>||<sp/>total<sp/>&lt;<sp/>idle;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>has_invalid_values<sp/>?<sp/>0.0<sp/>:<sp/>1<sp/>-<sp/>(</highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>double)idle/total;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>cpu_log_info(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr)</highlight></codeline>
+<codeline lineno="117"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="logger_8h_1a388edf12256bf73c3a8ee9734c3bd841" kindref="member">LOG</ref>(</highlight><highlight class="stringliteral">&quot;CPU<sp/>STATS:\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;Idle:<sp/>%ld\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;Total:<sp/>%ld\n&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>curr-&gt;idle,<sp/>curr-&gt;total);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="cpu_usage.c"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,1012 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="procfs_8c" kind="file" language="C++">
+    <compoundname>procfs.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes refid="logger_8h" local="yes">logger.h</includes>
+    <includes refid="os__searcher_8h" local="yes">os_searcher.h</includes>
+    <includes local="yes">string.h</includes>
+    <includes refid="util_8h" local="yes">util.h</includes>
+    <includes refid="string__extractor_8h" local="yes">string_extractor.h</includes>
+    <includes refid="uptime__formatter_8h" local="yes">uptime_formatter.h</includes>
+    <includes refid="cpu__usage_8h" local="yes">cpu_usage.h</includes>
+    <includes refid="mem__usage_8h" local="yes">mem_usage.h</includes>
+    <includes refid="task__finder_8h" local="yes">task_finder.h</includes>
+    <includes refid="procfs_8h" local="yes">procfs.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>procfs.c</label>
+        <link refid="procfs_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
+        <label>procfs.h</label>
+        <link refid="procfs_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdlib.h</label>
+      </node>
+      <node id="8">
+        <label>task_adder.h</label>
+        <link refid="task__adder_8h_source"/>
+      </node>
+      <node id="6">
+        <label>os_searcher.h</label>
+        <link refid="os__searcher_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>cpu_usage.h</label>
+        <link refid="cpu__usage_8h_source"/>
+      </node>
+      <node id="11">
+        <label>sys/types.h</label>
+      </node>
+      <node id="9">
+        <label>string.h</label>
+      </node>
+      <node id="10">
+        <label>util.h</label>
+        <link refid="util_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>unistd.h</label>
+      </node>
+      <node id="3">
+        <label>logger.h</label>
+        <link refid="logger_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>string_extractor.h</label>
+        <link refid="string__extractor_8h"/>
+      </node>
+      <node id="7">
+        <label>task_finder.h</label>
+        <link refid="task__finder_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>uptime_formatter.h</label>
+        <link refid="uptime__formatter_8h_source"/>
+      </node>
+      <node id="15">
+        <label>mem_usage.h</label>
+        <link refid="mem__usage_8h_source"/>
+      </node>
+      <node id="4">
+        <label>stdio.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="procfs_8c_1afd9a22056f1c44f1b54a027f8ecbd9f0" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* pfs_hostname_path</definition>
+        <argsstring></argsstring>
+        <name>pfs_hostname_path</name>
+        <initializer>= &quot;sys/kernel/hostname&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="15" column="12" bodyfile="procfs.c" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="procfs_8c_1a3507902b66fb540089ee21538152cea6" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* pfs_kernel_path</definition>
+        <argsstring></argsstring>
+        <name>pfs_kernel_path</name>
+        <initializer>= &quot;sys/kernel/osrelease&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="16" column="12" bodyfile="procfs.c" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="procfs_8c_1acb7648d462c6d9c35d975d714fbaf024" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* pfs_cpu_path</definition>
+        <argsstring></argsstring>
+        <name>pfs_cpu_path</name>
+        <initializer>= &quot;cpuinfo&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="17" column="12" bodyfile="procfs.c" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="procfs_8c_1add3458c3d4c21b46951e9ef542c86466" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* pfs_uptime_path</definition>
+        <argsstring></argsstring>
+        <name>pfs_uptime_path</name>
+        <initializer>= &quot;uptime&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="18" column="12" bodyfile="procfs.c" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="procfs_8c_1af0d75f52326f164ec46e548b484e83ee" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* pfs_load_avg_path</definition>
+        <argsstring></argsstring>
+        <name>pfs_load_avg_path</name>
+        <initializer>= &quot;loadavg&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="19" column="12" bodyfile="procfs.c" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="procfs_8c_1a6d831d891f49984ceffa98b912145146" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* pfs_cpu_usage_path</definition>
+        <argsstring></argsstring>
+        <name>pfs_cpu_usage_path</name>
+        <initializer>= &quot;stat&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="20" column="12" bodyfile="procfs.c" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="procfs_8c_1acadad8b63aada1a4e3fa8c69cb1a3155" prot="public" static="no" mutable="no">
+        <type>const char *</type>
+        <definition>const char* pfs_mem_usage_path</definition>
+        <argsstring></argsstring>
+        <name>pfs_mem_usage_path</name>
+        <initializer>= &quot;meminfo&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="21" column="12" bodyfile="procfs.c" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="procfs_8c_1a9e321282856d16737f3d36d58f62cba7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pfs_init_load_avg_with</definition>
+        <argsstring>(struct load_avg *lavg_ptr, const char *load_avg_line)</argsstring>
+        <name>pfs_init_load_avg_with</name>
+        <param>
+          <type>struct <ref refid="structload__avg" kindref="compound">load_avg</ref> *</type>
+          <declname>lavg_ptr</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>load_avg_line</declname>
+        </param>
+        <briefdescription>
+<para>Initalizes <ref refid="structload__avg" kindref="compound">load_avg</ref> info with load_avg_line. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lavg_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ptr to <ref refid="structload__avg" kindref="compound">load_avg</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">load_avg_line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>line containing load avg values </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="159" column="6" bodyfile="procfs.c" bodystart="159" bodyend="172" declfile="procfs.c" declline="25" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1a231707e77f6995e71aebf7fbc65b144a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pfs_log_lavg_info</definition>
+        <argsstring>(struct load_avg *lavg)</argsstring>
+        <name>pfs_log_lavg_info</name>
+        <param>
+          <type>struct <ref refid="structload__avg" kindref="compound">load_avg</ref> *</type>
+          <declname>lavg</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="26" column="6" declfile="procfs.c" declline="26" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1a6d83a75b68cd7da577813ca5ed1791cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pfs_init_load_avg_values</definition>
+        <argsstring>(struct load_avg *lavg_ptr, char **current_ptr, char **next_ptr)</argsstring>
+        <name>pfs_init_load_avg_values</name>
+        <param>
+          <type>struct <ref refid="structload__avg" kindref="compound">load_avg</ref> *</type>
+          <declname>lavg_ptr</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>current_ptr</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>next_ptr</declname>
+        </param>
+        <briefdescription>
+<para>Equivalent of: <linebreak/>
+ </para>
+        </briefdescription>
+        <detaileddescription>
+<para><preformatted>
+                 if ( (current = next_token(...) != NULL)) {
+                     lavg_ptr-&gt;one = current;
+                 }
+                 if ( (current = next_token(...) != NULL)) {
+                     lavg_ptr-&gt;five = current;
+                 }
+                 if ( (current = next_token(...) != NULL)) {
+                     lavg_ptr-&gt;fifteen = current;
+                 }
+            </preformatted></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lavg_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to struct <ref refid="structload__avg" kindref="compound">load_avg</ref> </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>current_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to current string, for next_token() </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>next_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to next string, for next_token() </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="193" column="6" bodyfile="procfs.c" bodystart="193" bodyend="198" declfile="procfs.c" declline="28" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1ae2f1bb8bdc86c350a73a15a486e808bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pfs_set_value</definition>
+        <argsstring>(double *lavg_value, char **current_ptr, char **next_ptr)</argsstring>
+        <name>pfs_set_value</name>
+        <param>
+          <type>double *</type>
+          <declname>lavg_value</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>current_ptr</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>next_ptr</declname>
+        </param>
+        <briefdescription>
+<para>Sets a value in <ref refid="structload__avg" kindref="compound">load_avg</ref> struct to the next token. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lavg_value</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>ptr to load_avg_one or load_avg_five or load_avg_fifteen </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>current_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to current, used in next_token </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>next_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to next, used in next_token </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="207" column="6" bodyfile="procfs.c" bodystart="207" bodyend="212" declfile="procfs.c" declline="29" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1acb1112f87eb6d7023b4bc2adccebb75e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int pfs_hostname</definition>
+        <argsstring>(char *proc_dir, char *hostname_buf, size_t buf_sz)</argsstring>
+        <name>pfs_hostname</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>hostname_buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>buf_sz</declname>
+        </param>
+        <briefdescription>
+<para>Copies this OS&apos;s hostname to hostname_buf. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>hostname_buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buf_sz</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>buffer size</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, -1 on error </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="40" column="5" bodyfile="procfs.c" bodystart="40" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1aa2daa2378b2816f378f7d8d1cad39371" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int pfs_kernel_version</definition>
+        <argsstring>(char *proc_dir, char *version_buf, size_t buf_sz)</argsstring>
+        <name>pfs_kernel_version</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>version_buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>buf_sz</declname>
+        </param>
+        <briefdescription>
+<para>Copies this OS&apos;s kernel version to version_buf. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>version_buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buf_sz</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>buffer size</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, -1 on error </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="58" column="5" bodyfile="procfs.c" bodystart="58" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1aa9d05ac622f7322719bbcf8302c682ad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int pfs_cpu_model</definition>
+        <argsstring>(char *proc_dir, char *model_buf, size_t buf_sz)</argsstring>
+        <name>pfs_cpu_model</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>model_buf</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>buf_sz</declname>
+        </param>
+        <briefdescription>
+<para>Copies this OS&apos;s cpu model to model_buf. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>model_buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>buffer </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">buf_sz</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>buffer size</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, -1 on error </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="77" column="5" bodyfile="procfs.c" bodystart="77" bodyend="85"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1a9b207290dee3e4fc725a6800ab2813d6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int pfs_cpu_units</definition>
+        <argsstring>(char *proc_dir)</argsstring>
+        <name>pfs_cpu_units</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <briefdescription>
+<para>Gets the num of cpu_units. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>number of cpu_units, or -1 on error </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="94" column="5" bodyfile="procfs.c" bodystart="94" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1a22f70e07728198887b6f062716183058" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double pfs_uptime</definition>
+        <argsstring>(char *proc_dir)</argsstring>
+        <name>pfs_uptime</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <briefdescription>
+<para>Gets the uptime of this OS. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>uptime of OS </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="111" column="8" bodyfile="procfs.c" bodystart="111" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1a2b539d023054cb32a82cc19e9fe1d977" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int pfs_format_uptime</definition>
+        <argsstring>(double time, char *uptime_buf)</argsstring>
+        <name>pfs_format_uptime</name>
+        <param>
+          <type>double</type>
+          <declname>time</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>uptime_buf</declname>
+        </param>
+        <briefdescription>
+<para>Formats the OS&apos;s uptime and writes it to uptime_buf. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>uptime </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>uptime_buf</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>uptime buffer, to write formatted uptime into</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0 on success, -1 on error </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="128" column="5" bodyfile="procfs.c" bodystart="128" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1ad7cd36585e7dc0dd239d622c60e1df69" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structload__avg" kindref="compound">load_avg</ref></type>
+        <definition>struct load_avg pfs_load_avg</definition>
+        <argsstring>(char *proc_dir)</argsstring>
+        <name>pfs_load_avg</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <briefdescription>
+<para>Creates a struct containing load average values and returns it. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><ref refid="structload__avg" kindref="compound">load_avg</ref> struct holding load average values </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="128" column="5" bodyfile="procfs.c" bodystart="143" bodyend="151"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1aac720420de0bc65b5f5180ef70593dc3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double pfs_cpu_usage</definition>
+        <argsstring>(char *proc_dir, struct cpu_stats *prev, struct cpu_stats *curr)</argsstring>
+        <name>pfs_cpu_usage</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> *</type>
+          <declname>prev</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> *</type>
+          <declname>curr</declname>
+        </param>
+        <briefdescription>
+<para>calculates this OS&apos;s cpu usage from cpu_usage file </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>prev</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>previous <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> struct, from the last time this function is called </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>curr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>new <ref refid="structcpu__stats" kindref="compound">cpu_stats</ref> struct, populated when this function is called</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>this OS&apos;s cpu usage, or 0 on error </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="223" column="8" bodyfile="procfs.c" bodystart="223" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1a7c34da2ba41299f9777ac56e5c04fe6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structmem__stats" kindref="compound">mem_stats</ref></type>
+        <definition>struct mem_stats pfs_mem_usage</definition>
+        <argsstring>(char *proc_dir)</argsstring>
+        <name>pfs_mem_usage</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <briefdescription>
+<para>Populates and returns a <ref refid="structmem__stats" kindref="compound">mem_stats</ref> struct with data from meminfo. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>a populated <ref refid="structmem__stats" kindref="compound">mem_stats</ref> struct with data from meminfo, or NULL on error </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="223" column="8" bodyfile="procfs.c" bodystart="236" bodyend="241"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1a3a7b8e342feb3d2ae29e01279c18087a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> *</type>
+        <definition>struct task_stats* pfs_create_tstats</definition>
+        <argsstring>()</argsstring>
+        <name>pfs_create_tstats</name>
+        <briefdescription>
+<para>Initalizes a <ref refid="structtask__stats" kindref="compound">task_stats</ref> struct. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>a <ref refid="structtask__stats" kindref="compound">task_stats</ref> struct, used to keep track of all processes in the OS </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="248" column="17" bodyfile="procfs.c" bodystart="248" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1ace1568af21fee77d1ce8b68ac7460e8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pfs_destroy_tstats</definition>
+        <argsstring>(struct task_stats *tstats)</argsstring>
+        <name>pfs_destroy_tstats</name>
+        <param>
+          <type>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> *</type>
+          <declname>tstats</declname>
+        </param>
+        <briefdescription>
+<para>Destroys <ref refid="structtask__stats" kindref="compound">task_stats</ref> data, including freeing allocated memory. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>tstats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structtask__stats" kindref="compound">task_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="258" column="6" bodyfile="procfs.c" bodystart="258" bodyend="261"/>
+      </memberdef>
+      <memberdef kind="function" id="procfs_8c_1a78c77e940f997164cfe044717b5ce2e1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int pfs_tasks</definition>
+        <argsstring>(char *proc_dir, struct task_stats *tstats)</argsstring>
+        <name>pfs_tasks</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> *</type>
+          <declname>tstats</declname>
+        </param>
+        <briefdescription>
+<para>Returns the number of tasks/processes in this OS. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tstats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structtask__stats" kindref="compound">task_stats</ref> struct</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>0, for success </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="procfs.c" line="271" column="5" bodyfile="procfs.c" bodystart="271" bodyend="275"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="logger_8h" kindref="compound">logger.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;os_searcher.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;string.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;util.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="string__extractor_8h" kindref="compound">string_extractor.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;uptime_formatter.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;cpu_usage.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;mem_usage.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;task_finder.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="procfs_8h" kindref="compound">procfs.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Constants<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>pfs_hostname_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;sys/kernel/hostname&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>pfs_kernel_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;sys/kernel/osrelease&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>pfs_cpu_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;cpuinfo&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>pfs_uptime_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;uptime&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>pfs_load_avg_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;loadavg&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>pfs_cpu_usage_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;stat&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>pfs_mem_usage_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;meminfo&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Func<sp/>prototypes<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pfs_init_load_avg_with(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structload__avg" kindref="compound">load_avg</ref><sp/>*lavg_ptr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*load_avg_line);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pfs_log_lavg_info(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structload__avg" kindref="compound">load_avg</ref><sp/>*lavg);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pfs_init_load_avg_with(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structload__avg" kindref="compound">load_avg</ref><sp/>*lavg_ptr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*load_avg_line);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pfs_init_load_avg_values(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structload__avg" kindref="compound">load_avg</ref><sp/>*lavg_ptr,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**current_ptr,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**next_ptr);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pfs_set_value(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*lavg_value,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**current_ptr,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**next_ptr);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="procfs_8h_1acb1112f87eb6d7023b4bc2adccebb75e" kindref="member">pfs_hostname</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*hostname_buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>buf_sz)</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">{<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>hostname<sp/>=<sp/>search_for_hostname(proc_dir);</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>return_val<sp/>=<sp/>n_copy_if_present(hostname_buf,<sp/>hostname,<sp/>buf_sz);</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>destroy_line_and_token(&amp;hostname,<sp/>NULL);</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>return_val;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="procfs_8h_1aa2daa2378b2816f378f7d8d1cad39371" kindref="member">pfs_kernel_version</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*version_buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>buf_sz)</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>kernel_line<sp/>=<sp/>search_for_kernel(proc_dir);</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>kernel_token<sp/>=<sp/><ref refid="os__static__data_8h_1a27fedde249b2c6cd9afa12ab97fc4cf2" kindref="member">extract_token_before</ref>(kernel_line,<sp/></highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>return_val<sp/>=<sp/>n_copy_if_present(version_buf,<sp/>kernel_token,<sp/>buf_sz);</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>destroy_line_and_token(&amp;kernel_line,<sp/>&amp;kernel_token);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>return_val;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="procfs_8h_1aa9d05ac622f7322719bbcf8302c682ad" kindref="member">pfs_cpu_model</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*model_buf,<sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>buf_sz)</highlight></codeline>
+<codeline lineno="78"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>model_line<sp/>=<sp/>search_for_cpu_model(proc_dir);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>model_token<sp/>=<sp/>extract_token_after(model_line,<sp/></highlight><highlight class="stringliteral">&quot;:&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>return_val<sp/>=<sp/>n_copy_if_present(model_buf,<sp/>model_token,<sp/>buf_sz);</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>destroy_line_and_token(&amp;model_line,<sp/>&amp;model_token);</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>return_val;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="procfs_8h_1a9b207290dee3e4fc725a6800ab2813d6" kindref="member">pfs_cpu_units</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir)</highlight></codeline>
+<codeline lineno="95"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>cores_line<sp/>=<sp/>search_for_cpu_cores(proc_dir);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>cores_token<sp/>=<sp/>extract_token_after(cores_line,<sp/></highlight><highlight class="stringliteral">&quot;:&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>return_val<sp/>=<sp/>cores_token<sp/>!=<sp/>NULL<sp/>?<sp/>atoi(cores_token)<sp/>*<sp/>2<sp/>:<sp/>-1;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/>destroy_line_and_token(&amp;cores_line,<sp/>&amp;cores_token);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>return_val;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="procfs_8h_1a22f70e07728198887b6f062716183058" kindref="member">pfs_uptime</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir)</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>uptime_line<sp/>=<sp/>search_for_uptime(proc_dir);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>return_val<sp/>=<sp/>uptime_line<sp/>!=<sp/>NULL<sp/>?<sp/>atof(uptime_line)<sp/>:<sp/>-1.0;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>destroy_line_and_token(&amp;uptime_line,<sp/>NULL);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>return_val;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="procfs_8h_1a2b539d023054cb32a82cc19e9fe1d977" kindref="member">pfs_format_uptime</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>time,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*uptime_buf)</highlight></codeline>
+<codeline lineno="129"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>time_str<sp/>=<sp/>time_f_get_time_str(time);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>return_val<sp/>=<sp/>n_copy_if_present(uptime_buf,<sp/>time_str,<sp/>256);</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>free_string(&amp;time_str);</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>return_val;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structload__avg" kindref="compound">load_avg</ref><sp/><ref refid="procfs_8h_1ad7cd36585e7dc0dd239d622c60e1df69" kindref="member">pfs_load_avg</ref>(char<sp/>*proc_dir)</highlight></codeline>
+<codeline lineno="144"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structload__avg" kindref="compound">load_avg</ref><sp/>lavg<sp/>=<sp/>{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">*<sp/>load_avg_line<sp/>=<sp/>search_for_load_avg(proc_dir);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/>pfs_init_load_avg_with(&amp;lavg,<sp/>load_avg_line);</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/>destroy_line_and_token(&amp;load_avg_line,<sp/>NULL);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>lavg;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pfs_init_load_avg_with(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structload__avg" kindref="compound">load_avg</ref><sp/>*lavg_ptr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*load_avg_line)</highlight></codeline>
+<codeline lineno="160"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(lavg_ptr<sp/>==<sp/>NULL<sp/>||<sp/>load_avg_line<sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;ERROR<sp/>-<sp/>LOAD_AVG<sp/>OR<sp/>LOAD_AVG_LINE<sp/>IS<sp/>NULL<sp/>PTR\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>load_avg_line_copy[256]<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>strcpy(load_avg_line_copy,<sp/>load_avg_line);</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*next<sp/>=<sp/>load_avg_line_copy;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*current;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>pfs_init_load_avg_values(lavg_ptr,<sp/>&amp;current,<sp/>&amp;next);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pfs_init_load_avg_values(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structload__avg" kindref="compound">load_avg</ref><sp/>*lavg_ptr,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**current_ptr,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**next_ptr)</highlight></codeline>
+<codeline lineno="194"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/>pfs_set_value(&amp;(lavg_ptr-&gt;one),<sp/>current_ptr,<sp/>next_ptr);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/>pfs_set_value(&amp;(lavg_ptr-&gt;five),<sp/>current_ptr,<sp/>next_ptr);</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>pfs_set_value(&amp;(lavg_ptr-&gt;fifteen),<sp/>current_ptr,<sp/>next_ptr);</highlight></codeline>
+<codeline lineno="198"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>pfs_set_value(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*lavg_value,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**current_ptr,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**next_ptr)</highlight></codeline>
+<codeline lineno="208"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>(*current_ptr<sp/>=<sp/>next_token(next_ptr,<sp/></highlight><highlight class="stringliteral">&quot;<sp/>,?!&quot;</highlight><highlight class="normal">))<sp/>!=<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*lavg_value<sp/>=<sp/>atof(*current_ptr);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="212"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="procfs_8h_1a866cac2f8014b4c83f23243ab0e01ab3" kindref="member">pfs_cpu_usage</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*prev,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structcpu__stats" kindref="compound">cpu_stats</ref><sp/>*curr)</highlight></codeline>
+<codeline lineno="224"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/>cpu_init(proc_dir,<sp/>curr);</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>cpu_calc_usage(prev,<sp/>curr);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmem__stats" kindref="compound">mem_stats</ref><sp/><ref refid="procfs_8h_1a6cde96a5ca78eb0d37fb4c8da3c7e0b4" kindref="member">pfs_mem_usage</ref>(char<sp/>*proc_dir)</highlight></codeline>
+<codeline lineno="237"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structmem__stats" kindref="compound">mem_stats</ref><sp/>mstats<sp/>=<sp/>{<sp/>0<sp/>};</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/>mem_init(&amp;mstats,<sp/>proc_dir);</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>mstats;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*<ref refid="procfs_8h_1a3a7b8e342feb3d2ae29e01279c18087a" kindref="member">pfs_create_tstats</ref>()</highlight></codeline>
+<codeline lineno="249"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>task_init_stats();</highlight></codeline>
+<codeline lineno="251"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="procfs_8h_1ace1568af21fee77d1ce8b68ac7460e8c" kindref="member">pfs_destroy_tstats</ref>(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*tstats)</highlight></codeline>
+<codeline lineno="259"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/>task_destroy_stats(&amp;tstats);</highlight></codeline>
+<codeline lineno="261"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="procfs_8h_1a78c77e940f997164cfe044717b5ce2e1" kindref="member">pfs_tasks</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*tstats)</highlight></codeline>
+<codeline lineno="272"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/>task_get_tasks_from_proc(proc_dir,<sp/>tstats);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="275"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="procfs.c"/>
+  </compounddef>
+</doxygen>

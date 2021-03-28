@@ -1,0 +1,541 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="task__finder_8c" kind="file" language="C++">
+    <compoundname>task_finder.c</compoundname>
+    <includes local="no">stdlib.h</includes>
+    <includes refid="logger_8h" local="yes">logger.h</includes>
+    <includes refid="os__searcher_8h" local="yes">os_searcher.h</includes>
+    <includes local="yes">string.h</includes>
+    <includes refid="util_8h" local="yes">util.h</includes>
+    <includes refid="string__extractor_8h" local="yes">string_extractor.h</includes>
+    <includes local="no">dirent.h</includes>
+    <includes local="no">ctype.h</includes>
+    <includes refid="procfs_8h" local="yes">procfs.h</includes>
+    <includes refid="task__finder_8h" local="yes">task_finder.h</includes>
+    <incdepgraph>
+      <node id="15">
+        <label>procfs.h</label>
+        <link refid="procfs_8h"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>stdlib.h</label>
+      </node>
+      <node id="8">
+        <label>task_adder.h</label>
+        <link refid="task__adder_8h_source"/>
+      </node>
+      <node id="6">
+        <label>os_searcher.h</label>
+        <link refid="os__searcher_8h_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>sys/types.h</label>
+      </node>
+      <node id="9">
+        <label>string.h</label>
+      </node>
+      <node id="10">
+        <label>util.h</label>
+        <link refid="util_8h_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>unistd.h</label>
+      </node>
+      <node id="3">
+        <label>logger.h</label>
+        <link refid="logger_8h"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>string_extractor.h</label>
+        <link refid="string__extractor_8h"/>
+      </node>
+      <node id="1">
+        <label>task_finder.c</label>
+        <link refid="task__finder_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>task_finder.h</label>
+        <link refid="task__finder_8h_source"/>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>ctype.h</label>
+      </node>
+      <node id="4">
+        <label>stdio.h</label>
+      </node>
+      <node id="13">
+        <label>dirent.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="task__finder_8c_1a1468df162a064a2344d7230b0bc5bc19" prot="public" static="no" mutable="no">
+        <type>const int</type>
+        <definition>const int task_init_max_len</definition>
+        <argsstring></argsstring>
+        <name>task_init_max_len</name>
+        <initializer>= 2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Constants </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_finder.c" line="22" column="11" bodyfile="task_finder.c" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="task__finder_8c_1ad4c38f8874c7201257b413ca63146d79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> *</type>
+        <definition>struct task_stats * task_init_stats</definition>
+        <argsstring>()</argsstring>
+        <name>task_init_stats</name>
+        <briefdescription>
+<para>Initalizes <ref refid="structtask__stats" kindref="compound">task_stats</ref> struct. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>An initalized task_stat struct, used to track info for all processes in this OS </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_finder.c" line="40" column="17" bodyfile="task_finder.c" bodystart="40" bodyend="48" declfile="task_finder.c" declline="25" declcolumn="17"/>
+      </memberdef>
+      <memberdef kind="function" id="task__finder_8c_1abdf748e292534347530becf50670ba1d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void task_destroy_stats</definition>
+        <argsstring>(struct task_stats **stats)</argsstring>
+        <name>task_destroy_stats</name>
+        <param>
+          <type>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> **</type>
+          <declname>stats</declname>
+        </param>
+        <briefdescription>
+<para>Destroys <ref refid="structtask__stats" kindref="compound">task_stats</ref> struct, including freeing allocated memory and setting pointers to NULL. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structtask__stats" kindref="compound">task_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_finder.c" line="55" column="6" bodyfile="task_finder.c" bodystart="55" bodyend="68" declfile="task_finder.c" declline="26" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="task__finder_8c_1a328ec0f203b8609860b8178315123f98" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void task_get_tasks_from_proc</definition>
+        <argsstring>(char *proc_dir, struct task_stats *stats)</argsstring>
+        <name>task_get_tasks_from_proc</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> *</type>
+          <declname>stats</declname>
+        </param>
+        <briefdescription>
+<para>Adds info from proc_dir/entry_name/status for ALL processes in OS. Here, &quot;process&quot; is any entry in proc that is a number. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structtask__stats" kindref="compound">task_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_finder.c" line="76" column="6" bodyfile="task_finder.c" bodystart="76" bodyend="90" declfile="task_finder.c" declline="27" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="task__finder_8c_1a77cc5294925f4c7b2695d1b383d97884" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void task_add_status_info_if_process</definition>
+        <argsstring>(char *proc_dir, struct task_stats *stats, struct dirent *entry)</argsstring>
+        <name>task_add_status_info_if_process</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> *</type>
+          <declname>stats</declname>
+        </param>
+        <param>
+          <type>struct dirent *</type>
+          <declname>entry</declname>
+        </param>
+        <briefdescription>
+<para>Safe version of task_add_status_info(). If the entry is a process, adds info from proc_dir/entry_name/status to stats. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structtask__stats" kindref="compound">task_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>entry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>entry in proc </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_finder.c" line="99" column="6" bodyfile="task_finder.c" bodystart="99" bodyend="108" declfile="task_finder.c" declline="28" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="task__finder_8c_1af31881106e606695972c7dd6fa05d3ff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void task_add_status_info</definition>
+        <argsstring>(char *proc_dir, struct task_stats *stats, struct dirent *entry)</argsstring>
+        <name>task_add_status_info</name>
+        <param>
+          <type>char *</type>
+          <declname>proc_dir</declname>
+        </param>
+        <param>
+          <type>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> *</type>
+          <declname>stats</declname>
+        </param>
+        <param>
+          <type>struct dirent *</type>
+          <declname>entry</declname>
+        </param>
+        <briefdescription>
+<para>Unsafe version of task_add_status_info_if_process(). Use the other one if possible. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>proc_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>proc directory </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>stats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structtask__stats" kindref="compound">task_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>entry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>entry in proc </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_finder.c" line="117" column="6" bodyfile="task_finder.c" bodystart="117" bodyend="126" declfile="task_finder.c" declline="29" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="task__finder_8c_1af0234975a0aa6fec843f929d5bdc3160" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void task_log_stats</definition>
+        <argsstring>(struct task_stats *stats)</argsstring>
+        <name>task_log_stats</name>
+        <param>
+          <type>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> *</type>
+          <declname>stats</declname>
+        </param>
+        <briefdescription>
+<para>Convenience function, for debugging. Logs all the information inside <ref refid="structtask__stats" kindref="compound">task_stats</ref> struct. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structtask__stats" kindref="compound">task_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_finder.c" line="133" column="6" bodyfile="task_finder.c" bodystart="133" bodyend="161" declfile="task_finder.c" declline="31" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="task__finder_8c_1a3a6c0ba63f80010c0036f147b64c633a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void task_log_all_active_tasks</definition>
+        <argsstring>(struct task_stats *stats)</argsstring>
+        <name>task_log_all_active_tasks</name>
+        <param>
+          <type>struct <ref refid="structtask__stats" kindref="compound">task_stats</ref> *</type>
+          <declname>stats</declname>
+        </param>
+        <briefdescription>
+<para>Convenience function, for debugging. Logs all active tasks in <ref refid="structtask__stats" kindref="compound">task_stats</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>stats</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structtask__stats" kindref="compound">task_stats</ref> struct </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_finder.c" line="168" column="6" bodyfile="task_finder.c" bodystart="168" bodyend="175" declfile="task_finder.c" declline="32" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="task__finder_8c_1afd059dfc16ee512ed4f06e0650c91f01" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void task_log_info</definition>
+        <argsstring>(struct task_info info)</argsstring>
+        <name>task_log_info</name>
+        <param>
+          <type>struct <ref refid="structtask__info" kindref="compound">task_info</ref></type>
+          <declname>info</declname>
+        </param>
+        <briefdescription>
+<para>Convenience function, for debugging. Logs one active task in <ref refid="structtask__stats" kindref="compound">task_stats</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">info</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An active task in <ref refid="structtask__stats" kindref="compound">task_stats</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="task_finder.c" line="182" column="6" bodyfile="task_finder.c" bodystart="182" bodyend="191" declfile="task_finder.c" declline="33" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="logger_8h" kindref="compound">logger.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;os_searcher.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;string.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;util.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="string__extractor_8h" kindref="compound">string_extractor.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;dirent.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ctype.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="procfs_8h" kindref="compound">procfs.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;task_finder.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>task_init_max_len<sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Func<sp/>prototypes<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*task_init_stats();</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_destroy_stats(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>**stats);</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_get_tasks_from_proc(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*stats);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_add_status_info_if_process(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*stats,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>dirent<sp/>*entry);</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_add_status_info(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*stats,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>dirent<sp/>*entry);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_log_stats(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*stats);</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_log_all_active_tasks(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*stats);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_log_info(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__info" kindref="compound">task_info</ref><sp/>info);</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*task_init_stats()</highlight></codeline>
+<codeline lineno="41"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*stats<sp/>=<sp/>calloc(1,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref>));</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>stats-&gt;active_tasks_size<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>stats-&gt;active_tasks_max_len<sp/>=<sp/>task_init_max_len;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>stats-&gt;active_tasks<sp/>=<sp/>calloc(stats-&gt;active_tasks_max_len,<sp/></highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__info" kindref="compound">task_info</ref>));</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>stats;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_destroy_stats(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>**stats)</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stats<sp/>==<sp/>NULL<sp/>||<sp/>*stats<sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;ERROR<sp/>-<sp/>NULL<sp/>TASK<sp/>STATS<sp/>PTR<sp/>-<sp/>RETURNING\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((*stats)-&gt;active_tasks<sp/>!=<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>free((*stats)-&gt;active_tasks);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>free(*stats);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>*stats<sp/>=<sp/>NULL;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_get_tasks_from_proc(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*stats)</highlight></codeline>
+<codeline lineno="77"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>DIR<sp/>*directory;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>(directory<sp/>=<sp/>opendir(proc_dir))<sp/>==<sp/>NULL<sp/>)<sp/>{</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>perror(</highlight><highlight class="stringliteral">&quot;opendir&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">dirent*<sp/>entry;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(<sp/>(entry<sp/>=<sp/>readdir(directory))<sp/>!=<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>task_add_status_info_if_process(proc_dir,<sp/>stats,<sp/>entry);</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>closedir(directory);</highlight></codeline>
+<codeline lineno="90"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_add_status_info_if_process(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*stats,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>dirent<sp/>*entry)</highlight></codeline>
+<codeline lineno="100"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Case:<sp/>not<sp/>a<sp/>process</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(isdigit(entry-&gt;d_name[0])<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Case:<sp/>is<sp/>a<sp/>process</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>task_add_status_info(proc_dir,<sp/>stats,<sp/>entry);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_add_status_info(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*proc_dir,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*stats,<sp/></highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/>dirent<sp/>*entry)</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structTask__Status__File__Info" kindref="compound">Task_Status_File_Info</ref><sp/>status_file_info<sp/>=<sp/>{0};</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(task_read_status_and_store_into(proc_dir,<sp/>entry-&gt;d_name,<sp/>&amp;status_file_info)<sp/>==<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>task_populate_task_stats_with(stats,<sp/>&amp;status_file_info);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>task_destroy_status_file_info(&amp;status_file_info);</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_log_stats(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*stats)</highlight></codeline>
+<codeline lineno="134"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stats<sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;ERROR<sp/>-<sp/>STATS<sp/>IS<sp/>NULL<sp/>-<sp/>RETURNING\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="logger_8h_1a388edf12256bf73c3a8ee9734c3bd841" kindref="member">LOG</ref>(</highlight><highlight class="stringliteral">&quot;STATS:\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;total:<sp/>%u\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;running:<sp/>%u\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;waiting:<sp/>%u\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;sleeping:<sp/>%u\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;stopped:<sp/>%u\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;zombie:<sp/>%u\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;active_tasks_size:<sp/>%u\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;active_tasks_max_len:<sp/>%u\n&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stats-&gt;total,<sp/>stats-&gt;running,<sp/>stats-&gt;waiting,</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stats-&gt;sleeping,<sp/>stats-&gt;stopped,<sp/>stats-&gt;zombie,</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>stats-&gt;active_tasks_size,<sp/>stats-&gt;active_tasks_max_len);</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stats-&gt;active_tasks<sp/>==<sp/>NULL)<sp/>{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;active<sp/>tasks<sp/>is<sp/>NULL,<sp/>returning\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="logger_8h_1ac60a33fb6244dfed75a5aaab504b8968" kindref="member">LOGP</ref>(</highlight><highlight class="stringliteral">&quot;ACTIVE<sp/>TASKS<sp/>EXIST\n&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>task_log_all_active_tasks(stats);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_log_all_active_tasks(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__stats" kindref="compound">task_stats</ref><sp/>*stats)</highlight></codeline>
+<codeline lineno="169"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>len<sp/>=<sp/>stats-&gt;active_tasks_size;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="logger_8h_1a388edf12256bf73c3a8ee9734c3bd841" kindref="member">LOG</ref>(</highlight><highlight class="stringliteral">&quot;len<sp/>is<sp/>%d\n&quot;</highlight><highlight class="normal">,<sp/>len);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>len;<sp/>i++)<sp/>{</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>task_log_info(stats-&gt;active_tasks[i]);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="175"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>task_log_info(</highlight><highlight class="keyword">struct</highlight><highlight class="normal"><sp/><ref refid="structtask__info" kindref="compound">task_info</ref><sp/>info)</highlight></codeline>
+<codeline lineno="183"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="logger_8h_1a388edf12256bf73c3a8ee9734c3bd841" kindref="member">LOG</ref>(</highlight><highlight class="stringliteral">&quot;INFO:\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;pid:<sp/>%d\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;uid:<sp/>%d\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;name:<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;\t-&gt;state:<sp/>&apos;%s&apos;\n&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>info.pid,<sp/>info.uid,<sp/>info.name<sp/>!=<sp/>NULL<sp/>?<sp/>info.name<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;null&quot;</highlight><highlight class="normal">,<sp/>info.state<sp/>!=<sp/>NULL<sp/>?<sp/>info.state<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;null&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="task_finder.c"/>
+  </compounddef>
+</doxygen>

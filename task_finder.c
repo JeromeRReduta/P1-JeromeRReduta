@@ -26,11 +26,17 @@ struct task_stats *task_init_stats();
 void task_destroy_stats(struct task_stats **stats);
 void task_get_tasks_from_proc(char *proc_dir, struct task_stats *stats);
 void task_add_status_info_if_process(char *proc_dir, struct task_stats *stats, struct dirent *entry);
+void task_add_status_info(char *proc_dir, struct task_stats *stats, struct dirent *entry);
 
 void task_log_stats(struct task_stats *stats);
 void task_log_all_active_tasks(struct task_stats *stats);
 void task_log_info(struct task_info info);
 
+/**
+ * @brief      Initalizes task_stats struct
+ *
+ * @return     	An initalized task_stat struct, used to track info for all processes in this OS
+ */
 struct task_stats *task_init_stats()
 {
 	struct task_stats *stats = calloc(1, sizeof(struct task_stats));
@@ -41,6 +47,11 @@ struct task_stats *task_init_stats()
 	return stats;
 }
 
+/**
+ * @brief      Destroys task_stats struct, including freeing allocated memory and setting pointers to NULL
+ *
+ * @param      stats  	task_stats struct
+ */
 void task_destroy_stats(struct task_stats **stats)
 {
 	if (stats == NULL || *stats == NULL) {
@@ -56,6 +67,12 @@ void task_destroy_stats(struct task_stats **stats)
 	*stats = NULL;
 }
 
+/**
+ * @brief      Adds info from proc_dir/entry_name/status for ALL processes in OS. Here, "process" is any entry in proc that is a number.
+ *
+ * @param      proc_dir  	proc directory
+ * @param      stats     	task_stats struct
+ */
 void task_get_tasks_from_proc(char *proc_dir, struct task_stats *stats)
 {
 	DIR *directory;
@@ -72,18 +89,47 @@ void task_get_tasks_from_proc(char *proc_dir, struct task_stats *stats)
 	closedir(directory);
 }
 
+/**
+ * @brief      Safe version of task_add_status_info(). If the entry is a process, adds info from proc_dir/entry_name/status to stats.
+ *
+ * @param      proc_dir  	proc directory
+ * @param      stats     	task_stats struct
+ * @param      entry     	entry in proc
+ */							
 void task_add_status_info_if_process(char *proc_dir, struct task_stats *stats, struct dirent *entry)
 {
-	if (isdigit(entry->d_name[0]) != 0) {
-		Task_Status_File_Info status_file_info = {0};
-
-		if (task_read_status_and_store_into(proc_dir, entry->d_name, &status_file_info) == 0) {
-			task_populate_task_stats_with(stats, &status_file_info);
-		}
-		task_destroy_status_file_info(&status_file_info);
+	// Case: not a process
+	if (isdigit(entry->d_name[0]) == 0) {
+		return;
 	}
+	// Case: is a process
+	task_add_status_info(proc_dir, stats, entry);
+
 }
 
+/**
+ * @brief      Unsafe version of task_add_status_info_if_process(). Use the other one if possible.
+ *
+ * @param      proc_dir  	proc directory
+ * @param      stats     	task_stats struct
+ * @param      entry     	entry in proc
+ */
+void task_add_status_info(char *proc_dir, struct task_stats *stats, struct dirent *entry)
+{
+	Task_Status_File_Info status_file_info = {0};
+
+	if (task_read_status_and_store_into(proc_dir, entry->d_name, &status_file_info) == 0) {
+		task_populate_task_stats_with(stats, &status_file_info);
+	}
+	task_destroy_status_file_info(&status_file_info);
+
+}
+
+/**
+ * @brief      Convenience function, for debugging. Logs all the information inside task_stats struct.
+ *
+ * @param      stats  	task_stats struct
+ */
 void task_log_stats(struct task_stats *stats)
 {
 	if (stats == NULL) {
@@ -114,6 +160,11 @@ void task_log_stats(struct task_stats *stats)
 
 }
 
+/**
+ * @brief      Convenience function, for debugging. Logs all active tasks in task_stats.
+ *
+ * @param      stats  	task_stats struct
+ */	
 void task_log_all_active_tasks(struct task_stats *stats)
 {
 	int len = stats->active_tasks_size;
@@ -123,6 +174,11 @@ void task_log_all_active_tasks(struct task_stats *stats)
 	}
 }
 
+/**
+ * @brief      Convenience function, for debugging. Logs one active task in task_stats.
+ *
+ * @param[in]  info  	An active task in task_stats.
+ */
 void task_log_info(struct task_info info)
 {
 	LOG("INFO:\n"
@@ -131,121 +187,5 @@ void task_log_info(struct task_info info)
 		"\t->name: '%s'\n"
 		"\t->state: '%s'\n",
 		info.pid, info.uid, info.name != NULL ? info.name : "null", info.state != NULL ? info.state : "null");
-
-}
-
-
-/**
- * @brief      Tests task_log_stats()
- * 
- * @note       Confirmed success for:
- *				1. Null tstats ptr (error msg)
- *				2. Good tstats ptr, null active_tasks (prints tstats info but gives error msg on active_tasks)
- *				3. Good tstats ptr, good active_tasks (prints info for both, ASSUMING size is accurate/increases when a task is added)
- *				4. Good tstats ptr, good active_tasks, adding more tasks than max_len should allow (should make sure
- *					that we realloc as necessary for task_info, especially since it doesn't show as a warning)
-*/
-void test_task_log_stats()
-{
-	LOGP("TEST - NULL TSTATS POINTER - SHOULD GIVE ERROR MSG\n");
-	struct task_stats* null_stats = NULL;
-	task_log_stats(null_stats);
-
-	LOGP("TEST - TSTATS IS GOOD BUT TASK INFO IS NULL - SHOULD LOG TSTATS AND GIVE ERROR MSG\n");
-	struct task_stats* good_stats_null_info = calloc(1, sizeof(struct task_stats));
-	good_stats_null_info->zombie = 1;
-	good_stats_null_info->stopped = 2;
-	good_stats_null_info->sleeping = 3;
-	good_stats_null_info->waiting = 4;
-	good_stats_null_info->running = 5;
-	good_stats_null_info->total = 1 + 2 + 3 + 4 + 5;
-	good_stats_null_info->active_tasks_size = 0;
-	good_stats_null_info->active_tasks_max_len = 2;
-
-	task_log_stats(good_stats_null_info);
-			
-	LOGP("TEST - TSTATS AND TASK INFO ARE GOOD - SHOULD LOG BOTH\n");
-
-	struct task_stats* all_good_tasks = calloc(1, sizeof(struct task_stats));
-	all_good_tasks->active_tasks = calloc(2, sizeof(struct task_info));
-
-	all_good_tasks->zombie = 1;
-	all_good_tasks->stopped = 2;
-	all_good_tasks->sleeping = 3;
-	all_good_tasks->waiting = 4;
-	all_good_tasks->running = 5;
-	all_good_tasks->total = 1 + 2 + 3 + 4 + 5;
-	all_good_tasks->active_tasks_size = 0;
-	all_good_tasks->active_tasks_max_len = 2;
-
-	task_init_info(all_good_tasks->active_tasks, "14", "15", "Yes", "also yes");
-	all_good_tasks->active_tasks_size++;
-
-	task_init_info(all_good_tasks->active_tasks + 1, "24", "25", "No", "also no");
-	all_good_tasks->active_tasks_size++;
-
-	// Case: Adding more tasks than max_len would allow
-	/*
-	all_good_tasks->active_tasks[2].pid = 24;
-	all_good_tasks->active_tasks[2].uid = 25;
-	strncpy(all_good_tasks->active_tasks[2].name, "No", 26);
-	strncpy(all_good_tasks->active_tasks[2].state, "Also no", 13);
-	all_good_tasks->active_tasks_size++;
-	*/
-	task_log_stats(all_good_tasks);
-
-}
-
-/**
- * @brief      Tests task_init_stats()
- * 
- * @note       Confirmed success
- */
-void test_task_init_stats()
-{
-	struct task_stats *tstats = task_init_stats();
-
-	//task_init_info(tstats->active_tasks, 14, 15, "Yes", "also yes");
-	tstats->active_tasks_size++;
-
-	//task_init_info(tstats->active_tasks + 1, 24, 25, "No", "also no");
-	tstats->active_tasks_size++;
-
-	task_log_stats(tstats);
-}
-
-/**
- * @brief      Tests task_destroy_stats()
- * 
- * @note       Confirmed success for:
- * 				1. non-null stats and info - frees both, sets stats to NULL
- * 				2. null stats - error message
- * 				3. non-null stats, null info - frees stats, sets stats to NULL
- */
-void test_task_destroy_stats()
-{
-
-	LOGP("INITALIZING\n");
-	struct task_stats* tstats = task_init_stats();
-	struct task_info* info = tstats->active_tasks;
-	task_log_stats(tstats);
-	task_log_info(info[0]);
-
-	LOGP("AFTER DESTROYING\n");
-	task_destroy_stats(&tstats);
-
-	task_log_stats(tstats);
-	LOG("IS INFO PTR NULL? '%s'\n", info == NULL ? "true" : "false");
-	task_log_info(info[0]);
-
-	LOGP("TESTING NULL DESTROY - SHOULD GIVE ERROR MSG\n");
-	task_destroy_stats(NULL);
-
-	LOGP("TESTING DESTROY ON GOOD TASK STATS, NULL INFO - SHOULD GIVE ERROR MSG BUT FREE TASK_STATS\n");
-	struct task_stats* null_info = task_init_stats();
-	free(null_info->active_tasks);
-	null_info->active_tasks = NULL;
-	task_destroy_stats(&null_info);
-	task_log_stats(null_info);
 
 }

@@ -1,0 +1,164 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.1" xml:lang="en-US">
+  <compounddef id="string__extractor_8h" kind="file" language="C++">
+    <compoundname>string_extractor.h</compoundname>
+    <includedby refid="cpu__usage_8c" local="yes">cpu_usage.c</includedby>
+    <includedby refid="mem__usage_8c" local="yes">mem_usage.c</includedby>
+    <includedby refid="os__searcher_8c" local="yes">os_searcher.c</includedby>
+    <includedby refid="procfs_8c" local="yes">procfs.c</includedby>
+    <includedby refid="string__extractor_8c" local="yes">string_extractor.c</includedby>
+    <includedby refid="task__adder_8c" local="yes">task_adder.c</includedby>
+    <includedby refid="task__finder_8c" local="yes">task_finder.c</includedby>
+    <includedby refid="util_8c" local="yes">util.c</includedby>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="string__extractor_8h_1ab4c953c32150dfa62ca4bf482ea40d6b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* extract_nth_token</definition>
+        <argsstring>(int n, char **current_ptr, char **next_ptr, const char *delim)</argsstring>
+        <name>extract_nth_token</name>
+        <param>
+          <type>int</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>current_ptr</declname>
+        </param>
+        <param>
+          <type>char **</type>
+          <declname>next_ptr</declname>
+        </param>
+        <param>
+          <type>const char *</type>
+          <declname>delim</declname>
+        </param>
+        <briefdescription>
+<para>Gets the nth token from a tokenized string. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">n</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>n, to get nth token </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>current_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to current - used for next_token() </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>next_ptr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>pointer to next - used for next_token() </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">delim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>delimiter</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The nth token.</para>
+</simplesect>
+<simplesect kind="note"><para>Warning: This function will segfault if you try to go out of bounds, e.g. getting the 4th token when the string only has 3. You must know the number of tokens in advance before you can safely use this function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="string_extractor.h" line="10" column="6" bodyfile="string_extractor.c" bodystart="94" bodyend="100" declfile="string_extractor.h" declline="10" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="string__extractor_8h_1a27fedde249b2c6cd9afa12ab97fc4cf2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* extract_token_before</definition>
+        <argsstring>(char *line, char *delim)</argsstring>
+        <name>extract_token_before</name>
+        <param>
+          <type>char *</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>delim</declname>
+        </param>
+        <briefdescription>
+<para>{ function_description } </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>line</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The line </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>delim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The delimiter</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>{ description_of_the_return_value } </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="string_extractor.h" line="11" column="6" bodyfile="string_extractor.c" bodystart="20" bodyend="43" declfile="string_extractor.h" declline="11" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="string__extractor_8h_1af9ffc2c64a983c0a940a47267dab63bd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char *</type>
+        <definition>char* extract_token_after</definition>
+        <argsstring>(char *line, char *delim)</argsstring>
+        <name>extract_token_after</name>
+        <param>
+          <type>char *</type>
+          <declname>line</declname>
+        </param>
+        <param>
+          <type>char *</type>
+          <declname>delim</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="string_extractor.h" line="12" column="6" bodyfile="string_extractor.c" bodystart="48" bodyend="79" declfile="string_extractor.h" declline="12" declcolumn="6"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Header file for string_extractor.c </para>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>_STRING_EXTRACTOR_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>_STRING_EXTRACTOR_H_</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="string__extractor_8h_1ab4c953c32150dfa62ca4bf482ea40d6b" kindref="member">extract_nth_token</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>n,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**current_ptr,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>**next_ptr,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*delim);</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*<ref refid="string__extractor_8h_1a27fedde249b2c6cd9afa12ab97fc4cf2" kindref="member">extract_token_before</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*line,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*delim);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*extract_token_after(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*line,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*delim);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="string_extractor.h"/>
+  </compounddef>
+</doxygen>
